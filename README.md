@@ -1,4 +1,4 @@
-# ErgoSNM Keyboard
+# ErgoSNM Keyboard Hardware
 
-A ***wireless/Bluetooth*** ergonomic split keyboard with integrated trackball.
+Hardware design files for the ErgoSNM keyboard \- a ***wireless/Bluetooth*** ergonomic split keyboard.
 
