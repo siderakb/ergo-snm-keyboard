@@ -6,7 +6,7 @@
     (property "Value" "Pro_Micro" (id 1) (at 0 -25.4 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (id 2) (at 10.16 16.51 0)
+    (property "Footprint" "ErgoSNM_Keybaord:Pro_Micro" (id 2) (at 10.16 16.51 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 10.16 16.51 0)
