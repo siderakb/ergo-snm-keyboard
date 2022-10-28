@@ -322,7 +322,7 @@
         (stroke (width 0) (type default) (color 0 0 0 0))
         (fill (type none))
       )
-      (rectangle (start 10.16 11.43) (end -13.97 -11.43)
+      (rectangle (start 7.62 11.43) (end -16.51 -11.43)
         (stroke (width 0) (type default) (color 0 0 0 0))
         (fill (type background))
       )
