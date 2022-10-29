@@ -82,8 +82,3 @@
 (rule "Min annular ring PTH"
     (constraint annular_width (min 0.3mm))
     (condition "A.Pad_Type == 'Through-hole'"))
-
-# For V-Cut line min clearance >= 0.4mm
-(rule "Min Trace to Outline"
-    (constraint edge_clearance (min 0.2mm))
-    (condition "A.Type =='Track'"))
