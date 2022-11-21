@@ -60,9 +60,7 @@
           "width": 0.92
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|155939394|127681127|384c6db8-8085-4148-8afe-58c84a494612|00e9f0fe-7b66-473d-8d05-175c9ea67fdf"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -397,8 +395,8 @@
         "microvia_drill": 0.1,
         "name": "Power",
         "nets": [
-          "+3V3",
-          "+5V"
+          "+5V",
+          "VBUS"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
