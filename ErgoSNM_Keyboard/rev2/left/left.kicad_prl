@@ -1,15 +1,15 @@
 {
   "board": {
-    "active_layer": 33,
+    "active_layer": 36,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_nets": [],
     "high_contrast_mode": 0,
     "net_color_mode": 1,
     "opacity": {
-      "pads": 1.0,
+      "pads": 0.8299999833106995,
       "tracks": 1.0,
-      "vias": 1.0,
+      "vias": 0.7699999809265137,
       "zones": 0.6
     },
     "ratsnest_display_mode": 0,
@@ -18,7 +18,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": true,
+      "lockedItems": false,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -62,8 +62,8 @@
       35,
       36
     ],
-    "visible_layers": "ffffeff_ffffffff",
-    "zone_display_mode": 1
+    "visible_layers": "ffdfeff_ffffffff",
+    "zone_display_mode": 0
   },
   "meta": {
     "filename": "left.kicad_prl",

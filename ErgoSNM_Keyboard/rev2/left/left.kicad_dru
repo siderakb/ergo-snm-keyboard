@@ -11,13 +11,13 @@
 
 ### Trace Width and Spacing ###
 
-(rule "Track to Track Clearance"
-    (constraint clearance (min 0.127mm))
-    (condition "A.Type =='Track' && B.Type =='Track'"))
+# (rule "Track to Track Clearance"
+#     (constraint clearance (min 0.127mm))
+#     (condition "A.Type =='Track' && B.Type =='Track'"))
 
-(rule "Min Track width"
-    (constraint track_width (min 0.127mm))
-    (condition "A.Type =='Track'"))
+# (rule "Min Track width"
+#     (constraint track_width (min 0.15mm))
+#     (condition "A.Type =='Track'"))
 
 
 ### Min Clearance ###
