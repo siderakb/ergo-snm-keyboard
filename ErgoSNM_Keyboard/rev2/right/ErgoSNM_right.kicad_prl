@@ -18,7 +18,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": false,
+      "lockedItems": true,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -66,7 +66,7 @@
     "zone_display_mode": 0
   },
   "meta": {
-    "filename": "left.kicad_prl",
+    "filename": "ErgoSNM_right.kicad_prl",
     "version": 3
   },
   "project": {
