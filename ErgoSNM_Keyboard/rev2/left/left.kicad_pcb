@@ -62,7 +62,7 @@
     (aux_axis_origin 60.96 25.4)
     (grid_origin 60.96 25.4)
     (pcbplotparams
-      (layerselection 0x0000100_7ffffffe)
+      (layerselection 0x0001000_7ffffffe)
       (disableapertmacros false)
       (usegerberextensions true)
       (usegerberattributes false)
@@ -70,7 +70,7 @@
       (creategerberjobfile false)
       (svguseinch false)
       (svgprecision 6)
-      (excludeedgelayer false)
+      (excludeedgelayer true)
       (plotframeref false)
       (viasonmask false)
       (mode 1)
@@ -92,7 +92,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "gerber/")
+      (outputdirectory "../../../../../../../../Downloads/")
     )
   )
 

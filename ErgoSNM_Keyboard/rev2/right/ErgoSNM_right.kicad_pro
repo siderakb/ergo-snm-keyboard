@@ -60,9 +60,7 @@
           "width": 0.92
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|163960001|59308501|abf585ec-e708-453f-b649-b5777ece85e6|eddaca4c-7506-4325-bd63-7dea02c1d967"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -70,7 +68,7 @@
         "annular_width": "error",
         "clearance": "error",
         "copper_edge_clearance": "error",
-        "courtyards_overlap": "error",
+        "courtyards_overlap": "ignore",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
@@ -110,7 +108,7 @@
         "allow_blind_buried_vias": false,
         "allow_microvias": false,
         "max_error": 0.005,
-        "min_clearance": 0.127,
+        "min_clearance": 0.13,
         "min_copper_edge_clearance": 0.0,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
