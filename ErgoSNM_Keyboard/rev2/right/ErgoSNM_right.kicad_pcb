@@ -12800,6 +12800,12 @@
   (gr_circle (center 139.708871 42.213271) (end 139.962871 42.213271) (layer "B.SilkS") (width 0) (fill solid) (tstamp f34a1b31-458a-42f4-9846-d52d15616f66))
   (gr_poly
     (pts
+      (xy 96.3225 119.4365)
+      (xy 96.3225 117.9125)
+      (xy 97.8465 117.9125)
+    ) (layer "F.SilkS") (width 0.15) (fill solid) (tstamp 4ef545c0-406e-4ad6-9c25-3c66abf5f5c0))
+  (gr_poly
+    (pts
       (xy 184.913527 120.618808)
       (xy 184.906377 120.619225)
       (xy 184.899399 120.619919)
