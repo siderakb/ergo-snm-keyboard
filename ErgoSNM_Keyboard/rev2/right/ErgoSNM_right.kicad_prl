@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 36,
+    "active_layer": 31,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_nets": [],
@@ -17,14 +17,14 @@
       "dimensions": true,
       "footprints": true,
       "graphics": true,
-      "keepouts": true,
+      "keepouts": false,
       "lockedItems": false,
       "otherItems": true,
       "pads": true,
       "text": true,
       "tracks": true,
       "vias": true,
-      "zones": true
+      "zones": false
     },
     "visible_items": [
       0,
@@ -62,11 +62,11 @@
       35,
       36
     ],
-    "visible_layers": "ffdffff_ffffffff",
-    "zone_display_mode": 1
+    "visible_layers": "9fcffff_ffffffff",
+    "zone_display_mode": 0
   },
   "meta": {
-    "filename": "left.kicad_prl",
+    "filename": "ErgoSNM_right.kicad_prl",
     "version": 3
   },
   "project": {

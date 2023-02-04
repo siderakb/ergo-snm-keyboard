@@ -1,15 +1,15 @@
 {
   "board": {
-    "active_layer": 36,
-    "active_layer_preset": "",
+    "active_layer": 44,
+    "active_layer_preset": "All Layers",
     "auto_track_width": true,
     "hidden_nets": [],
     "high_contrast_mode": 0,
     "net_color_mode": 1,
     "opacity": {
-      "pads": 0.8299999833106995,
+      "pads": 1.0,
       "tracks": 1.0,
-      "vias": 0.7699999809265137,
+      "vias": 1.0,
       "zones": 0.6
     },
     "ratsnest_display_mode": 0,
@@ -62,11 +62,11 @@
       35,
       36
     ],
-    "visible_layers": "ffdffff_ffffffff",
-    "zone_display_mode": 1
+    "visible_layers": "fffffff_ffffffff",
+    "zone_display_mode": 0
   },
   "meta": {
-    "filename": "left.kicad_prl",
+    "filename": "thumb_cluster.kicad_prl",
     "version": 3
   },
   "project": {
