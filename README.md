@@ -4,6 +4,11 @@
 
 [Project WiKi](https://github.com/ziteh/ergo-snm-keyboard/wiki)
 
+|Left|Right|
+|-|-|
+|![](https://i.imgur.com/xM4c3UR.png)|![](https://i.imgur.com/ulswxmm.png)|
+> Rev 2.0
+
 ## Related Repository
 
 - Hardware
