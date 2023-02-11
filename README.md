@@ -6,8 +6,8 @@
 
 |Left|Right|
 |-|-|
-|![](https://i.imgur.com/xM4c3UR.png)|![](https://i.imgur.com/ulswxmm.png)|
-> Rev 2.0
+|![](https://i.imgur.com/ulswxmm.png)|![](https://i.imgur.com/xM4c3UR.png)|
+> Rev 2.0, bottom view.
 
 ## Related Repository
 
