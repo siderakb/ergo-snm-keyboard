@@ -9,7 +9,7 @@
 |![](https://i.imgur.com/ulswxmm.png)|![](https://i.imgur.com/xM4c3UR.png)|
 > Rev 2.0, bottom view.
 
-## Related Repository
+## Related Repositories
 
 - Hardware
   - [ergo-snm-keyboard](https://github.com/ziteh/ergo-snm-keyboard) (*this repo*): Hardware design files for the ErgoSNM keyboard. Main repo for ErgoSNM.
@@ -19,4 +19,5 @@
   - [pmw3360-pcb](https://github.com/ziteh/pmw3360-pcb): PMW3360 optical mouse sensor breakout board PCB files. Used for trackball.
   - [key-switches.pretty](https://github.com/ziteh/key-switches.pretty): Mechanical keyboard switches KiCad footprint library.
 - Firmware
+  - [vial-qmk](https://github.com/ziteh/vial-qmk/tree/ergosnm/rev2): The [Vial QMK](https://get.vial.today/) firmware for ErgoSNM.
   - [ergo-snm-keyboard-qmk](https://github.com/ziteh/ergo-snm-keyboard-qmk): The [QMK](https://github.com/qmk/qmk_firmware) edition firmware for ErgoSNM.
