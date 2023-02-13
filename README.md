@@ -2,7 +2,7 @@
 
 *ErgoSNM* \- an ergonomic split keyboard that aims to make people leave their mouse behind.
 
-[:book: Project Wiki](https://github.com/ziteh/ergo-snm-keyboard/wiki)
+Features introduction, build guides and more information can be found in the [Wiki:book:](https://github.com/ziteh/ergo-snm-keyboard/wiki)
 
 |Left|Right|
 |-|-|
