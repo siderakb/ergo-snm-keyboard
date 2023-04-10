@@ -6,10 +6,6 @@
 
 Features introduction, build guides and more information can be found in the [Wiki:book:](https://github.com/ziteh/ergo-snm-keyboard/wiki)
 
-|Left|Right|
-|:-:|:-:|
-|![](https://i.imgur.com/lFPIKst.png)|![](https://i.imgur.com/YIMYJX9.png)|
-
 ## Related Repositories
 
 - Hardware
