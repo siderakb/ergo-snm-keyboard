@@ -6,6 +6,10 @@
 
 Features introduction, build guides and more information can be found in the [Wiki:book:](https://github.com/ziteh/ergo-snm-keyboard/wiki)
 
+## Footprint 
+
+If `key-switches.pretty` folder is empty, run `git submodule update --init` to clone submodule.
+
 ## Related Repositories
 
 - Hardware
