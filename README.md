@@ -21,4 +21,4 @@ If `key-switches.pretty` folder is empty, run `git submodule update --init` to c
   - [pmw3360-pcb](https://github.com/siderakb/pmw3360-pcb): PMW3360 optical mouse sensor breakout board PCB files. Used for trackball.
   - [key-switches.pretty](https://github.com/siderakb/key-switches.pretty): Mechanical keyboard switches KiCad footprint library.
 - Firmware
-  - [ziteh/vial-qmk (*zite/ergosnm* branch)](https://github.com/siderakb/vial-qmk/tree/siderakb/ergosnm/keyboards/zite/ergosnm): The Vial QMK firmware for ErgoSNM.
+  - [siderakb/vial-qmk (*siderakb/ergosnm* branch)](https://github.com/siderakb/vial-qmk/tree/siderakb/ergosnm/keyboards/zite/ergosnm): The Vial QMK firmware for ErgoSNM.
