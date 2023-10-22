@@ -730,14 +730,6 @@
     (uuid f88550a9-102a-4538-bfcb-29b598ad7028)
   )
 
-  (text_box "Power Mode:\n1. Reg0 DC/DC & LDO disable: JP 1-2 3, L DNI\n2. Reg0 DC/DC enable: JP 1 2-3, L 10uH"
-    (at 99.06 19.05 0) (size 50.8 7.62)
-    (stroke (width 0) (type default))
-    (fill (type none))
-    (effects (font (size 1.27 1.27)) (justify left top))
-    (uuid 5c974e32-b2cb-4664-a86f-268c341c6287)
-  )
-
   (label "VBUS" (at 132.08 71.12 270) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 04ebd866-5ec4-4c48-af17-8057e646e418)
