@@ -20,7 +20,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": false,
+      "lockedItems": true,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -64,11 +64,11 @@
       35,
       36
     ],
-    "visible_layers": "9fcfeff_ffffffff",
-    "zone_display_mode": 1
+    "visible_layers": "ffcffff_ffffffff",
+    "zone_display_mode": 0
   },
   "meta": {
-    "filename": "ErgoSNM_v3_right.kicad_prl",
+    "filename": "ErgoSNM_v3_left.kicad_prl",
     "version": 3
   },
   "project": {
