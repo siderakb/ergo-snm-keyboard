@@ -976,7 +976,7 @@
       )
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0105") (unit 1)
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -1035,7 +1035,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0106") (unit 1)
+          (reference "#PWR024") (unit 1)
         )
       )
     )
@@ -1068,7 +1068,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0103") (unit 1)
+          (reference "#PWR030") (unit 1)
         )
       )
     )
@@ -1077,7 +1077,7 @@
   (symbol (lib_id "ErgoSNM_Keyboard_Library:E73-2G4M08S1C") (at 128.27 110.49 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 38ec680c-1a73-4152-8e39-047b6a394579)
-    (property "Reference" "U2" (at 133.0041 146.05 0)
+    (property "Reference" "U3" (at 133.0041 146.05 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "E73-2G4M08S1C" (at 133.0041 148.59 0)
@@ -1135,7 +1135,7 @@
     (instances
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "U2") (unit 1)
+          (reference "U3") (unit 1)
         )
       )
     )
@@ -1165,7 +1165,7 @@
       )
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0102") (unit 1)
+          (reference "#PWR028") (unit 1)
         )
       )
     )
@@ -1299,7 +1299,7 @@
           (reference "SW?") (unit 1)
         )
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "SW3") (unit 1)
+          (reference "SW2") (unit 1)
         )
       )
     )
@@ -1329,7 +1329,7 @@
       )
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0108") (unit 1)
+          (reference "#PWR029") (unit 1)
         )
       )
     )
@@ -1369,7 +1369,7 @@
       )
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "C3") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
     )
@@ -1399,7 +1399,7 @@
       )
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0104") (unit 1)
+          (reference "#PWR031") (unit 1)
         )
       )
     )
@@ -1465,7 +1465,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0107") (unit 1)
+          (reference "#PWR025") (unit 1)
         )
       )
     )
@@ -1493,7 +1493,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "#PWR0101") (unit 1)
+          (reference "#PWR027") (unit 1)
         )
       )
     )
@@ -1533,7 +1533,7 @@
       )
       (project "ErgoSNM_v3_left"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/55bd3253-f9d8-4021-ab54-3edc1cd235a5"
-          (reference "C4") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
     )

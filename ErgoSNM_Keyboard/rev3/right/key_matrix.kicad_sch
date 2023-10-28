@@ -835,7 +835,7 @@
   (symbol (lib_id "Diode:1N4148") (at 158.75 59.69 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00972ac5-217a-40e1-8328-c5319ea2eacf)
-    (property "Reference" "D4" (at 153.67 58.42 90)
+    (property "Reference" "D16" (at 153.67 58.42 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 149.86 60.96 90)
@@ -858,7 +858,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D4") (unit 1)
+          (reference "D16") (unit 1)
         )
       )
     )
@@ -867,7 +867,7 @@
   (symbol (lib_id "Diode:1N4148") (at 158.75 116.84 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 119bb9a5-720d-4820-b628-be4dcabec89b)
-    (property "Reference" "D22" (at 153.67 115.57 90)
+    (property "Reference" "D19" (at 153.67 115.57 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 149.86 118.11 90)
@@ -890,7 +890,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D22") (unit 1)
+          (reference "D19") (unit 1)
         )
       )
     )
@@ -899,7 +899,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 191.77 91.44 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 129733f1-5643-44eb-aec2-5d72e90e347f)
-    (property "Reference" "KEY18" (at 191.77 96.52 0)
+    (property "Reference" "KEY28" (at 191.77 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 191.77 96.52 0)
@@ -922,7 +922,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY18") (unit 1)
+          (reference "KEY28") (unit 1)
         )
       )
     )
@@ -931,7 +931,7 @@
   (symbol (lib_id "Diode:1N4148") (at 194.31 116.84 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 132b48ce-f541-424e-932e-9adbb0b19178)
-    (property "Reference" "D24" (at 189.23 115.57 90)
+    (property "Reference" "D29" (at 189.23 115.57 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 185.42 118.11 90)
@@ -954,7 +954,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D24") (unit 1)
+          (reference "D29") (unit 1)
         )
       )
     )
@@ -963,7 +963,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 102.87 129.54 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 18de5f83-9b70-43f9-b43c-c3df72ce5a70)
-    (property "Reference" "KEY25" (at 102.87 134.62 0)
+    (property "Reference" "KEY5" (at 102.87 134.62 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 102.87 134.62 0)
@@ -986,7 +986,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY25") (unit 1)
+          (reference "KEY5") (unit 1)
         )
       )
     )
@@ -995,7 +995,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 156.21 91.44 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 29e2a5ac-ae44-4cab-b96e-5579dcd39e29)
-    (property "Reference" "KEY16" (at 156.21 96.52 0)
+    (property "Reference" "KEY18" (at 156.21 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 156.21 96.52 0)
@@ -1018,7 +1018,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY16") (unit 1)
+          (reference "KEY18") (unit 1)
         )
       )
     )
@@ -1027,7 +1027,7 @@
   (symbol (lib_id "Diode:1N4148") (at 140.97 97.79 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2dc27a59-576e-4d19-a5c2-a0930890517a)
-    (property "Reference" "D15" (at 135.89 96.52 90)
+    (property "Reference" "D13" (at 135.89 96.52 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 132.08 99.06 90)
@@ -1050,7 +1050,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D15") (unit 1)
+          (reference "D13") (unit 1)
         )
       )
     )
@@ -1059,7 +1059,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 173.99 110.49 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2e6b5e54-9ac8-4524-889c-fac5f0e55a16)
-    (property "Reference" "KEY23" (at 173.99 115.57 0)
+    (property "Reference" "KEY24" (at 173.99 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 173.99 115.57 0)
@@ -1082,7 +1082,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY23") (unit 1)
+          (reference "KEY24") (unit 1)
         )
       )
     )
@@ -1091,7 +1091,7 @@
   (symbol (lib_id "Diode:1N4148") (at 158.75 97.79 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3700fa48-b66c-4bfa-8b19-51ee73cd7b5c)
-    (property "Reference" "D16" (at 153.67 96.52 90)
+    (property "Reference" "D18" (at 153.67 96.52 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 149.86 99.06 90)
@@ -1114,7 +1114,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D16") (unit 1)
+          (reference "D18") (unit 1)
         )
       )
     )
@@ -1123,7 +1123,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 138.43 110.49 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3ed736df-486d-4bac-b4fb-61efd265ed72)
-    (property "Reference" "KEY21" (at 138.43 115.57 0)
+    (property "Reference" "KEY14" (at 138.43 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 138.43 115.57 0)
@@ -1146,7 +1146,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY21") (unit 1)
+          (reference "KEY14") (unit 1)
         )
       )
     )
@@ -1155,7 +1155,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 102.87 91.44 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 40bd50e2-a0f5-4f30-aff3-097017ffac63)
-    (property "Reference" "KEY13" (at 102.87 96.52 0)
+    (property "Reference" "KEY3" (at 102.87 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 102.87 96.52 0)
@@ -1178,7 +1178,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY13") (unit 1)
+          (reference "KEY3") (unit 1)
         )
       )
     )
@@ -1187,7 +1187,7 @@
   (symbol (lib_id "Diode:1N4148") (at 176.53 116.84 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 443ef69f-bd52-47e2-8247-b55316c1f0ac)
-    (property "Reference" "D23" (at 171.45 115.57 90)
+    (property "Reference" "D24" (at 171.45 115.57 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 167.64 118.11 90)
@@ -1210,7 +1210,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D23") (unit 1)
+          (reference "D24") (unit 1)
         )
       )
     )
@@ -1219,7 +1219,7 @@
   (symbol (lib_id "Diode:1N4148") (at 158.75 78.74 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4bad156a-6d5c-4836-857a-3ffdd1e7b131)
-    (property "Reference" "D10" (at 153.67 77.47 90)
+    (property "Reference" "D17" (at 153.67 77.47 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 149.86 80.01 90)
@@ -1242,7 +1242,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D10") (unit 1)
+          (reference "D17") (unit 1)
         )
       )
     )
@@ -1251,7 +1251,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 138.43 129.54 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4eb45b05-5a56-4aea-a40d-5fd5cecb20d2)
-    (property "Reference" "KEY27" (at 138.43 134.62 0)
+    (property "Reference" "KEY15" (at 138.43 134.62 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 138.43 134.62 0)
@@ -1274,7 +1274,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY27") (unit 1)
+          (reference "KEY15") (unit 1)
         )
       )
     )
@@ -1283,7 +1283,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 138.43 72.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 53a7cee3-7388-4460-ac78-b8ba60518373)
-    (property "Reference" "KEY9" (at 138.43 77.47 0)
+    (property "Reference" "KEY12" (at 138.43 77.47 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 138.43 77.47 0)
@@ -1306,7 +1306,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY9") (unit 1)
+          (reference "KEY12") (unit 1)
         )
       )
     )
@@ -1315,7 +1315,7 @@
   (symbol (lib_id "Diode:1N4148") (at 140.97 59.69 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5c7fc2f1-f140-4fbc-94d2-ebd08dae059a)
-    (property "Reference" "D3" (at 135.89 58.42 90)
+    (property "Reference" "D11" (at 135.89 58.42 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 132.08 60.96 90)
@@ -1338,7 +1338,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D3") (unit 1)
+          (reference "D11") (unit 1)
         )
       )
     )
@@ -1347,7 +1347,7 @@
   (symbol (lib_id "Diode:1N4148") (at 105.41 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5c97b98e-56bf-4a59-9e60-d0227177ebd0)
-    (property "Reference" "D25" (at 100.33 134.62 90)
+    (property "Reference" "D5" (at 100.33 134.62 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 96.52 137.16 90)
@@ -1370,7 +1370,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D25") (unit 1)
+          (reference "D5") (unit 1)
         )
       )
     )
@@ -1379,7 +1379,7 @@
   (symbol (lib_id "Diode:1N4148") (at 194.31 59.69 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5ce89196-f362-477d-86ba-fec7cfdccf9f)
-    (property "Reference" "D6" (at 189.23 58.42 90)
+    (property "Reference" "D26" (at 189.23 58.42 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 185.42 60.96 90)
@@ -1402,7 +1402,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D6") (unit 1)
+          (reference "D26") (unit 1)
         )
       )
     )
@@ -1411,7 +1411,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 102.87 110.49 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 63ed825b-0909-4309-bd74-be376bac5bfa)
-    (property "Reference" "KEY19" (at 102.87 115.57 0)
+    (property "Reference" "KEY4" (at 102.87 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 102.87 115.57 0)
@@ -1434,7 +1434,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY19") (unit 1)
+          (reference "KEY4") (unit 1)
         )
       )
     )
@@ -1443,7 +1443,7 @@
   (symbol (lib_id "Diode:1N4148") (at 176.53 59.69 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 64ffa349-bf5a-45f4-a5ba-3571fd62cdb7)
-    (property "Reference" "D5" (at 171.45 58.42 90)
+    (property "Reference" "D21" (at 171.45 58.42 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 167.64 60.96 90)
@@ -1466,7 +1466,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D5") (unit 1)
+          (reference "D21") (unit 1)
         )
       )
     )
@@ -1475,7 +1475,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 156.21 110.49 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 655952c9-01f6-4ff2-a75a-8aa393160de1)
-    (property "Reference" "KEY22" (at 156.21 115.57 0)
+    (property "Reference" "KEY19" (at 156.21 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 156.21 115.57 0)
@@ -1498,7 +1498,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY22") (unit 1)
+          (reference "KEY19") (unit 1)
         )
       )
     )
@@ -1507,7 +1507,7 @@
   (symbol (lib_id "Diode:1N4148") (at 105.41 97.79 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 65863e8a-7343-48f6-a36f-eb8845cd2aab)
-    (property "Reference" "D13" (at 100.33 96.52 90)
+    (property "Reference" "D3" (at 100.33 96.52 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 96.52 99.06 90)
@@ -1530,7 +1530,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D13") (unit 1)
+          (reference "D3") (unit 1)
         )
       )
     )
@@ -1539,7 +1539,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 138.43 53.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6678dc44-e6a1-4ac4-9dbb-3dd7eb37aedb)
-    (property "Reference" "KEY3" (at 138.43 58.42 0)
+    (property "Reference" "KEY11" (at 138.43 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 138.43 58.42 0)
@@ -1562,7 +1562,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY3") (unit 1)
+          (reference "KEY11") (unit 1)
         )
       )
     )
@@ -1571,7 +1571,7 @@
   (symbol (lib_id "Diode:1N4148") (at 105.41 78.74 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 74c4a531-65f8-45df-a1ea-44d7c021de41)
-    (property "Reference" "D7" (at 101.6 77.47 90)
+    (property "Reference" "D2" (at 101.6 77.47 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 96.52 80.01 90)
@@ -1594,7 +1594,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D7") (unit 1)
+          (reference "D2") (unit 1)
         )
       )
     )
@@ -1603,7 +1603,7 @@
   (symbol (lib_id "Diode:1N4148") (at 140.97 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 839fab45-c5fc-4bcf-b236-9e82d6ccb142)
-    (property "Reference" "D27" (at 135.89 134.62 90)
+    (property "Reference" "D15" (at 135.89 134.62 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 132.08 137.16 90)
@@ -1626,7 +1626,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D27") (unit 1)
+          (reference "D15") (unit 1)
         )
       )
     )
@@ -1635,7 +1635,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 173.99 129.54 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8e2f644f-9fb0-4ba6-9a2d-7dce094536da)
-    (property "Reference" "KEY29" (at 173.99 134.62 0)
+    (property "Reference" "KEY25" (at 173.99 134.62 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 173.99 134.62 0)
@@ -1658,7 +1658,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY29") (unit 1)
+          (reference "KEY25") (unit 1)
         )
       )
     )
@@ -1667,7 +1667,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 173.99 72.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9483333d-4339-4d2b-87d9-646560ff8f76)
-    (property "Reference" "KEY11" (at 173.99 77.47 0)
+    (property "Reference" "KEY22" (at 173.99 77.47 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 173.99 77.47 0)
@@ -1690,7 +1690,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY11") (unit 1)
+          (reference "KEY22") (unit 1)
         )
       )
     )
@@ -1699,7 +1699,7 @@
   (symbol (lib_id "Diode:1N4148") (at 123.19 59.69 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 962a8b1b-5920-4c15-b35e-bb7fb7cc45cb)
-    (property "Reference" "D2" (at 119.38 58.42 90)
+    (property "Reference" "D6" (at 119.38 58.42 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 114.3 60.96 90)
@@ -1722,7 +1722,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D2") (unit 1)
+          (reference "D6") (unit 1)
         )
       )
     )
@@ -1731,7 +1731,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 138.43 91.44 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9fba3628-391b-4219-9473-907dd42f8f8a)
-    (property "Reference" "KEY15" (at 138.43 96.52 0)
+    (property "Reference" "KEY13" (at 138.43 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 138.43 96.52 0)
@@ -1754,7 +1754,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY15") (unit 1)
+          (reference "KEY13") (unit 1)
         )
       )
     )
@@ -1763,7 +1763,7 @@
   (symbol (lib_id "Diode:1N4148") (at 194.31 97.79 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a1a1d588-c656-4401-8c76-5f15e214f6de)
-    (property "Reference" "D18" (at 189.23 96.52 90)
+    (property "Reference" "D28" (at 189.23 96.52 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 185.42 99.06 90)
@@ -1786,7 +1786,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D18") (unit 1)
+          (reference "D28") (unit 1)
         )
       )
     )
@@ -1795,7 +1795,7 @@
   (symbol (lib_id "Diode:1N4148") (at 123.19 97.79 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid aa5cd4e3-7f45-4644-8a90-08ca14389544)
-    (property "Reference" "D14" (at 118.11 96.52 90)
+    (property "Reference" "D8" (at 118.11 96.52 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 114.3 99.06 90)
@@ -1818,7 +1818,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D14") (unit 1)
+          (reference "D8") (unit 1)
         )
       )
     )
@@ -1827,7 +1827,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 102.87 72.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid aef23c36-4cbf-40a1-bb51-7db7aaabb9b7)
-    (property "Reference" "KEY7" (at 102.87 77.47 0)
+    (property "Reference" "KEY2" (at 102.87 77.47 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 102.87 77.47 0)
@@ -1850,7 +1850,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY7") (unit 1)
+          (reference "KEY2") (unit 1)
         )
       )
     )
@@ -1859,7 +1859,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 156.21 53.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b51c9699-5dbf-4a5e-8ce8-edbafa2b880d)
-    (property "Reference" "KEY4" (at 156.21 58.42 0)
+    (property "Reference" "KEY16" (at 156.21 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 156.21 58.42 0)
@@ -1882,7 +1882,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY4") (unit 1)
+          (reference "KEY16") (unit 1)
         )
       )
     )
@@ -1891,7 +1891,7 @@
   (symbol (lib_id "Diode:1N4148") (at 158.75 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b526bdac-dd2c-40a7-9c1d-d369fe65341c)
-    (property "Reference" "D28" (at 153.67 134.62 90)
+    (property "Reference" "D20" (at 153.67 134.62 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 149.86 137.16 90)
@@ -1914,7 +1914,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D28") (unit 1)
+          (reference "D20") (unit 1)
         )
       )
     )
@@ -1923,7 +1923,7 @@
   (symbol (lib_id "Diode:1N4148") (at 123.19 78.74 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b6787f3a-0a73-4617-9ab1-79593435ba02)
-    (property "Reference" "D8" (at 119.38 77.47 90)
+    (property "Reference" "D7" (at 119.38 77.47 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 114.3 80.01 90)
@@ -1946,7 +1946,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D8") (unit 1)
+          (reference "D7") (unit 1)
         )
       )
     )
@@ -1955,7 +1955,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 120.65 91.44 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b7d32f43-e1c9-4910-ac75-248a95c9baea)
-    (property "Reference" "KEY14" (at 120.65 96.52 0)
+    (property "Reference" "KEY8" (at 120.65 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 120.65 96.52 0)
@@ -1978,7 +1978,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY14") (unit 1)
+          (reference "KEY8") (unit 1)
         )
       )
     )
@@ -1987,7 +1987,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 191.77 110.49 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bcf99b8e-35ec-48ea-b650-07ea0c87952f)
-    (property "Reference" "KEY24" (at 191.77 115.57 0)
+    (property "Reference" "KEY29" (at 191.77 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 191.77 115.57 0)
@@ -2010,7 +2010,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY24") (unit 1)
+          (reference "KEY29") (unit 1)
         )
       )
     )
@@ -2019,7 +2019,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 191.77 72.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bd990fd1-1bc0-443f-8944-5359428a9050)
-    (property "Reference" "KEY12" (at 191.77 77.47 0)
+    (property "Reference" "KEY27" (at 191.77 77.47 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 191.77 77.47 0)
@@ -2042,7 +2042,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY12") (unit 1)
+          (reference "KEY27") (unit 1)
         )
       )
     )
@@ -2083,7 +2083,7 @@
   (symbol (lib_id "Diode:1N4148") (at 140.97 78.74 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c7ad7217-bdac-41ca-8be8-98832c7c2a6b)
-    (property "Reference" "D9" (at 135.89 77.47 90)
+    (property "Reference" "D12" (at 135.89 77.47 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 132.08 80.01 90)
@@ -2106,7 +2106,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D9") (unit 1)
+          (reference "D12") (unit 1)
         )
       )
     )
@@ -2115,7 +2115,7 @@
   (symbol (lib_id "Diode:1N4148") (at 194.31 78.74 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d88e7486-d217-47bb-b0bf-762f8aafdef6)
-    (property "Reference" "D12" (at 189.23 77.47 90)
+    (property "Reference" "D27" (at 189.23 77.47 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 185.42 80.01 90)
@@ -2138,7 +2138,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D12") (unit 1)
+          (reference "D27") (unit 1)
         )
       )
     )
@@ -2147,7 +2147,7 @@
   (symbol (lib_id "Diode:1N4148") (at 176.53 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dab1df1f-afbf-4763-b53f-11213600d97e)
-    (property "Reference" "D29" (at 171.45 134.62 90)
+    (property "Reference" "D25" (at 171.45 134.62 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 167.64 137.16 90)
@@ -2170,7 +2170,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D29") (unit 1)
+          (reference "D25") (unit 1)
         )
       )
     )
@@ -2179,7 +2179,7 @@
   (symbol (lib_id "Diode:1N4148") (at 176.53 97.79 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dc6a0158-d583-424f-ad43-74ed3c3da481)
-    (property "Reference" "D17" (at 171.45 96.52 90)
+    (property "Reference" "D23" (at 171.45 96.52 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 167.64 99.06 90)
@@ -2202,7 +2202,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D17") (unit 1)
+          (reference "D23") (unit 1)
         )
       )
     )
@@ -2211,7 +2211,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 156.21 72.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dcf97810-0073-4472-88aa-f6cd5dbba70a)
-    (property "Reference" "KEY10" (at 156.21 77.47 0)
+    (property "Reference" "KEY17" (at 156.21 77.47 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 156.21 77.47 0)
@@ -2234,7 +2234,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY10") (unit 1)
+          (reference "KEY17") (unit 1)
         )
       )
     )
@@ -2243,7 +2243,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 120.65 72.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid de739eec-f6d1-4fd9-9744-a264ee92052a)
-    (property "Reference" "KEY8" (at 120.65 77.47 0)
+    (property "Reference" "KEY7" (at 120.65 77.47 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 120.65 77.47 0)
@@ -2266,7 +2266,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY8") (unit 1)
+          (reference "KEY7") (unit 1)
         )
       )
     )
@@ -2275,7 +2275,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 173.99 91.44 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid df022a7f-103e-41a3-93aa-8c6797d69d7f)
-    (property "Reference" "KEY17" (at 173.99 96.52 0)
+    (property "Reference" "KEY23" (at 173.99 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 173.99 96.52 0)
@@ -2298,7 +2298,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY17") (unit 1)
+          (reference "KEY23") (unit 1)
         )
       )
     )
@@ -2307,7 +2307,7 @@
   (symbol (lib_id "Diode:1N4148") (at 105.41 116.84 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dfa86832-5cc6-4833-bf8d-b43ab2e9c9d8)
-    (property "Reference" "D19" (at 100.33 115.57 90)
+    (property "Reference" "D4" (at 100.33 115.57 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 96.52 118.11 90)
@@ -2330,7 +2330,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D19") (unit 1)
+          (reference "D4") (unit 1)
         )
       )
     )
@@ -2339,7 +2339,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 120.65 110.49 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e014dd48-693e-4449-9879-1597aaab69af)
-    (property "Reference" "KEY20" (at 120.65 115.57 0)
+    (property "Reference" "KEY9" (at 120.65 115.57 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 120.65 115.57 0)
@@ -2362,7 +2362,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY20") (unit 1)
+          (reference "KEY9") (unit 1)
         )
       )
     )
@@ -2371,7 +2371,7 @@
   (symbol (lib_id "Diode:1N4148") (at 123.19 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e5f690a1-64e5-4c22-945a-a2bc11e5a03c)
-    (property "Reference" "D26" (at 118.11 134.62 90)
+    (property "Reference" "D10" (at 118.11 134.62 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 114.3 137.16 90)
@@ -2394,7 +2394,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D26") (unit 1)
+          (reference "D10") (unit 1)
         )
       )
     )
@@ -2403,7 +2403,7 @@
   (symbol (lib_id "Diode:1N4148") (at 176.53 78.74 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ecac2427-9720-4cbd-971a-57eb38777985)
-    (property "Reference" "D11" (at 171.45 77.47 90)
+    (property "Reference" "D22" (at 171.45 77.47 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 167.64 80.01 90)
@@ -2426,7 +2426,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D11") (unit 1)
+          (reference "D22") (unit 1)
         )
       )
     )
@@ -2435,7 +2435,7 @@
   (symbol (lib_id "Diode:1N4148") (at 123.19 116.84 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f05301eb-7060-4663-b4b9-2d8543376d85)
-    (property "Reference" "D20" (at 118.11 115.57 90)
+    (property "Reference" "D9" (at 118.11 115.57 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 114.3 118.11 90)
@@ -2458,7 +2458,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D20") (unit 1)
+          (reference "D9") (unit 1)
         )
       )
     )
@@ -2467,7 +2467,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 156.21 129.54 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f484637b-1d0d-42be-ac80-d795ba86d28b)
-    (property "Reference" "KEY28" (at 156.21 134.62 0)
+    (property "Reference" "KEY20" (at 156.21 134.62 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 156.21 134.62 0)
@@ -2490,7 +2490,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY28") (unit 1)
+          (reference "KEY20") (unit 1)
         )
       )
     )
@@ -2531,7 +2531,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 120.65 53.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fa7710f4-8a67-4a79-a152-a7cb0c456e3a)
-    (property "Reference" "KEY2" (at 120.65 58.42 0)
+    (property "Reference" "KEY6" (at 120.65 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 120.65 58.42 0)
@@ -2554,7 +2554,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY2") (unit 1)
+          (reference "KEY6") (unit 1)
         )
       )
     )
@@ -2563,7 +2563,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 120.65 129.54 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid faa2fb14-42a4-44a2-945a-e00d1e153318)
-    (property "Reference" "KEY26" (at 120.65 134.62 0)
+    (property "Reference" "KEY10" (at 120.65 134.62 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 120.65 134.62 0)
@@ -2586,7 +2586,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY26") (unit 1)
+          (reference "KEY10") (unit 1)
         )
       )
     )
@@ -2595,7 +2595,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 173.99 53.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fd35fa35-3da7-40f9-b0f2-380c192c189b)
-    (property "Reference" "KEY5" (at 173.99 58.42 0)
+    (property "Reference" "KEY21" (at 173.99 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 173.99 58.42 0)
@@ -2618,7 +2618,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY5") (unit 1)
+          (reference "KEY21") (unit 1)
         )
       )
     )
@@ -2627,7 +2627,7 @@
   (symbol (lib_id "Switch:SW_Push_45deg") (at 191.77 53.34 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fdac179b-c4c9-4133-b250-4f4c101f1b74)
-    (property "Reference" "KEY6" (at 191.77 58.42 0)
+    (property "Reference" "KEY26" (at 191.77 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_Push_45deg" (at 191.77 58.42 0)
@@ -2650,7 +2650,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "KEY6") (unit 1)
+          (reference "KEY26") (unit 1)
         )
       )
     )
@@ -2659,7 +2659,7 @@
   (symbol (lib_id "Diode:1N4148") (at 140.97 116.84 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ff934c66-072c-4c56-8145-34e8c27d0653)
-    (property "Reference" "D21" (at 135.89 115.57 90)
+    (property "Reference" "D14" (at 135.89 115.57 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1N4148" (at 132.08 118.11 90)
@@ -2682,7 +2682,7 @@
     (instances
       (project "ErgoSNM_v3_right"
         (path "/94fd6fa5-abea-4c62-b80d-3b080722228a/1a54857c-0204-45b8-b08f-47236e02c723"
-          (reference "D21") (unit 1)
+          (reference "D14") (unit 1)
         )
       )
     )
