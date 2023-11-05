@@ -9,7 +9,7 @@
     (title "ErgoSNM Keyboard - Right")
     (rev "3.0")
     (company "SideraKB")
-    (comment 1 "MIT License (Open source hardware)")
+    (comment 1 "Open source hardware, CERN-OHL-P v2")
     (comment 2 "https://github.com/ziteh/ergo-snm-keyboard")
   )
 
