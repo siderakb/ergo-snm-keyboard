@@ -8,7 +8,7 @@
 
 *ErgoSNM* \- a split ergonomic keyboard that aims to make people leave their mouse behind.
 
-Features introduction, build guides and more information can be found in the [Docs:book:](https://siderakb.github.io/docs/ergosnm/)
+Features introduction, build guides and more information can be found in the [Docs:book:](https://siderakb.github.io/docs/intro)
 
 ## Footprint
 
