@@ -4,13 +4,20 @@
 [![docs.rs](https://img.shields.io/badge/Docs-latest-blue)](https://siderakb.github.io/docs/ergosnm/rev2)
 [![kicad](https://img.shields.io/badge/KiCad-v7-orange)](https://github.com/siderakb/ergo-snm-keyboard/tree/main/ErgoSNM_Keyboard)
 
-![](https://i.imgur.com/ovP1uKJ.jpg)
+![](https://imgur.com/hzSMu2A.jpg)
 
 *ErgoSNM* \- a split ergonomic keyboard that aims to make people leave their mouse behind.
 
-Features introduction, build guides and more information can be found in the [Docs:book:](https://siderakb.github.io/docs/ergosnm/)
+- 64 keys in total.
+  - Left half 29+6 keys.
+  - Right half 29 keys + trackball for mouse cursor and scroll.
+- Cherry MX style switches, hot-swap avaliable.
+- USB Type-C.
+- Column-staggered layout.
 
-## Footprint
+Build guide and more information can be found in the [📖Docs](https://siderakb.github.io/docs/ergosnm/rev2)
+
+## Clone
 
 If `key-switches.pretty` folder is empty, run `git submodule update --init` to clone submodule.
 
@@ -20,4 +27,4 @@ If `key-switches.pretty` folder is empty, run `git submodule update --init` to c
 
 ## License
 
-Hardware available under the [CERN-OHL-P v2](/LICENSE-CERN-OHL-P).
+Hardware available under the [CERN-OHL-P v2](/LICENSE) permissive license.
