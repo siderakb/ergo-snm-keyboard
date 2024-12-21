@@ -17,6 +17,8 @@
 
 Build guide and more information can be found in the [📖Docs](https://siderakb.github.io/docs/ergosnm/rev2)
 
+⚡The wireless `Rev 3.0` is in progress, here's a [demo video](https://www.youtube.com/watch?v=TtJiaOGiEaQ).
+
 ## Clone
 
 If `key-switches.pretty` folder is empty, run `git submodule update --init` to clone submodule.
