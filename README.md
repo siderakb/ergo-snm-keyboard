@@ -30,7 +30,8 @@
 
 Build guide and more information can be found in the [📖Docs](https://siderakb.ziteh.dev/docs/ergosnm/intro)
 
-> [Playing *Call of Duty* with ErgoSNM](https://youtu.be/b-AAzqrqtw4)
+Introduction Video
+[![](https://i.imgur.com/3YvQYrx.png)](https://youtu.be/mWoAi_D721U)
 
 ## Clone
 
