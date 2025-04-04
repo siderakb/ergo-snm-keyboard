@@ -21,6 +21,14 @@
         - *K*+*L* performs the right click
         - *J*+*L* performs the middle click.
 
+Introduction Video:
+
+<a href="https://youtu.be/mWoAi_D721U" target="_blank">
+  <img src="https://i.imgur.com/3YvQYrx.png" alt="Thumbnail" width="480">
+</a>
+
+
+
 | Rev   | MCU                       | Note                                     | Video                                               |
 | ----- | ------------------------- | ---------------------------------------- | --------------------------------------------------- |
 | `1.x` | Pro Micro (ATmega32U4)    | Experimental version                     |                                                     |
@@ -29,9 +37,6 @@
 | `4.x` | ???                       | ⚡In progress                             |                                                     |
 
 Build guide and more information can be found in the [📖Docs](https://siderakb.ziteh.dev/docs/ergosnm/intro)
-
-Introduction Video
-[![](https://i.imgur.com/3YvQYrx.png)](https://youtu.be/mWoAi_D721U)
 
 ## Clone
 
