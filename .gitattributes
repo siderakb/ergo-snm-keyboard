@@ -1,0 +1,7 @@
+*.kicad_pro linguist-detectable=true
+*.kicad_prl linguist-detectable=true
+*.kicad_pcb linguist-detectable=true
+*.kicad_sch linguist-detectable=true
+*.kicad_dru linguist-detectable=true
+*.kicad_mod linguist-detectable=true
+*.kicad_sym linguist-detectable=true
