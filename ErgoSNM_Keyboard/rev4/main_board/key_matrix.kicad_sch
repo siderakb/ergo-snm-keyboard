@@ -2016,7 +2016,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "00972ac5-217a-40e1-8328-c5319ea2eacf")
-		(property "Reference" "D16"
+		(property "Reference" "D4"
 			(at 162.56 58.42 90)
 			(effects
 				(font
@@ -2087,7 +2087,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D16")
+					(reference "D4")
 					(unit 1)
 				)
 			)
@@ -2103,7 +2103,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0b41716f-fe71-4e02-8c9b-6b1148a52854")
-		(property "Reference" "TP9"
+		(property "Reference" "TP3"
 			(at 214.63 100.3299 90)
 			(effects
 				(font
@@ -2172,7 +2172,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP9")
+					(reference "TP3")
 					(unit 1)
 				)
 			)
@@ -2188,7 +2188,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0c836a3e-0d59-448d-b721-3d6b00039d71")
-		(property "Reference" "TP7"
+		(property "Reference" "TP1"
 			(at 214.63 62.2299 90)
 			(effects
 				(font
@@ -2257,7 +2257,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP7")
+					(reference "TP1")
 					(unit 1)
 				)
 			)
@@ -2272,7 +2272,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "119bb9a5-720d-4820-b628-be4dcabec89b")
-		(property "Reference" "D19"
+		(property "Reference" "D22"
 			(at 162.56 115.57 90)
 			(effects
 				(font
@@ -2343,7 +2343,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D19")
+					(reference "D22")
 					(unit 1)
 				)
 			)
@@ -2358,7 +2358,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "129733f1-5643-44eb-aec2-5d72e90e347f")
-		(property "Reference" "KEY28"
+		(property "Reference" "KEY18"
 			(at 200.66 86.36 0)
 			(effects
 				(font
@@ -2375,7 +2375,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 200.66 91.44 0)
 			(effects
 				(font
@@ -2428,7 +2428,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY28")
+					(reference "KEY18")
 					(unit 1)
 				)
 			)
@@ -2443,7 +2443,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "132b48ce-f541-424e-932e-9adbb0b19178")
-		(property "Reference" "D29"
+		(property "Reference" "D24"
 			(at 198.12 115.57 90)
 			(effects
 				(font
@@ -2514,7 +2514,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D29")
+					(reference "D24")
 					(unit 1)
 				)
 			)
@@ -2529,7 +2529,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "18de5f83-9b70-43f9-b43c-c3df72ce5a70")
-		(property "Reference" "KEY5"
+		(property "Reference" "KEY25"
 			(at 111.76 124.46 0)
 			(effects
 				(font
@@ -2546,7 +2546,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 111.76 129.54 0)
 			(effects
 				(font
@@ -2599,7 +2599,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY5")
+					(reference "KEY25")
 					(unit 1)
 				)
 			)
@@ -2614,7 +2614,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "29e2a5ac-ae44-4cab-b96e-5579dcd39e29")
-		(property "Reference" "KEY18"
+		(property "Reference" "KEY16"
 			(at 165.1 86.36 0)
 			(effects
 				(font
@@ -2631,7 +2631,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 165.1 91.44 0)
 			(effects
 				(font
@@ -2684,7 +2684,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY18")
+					(reference "KEY16")
 					(unit 1)
 				)
 			)
@@ -2700,7 +2700,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2b7639ed-c88e-4974-b9f7-795bedc7eaee")
-		(property "Reference" "TP4"
+		(property "Reference" "TP9"
 			(at 160.02 146.8119 0)
 			(effects
 				(font
@@ -2769,7 +2769,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP4")
+					(reference "TP9")
 					(unit 1)
 				)
 			)
@@ -2784,7 +2784,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2dc27a59-576e-4d19-a5c2-a0930890517a")
-		(property "Reference" "D13"
+		(property "Reference" "D15"
 			(at 144.78 96.52 90)
 			(effects
 				(font
@@ -2855,7 +2855,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D13")
+					(reference "D15")
 					(unit 1)
 				)
 			)
@@ -2871,7 +2871,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2e18d303-b923-4d11-9738-8263a2595f76")
-		(property "Reference" "TP8"
+		(property "Reference" "TP2"
 			(at 214.63 81.2799 90)
 			(effects
 				(font
@@ -2940,7 +2940,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP8")
+					(reference "TP2")
 					(unit 1)
 				)
 			)
@@ -2955,7 +2955,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2e6b5e54-9ac8-4524-889c-fac5f0e55a16")
-		(property "Reference" "KEY24"
+		(property "Reference" "KEY23"
 			(at 182.88 105.41 0)
 			(effects
 				(font
@@ -2972,7 +2972,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 182.88 110.49 0)
 			(effects
 				(font
@@ -3025,7 +3025,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY24")
+					(reference "KEY23")
 					(unit 1)
 				)
 			)
@@ -3041,7 +3041,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2f27a4d8-3c44-4205-8780-36c43e934028")
-		(property "Reference" "TP3"
+		(property "Reference" "TP8"
 			(at 142.24 146.8119 0)
 			(effects
 				(font
@@ -3110,7 +3110,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP3")
+					(reference "TP8")
 					(unit 1)
 				)
 			)
@@ -3125,7 +3125,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3700fa48-b66c-4bfa-8b19-51ee73cd7b5c")
-		(property "Reference" "D18"
+		(property "Reference" "D16"
 			(at 162.56 96.52 90)
 			(effects
 				(font
@@ -3196,7 +3196,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D18")
+					(reference "D16")
 					(unit 1)
 				)
 			)
@@ -3211,7 +3211,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3ed736df-486d-4bac-b4fb-61efd265ed72")
-		(property "Reference" "KEY14"
+		(property "Reference" "KEY21"
 			(at 147.32 105.41 0)
 			(effects
 				(font
@@ -3228,7 +3228,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 147.32 110.49 0)
 			(effects
 				(font
@@ -3281,7 +3281,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY14")
+					(reference "KEY21")
 					(unit 1)
 				)
 			)
@@ -3296,7 +3296,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "40bd50e2-a0f5-4f30-aff3-097017ffac63")
-		(property "Reference" "KEY3"
+		(property "Reference" "KEY13"
 			(at 111.76 86.36 0)
 			(effects
 				(font
@@ -3313,7 +3313,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 111.76 91.44 0)
 			(effects
 				(font
@@ -3366,7 +3366,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY3")
+					(reference "KEY13")
 					(unit 1)
 				)
 			)
@@ -3381,7 +3381,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "443ef69f-bd52-47e2-8247-b55316c1f0ac")
-		(property "Reference" "D24"
+		(property "Reference" "D23"
 			(at 180.34 115.57 90)
 			(effects
 				(font
@@ -3452,7 +3452,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D24")
+					(reference "D23")
 					(unit 1)
 				)
 			)
@@ -3467,7 +3467,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4bad156a-6d5c-4836-857a-3ffdd1e7b131")
-		(property "Reference" "D17"
+		(property "Reference" "D10"
 			(at 162.56 77.47 90)
 			(effects
 				(font
@@ -3538,7 +3538,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D17")
+					(reference "D10")
 					(unit 1)
 				)
 			)
@@ -3553,7 +3553,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4eb45b05-5a56-4aea-a40d-5fd5cecb20d2")
-		(property "Reference" "KEY15"
+		(property "Reference" "KEY27"
 			(at 147.32 124.46 0)
 			(effects
 				(font
@@ -3570,7 +3570,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 147.32 129.54 0)
 			(effects
 				(font
@@ -3623,7 +3623,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY15")
+					(reference "KEY27")
 					(unit 1)
 				)
 			)
@@ -3638,7 +3638,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "53a7cee3-7388-4460-ac78-b8ba60518373")
-		(property "Reference" "KEY12"
+		(property "Reference" "KEY9"
 			(at 147.32 67.31 0)
 			(effects
 				(font
@@ -3655,7 +3655,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 147.32 72.39 0)
 			(effects
 				(font
@@ -3708,7 +3708,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY12")
+					(reference "KEY9")
 					(unit 1)
 				)
 			)
@@ -3724,7 +3724,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5ba078f5-62d1-4b4d-8917-27a5e6e27749")
-		(property "Reference" "TP1"
+		(property "Reference" "TP6"
 			(at 106.68 146.8119 0)
 			(effects
 				(font
@@ -3793,7 +3793,7 @@
 		(instances
 			(project ""
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP1")
+					(reference "TP6")
 					(unit 1)
 				)
 			)
@@ -3808,7 +3808,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5c7fc2f1-f140-4fbc-94d2-ebd08dae059a")
-		(property "Reference" "D11"
+		(property "Reference" "D3"
 			(at 144.78 58.42 90)
 			(effects
 				(font
@@ -3879,7 +3879,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D11")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -3894,7 +3894,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5c97b98e-56bf-4a59-9e60-d0227177ebd0")
-		(property "Reference" "D5"
+		(property "Reference" "D25"
 			(at 109.22 134.62 90)
 			(effects
 				(font
@@ -3965,7 +3965,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D5")
+					(reference "D25")
 					(unit 1)
 				)
 			)
@@ -3980,7 +3980,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5ce89196-f362-477d-86ba-fec7cfdccf9f")
-		(property "Reference" "D26"
+		(property "Reference" "D6"
 			(at 198.12 58.42 90)
 			(effects
 				(font
@@ -4051,7 +4051,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D26")
+					(reference "D6")
 					(unit 1)
 				)
 			)
@@ -4066,7 +4066,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "63ed825b-0909-4309-bd74-be376bac5bfa")
-		(property "Reference" "KEY4"
+		(property "Reference" "KEY19"
 			(at 111.76 105.41 0)
 			(effects
 				(font
@@ -4083,7 +4083,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 111.76 110.49 0)
 			(effects
 				(font
@@ -4136,7 +4136,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY4")
+					(reference "KEY19")
 					(unit 1)
 				)
 			)
@@ -4151,7 +4151,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "64ffa349-bf5a-45f4-a5ba-3571fd62cdb7")
-		(property "Reference" "D21"
+		(property "Reference" "D5"
 			(at 180.34 58.42 90)
 			(effects
 				(font
@@ -4222,7 +4222,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D21")
+					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -4237,7 +4237,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "655952c9-01f6-4ff2-a75a-8aa393160de1")
-		(property "Reference" "KEY19"
+		(property "Reference" "KEY22"
 			(at 165.1 105.41 0)
 			(effects
 				(font
@@ -4254,7 +4254,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 165.1 110.49 0)
 			(effects
 				(font
@@ -4307,7 +4307,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY19")
+					(reference "KEY22")
 					(unit 1)
 				)
 			)
@@ -4322,7 +4322,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "65863e8a-7343-48f6-a36f-eb8845cd2aab")
-		(property "Reference" "D3"
+		(property "Reference" "D13"
 			(at 109.22 96.52 90)
 			(effects
 				(font
@@ -4393,7 +4393,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D3")
+					(reference "D13")
 					(unit 1)
 				)
 			)
@@ -4408,7 +4408,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6678dc44-e6a1-4ac4-9dbb-3dd7eb37aedb")
-		(property "Reference" "KEY11"
+		(property "Reference" "KEY3"
 			(at 147.32 48.26 0)
 			(effects
 				(font
@@ -4425,7 +4425,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 147.32 53.34 0)
 			(effects
 				(font
@@ -4478,7 +4478,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY11")
+					(reference "KEY3")
 					(unit 1)
 				)
 			)
@@ -4493,7 +4493,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "74c4a531-65f8-45df-a1ea-44d7c021de41")
-		(property "Reference" "D2"
+		(property "Reference" "D7"
 			(at 110.49 77.47 90)
 			(effects
 				(font
@@ -4564,7 +4564,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D2")
+					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -4579,7 +4579,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "839fab45-c5fc-4bcf-b236-9e82d6ccb142")
-		(property "Reference" "D15"
+		(property "Reference" "D27"
 			(at 144.78 134.62 90)
 			(effects
 				(font
@@ -4650,7 +4650,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D15")
+					(reference "D27")
 					(unit 1)
 				)
 			)
@@ -4665,7 +4665,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8e2f644f-9fb0-4ba6-9a2d-7dce094536da")
-		(property "Reference" "KEY25"
+		(property "Reference" "KEY29"
 			(at 182.88 124.46 0)
 			(effects
 				(font
@@ -4682,7 +4682,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 182.88 129.54 0)
 			(effects
 				(font
@@ -4735,7 +4735,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY25")
+					(reference "KEY29")
 					(unit 1)
 				)
 			)
@@ -4750,7 +4750,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9483333d-4339-4d2b-87d9-646560ff8f76")
-		(property "Reference" "KEY22"
+		(property "Reference" "KEY11"
 			(at 182.88 67.31 0)
 			(effects
 				(font
@@ -4767,7 +4767,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 182.88 72.39 0)
 			(effects
 				(font
@@ -4820,7 +4820,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY22")
+					(reference "KEY11")
 					(unit 1)
 				)
 			)
@@ -4835,7 +4835,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "962a8b1b-5920-4c15-b35e-bb7fb7cc45cb")
-		(property "Reference" "D6"
+		(property "Reference" "D2"
 			(at 128.27 58.42 90)
 			(effects
 				(font
@@ -4906,7 +4906,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D6")
+					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -4921,7 +4921,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9fba3628-391b-4219-9473-907dd42f8f8a")
-		(property "Reference" "KEY13"
+		(property "Reference" "KEY15"
 			(at 147.32 86.36 0)
 			(effects
 				(font
@@ -4938,7 +4938,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 147.32 91.44 0)
 			(effects
 				(font
@@ -4991,7 +4991,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY13")
+					(reference "KEY15")
 					(unit 1)
 				)
 			)
@@ -5006,7 +5006,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a1a1d588-c656-4401-8c76-5f15e214f6de")
-		(property "Reference" "D28"
+		(property "Reference" "D18"
 			(at 198.12 96.52 90)
 			(effects
 				(font
@@ -5077,7 +5077,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D28")
+					(reference "D18")
 					(unit 1)
 				)
 			)
@@ -5092,7 +5092,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aa5cd4e3-7f45-4644-8a90-08ca14389544")
-		(property "Reference" "D8"
+		(property "Reference" "D14"
 			(at 127 96.52 90)
 			(effects
 				(font
@@ -5163,7 +5163,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D8")
+					(reference "D14")
 					(unit 1)
 				)
 			)
@@ -5178,7 +5178,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aef23c36-4cbf-40a1-bb51-7db7aaabb9b7")
-		(property "Reference" "KEY2"
+		(property "Reference" "KEY7"
 			(at 111.76 67.31 0)
 			(effects
 				(font
@@ -5195,7 +5195,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 111.76 72.39 0)
 			(effects
 				(font
@@ -5248,7 +5248,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY2")
+					(reference "KEY7")
 					(unit 1)
 				)
 			)
@@ -5264,7 +5264,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "af35457c-4ef7-4739-92ab-145594ec180e")
-		(property "Reference" "TP11"
+		(property "Reference" "TP5"
 			(at 214.63 138.4299 90)
 			(effects
 				(font
@@ -5333,7 +5333,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP11")
+					(reference "TP5")
 					(unit 1)
 				)
 			)
@@ -5348,7 +5348,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b51c9699-5dbf-4a5e-8ce8-edbafa2b880d")
-		(property "Reference" "KEY16"
+		(property "Reference" "KEY4"
 			(at 165.1 48.26 0)
 			(effects
 				(font
@@ -5365,7 +5365,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 165.1 53.34 0)
 			(effects
 				(font
@@ -5418,7 +5418,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY16")
+					(reference "KEY4")
 					(unit 1)
 				)
 			)
@@ -5433,7 +5433,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b526bdac-dd2c-40a7-9c1d-d369fe65341c")
-		(property "Reference" "D20"
+		(property "Reference" "D28"
 			(at 162.56 134.62 90)
 			(effects
 				(font
@@ -5504,7 +5504,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D20")
+					(reference "D28")
 					(unit 1)
 				)
 			)
@@ -5519,7 +5519,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b6787f3a-0a73-4617-9ab1-79593435ba02")
-		(property "Reference" "D7"
+		(property "Reference" "D8"
 			(at 128.27 77.47 90)
 			(effects
 				(font
@@ -5590,7 +5590,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D7")
+					(reference "D8")
 					(unit 1)
 				)
 			)
@@ -5605,7 +5605,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b7d32f43-e1c9-4910-ac75-248a95c9baea")
-		(property "Reference" "KEY8"
+		(property "Reference" "KEY14"
 			(at 129.54 86.36 0)
 			(effects
 				(font
@@ -5622,7 +5622,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 129.54 91.44 0)
 			(effects
 				(font
@@ -5675,7 +5675,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY8")
+					(reference "KEY14")
 					(unit 1)
 				)
 			)
@@ -5690,7 +5690,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bcf99b8e-35ec-48ea-b650-07ea0c87952f")
-		(property "Reference" "KEY29"
+		(property "Reference" "KEY24"
 			(at 200.66 105.41 0)
 			(effects
 				(font
@@ -5707,7 +5707,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 200.66 110.49 0)
 			(effects
 				(font
@@ -5760,7 +5760,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY29")
+					(reference "KEY24")
 					(unit 1)
 				)
 			)
@@ -5775,7 +5775,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bd990fd1-1bc0-443f-8944-5359428a9050")
-		(property "Reference" "KEY27"
+		(property "Reference" "KEY12"
 			(at 200.66 67.31 0)
 			(effects
 				(font
@@ -5792,7 +5792,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 200.66 72.39 0)
 			(effects
 				(font
@@ -5845,7 +5845,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY27")
+					(reference "KEY12")
 					(unit 1)
 				)
 			)
@@ -5877,7 +5877,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 111.76 53.34 0)
 			(effects
 				(font
@@ -5946,7 +5946,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c32dde4e-779b-40b2-bca7-8d818af2180a")
-		(property "Reference" "TP5"
+		(property "Reference" "TP10"
 			(at 177.8 146.8119 0)
 			(effects
 				(font
@@ -6015,7 +6015,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP5")
+					(reference "TP10")
 					(unit 1)
 				)
 			)
@@ -6031,7 +6031,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c6025868-aaac-43fe-b795-0c50641f5e92")
-		(property "Reference" "TP6"
+		(property "Reference" "TP11"
 			(at 195.58 146.8119 0)
 			(effects
 				(font
@@ -6100,7 +6100,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP6")
+					(reference "TP11")
 					(unit 1)
 				)
 			)
@@ -6115,7 +6115,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c7ad7217-bdac-41ca-8be8-98832c7c2a6b")
-		(property "Reference" "D12"
+		(property "Reference" "D9"
 			(at 144.78 77.47 90)
 			(effects
 				(font
@@ -6186,7 +6186,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D12")
+					(reference "D9")
 					(unit 1)
 				)
 			)
@@ -6202,7 +6202,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cc348e3c-b18a-4088-87f4-de06257a80a7")
-		(property "Reference" "TP10"
+		(property "Reference" "TP4"
 			(at 214.63 119.3799 90)
 			(effects
 				(font
@@ -6271,7 +6271,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP10")
+					(reference "TP4")
 					(unit 1)
 				)
 			)
@@ -6286,7 +6286,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d88e7486-d217-47bb-b0bf-762f8aafdef6")
-		(property "Reference" "D27"
+		(property "Reference" "D12"
 			(at 198.12 77.47 90)
 			(effects
 				(font
@@ -6357,7 +6357,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D27")
+					(reference "D12")
 					(unit 1)
 				)
 			)
@@ -6373,7 +6373,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "da12c9c7-8894-419c-9d9e-49a2ff3f5609")
-		(property "Reference" "TP2"
+		(property "Reference" "TP7"
 			(at 124.46 146.8119 0)
 			(effects
 				(font
@@ -6442,7 +6442,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "TP2")
+					(reference "TP7")
 					(unit 1)
 				)
 			)
@@ -6457,7 +6457,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dab1df1f-afbf-4763-b53f-11213600d97e")
-		(property "Reference" "D25"
+		(property "Reference" "D29"
 			(at 180.34 134.62 90)
 			(effects
 				(font
@@ -6528,7 +6528,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D25")
+					(reference "D29")
 					(unit 1)
 				)
 			)
@@ -6543,7 +6543,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dc6a0158-d583-424f-ad43-74ed3c3da481")
-		(property "Reference" "D23"
+		(property "Reference" "D17"
 			(at 180.34 96.52 90)
 			(effects
 				(font
@@ -6614,7 +6614,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D23")
+					(reference "D17")
 					(unit 1)
 				)
 			)
@@ -6629,7 +6629,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dcf97810-0073-4472-88aa-f6cd5dbba70a")
-		(property "Reference" "KEY17"
+		(property "Reference" "KEY10"
 			(at 165.1 67.31 0)
 			(effects
 				(font
@@ -6646,7 +6646,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 165.1 72.39 0)
 			(effects
 				(font
@@ -6699,7 +6699,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY17")
+					(reference "KEY10")
 					(unit 1)
 				)
 			)
@@ -6714,7 +6714,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "de739eec-f6d1-4fd9-9744-a264ee92052a")
-		(property "Reference" "KEY7"
+		(property "Reference" "KEY8"
 			(at 129.54 67.31 0)
 			(effects
 				(font
@@ -6731,7 +6731,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 129.54 72.39 0)
 			(effects
 				(font
@@ -6784,7 +6784,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY7")
+					(reference "KEY8")
 					(unit 1)
 				)
 			)
@@ -6799,7 +6799,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "df022a7f-103e-41a3-93aa-8c6797d69d7f")
-		(property "Reference" "KEY23"
+		(property "Reference" "KEY17"
 			(at 182.88 86.36 0)
 			(effects
 				(font
@@ -6816,7 +6816,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 182.88 91.44 0)
 			(effects
 				(font
@@ -6869,7 +6869,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY23")
+					(reference "KEY17")
 					(unit 1)
 				)
 			)
@@ -6884,7 +6884,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dfa86832-5cc6-4833-bf8d-b43ab2e9c9d8")
-		(property "Reference" "D4"
+		(property "Reference" "D19"
 			(at 109.22 115.57 90)
 			(effects
 				(font
@@ -6955,7 +6955,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D4")
+					(reference "D19")
 					(unit 1)
 				)
 			)
@@ -6970,7 +6970,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e014dd48-693e-4449-9879-1597aaab69af")
-		(property "Reference" "KEY9"
+		(property "Reference" "KEY20"
 			(at 129.54 105.41 0)
 			(effects
 				(font
@@ -6987,7 +6987,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 129.54 110.49 0)
 			(effects
 				(font
@@ -7040,7 +7040,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY9")
+					(reference "KEY20")
 					(unit 1)
 				)
 			)
@@ -7055,7 +7055,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e5f690a1-64e5-4c22-945a-a2bc11e5a03c")
-		(property "Reference" "D10"
+		(property "Reference" "D26"
 			(at 127 134.62 90)
 			(effects
 				(font
@@ -7126,7 +7126,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D10")
+					(reference "D26")
 					(unit 1)
 				)
 			)
@@ -7141,7 +7141,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ecac2427-9720-4cbd-971a-57eb38777985")
-		(property "Reference" "D22"
+		(property "Reference" "D11"
 			(at 180.34 77.47 90)
 			(effects
 				(font
@@ -7212,7 +7212,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D22")
+					(reference "D11")
 					(unit 1)
 				)
 			)
@@ -7227,7 +7227,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f05301eb-7060-4663-b4b9-2d8543376d85")
-		(property "Reference" "D9"
+		(property "Reference" "D20"
 			(at 127 115.57 90)
 			(effects
 				(font
@@ -7298,7 +7298,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D9")
+					(reference "D20")
 					(unit 1)
 				)
 			)
@@ -7313,7 +7313,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f484637b-1d0d-42be-ac80-d795ba86d28b")
-		(property "Reference" "KEY20"
+		(property "Reference" "KEY28"
 			(at 165.1 124.46 0)
 			(effects
 				(font
@@ -7330,7 +7330,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 165.1 129.54 0)
 			(effects
 				(font
@@ -7383,7 +7383,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY20")
+					(reference "KEY28")
 					(unit 1)
 				)
 			)
@@ -7484,7 +7484,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fa7710f4-8a67-4a79-a152-a7cb0c456e3a")
-		(property "Reference" "KEY6"
+		(property "Reference" "KEY2"
 			(at 129.54 48.26 0)
 			(effects
 				(font
@@ -7501,7 +7501,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 129.54 53.34 0)
 			(effects
 				(font
@@ -7554,7 +7554,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY6")
+					(reference "KEY2")
 					(unit 1)
 				)
 			)
@@ -7569,7 +7569,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "faa2fb14-42a4-44a2-945a-e00d1e153318")
-		(property "Reference" "KEY10"
+		(property "Reference" "KEY26"
 			(at 129.54 124.46 0)
 			(effects
 				(font
@@ -7586,7 +7586,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 129.54 129.54 0)
 			(effects
 				(font
@@ -7639,7 +7639,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY10")
+					(reference "KEY26")
 					(unit 1)
 				)
 			)
@@ -7654,7 +7654,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fd35fa35-3da7-40f9-b0f2-380c192c189b")
-		(property "Reference" "KEY21"
+		(property "Reference" "KEY5"
 			(at 182.88 48.26 0)
 			(effects
 				(font
@@ -7671,7 +7671,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 182.88 53.34 0)
 			(effects
 				(font
@@ -7724,7 +7724,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY21")
+					(reference "KEY5")
 					(unit 1)
 				)
 			)
@@ -7739,7 +7739,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fdac179b-c4c9-4133-b250-4f4c101f1b74")
-		(property "Reference" "KEY26"
+		(property "Reference" "KEY6"
 			(at 200.66 48.26 0)
 			(effects
 				(font
@@ -7756,7 +7756,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid"
+		(property "Footprint" "key-switches:SW_MX_Kailh_Choc_V1V2_HotSwap_Hybrid_double"
 			(at 200.66 53.34 0)
 			(effects
 				(font
@@ -7809,7 +7809,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "KEY26")
+					(reference "KEY6")
 					(unit 1)
 				)
 			)
@@ -7824,7 +7824,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ff934c66-072c-4c56-8145-34e8c27d0653")
-		(property "Reference" "D14"
+		(property "Reference" "D21"
 			(at 144.78 115.57 90)
 			(effects
 				(font
@@ -7895,7 +7895,7 @@
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71/13af3ddf-6519-42c3-b574-52d3608da2fd"
-					(reference "D14")
+					(reference "D21")
 					(unit 1)
 				)
 			)
