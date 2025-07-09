@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "ErgoSNM_Keyboard_Library")(type "KiCad")(uri "${KIPRJMOD}/../../../ErgoSNM_Keyboard_Library.kicad_sym")(options "")(descr ""))
+)
