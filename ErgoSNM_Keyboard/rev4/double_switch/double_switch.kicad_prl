@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 2,
+    "active_layer": 25,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -20,7 +20,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": true,
+      "lockedItems": false,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -45,10 +45,11 @@
       "pads",
       "zones",
       "drc_warnings",
+      "drc_exclusions",
       "conflict_shadows",
       "shapes"
     ],
-    "visible_layers": "ffffffff_ffffffff_fffffff5_ffffffff",
+    "visible_layers": "ffffffff_ffffffff_ffffffff_ffffffff",
     "zone_display_mode": 0
   },
   "git": {
@@ -57,7 +58,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "core_board_e73.kicad_prl",
+    "filename": "double_switch.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
@@ -86,16 +87,16 @@
       9
     ],
     "col_widths": [
-      125,
-      118,
-      74,
-      51,
-      74,
-      74,
-      74,
-      53,
-      74,
-      74
+      221,
+      209,
+      130,
+      90,
+      130,
+      130,
+      130,
+      95,
+      130,
+      130
     ],
     "custom_group_rules": [],
     "expanded_rows": [],

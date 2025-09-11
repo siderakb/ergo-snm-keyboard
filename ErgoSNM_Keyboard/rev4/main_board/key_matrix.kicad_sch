@@ -2078,6 +2078,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 167.64 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 167.64 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d363cff7-3f62-4cb2-891e-2df9458030f1")
 		)
@@ -2158,6 +2176,24 @@
 			)
 		)
 		(property "MFR. Part #" "--"
+			(at 209.55 101.6 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 209.55 101.6 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 209.55 101.6 90)
 			(effects
 				(font
@@ -2251,6 +2287,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 209.55 63.5 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 209.55 63.5 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d20fea4d-a9e8-4ceb-82b3-b52d52469365")
 		)
@@ -2334,6 +2388,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 167.64 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 167.64 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "fa399eec-c459-4cea-aa31-ecba9c945e12")
 		)
@@ -2354,7 +2426,7 @@
 		(at 200.66 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "129733f1-5643-44eb-aec2-5d72e90e347f")
@@ -2411,6 +2483,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 200.66 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 200.66 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 200.66 91.44 0)
 			(effects
 				(font
@@ -2505,6 +2595,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 203.2 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 203.2 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0e49359b-9b69-4174-91ba-9191e59d43e7")
 		)
@@ -2525,7 +2633,7 @@
 		(at 111.76 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "18de5f83-9b70-43f9-b43c-c3df72ce5a70")
@@ -2590,6 +2698,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 111.76 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 111.76 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "cdbc679b-8b4b-4a78-8332-495320b5c7cf")
 		)
@@ -2610,7 +2736,7 @@
 		(at 165.1 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "29e2a5ac-ae44-4cab-b96e-5579dcd39e29")
@@ -2667,6 +2793,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 165.1 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 165.1 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 165.1 91.44 0)
 			(effects
 				(font
@@ -2763,6 +2907,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 157.48 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 157.48 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e5790329-3235-428e-944c-24734a921734")
 		)
@@ -2838,6 +3000,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 149.86 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 149.86 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 149.86 97.79 90)
 			(effects
 				(font
@@ -2934,6 +3114,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 209.55 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 209.55 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e9479fa9-c314-4b72-b726-3640ec382881")
 		)
@@ -2951,7 +3149,7 @@
 		(at 182.88 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "2e6b5e54-9ac8-4524-889c-fac5f0e55a16")
@@ -3008,6 +3206,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 182.88 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 182.88 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 182.88 110.49 0)
 			(effects
 				(font
@@ -3104,6 +3320,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 139.7 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 139.7 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a95516b0-a2ad-4db5-bc48-0efa621b7dc1")
 		)
@@ -3187,6 +3421,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 167.64 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 167.64 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a0ac4aa5-8282-48f2-a573-ad2d1e961d32")
 		)
@@ -3207,7 +3459,7 @@
 		(at 147.32 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "3ed736df-486d-4bac-b4fb-61efd265ed72")
@@ -3272,6 +3524,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 147.32 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 147.32 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d934ae4b-5cf9-435c-a842-5c39c042b0cf")
 		)
@@ -3292,7 +3562,7 @@
 		(at 111.76 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "40bd50e2-a0f5-4f30-aff3-097017ffac63")
@@ -3349,6 +3619,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 111.76 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 111.76 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 111.76 91.44 0)
 			(effects
 				(font
@@ -3443,6 +3731,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 185.42 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 185.42 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b342e9cf-0d71-4610-933a-dafb9c6e0f2f")
 		)
@@ -3529,6 +3835,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 167.64 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 167.64 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b4804cb9-8463-4e47-94eb-1f691623383a")
 		)
@@ -3549,7 +3873,7 @@
 		(at 147.32 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "4eb45b05-5a56-4aea-a40d-5fd5cecb20d2")
@@ -3614,6 +3938,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 147.32 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 147.32 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "22121874-aaca-452e-825c-67de08bd0bd9")
 		)
@@ -3634,7 +3976,7 @@
 		(at 147.32 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "53a7cee3-7388-4460-ac78-b8ba60518373")
@@ -3691,6 +4033,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 147.32 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 147.32 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 147.32 72.39 0)
 			(effects
 				(font
@@ -3787,6 +4147,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 104.14 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 104.14 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ba2aa5b0-87fb-42a7-aa7c-eb44cd3e3e32")
 		)
@@ -3862,6 +4240,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 149.86 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 149.86 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 149.86 59.69 90)
 			(effects
 				(font
@@ -3956,6 +4352,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 114.3 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 114.3 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "91bfbad6-c11c-412a-96a3-3a8fbb25cf8b")
 		)
@@ -4042,6 +4456,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 203.2 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 203.2 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a4420abd-a3e8-4cae-b1b4-5b561a72538b")
 		)
@@ -4062,7 +4494,7 @@
 		(at 111.76 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "63ed825b-0909-4309-bd74-be376bac5bfa")
@@ -4119,6 +4551,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 111.76 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 111.76 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 111.76 110.49 0)
 			(effects
 				(font
@@ -4213,6 +4663,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 185.42 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 185.42 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "75a3fb90-c760-477e-a7fd-95f5fd2068f5")
 		)
@@ -4233,7 +4701,7 @@
 		(at 165.1 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "655952c9-01f6-4ff2-a75a-8aa393160de1")
@@ -4290,6 +4758,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 165.1 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 165.1 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 165.1 110.49 0)
 			(effects
 				(font
@@ -4384,6 +4870,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 114.3 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 114.3 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "902cf62b-4652-407c-a8cd-d24126243a6b")
 		)
@@ -4404,7 +4908,7 @@
 		(at 147.32 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "6678dc44-e6a1-4ac4-9dbb-3dd7eb37aedb")
@@ -4461,6 +4965,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 147.32 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 147.32 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 147.32 53.34 0)
 			(effects
 				(font
@@ -4555,6 +5077,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 114.3 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 114.3 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1f702a8d-bd61-4033-9a7e-5ff4ca021726")
 		)
@@ -4641,6 +5181,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 149.86 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 149.86 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c112d9e8-e2b4-4e7c-93d1-b95b115b0e90")
 		)
@@ -4661,7 +5219,7 @@
 		(at 182.88 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "8e2f644f-9fb0-4ba6-9a2d-7dce094536da")
@@ -4726,6 +5284,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 182.88 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 182.88 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9095094e-fef2-4667-9cf1-428819ca16dc")
 		)
@@ -4746,7 +5322,7 @@
 		(at 182.88 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "9483333d-4339-4d2b-87d9-646560ff8f76")
@@ -4803,6 +5379,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 182.88 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 182.88 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 182.88 72.39 0)
 			(effects
 				(font
@@ -4897,6 +5491,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 132.08 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 132.08 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "46438cab-554f-4122-bb84-46492a84a2b5")
 		)
@@ -4917,7 +5529,7 @@
 		(at 147.32 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "9fba3628-391b-4219-9473-907dd42f8f8a")
@@ -4974,6 +5586,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 147.32 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 147.32 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 147.32 91.44 0)
 			(effects
 				(font
@@ -5068,6 +5698,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 203.2 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 203.2 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "92a7172b-d6a2-4500-b560-ee8d11a7db5b")
 		)
@@ -5154,6 +5802,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 132.08 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 132.08 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "51ac46a0-9345-4524-bbd7-83c4102da49e")
 		)
@@ -5174,7 +5840,7 @@
 		(at 111.76 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "aef23c36-4cbf-40a1-bb51-7db7aaabb9b7")
@@ -5231,6 +5897,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 111.76 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 111.76 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 111.76 72.39 0)
 			(effects
 				(font
@@ -5327,6 +6011,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 209.55 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 209.55 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "fbbb1440-6ae6-45ab-ae68-d07f89695ab9")
 		)
@@ -5344,7 +6046,7 @@
 		(at 165.1 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "b51c9699-5dbf-4a5e-8ce8-edbafa2b880d")
@@ -5401,6 +6103,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 165.1 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 165.1 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 165.1 53.34 0)
 			(effects
 				(font
@@ -5495,6 +6215,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 167.64 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 167.64 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5e5994b3-02b9-4556-bd4a-e5ae8e4abdef")
 		)
@@ -5581,6 +6319,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 132.08 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 132.08 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f3565a5b-c135-4920-a8dd-0ca2d84ed2f2")
 		)
@@ -5601,7 +6357,7 @@
 		(at 129.54 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "b7d32f43-e1c9-4910-ac75-248a95c9baea")
@@ -5666,6 +6422,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 129.54 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 129.54 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f558ac3a-2eb5-487e-a45f-92397272d1e3")
 		)
@@ -5686,7 +6460,7 @@
 		(at 200.66 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "bcf99b8e-35ec-48ea-b650-07ea0c87952f")
@@ -5751,6 +6525,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 200.66 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 200.66 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "92918f9e-c3e2-42c3-a16e-d2e865def587")
 		)
@@ -5771,7 +6563,7 @@
 		(at 200.66 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "bd990fd1-1bc0-443f-8944-5359428a9050")
@@ -5836,6 +6628,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 200.66 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 200.66 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "500aa053-272c-414f-b7a5-f32ecab169ff")
 		)
@@ -5856,7 +6666,7 @@
 		(at 111.76 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "bef0ed30-218e-42e5-9109-965e80a536d2")
@@ -5913,6 +6723,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 111.76 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 111.76 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 111.76 53.34 0)
 			(effects
 				(font
@@ -6009,6 +6837,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 175.26 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 175.26 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ddb72cd7-8df5-4027-98d4-52ccd586ed59")
 		)
@@ -6094,6 +6940,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 193.04 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 193.04 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d3388e49-9846-4cd5-bd14-847c237eaedc")
 		)
@@ -6169,6 +7033,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 149.86 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 149.86 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 149.86 78.74 90)
 			(effects
 				(font
@@ -6265,6 +7147,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 209.55 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 209.55 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "01554045-fafd-43db-8bac-61c405b4716d")
 		)
@@ -6340,6 +7240,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 203.2 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 203.2 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 203.2 78.74 90)
 			(effects
 				(font
@@ -6436,6 +7354,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 121.92 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 121.92 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "92698940-4687-4b5c-999b-79b80ec2ee4e")
 		)
@@ -6511,6 +7447,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 185.42 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 185.42 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 185.42 135.89 90)
 			(effects
 				(font
@@ -6605,6 +7559,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 185.42 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 185.42 97.79 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "37cb24a0-4a21-45c7-8298-5ca12d37fdd1")
 		)
@@ -6625,7 +7597,7 @@
 		(at 165.1 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "dcf97810-0073-4472-88aa-f6cd5dbba70a")
@@ -6690,6 +7662,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 165.1 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 165.1 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3cb23a1c-14a6-4e3a-9026-c93c5b8e6feb")
 		)
@@ -6710,7 +7700,7 @@
 		(at 129.54 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "de739eec-f6d1-4fd9-9744-a264ee92052a")
@@ -6775,6 +7765,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 129.54 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 129.54 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7382f4b9-f44c-44eb-9f48-7653a2b22e0f")
 		)
@@ -6795,7 +7803,7 @@
 		(at 182.88 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "df022a7f-103e-41a3-93aa-8c6797d69d7f")
@@ -6852,6 +7860,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 182.88 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 182.88 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 182.88 91.44 0)
 			(effects
 				(font
@@ -6946,6 +7972,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 114.3 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 114.3 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f11e9b06-fea6-4dcf-9adb-cec0228d6870")
 		)
@@ -6966,7 +8010,7 @@
 		(at 129.54 110.49 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "e014dd48-693e-4449-9879-1597aaab69af")
@@ -7023,6 +8067,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 129.54 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 129.54 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 129.54 110.49 0)
 			(effects
 				(font
@@ -7117,6 +8179,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 132.08 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 132.08 135.89 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "84e4c504-693c-488c-97a1-4aca09a7feb8")
 		)
@@ -7195,6 +8275,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 185.42 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 185.42 78.74 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 185.42 78.74 90)
 			(effects
 				(font
@@ -7289,6 +8387,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 132.08 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 132.08 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3bbd7018-d27e-40aa-a78d-cab0a9ddc8f0")
 		)
@@ -7309,7 +8425,7 @@
 		(at 165.1 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "f484637b-1d0d-42be-ac80-d795ba86d28b")
@@ -7366,6 +8482,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 165.1 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 165.1 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 165.1 129.54 0)
 			(effects
 				(font
@@ -7460,6 +8594,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 114.3 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 114.3 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9ee89cf5-491b-47f2-9330-b1e193af6c17")
 		)
@@ -7480,7 +8632,7 @@
 		(at 129.54 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "fa7710f4-8a67-4a79-a152-a7cb0c456e3a")
@@ -7545,6 +8697,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 129.54 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 129.54 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "99bac630-aea7-4eac-8106-6fc461d45425")
 		)
@@ -7565,7 +8735,7 @@
 		(at 129.54 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "faa2fb14-42a4-44a2-945a-e00d1e153318")
@@ -7630,6 +8800,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 129.54 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 129.54 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d807fa7f-669f-4929-88a5-5965445e9297")
 		)
@@ -7650,7 +8838,7 @@
 		(at 182.88 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "fd35fa35-3da7-40f9-b0f2-380c192c189b")
@@ -7715,6 +8903,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 182.88 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 182.88 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b5ecd0ee-7296-47ca-a4d6-026519862249")
 		)
@@ -7735,7 +8941,7 @@
 		(at 200.66 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "fdac179b-c4c9-4133-b250-4f4c101f1b74")
@@ -7792,6 +8998,24 @@
 			)
 		)
 		(property "JLCPCB Part #" ""
+			(at 200.66 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 200.66 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 200.66 53.34 0)
 			(effects
 				(font
@@ -7878,6 +9102,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C81598"
+			(at 149.86 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 149.86 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 149.86 116.84 90)
 			(effects
 				(font

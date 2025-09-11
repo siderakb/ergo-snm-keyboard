@@ -29,6 +29,8 @@ fp-info-cache
 *.csv
 
 # Exported Gerber
+jlcpcb/
+production/
 [Gg]erber/
 *.g[tb][lops]
 *.gbr
@@ -38,8 +40,9 @@ fp-info-cache
 # Backup
 *-backups/
 
-# Exported JLCPCB tools plugin
-jlcpcb/
-
 # FreeCAD
 *.FCBak
+
+# OS
+.DS_Store
+Thumbs.db

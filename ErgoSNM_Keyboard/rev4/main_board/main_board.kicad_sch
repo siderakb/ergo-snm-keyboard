@@ -5,6 +5,113 @@
 	(uuid "18d7af45-c17c-4dce-a8e5-f3abde5b4a71")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Connector:TestPoint"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.762)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "TP"
+				(at 0 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TestPoint"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "test point"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "test point tp"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Pin* Test*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TestPoint_0_1"
+				(circle
+					(center 0 3.302)
+					(radius 0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TestPoint_1_1"
+				(pin passive line
+					(at 0 0 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x08"
 			(pin_names
 				(offset 1.016)
@@ -985,6 +1092,189 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:LED"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LED"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Light emitting diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "LED diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LED_0_1"
+				(polyline
+					(pts
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LED_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Mechanical:MountingHole"
 			(pin_names
 				(offset 1.016)
@@ -1446,6 +1736,18 @@
 		)
 	)
 	(junction
+		(at 81.28 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "067513f4-d00a-48e9-a34e-c96424833aa0")
+	)
+	(junction
+		(at 81.28 107.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0a7437af-70a8-4a84-99f8-bd09f654ac2e")
+	)
+	(junction
 		(at 245.11 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1456,6 +1758,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1d1fe8ac-e5fa-4a60-adaa-f6d688298cdb")
+	)
+	(junction
+		(at 93.98 107.95)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2b8b53dc-8b22-4bc4-9458-276429bac82a")
 	)
 	(junction
 		(at 238.76 142.24)
@@ -1474,6 +1782,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5a94ce19-7cf7-4d18-8ac1-f0ae96484bf0")
+	)
+	(junction
+		(at 93.98 92.71)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6f964882-4650-4830-9782-c0027d74b38f")
 	)
 	(junction
 		(at 241.3 53.34)
@@ -1525,6 +1839,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 80.01) (xy 81.28 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00425ab4-6091-43e5-9f49-8352a2dc7b3c")
+	)
+	(wire
+		(pts
 			(xy 242.57 50.8) (xy 246.38 50.8)
 		)
 		(stroke
@@ -1545,6 +1869,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 92.71) (xy 78.74 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0381f22d-0d52-43e0-a411-6e9c4367f221")
+	)
+	(wire
+		(pts
 			(xy 173.99 133.35) (xy 161.29 133.35)
 		)
 		(stroke
@@ -1555,6 +1889,26 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 92.71) (xy 81.28 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a69467c-72ac-4961-9a6e-7fb02947bd72")
+	)
+	(wire
+		(pts
+			(xy 93.98 80.01) (xy 91.44 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0be8511b-1162-4d6c-8eb0-34f6746e3a4e")
+	)
+	(wire
+		(pts
 			(xy 236.22 63.5) (xy 236.22 91.44)
 		)
 		(stroke
@@ -1562,6 +1916,16 @@
 			(type default)
 		)
 		(uuid "0c5b6569-4da6-4ede-8cc9-5fc1de665b21")
+	)
+	(wire
+		(pts
+			(xy 93.98 119.38) (xy 93.98 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ec0d0c3-70b0-4bdf-94f9-2439d9d3539a")
 	)
 	(wire
 		(pts
@@ -1625,6 +1989,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 99.06) (xy 199.39 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f0c8c15-203d-4129-8970-b1dd496cfb50")
+	)
+	(wire
+		(pts
 			(xy 142.24 118.11) (xy 148.59 118.11)
 		)
 		(stroke
@@ -1642,6 +2016,16 @@
 			(type default)
 		)
 		(uuid "2b559f69-4c9d-473c-b19c-e048a7a0d252")
+	)
+	(wire
+		(pts
+			(xy 81.28 107.95) (xy 83.82 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32dde7ac-a60a-44db-bb28-e0c0e252208c")
 	)
 	(wire
 		(pts
@@ -1755,6 +2139,16 @@
 	)
 	(wire
 		(pts
+			(xy 78.74 107.95) (xy 81.28 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "644360e1-76e0-49a0-9f94-61284185f2c7")
+	)
+	(wire
+		(pts
 			(xy 170.18 115.57) (xy 170.18 138.43)
 		)
 		(stroke
@@ -1762,6 +2156,16 @@
 			(type default)
 		)
 		(uuid "6899bb76-2087-4bca-a95e-22355c9636ca")
+	)
+	(wire
+		(pts
+			(xy 158.75 99.06) (xy 156.21 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a36b00e-4549-4478-8fe7-4c0432d9cbdd")
 	)
 	(wire
 		(pts
@@ -1795,6 +2199,26 @@
 	)
 	(wire
 		(pts
+			(xy 93.98 107.95) (xy 99.06 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f1d4499-ab16-4bcb-860e-d6d701eb4f1d")
+	)
+	(wire
+		(pts
+			(xy 91.44 92.71) (xy 93.98 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6f493bae-bf17-41a8-bc2b-f6b019d57ab5")
+	)
+	(wire
+		(pts
 			(xy 246.38 83.82) (xy 240.03 83.82)
 		)
 		(stroke
@@ -1815,6 +2239,16 @@
 	)
 	(wire
 		(pts
+			(xy 158.75 96.52) (xy 156.21 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e1fb322-ecb4-4ac0-837c-15a15823ec04")
+	)
+	(wire
+		(pts
 			(xy 246.38 76.2) (xy 243.84 76.2)
 		)
 		(stroke
@@ -1822,6 +2256,16 @@
 			(type default)
 		)
 		(uuid "7f002c53-a63b-42e0-a094-e8c9ac207fef")
+	)
+	(wire
+		(pts
+			(xy 91.44 107.95) (xy 93.98 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "825c13d4-0e87-4cc5-a9a4-702344fd4f91")
 	)
 	(wire
 		(pts
@@ -1945,6 +2389,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 80.01) (xy 81.28 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abc0fdd4-d88a-428f-ba06-65372e17c26e")
+	)
+	(wire
+		(pts
 			(xy 227.33 53.34) (xy 241.3 53.34)
 		)
 		(stroke
@@ -1962,6 +2416,16 @@
 			(type default)
 		)
 		(uuid "b1906d78-5e26-43b9-ab25-ecb9b2454072")
+	)
+	(wire
+		(pts
+			(xy 198.12 114.3) (xy 199.39 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b37d0e27-cb92-413d-9944-5a8f92b50f36")
 	)
 	(wire
 		(pts
@@ -2055,6 +2519,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 107.95) (xy 81.28 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d278e155-ad13-442b-acfc-c2ec9d863156")
+	)
+	(wire
+		(pts
 			(xy 140.97 115.57) (xy 140.97 114.3)
 		)
 		(stroke
@@ -2065,6 +2539,16 @@
 	)
 	(wire
 		(pts
+			(xy 93.98 92.71) (xy 99.06 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d5ff26d7-9edb-4227-8353-f403e7b7f204")
+	)
+	(wire
+		(pts
 			(xy 148.59 138.43) (xy 140.97 138.43)
 		)
 		(stroke
@@ -2072,6 +2556,16 @@
 			(type default)
 		)
 		(uuid "da3e2669-87f7-4571-acb6-1ff59c538a52")
+	)
+	(wire
+		(pts
+			(xy 198.12 106.68) (xy 199.39 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dbc6af67-f647-42b5-a223-da2379127fd4")
 	)
 	(wire
 		(pts
@@ -2092,6 +2586,16 @@
 			(type default)
 		)
 		(uuid "dd08fad3-cd55-423b-89a7-40d949213bf3")
+	)
+	(wire
+		(pts
+			(xy 93.98 80.01) (xy 93.98 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd14a227-4a87-4447-a748-2628a255e31e")
 	)
 	(wire
 		(pts
@@ -2125,6 +2629,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 119.38) (xy 81.28 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9585825-90a1-4e33-9fe4-34d64c5ff36a")
+	)
+	(wire
+		(pts
 			(xy 237.49 60.96) (xy 237.49 88.9)
 		)
 		(stroke
@@ -2132,6 +2646,16 @@
 			(type default)
 		)
 		(uuid "e9fa9367-a9df-4190-9e94-9564b1e990b2")
+	)
+	(wire
+		(pts
+			(xy 91.44 119.38) (xy 93.98 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb5a4044-5c53-44a8-b716-e704d7233638")
 	)
 	(wire
 		(pts
@@ -2235,6 +2759,28 @@
 			)
 		)
 	)
+	(global_label "COL_2"
+		(shape input)
+		(at 158.75 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "034e7719-b83a-43ba-ae04-04503b4c935a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 167.5409 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SCLK"
 		(shape input)
 		(at 173.99 125.73 0)
@@ -2279,7 +2825,7 @@
 			)
 		)
 	)
-	(global_label "COL_2"
+	(global_label "COL_5"
 		(shape input)
 		(at 158.75 88.9 0)
 		(fields_autoplaced yes)
@@ -2289,7 +2835,7 @@
 			)
 			(justify left)
 		)
-		(uuid "2727f476-ef42-4f92-81ac-8b500fd047f4")
+		(uuid "13222d66-02c7-432c-9c13-387348940d75")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 167.5409 88.9 0)
 			(effects
@@ -2297,6 +2843,50 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LED_STA"
+		(shape input)
+		(at 158.75 99.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "16ac6fb4-1fa2-4395-a55e-77ced52dbb7a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 169.4156 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "ROW_4"
+		(shape input)
+		(at 198.12 114.3 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "19f61850-6095-4175-9486-2d969c15f329")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 188.9058 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -2367,9 +2957,31 @@
 			)
 		)
 	)
-	(global_label "COL_3"
+	(global_label "LED_STA"
 		(shape input)
-		(at 158.75 86.36 0)
+		(at 78.74 107.95 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "56d27138-dc30-46f3-ab7f-9420d3d8c9af")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 68.0744 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL_0"
+		(shape input)
+		(at 158.75 83.82 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2377,9 +2989,9 @@
 			)
 			(justify left)
 		)
-		(uuid "5cdf9b9e-43e7-4443-bccb-49e0734b124f")
+		(uuid "6d1d5dc9-927e-4196-90c3-8effb60f9a7c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 167.5409 86.36 0)
+			(at 167.5409 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2391,6 +3003,28 @@
 	)
 	(global_label "COL_1"
 		(shape input)
+		(at 158.75 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6dce77ef-8004-4488-ab87-db80b1151437")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 167.5409 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL_4"
+		(shape input)
 		(at 158.75 91.44 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2399,7 +3033,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7a246f93-5d51-4cce-a2d7-bf8da2a1017e")
+		(uuid "7145022b-5e84-435b-be00-b531ecd73057")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 167.5409 91.44 0)
 			(effects
@@ -2429,28 +3063,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "COL_5"
-		(shape input)
-		(at 158.75 81.28 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "8d4048ef-6e0b-4817-b008-aa9393418011")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 167.5409 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -2499,6 +3111,28 @@
 			)
 		)
 	)
+	(global_label "COL_5"
+		(shape input)
+		(at 198.12 106.68 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9e990d73-7d74-4f72-a712-bc815b8c1adf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 189.3291 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "MISO"
 		(shape input)
 		(at 173.99 130.81 0)
@@ -2512,6 +3146,28 @@
 		(uuid "a7403b97-291f-4e05-862d-1133397e9664")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 181.5714 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "LED_CHG"
+		(shape input)
+		(at 158.75 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ad1c9695-4e9e-4e9c-ac55-34c67e4052d7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 170.0204 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2587,46 +3243,46 @@
 			)
 		)
 	)
-	(global_label "COL_4"
+	(global_label "LED_CHG"
 		(shape input)
-		(at 158.75 83.82 0)
+		(at 78.74 92.71 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
-		(uuid "d36a132c-2fb5-4376-86ba-65cb6f923c6c")
+		(uuid "c1fbc016-48da-4fc7-81dd-71fd32172935")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 167.5409 83.82 0)
+			(at 67.4696 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
 	)
-	(global_label "COL_0"
+	(global_label "MISO"
 		(shape input)
-		(at 158.75 93.98 0)
+		(at 198.12 99.06 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
-		(uuid "d6339283-c230-410f-9833-594e1e139e61")
+		(uuid "c3c5c238-66fa-4e0c-8658-ac73fb15470e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 167.5409 93.98 0)
+			(at 190.5386 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -2666,6 +3322,28 @@
 		(uuid "d9b6540b-fa5a-47fd-802e-b49cd51c6ac0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 181.0876 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL_3"
+		(shape input)
+		(at 158.75 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e1792ec7-fbee-4cb9-aa74-91c0b5f70c75")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 167.5409 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2764,6 +3442,101 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED")
+		(at 87.63 107.95 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "02205316-6bcc-45c2-9e8a-ff8a3465b8e1")
+		(property "Reference" "LD2"
+			(at 89.2175 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 89.2175 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 87.63 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 87.63 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 87.63 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 87.63 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 87.63 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 87.63 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8a6d43bf-a5a0-459e-a558-7e8aa862502c")
+		)
+		(pin "2"
+			(uuid "a91bde61-182a-4a95-8689-58e705f25a25")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "LD2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_01x08")
 		(at 251.46 81.28 0)
 		(unit 1)
@@ -2827,6 +3600,24 @@
 			)
 		)
 		(property "JLCPCB Part #" "C2856797"
+			(at 251.46 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 251.46 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 251.46 81.28 0)
 			(effects
 				(font
@@ -2935,11 +3726,181 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 199.39 114.3 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0666f6c9-3f79-4aa5-9bec-15a9e72ca93c")
+		(property "Reference" "TP14"
+			(at 204.47 113.0299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 204.47 115.5699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_1.5x1.5mm"
+			(at 199.39 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 199.39 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 199.39 114.3 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 199.39 114.3 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "90188f44-dc0c-4aeb-add3-cdacbf493c3f")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "TP14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 199.39 99.06 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0db3d235-86fc-46ae-ad2a-e0d1b7d65205")
+		(property "Reference" "TP12"
+			(at 204.47 97.7899 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 204.47 100.3299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_1.5x1.5mm"
+			(at 199.39 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 199.39 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 199.39 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 199.39 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bc9574c0-50db-478b-b8a4-1416e76956b6")
+		)
+		(instances
+			(project ""
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "TP12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_02x10_Odd_Even")
 		(at 153.67 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -2979,6 +3940,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 153.67 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 153.67 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 153.67 125.73 0)
 			(effects
 				(font
@@ -3128,6 +4107,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 251.46 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 251.46 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f8e5b010-3c73-4573-b3dc-99fbc3189168")
 		)
@@ -3217,6 +4214,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 172.72 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 172.72 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "main_board"
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
@@ -3227,8 +4242,74 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VDD")
+		(at 99.06 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3e244b92-7411-46c7-8fa3-b001c7f261da")
+		(property "Reference" "#PWR03"
+			(at 99.06 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VDD"
+			(at 99.06 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 99.06 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VDD\""
+			(at 99.06 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cab34515-c4b2-47d7-81f6-a37b0d5688b3")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 172.72 176.53 0)
+		(at 147.32 184.15 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3237,7 +4318,7 @@
 		(dnp no)
 		(uuid "401ac3c0-37d2-4caa-8425-75bd236e802a")
 		(property "Reference" "H7"
-			(at 170.18 176.53 0)
+			(at 144.78 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3246,7 +4327,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 170.18 177.7999 0)
+			(at 144.78 185.4199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3255,8 +4336,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_ISO14580"
-			(at 172.72 176.53 0)
+		(property "Footprint" "ErgoSNM_Keyboard:mounting_hole_6.5mm"
+			(at 147.32 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3265,7 +4346,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 172.72 176.53 0)
+			(at 147.32 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3274,7 +4355,25 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 172.72 176.53 0)
+			(at 147.32 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 147.32 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 147.32 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3364,6 +4463,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 238.76 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 238.76 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6490d7ad-1ca0-43ce-ad69-363e6a53f30a")
 		)
@@ -3374,6 +4491,335 @@
 			(project ""
 				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
 					(reference "SW2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 147.32 189.23 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "42e64a85-ee11-4095-8f86-4b4be1b9be33")
+		(property "Reference" "H2"
+			(at 144.78 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 144.78 190.4999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "ErgoSNM_Keyboard:mounting_hole_6.5mm"
+			(at 147.32 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 147.32 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 147.32 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 147.32 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 147.32 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 87.63 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "54aed8b4-242a-49e8-8e59-1366f6df885c")
+		(property "Reference" "LD1"
+			(at 86.0425 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 86.0425 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 87.63 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "013ae2fd-c8b0-452d-a287-4babbedbeb55")
+		)
+		(pin "2"
+			(uuid "49f2c0f5-8609-4a72-952d-8fad1c537b1d")
+		)
+		(instances
+			(project ""
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "LD1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 199.39 106.68 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "618d4262-b7e2-418d-8bcf-0031995f8318")
+		(property "Reference" "TP13"
+			(at 204.47 105.4099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 204.47 107.9499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_1.5x1.5mm"
+			(at 199.39 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 199.39 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 199.39 106.68 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 199.39 106.68 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3593aaa4-fdf7-4878-8f1f-3735a3e29aa0")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "TP13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 107.95 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "67f2544a-e981-4ef5-b7a9-5e3777831490")
+		(property "Reference" "#PWR04"
+			(at 99.06 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 99.06 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 99.06 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 99.06 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3d31170c-92b7-477b-ab1f-78d3e9e0df25")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -3447,6 +4893,184 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
+		(at 147.32 194.31 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "7fee16c2-dcff-4271-adb8-73c14cc7df11")
+		(property "Reference" "H3"
+			(at 144.78 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 144.78 195.5799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "ErgoSNM_Keyboard:mounting_hole_6.5mm"
+			(at 147.32 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 147.32 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 147.32 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 147.32 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 147.32 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 87.63 119.38 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(uuid "85ac2527-b591-445e-a0a3-3f7945eed3fd")
+		(property "Reference" "LD3"
+			(at 89.2175 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 89.2175 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 87.63 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 87.63 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 87.63 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 87.63 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 87.63 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 87.63 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0c0ab792-979d-4f71-a4ac-af058a6984f2")
+		)
+		(pin "2"
+			(uuid "2845d7d9-5069-4ea8-9ba2-8158dbf7bdb8")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "LD3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
 		(at 172.72 186.69 0)
 		(mirror y)
 		(unit 1)
@@ -3454,8 +5078,8 @@
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "9ff97af5-a532-46bc-9e2c-122b3c192a44")
-		(property "Reference" "H9"
+		(uuid "a3615a76-772e-4459-9be2-de7fe3d567b6")
+		(property "Reference" "H8"
 			(at 170.18 186.69 0)
 			(effects
 				(font
@@ -3501,46 +5125,8 @@
 				(hide yes)
 			)
 		)
-		(instances
-			(project "main_board"
-				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
-					(reference "H9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 172.72 181.61 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(uuid "a3615a76-772e-4459-9be2-de7fe3d567b6")
-		(property "Reference" "H8"
-			(at 170.18 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "~"
-			(at 170.18 182.8799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_ISO14580"
-			(at 172.72 181.61 0)
+		(property "Cal" ""
+			(at 172.72 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3548,17 +5134,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 172.72 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 172.72 181.61 0)
+		(property "Sim.Pin" ""
+			(at 172.72 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3714,6 +5291,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 252.73 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 252.73 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8bc352f9-4ee1-43e0-8cd5-4296973028a3")
 		)
@@ -3796,6 +5391,101 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED")
+		(at 87.63 80.01 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp yes)
+		(fields_autoplaced yes)
+		(uuid "c59ad7a1-adbe-42a1-9bee-04a40e96eda6")
+		(property "Reference" "LD4"
+			(at 86.0425 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 86.0425 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+			(at 87.63 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 87.63 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 87.63 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 87.63 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 87.63 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 87.63 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1fba3906-fa66-4754-a07e-1e02fc6fbc0e")
+		)
+		(pin "2"
+			(uuid "92052bbe-9e77-40e2-8a42-7f0db59d3d86")
+		)
+		(instances
+			(project "main_board"
+				(path "/18d7af45-c17c-4dce-a8e5-f3abde5b4a71"
+					(reference "LD4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VDD")
 		(at 140.97 114.3 0)
 		(unit 1)
@@ -3866,7 +5556,7 @@
 		(at 148.59 86.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3906,6 +5596,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 148.59 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 148.59 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 148.59 86.36 0)
 			(effects
 				(font
@@ -4031,6 +5739,24 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at 172.72 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 172.72 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 172.72 196.85 0)
 			(effects
 				(font

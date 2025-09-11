@@ -816,7 +816,7 @@
 			(net 6 "COL_5")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "bfa77b98-2458-4154-a882-181cfa09f5ba")
+			(uuid "9ca0ed69-2631-4007-86f0-e0129d5d9b7c")
 		)
 		(pad "2" smd roundrect
 			(at -8.7 3.8)
@@ -836,7 +836,7 @@
 			(net 9 "Net-(D4-A)")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "6e29eca1-0c59-463a-80fe-f920e05fee2f")
+			(uuid "9b964b0a-80f3-4b98-ab10-fe97818d5b1f")
 		)
 		(group ""
 			(uuid "761767d5-30d9-4ab8-9f89-dd3b3522d36b")
@@ -1534,7 +1534,7 @@
 			(net 7 "COL_6")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "a691ceb8-d2b3-4858-9796-00809adaacfa")
+			(uuid "f36759e9-6bdb-4032-a29b-43d254f4f8e9")
 		)
 		(pad "2" smd roundrect
 			(at -8.7 3.8)
@@ -1554,7 +1554,7 @@
 			(net 10 "Net-(D5-A)")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "8b42662e-4779-466a-9a86-1135a7b65a8c")
+			(uuid "cf29a51f-abfb-401c-bfa0-aada345091db")
 		)
 		(group ""
 			(uuid "b5a90af0-f1c7-4f7e-90cd-be860d3639d3")
@@ -2252,7 +2252,7 @@
 			(net 5 "COL_7")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "8b8bd944-a935-44c6-8b69-3e3c6cfcb0b9")
+			(uuid "24b9fb4a-4f39-463f-a2b7-8ff11eaea64c")
 		)
 		(pad "2" smd roundrect
 			(at -8.7 3.8)
@@ -2272,7 +2272,7 @@
 			(net 11 "Net-(D6-A)")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "4e372566-ba96-4d25-a007-db84235b12cf")
+			(uuid "e085e2a4-10b2-46d9-a159-8e69d5ac74be")
 		)
 		(group ""
 			(uuid "34ee5a52-2912-41d7-879d-022d1471d037")
@@ -2970,7 +2970,7 @@
 			(net 6 "COL_5")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "d1574570-4b1e-4c37-a7b0-93be8b37fecd")
+			(uuid "e6d4a565-733b-4ba9-b021-0574e8eb2bfe")
 		)
 		(pad "2" smd roundrect
 			(at -8.7 3.8 180)
@@ -2990,7 +2990,7 @@
 			(net 3 "Net-(D1-A)")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "0fd3f35a-d055-4640-8237-d0f1777d25a7")
+			(uuid "aff7e69e-312a-4fc2-b078-25329667fa02")
 		)
 		(group ""
 			(uuid "6f55e0e5-b983-4011-a98b-a0d4abb57551")
@@ -3688,7 +3688,7 @@
 			(net 7 "COL_6")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "64146ce7-4df2-4ca8-856d-baf672ef8866")
+			(uuid "78510649-a150-45cb-bd5b-a4d988f11c08")
 		)
 		(pad "2" smd roundrect
 			(at -8.7 3.8 180)
@@ -3708,7 +3708,7 @@
 			(net 4 "Net-(D2-A)")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "c5bedea8-93fe-410b-8271-93eb4ed2a314")
+			(uuid "ed5ad056-9efa-40ca-a094-d723d09dfa65")
 		)
 		(group ""
 			(uuid "3468f23b-df98-48ad-ab9b-dcf0cdde1a3a")
@@ -4406,7 +4406,7 @@
 			(net 5 "COL_7")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "1c02e912-9ffe-4038-ad33-b160e622bfe3")
+			(uuid "a86300b7-3883-49a4-8079-cd07d9e7a7e3")
 		)
 		(pad "2" smd roundrect
 			(at -8.7 3.8 180)
@@ -4426,7 +4426,7 @@
 			(net 8 "Net-(D3-A)")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "0ee95eb9-d9c7-4398-8cec-fce693a704d2")
+			(uuid "ceb73843-18e2-4a47-b12a-d5c8c6aabb61")
 		)
 		(group ""
 			(uuid "a88f6395-90ec-4eef-b07b-58dd2a359d86")

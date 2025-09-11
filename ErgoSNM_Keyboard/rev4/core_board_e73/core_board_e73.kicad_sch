@@ -3215,191 +3215,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:LED_Small"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D"
-				(at -1.27 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "LED_Small"
-				(at -4.445 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Light emitting diode, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pin" "1=K 2=A"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "LED diode light-emitting-diode"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "LED_Small_0_1"
-				(polyline
-					(pts
-						(xy -0.762 -1.016) (xy -0.762 1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0.762) (xy -0.508 1.27) (xy -0.254 1.27) (xy -0.508 1.27) (xy -0.508 1.016)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.508 1.27) (xy 0 1.778) (xy 0.254 1.778) (xy 0 1.778) (xy 0 1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 -1.016) (xy -0.762 0) (xy 0.762 1.016) (xy 0.762 -1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 0) (xy -0.762 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "LED_Small_1_1"
-				(pin passive line
-					(at -2.54 0 0)
-					(length 1.778)
-					(name "K"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 0 180)
-					(length 1.778)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:Polyfuse"
 			(pin_numbers
 				(hide yes)
@@ -7095,6 +6910,12 @@
 		(uuid "0512a919-e30e-485e-971e-5efe7161ae71")
 	)
 	(junction
+		(at 143.51 45.72)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0621b471-b268-4d03-9f74-50c7885719d9")
+	)
+	(junction
 		(at 134.62 -111.76)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7135,6 +6956,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "25a08aa2-2566-40c7-aca4-c4a50499c85b")
+	)
+	(junction
+		(at 146.05 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "34925bf2-2ed4-4b3d-b18b-ac5af92be725")
 	)
 	(junction
 		(at 52.07 99.06)
@@ -7315,14 +7142,6 @@
 		(uuid "0aa05962-9b72-429e-ab20-8cbe957babe8")
 	)
 	(no_connect
-		(at 121.92 43.18)
-		(uuid "114a65c9-0504-4597-b8df-2a1caf1c584a")
-	)
-	(no_connect
-		(at 121.92 66.04)
-		(uuid "15d5e0ef-62d3-4cb2-b284-1304c20dfa30")
-	)
-	(no_connect
 		(at 232.41 -67.31)
 		(uuid "21146afa-1bd7-4a0b-9692-e6e2343f681c")
 	)
@@ -7423,20 +7242,12 @@
 		(uuid "b32b1a8d-0fed-472d-9ae2-98f9b5b0d487")
 	)
 	(no_connect
-		(at 121.92 45.72)
-		(uuid "bb9572bb-a039-49f5-be94-b59c336f225c")
-	)
-	(no_connect
 		(at 72.39 143.51)
 		(uuid "c0d7ac11-dd18-43c1-a483-0912053fdbfb")
 	)
 	(no_connect
 		(at 151.13 -114.3)
 		(uuid "cd1aa158-65e2-4ae0-99fa-7c0132988fd7")
-	)
-	(no_connect
-		(at 121.92 63.5)
-		(uuid "d1466479-2d00-4d9b-9c88-289ff3058843")
 	)
 	(no_connect
 		(at 114.3 95.25)
@@ -7471,6 +7282,16 @@
 			(type default)
 		)
 		(uuid "0002f306-d1de-4fb4-bf41-39f8d51fa03f")
+	)
+	(wire
+		(pts
+			(xy 121.92 63.5) (xy 143.51 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "007c0fa3-8b7c-49b6-b55b-70977d6a6a26")
 	)
 	(wire
 		(pts
@@ -7954,16 +7775,6 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 146.05) (xy 72.39 146.05)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42991511-d278-4c8e-ab43-2ea33dafea9e")
-	)
-	(wire
-		(pts
 			(xy 180.34 -137.16) (xy 187.96 -137.16)
 		)
 		(stroke
@@ -8011,6 +7822,16 @@
 			(type default)
 		)
 		(uuid "46aeb56f-8698-4a52-ae79-0f7213e11f31")
+	)
+	(wire
+		(pts
+			(xy 143.51 45.72) (xy 148.59 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48095acc-96b5-4569-a149-530fe1f75b71")
 	)
 	(wire
 		(pts
@@ -8181,6 +8002,26 @@
 			(type default)
 		)
 		(uuid "56dbff6c-fd6d-4a7f-8850-577a6c0e221e")
+	)
+	(wire
+		(pts
+			(xy 121.92 45.72) (xy 143.51 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "575a4450-abd7-469c-955e-43b02348f2ef")
+	)
+	(wire
+		(pts
+			(xy 121.92 43.18) (xy 146.05 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57936feb-c5c7-499b-9255-65c02a71c4b6")
 	)
 	(wire
 		(pts
@@ -8384,26 +8225,6 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 218.44) (xy 129.54 218.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "69987680-c419-4616-9125-7899ea748513")
-	)
-	(wire
-		(pts
-			(xy 106.68 218.44) (xy 114.3 218.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6df100d5-83cc-4546-9bc0-2e43196a27f4")
-	)
-	(wire
-		(pts
 			(xy 58.42 177.8) (xy 55.88 177.8)
 		)
 		(stroke
@@ -8464,6 +8285,16 @@
 	)
 	(wire
 		(pts
+			(xy 121.92 66.04) (xy 146.05 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74beabdd-9213-4cd9-8d7d-c91d2c9d18ad")
+	)
+	(wire
+		(pts
 			(xy 326.39 -113.03) (xy 323.85 -113.03)
 		)
 		(stroke
@@ -8471,6 +8302,16 @@
 			(type default)
 		)
 		(uuid "7555f1b9-8622-46c9-b5e7-ccda41b9dff9")
+	)
+	(wire
+		(pts
+			(xy 143.51 63.5) (xy 143.51 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78c0e47b-e882-421f-a4c8-c09ca589b52c")
 	)
 	(wire
 		(pts
@@ -8944,6 +8785,16 @@
 	)
 	(wire
 		(pts
+			(xy 81.28 146.05) (xy 83.82 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1550dc4-a069-46cc-9060-995b038e11d6")
+	)
+	(wire
+		(pts
 			(xy 149.86 -140.97) (xy 153.67 -140.97)
 		)
 		(stroke
@@ -9041,6 +8892,16 @@
 			(type default)
 		)
 		(uuid "b7f98da4-9a8a-4cd6-8614-d2065a61b408")
+	)
+	(wire
+		(pts
+			(xy 146.05 66.04) (xy 146.05 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b85e7744-3f01-4b6a-be5e-c293e995bb14")
 	)
 	(wire
 		(pts
@@ -9184,16 +9045,6 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 -111.76) (xy 190.5 -111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cae7e13e-8061-44ea-8618-12a3bc6a759e")
-	)
-	(wire
-		(pts
 			(xy 238.76 -135.89) (xy 247.65 -135.89)
 		)
 		(stroke
@@ -9211,16 +9062,6 @@
 			(type default)
 		)
 		(uuid "cb5820cf-51e4-45e5-a61a-01878ff74e2d")
-	)
-	(wire
-		(pts
-			(xy 119.38 218.44) (xy 124.46 218.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb752290-633d-4b8e-a424-fb99cb075997")
 	)
 	(wire
 		(pts
@@ -9304,6 +9145,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 43.18) (xy 148.59 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6f09fe1-798b-44a6-afe5-ef6c20d988b4")
+	)
+	(wire
+		(pts
 			(xy 106.68 55.88) (xy 109.22 55.88)
 		)
 		(stroke
@@ -9321,6 +9172,16 @@
 			(type default)
 		)
 		(uuid "d7a6a91d-7268-4184-8cd7-3125885d52a2")
+	)
+	(wire
+		(pts
+			(xy 72.39 146.05) (xy 76.2 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8522f8c-8331-4a75-9099-f45f576590a9")
 	)
 	(wire
 		(pts
@@ -9634,7 +9495,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 -111.76) (xy 203.2 -111.76)
+			(xy 185.42 -111.76) (xy 189.23 -111.76)
 		)
 		(stroke
 			(width 0)
@@ -10434,28 +10295,6 @@
 			)
 		)
 	)
-	(global_label "STATUS_LED"
-		(shape input)
-		(at 132.08 218.44 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "7a2dcde1-85a1-4d30-a70d-258c6fc886e6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 146.2532 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "USB_D+"
 		(shape input)
 		(at 36.83 142.24 180)
@@ -10474,6 +10313,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "CHG_LED"
+		(shape input)
+		(at 148.59 45.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8254db68-e46d-4530-8376-2477e814f9c9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 159.8604 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -10896,6 +10757,28 @@
 			)
 		)
 	)
+	(global_label "STATUS_LED"
+		(shape input)
+		(at 148.59 43.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d8769ed0-b63d-4643-ae56-e61ea40410ff")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 162.7632 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "HS_IO_5"
 		(shape input)
 		(at 139.7 100.33 0)
@@ -10931,6 +10814,28 @@
 		(uuid "e0912030-5a0e-4f73-ae32-a834b6b95fcb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 89.2847 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "CHG_LED"
+		(shape input)
+		(at 189.23 -111.76 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e3e737aa-6792-4a59-b824-2ed794e9e74c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 200.5004 -111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11123,7 +11028,7 @@
 				)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C25905"
 			(at 44.45 -45.72 0)
 			(effects
 				(font
@@ -11132,8 +11037,26 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF5101TCE"
 			(at 44.45 -45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 44.45 -45.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 44.45 -45.72 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11344,6 +11267,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at -34.29 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at -34.29 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "adapter_core_mdbt50q"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
@@ -11425,7 +11366,7 @@
 		(at 39.37 57.15 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -11468,6 +11409,24 @@
 		)
 		(property "Description" "test point"
 			(at 39.37 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 39.37 57.15 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 39.37 57.15 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11533,6 +11492,24 @@
 			)
 		)
 		(property "Description" "Switch, single pole double throw"
+			(at 269.24 -128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 269.24 -128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 269.24 -128.27 0)
 			(effects
 				(font
@@ -11693,101 +11670,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:LED_Small")
-		(at 182.88 -111.76 0)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1228708d-5c14-4542-92d4-bd9e142ce593")
-		(property "Reference" "LD2"
-			(at 182.9435 -105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "RED"
-			(at 182.9435 -107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 182.88 -111.76 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 182.88 -111.76 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode, small symbol"
-			(at 182.88 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pin" "1=K 2=A"
-			(at 182.88 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "JLCPCB Part #" "C2286"
-			(at 182.88 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR. Part #" "KT-0603R"
-			(at 182.88 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d5fcdc68-c18d-4787-9def-df0ee6b476f2")
-		)
-		(pin "2"
-			(uuid "210c3d4f-58c3-47d9-aba9-8c796c17ab08")
-		)
-		(instances
-			(project "core_board_e73"
-				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
-					(reference "LD2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+5V")
 		(at 39.37 -52.07 0)
 		(unit 1)
@@ -11923,6 +11805,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 295.91 -113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 295.91 -113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0e624790-63dd-4a39-a336-747956c125aa")
 		)
@@ -11993,7 +11893,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C22984"
 			(at 350.52 -107.95 0)
 			(effects
 				(font
@@ -12002,7 +11902,7 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0603WAF3002T5E"
 			(at 350.52 -107.95 0)
 			(effects
 				(font
@@ -12017,6 +11917,24 @@
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "Cal" ""
+			(at 350.52 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 350.52 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -12039,7 +11957,7 @@
 		(at -86.36 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -12087,6 +12005,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at -86.36 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at -86.36 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "79639e84-3424-4360-ae43-370f0c452417")
 		)
@@ -12125,7 +12061,7 @@
 		(at 307.34 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -12165,6 +12101,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 307.34 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 307.34 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 307.34 81.28 0)
 			(effects
 				(font
@@ -12415,6 +12369,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 20.32 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 20.32 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "A1"
 			(uuid "831d1626-8d38-4302-b86a-97b463e6d755")
 		)
@@ -12520,6 +12492,42 @@
 			)
 		)
 		(property "Description" "Buck-Boost Converter, 1.8-5.5V Input Voltage, 0.4A Switch Current, Adjustable 1.8-5V Output Voltage, WSON-10"
+			(at 313.69 -118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 313.69 -118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 313.69 -118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1518762"
+			(at 313.69 -118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "TPS63900DSKR"
 			(at 313.69 -118.11 0)
 			(effects
 				(font
@@ -12639,6 +12647,33 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 215.9 -59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C668609"
+			(at 215.9 -59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 215.9 -59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "R1_{s}"
 			(uuid "34a7ac23-268e-4619-9a1c-af57d1b1200e")
 		)
@@ -12677,7 +12712,7 @@
 		(at 114.3 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -12717,6 +12752,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 114.3 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 114.3 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 114.3 53.34 0)
 			(effects
 				(font
@@ -12915,7 +12968,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C21189"
 			(at 339.09 -107.95 0)
 			(effects
 				(font
@@ -12924,7 +12977,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 339.09 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 339.09 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 339.09 -107.95 0)
 			(effects
 				(font
@@ -13019,6 +13090,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 44.45 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 44.45 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e78e5791-d5bb-4a1e-8cc7-2475495bcf5c")
 		)
@@ -13036,7 +13125,8 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 127 218.44 270)
+		(at 78.74 146.05 270)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13044,7 +13134,7 @@
 		(dnp no)
 		(uuid "2dc8d7c7-22cb-4a62-bfec-994dfc505c95")
 		(property "Reference" "R6"
-			(at 127 223.52 90)
+			(at 78.74 140.97 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -13052,7 +13142,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 127 220.98 90)
+			(at 78.74 143.51 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13060,7 +13150,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 127 218.44 0)
+			(at 78.74 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13069,7 +13159,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 127 218.44 0)
+			(at 78.74 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13078,7 +13168,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 127 218.44 0)
+			(at 78.74 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13086,8 +13176,8 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
-			(at 127 218.44 90)
+		(property "JLCPCB Part #" "C25744"
+			(at 78.74 146.05 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13095,8 +13185,26 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
-			(at 127 218.44 90)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 78.74 146.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 78.74 146.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 78.74 146.05 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13111,7 +13219,7 @@
 			(uuid "bca39de4-b75f-4afa-887b-5ff114d39555")
 		)
 		(instances
-			(project "adapter_core_mdbt50q"
+			(project "core_board_e73"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
 					(reference "R6")
 					(unit 1)
@@ -13452,6 +13560,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 124.46 181.61 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 124.46 181.61 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bdcca2d7-46b2-4543-bfab-57c907b3b789")
 		)
@@ -13653,7 +13779,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C25744"
 			(at 26.67 125.73 0)
 			(effects
 				(font
@@ -13662,7 +13788,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 26.67 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 26.67 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 26.67 125.73 0)
 			(effects
 				(font
@@ -13816,6 +13960,24 @@
 			)
 		)
 		(property "MFR. Part #" "CL05A105KA5NQNC"
+			(at 156.21 -140.97 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 156.21 -140.97 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 156.21 -140.97 90)
 			(effects
 				(font
@@ -14034,6 +14196,24 @@
 			)
 		)
 		(property "MFR. Part #" "CL21A226MAQNNNE"
+			(at 287.02 -124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 287.02 -124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 287.02 -124.46 0)
 			(effects
 				(font
@@ -14261,6 +14441,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 161.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 161.29 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "2d86face-b0f2-47cd-94aa-44b3c143de0d")
 		)
@@ -14347,6 +14545,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 124.46 173.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 124.46 173.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "59147d19-dc80-44ee-a7b4-1be019ce759d")
 		)
@@ -14357,72 +14573,6 @@
 			(project "adapter_core_mdbt50q"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
 					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VDD")
-		(at 203.2 -111.76 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4de4366f-2d19-4eb5-bd66-45deac69ef9c")
-		(property "Reference" "#PWR034"
-			(at 203.2 -107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VDDH"
-			(at 203.2 -116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 203.2 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 203.2 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 203.2 -111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fb557cfc-63e6-46cc-995c-f1ee212bd13f")
-		)
-		(instances
-			(project "core_board_e73"
-				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
-					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -14483,7 +14633,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C2909386"
 			(at 166.37 172.72 0)
 			(effects
 				(font
@@ -14492,7 +14642,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "FRC0402F8203TS"
+			(at 166.37 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 166.37 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 166.37 172.72 0)
 			(effects
 				(font
@@ -14581,6 +14749,24 @@
 			)
 		)
 		(property "MFR. Part #" "X321532768KGD2SI"
+			(at 118.11 177.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 118.11 177.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 118.11 177.8 90)
 			(effects
 				(font
@@ -14743,6 +14929,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 180.34 -127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 180.34 -127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a61cac23-f205-42fc-a2cc-9504e00a7cf4")
 		)
@@ -14763,7 +14967,7 @@
 		(at 119.38 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -14803,6 +15007,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 119.38 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 119.38 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 119.38 92.71 0)
 			(effects
 				(font
@@ -15082,6 +15304,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 54.61 -50.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 54.61 -50.8 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bcdbe7a6-76c7-47c9-9cb7-c6f0b1628897")
 		)
@@ -15146,6 +15386,24 @@
 			)
 		)
 		(property "Description" ""
+			(at -104.14 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at -104.14 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at -104.14 80.01 0)
 			(effects
 				(font
@@ -15232,6 +15490,33 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 215.9 -20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C668609"
+			(at 215.9 -20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 215.9 -20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "R1_{s}"
 			(uuid "58dc2067-a8d8-4931-b617-b65e27ed0ec3")
 		)
@@ -15260,72 +15545,6 @@
 			(project "core_board_e73"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
 					(reference "J5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 106.68 218.44 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "68b1daec-7ae7-4497-a536-2c15f53a62b4")
-		(property "Reference" "#PWR016"
-			(at 106.68 224.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 106.68 223.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 106.68 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 106.68 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 106.68 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2208e5a3-30b3-43d7-a31f-497f85620003")
-		)
-		(instances
-			(project "adapter_core_mdbt50q"
-				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
-					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -15445,6 +15664,42 @@
 			)
 		)
 		(property "Description" "Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 267.97 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 267.97 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 267.97 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C295747"
+			(at 267.97 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "S2B-PH-SM4-TB(LF)(SN)"
 			(at 267.97 139.7 0)
 			(effects
 				(font
@@ -15608,6 +15863,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 129.54 -111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 129.54 -111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6a09ea7f-df63-4dc9-b92d-7876e1e186c9")
 		)
@@ -15743,7 +16016,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C4109"
 			(at 124.46 -107.95 0)
 			(effects
 				(font
@@ -15752,7 +16025,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF2001TCE"
+			(at 124.46 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 124.46 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 124.46 -107.95 0)
 			(effects
 				(font
@@ -15892,6 +16183,24 @@
 			)
 		)
 		(property "Description" ""
+			(at -104.14 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at -104.14 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at -104.14 100.33 0)
 			(effects
 				(font
@@ -16121,6 +16430,24 @@
 				)
 			)
 		)
+		(property "Cal" ""
+			(at 326.39 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 326.39 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "34b0d64f-1cf0-4258-a93c-3b32832de17e")
 		)
@@ -16251,7 +16578,7 @@
 				)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C25905"
 			(at 44.45 -43.18 0)
 			(effects
 				(font
@@ -16260,8 +16587,26 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF5101TCE"
 			(at 44.45 -43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 44.45 -43.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 44.45 -43.18 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16357,6 +16702,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 247.65 -130.81 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 247.65 -130.81 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "9b16e5f7-58b9-47b6-b5fd-5c6c5430e694")
 		)
@@ -16429,7 +16792,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C45783"
+		(property "JLCPCB Part #" "C1744"
 			(at 17.78 -1.27 0)
 			(effects
 				(font
@@ -16438,7 +16801,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" "CL21A226MAQNNNE"
+		(property "MFR. Part #" "0805B472K500NT"
+			(at 17.78 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 17.78 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 17.78 -1.27 0)
 			(effects
 				(font
@@ -16525,6 +16906,24 @@
 			)
 		)
 		(property "MFR. Part #" "CL10A106KP8NNNC"
+			(at 67.31 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 67.31 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 67.31 99.06 90)
 			(effects
 				(font
@@ -16738,6 +17137,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at -104.14 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at -104.14 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "core_board_e73"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
@@ -16936,7 +17353,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C11512"
 			(at 166.37 182.88 0)
 			(effects
 				(font
@@ -16945,7 +17362,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF2004TCE"
+			(at 166.37 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 166.37 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 166.37 182.88 0)
 			(effects
 				(font
@@ -17016,6 +17451,24 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
+			(at -34.29 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at -34.29 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at -34.29 36.83 0)
 			(effects
 				(font
@@ -17098,6 +17551,24 @@
 			)
 		)
 		(property "MFR. Part #" "CL05A475MP5NRNC"
+			(at 180.34 -134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 180.34 -134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 180.34 -134.62 0)
 			(effects
 				(font
@@ -17394,6 +17865,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 163.83 -121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 163.83 -121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "14"
 			(uuid "db2a1894-8ca2-4b14-97fa-24e0d77eb382")
 		)
@@ -17511,105 +18000,28 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at -104.14 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at -104.14 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "core_board_e73"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
 					(reference "H5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:LED_Small")
-		(at 116.84 218.44 0)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "af4e8821-5d4b-419f-ac85-ae30894ef05a")
-		(property "Reference" "LD1"
-			(at 116.9035 224.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "BLUE"
-			(at 116.9035 222.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 116.84 218.44 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 116.84 218.44 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode, small symbol"
-			(at 116.84 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pin" "1=K 2=A"
-			(at 116.84 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "JLCPCB Part #" "C2286"
-			(at 116.84 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFR. Part #" "KT-0603R"
-			(at 116.84 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "52d18f55-0693-46cd-9ad2-b7fe6c796c00")
-		)
-		(pin "2"
-			(uuid "ee60f563-2ff0-4e6c-a4dc-fa5904f429a1")
-		)
-		(instances
-			(project "adapter_core_mdbt50q"
-				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
-					(reference "LD1")
 					(unit 1)
 				)
 			)
@@ -17679,6 +18091,24 @@
 			)
 		)
 		(property "MFR. Part #" "--"
+			(at 260.35 -109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 260.35 -109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 260.35 -109.22 90)
 			(effects
 				(font
@@ -17824,7 +18254,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C25744"
 			(at 182.88 -119.38 90)
 			(effects
 				(font
@@ -17833,7 +18263,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 182.88 -119.38 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 182.88 -119.38 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 182.88 -119.38 90)
 			(effects
 				(font
@@ -18041,6 +18489,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 269.24 -144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 269.24 -144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "cd67f980-63d4-4e80-b71d-dfa5374e30cd")
 		)
@@ -18128,7 +18594,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 193.04 -111.76 270)
+		(at 182.88 -111.76 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18136,7 +18602,7 @@
 		(dnp no)
 		(uuid "c0ba3151-7111-4cc2-af34-82f8aa1d8525")
 		(property "Reference" "R11"
-			(at 193.04 -106.68 90)
+			(at 182.88 -106.68 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -18144,7 +18610,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 193.04 -109.22 90)
+			(at 182.88 -109.22 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18152,7 +18618,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 193.04 -111.76 0)
+			(at 182.88 -111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18161,7 +18627,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 193.04 -111.76 0)
+			(at 182.88 -111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18170,7 +18636,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 193.04 -111.76 0)
+			(at 182.88 -111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18178,8 +18644,8 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
-			(at 193.04 -111.76 90)
+		(property "JLCPCB Part #" "C25744"
+			(at 182.88 -111.76 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18187,8 +18653,26 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
-			(at 193.04 -111.76 90)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 182.88 -111.76 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 182.88 -111.76 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 182.88 -111.76 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18274,6 +18758,24 @@
 			)
 		)
 		(property "MFR. Part #" "--"
+			(at 207.01 -124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 207.01 -124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 207.01 -124.46 0)
 			(effects
 				(font
@@ -18417,7 +18919,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C25744"
 			(at 134.62 -107.95 0)
 			(effects
 				(font
@@ -18426,7 +18928,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 134.62 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 134.62 -107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 134.62 -107.95 0)
 			(effects
 				(font
@@ -18563,6 +19083,42 @@
 			)
 		)
 		(property "Description" "nRF52840 BLE module"
+			(at 55.88 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 55.88 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 55.88 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C356849"
+			(at 55.88 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "E73-2G4M08S1C"
 			(at 55.88 140.97 0)
 			(effects
 				(font
@@ -18962,6 +19518,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at -34.29 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at -34.29 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "adapter_core_mdbt50q"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
@@ -19029,6 +19603,42 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 68.58 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 68.58 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C2687116"
+			(at 68.58 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "USBLC6-2SC6"
+			(at 68.58 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "22691443-6cce-4626-8312-e60aabc1cf91")
 		)
@@ -19061,7 +19671,7 @@
 		(at 39.37 64.77 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -19104,6 +19714,24 @@
 		)
 		(property "Description" "test point"
 			(at 39.37 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 39.37 64.77 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 39.37 64.77 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19195,6 +19823,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at 356.87 -124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 356.87 -124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "57acf8e5-b654-48d6-8615-a9afa18bc127")
 		)
@@ -19215,7 +19861,7 @@
 		(at -86.36 78.74 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -19255,6 +19901,24 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x04, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at -86.36 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at -86.36 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at -86.36 78.74 0)
 			(effects
 				(font
@@ -19351,6 +20015,24 @@
 				(hide yes)
 			)
 		)
+		(property "Cal" ""
+			(at -34.29 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at -34.29 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "core_board_e73"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
@@ -19406,6 +20088,42 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 82.55 -44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 82.55 -44.45 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
+			(at 82.55 -44.45 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C1525"
+			(at 82.55 -44.45 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "CL05B104KO5NNNC"
+			(at 82.55 -44.45 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19612,7 +20330,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" ""
+		(property "JLCPCB Part #" "C22935"
 			(at 12.7 -1.27 0)
 			(effects
 				(font
@@ -19621,7 +20339,25 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" ""
+		(property "MFR. Part #" "0603WAF1004T5E"
+			(at 12.7 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Cal" ""
+			(at 12.7 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pin" ""
 			(at 12.7 -1.27 0)
 			(effects
 				(font
