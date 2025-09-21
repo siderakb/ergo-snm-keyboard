@@ -1,0 +1,27 @@
+* text=auto
+
+# Explicitly set EOL for Windows-specific files to CRLF
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.bmp binary
+*.wasm binary
+
+# KiCad files
+# https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml
+*.kicad_pro text linguist-detectable=true
+*.kicad_prl text linguist-detectable=true
+*.kicad_pcb text linguist-detectable=true
+*.kicad_sch text linguist-detectable=true
+*.kicad_dru text linguist-detectable=true
+*.kicad_mod text linguist-detectable=true
+*.kicad_sym text linguist-detectable=true
+*.kicad_wks text linguist-detectable=true
