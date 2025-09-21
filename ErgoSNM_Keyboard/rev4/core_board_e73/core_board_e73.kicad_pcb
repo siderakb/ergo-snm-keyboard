@@ -324,6 +324,19 @@
 				)
 			)
 		)
+		(property "Rotation Offset" "90"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "64ee17fe-3135-4a04-a9aa-8e8b3087a3e2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "SOT?23*")
 		(path "/2e2155ce-e3ba-4327-89a0-259f1fcfea4e/e899d866-2dbe-40ac-9dc0-d61af9e16071")
 		(sheetname "/power/")
@@ -732,6 +745,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "82050167-4d13-4a1c-8b50-393bf51aa40b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" "180"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "64ad64ee-4aad-4f1e-b880-1906666eafb5")
 			(effects
 				(font
 					(size 1 1)
@@ -3250,6 +3276,19 @@
 				)
 			)
 		)
+		(property "MFR. Part #" "--"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9b048866-f74d-4502-8b90-48cdc3739b11")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "MountingHole*")
 		(path "/08ffbbab-e559-4c6a-b4eb-caf86ed072df")
 		(sheetname "/")
@@ -3368,6 +3407,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "95d272a9-6df8-4e95-bb27-e91ef67da068")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "--"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b61c1b1d-6a46-4868-8290-48c9f2779e3e")
 			(effects
 				(font
 					(size 1 1)
@@ -3997,7 +4049,7 @@
 				)
 			)
 		)
-		(property "JLCPCB Part #" "C22765"
+		(property "JLCPCB Part #" "C22809"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4010,7 +4062,7 @@
 				)
 			)
 		)
-		(property "MFR. Part #" "0603WAF1201T5E"
+		(property "MFR. Part #" "0603WAF1502T5E"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4714,7 +4766,7 @@
 		(path "/61726617-eb4d-4d0b-9f7f-1cc84185cd05")
 		(sheetname "/")
 		(sheetfile "core_board_e73.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start 3.7 -3.2)
 			(end 5.4 -3.2)
@@ -9885,7 +9937,7 @@
 				)
 			)
 		)
-		(property "JLCPCB Part #" "C22984"
+		(property "JLCPCB Part #" "C4184"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9898,7 +9950,7 @@
 				)
 			)
 		)
-		(property "MFR. Part #" "0603WAF3002T5E"
+		(property "MFR. Part #" "0603WAF2002T5E"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13514,6 +13566,19 @@
 				)
 			)
 		)
+		(property "MFR. Part #" "--"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8ee444a7-b47e-4b3b-a5fe-b01888dca5e5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "MountingHole*")
 		(path "/e480689b-a9d3-445a-b742-1081f81c1437")
 		(sheetname "/")
@@ -13651,7 +13716,7 @@
 		(path "/2e2155ce-e3ba-4327-89a0-259f1fcfea4e/bbb0c70c-4c38-44c2-9a4a-61b68dfd949f")
 		(sheetname "/power/")
 		(sheetfile "power.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_rect
 			(start -4.5 1.75)
 			(end 4.5 -1.75)
@@ -14080,6 +14145,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "7efb0d82-6aa5-419f-9080-6e621c44d962")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" "--"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2131ae35-630d-4edc-988f-b9e8750252fc")
 			(effects
 				(font
 					(size 1 1)
@@ -15607,6 +15686,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "d9289ea3-1498-4909-af95-bc4cca5177b2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" "--"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1b00f431-1fcc-4340-98d6-b5ac8394a8c3")
 			(effects
 				(font
 					(size 1 1)

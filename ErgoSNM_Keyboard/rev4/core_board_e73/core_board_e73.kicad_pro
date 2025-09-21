@@ -661,6 +661,12 @@
           "label": "LCSC",
           "name": "LCSC",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Rotation Offset",
+          "name": "Rotation Offset",
+          "show": false
         }
       ],
       "filter_string": "",

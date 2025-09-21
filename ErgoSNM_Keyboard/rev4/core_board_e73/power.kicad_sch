@@ -6239,7 +6239,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C22984"
+		(property "JLCPCB Part #" "C4184"
 			(at 264.16 81.28 0)
 			(effects
 				(font
@@ -6248,7 +6248,7 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" "0603WAF3002T5E"
+		(property "MFR. Part #" "0603WAF2002T5E"
 			(at 264.16 81.28 0)
 			(effects
 				(font
@@ -7886,6 +7886,15 @@
 				(hide yes)
 			)
 		)
+		(property "Rotation Offset" "180"
+			(at 204.47 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c7c17310-06e1-4933-a209-f1958df6fe0c")
 		)
@@ -8471,7 +8480,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB Part #" "C22765"
+		(property "JLCPCB Part #" "C22809"
 			(at 240.03 81.28 0)
 			(effects
 				(font
@@ -8480,7 +8489,7 @@
 				(hide yes)
 			)
 		)
-		(property "MFR. Part #" "0603WAF1201T5E"
+		(property "MFR. Part #" "0603WAF1502T5E"
 			(at 240.03 81.28 0)
 			(effects
 				(font
@@ -9885,7 +9894,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bbb0c70c-4c38-44c2-9a4a-61b68dfd949f")
 		(property "Reference" "SW1"
@@ -10802,6 +10811,15 @@
 			)
 		)
 		(property "MFR. Part #" "USBLC6-2SC6"
+			(at 92.71 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Rotation Offset" "90"
 			(at 92.71 142.24 0)
 			(effects
 				(font

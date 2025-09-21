@@ -5989,6 +5989,15 @@
 				(hide yes)
 			)
 		)
+		(property "MFR. Part #" "--"
+			(at 156.21 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "adapter_core_mdbt50q"
 				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939"
@@ -6127,6 +6136,15 @@
 			)
 		)
 		(property "Sim.Pin" ""
+			(at 138.43 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "--"
 			(at 138.43 153.67 0)
 			(effects
 				(font
@@ -6433,6 +6451,15 @@
 			)
 		)
 		(property "Sim.Pin" ""
+			(at 146.05 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "--"
 			(at 146.05 55.88 0)
 			(effects
 				(font
@@ -7817,6 +7844,15 @@
 				(hide yes)
 			)
 		)
+		(property "MFR. Part #" "--"
+			(at 146.05 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c4581aca-2466-47fd-9581-9a207204d84b")
 		)
@@ -7959,7 +7995,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "61726617-eb4d-4d0b-9f7f-1cc84185cd05")
 		(property "Reference" "J5"
 			(at 234.95 73.66 0)
@@ -9049,6 +9085,15 @@
 			)
 		)
 		(property "Sim.Pin" ""
+			(at 156.21 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "--"
 			(at 156.21 190.5 0)
 			(effects
 				(font
