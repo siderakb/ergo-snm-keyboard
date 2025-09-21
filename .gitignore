@@ -36,6 +36,7 @@ production/
 *.gbr
 *.gm1
 *.drl
+fabrication-toolkit-options.json
 
 # Backup
 *-backups/
