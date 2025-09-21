@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.0
+          "min_clearance": 0.25
         }
       },
       "diff_pair_dimensions": [
@@ -714,6 +714,10 @@
     [
       "53f9535d-094b-439f-baf7-92a0b9b7a939",
       "Root"
+    ],
+    [
+      "2e2155ce-e3ba-4327-89a0-259f1fcfea4e",
+      "power"
     ]
   ],
   "text_variables": {}
