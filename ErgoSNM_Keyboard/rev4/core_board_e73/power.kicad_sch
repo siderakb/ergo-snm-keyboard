@@ -2086,6 +2086,156 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Diode:1N5819WS"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "1N5819WS"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Diode_SMD:D_SOD-323"
+				(at 0 -4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://datasheet.lcsc.com/lcsc/2204281430_Guangdong-Hottech-1N5819WS_C191023.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "40V 600mV@1A 1A SOD-323 Schottky Barrier Diodes, SOD-323"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode Schottky"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "D*SOD?323*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "1N5819WS_0_1"
+				(polyline
+					(pts
+						(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "1N5819WS_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Jumper:SolderJumper_2_Open"
 			(pin_numbers
 				(hide yes)
@@ -4081,7 +4231,7 @@
 	)
 	(text "2xAA Battery\nor\nLiPo Battery"
 		(exclude_from_sim no)
-		(at 146.05 60.96 0)
+		(at 137.16 60.96 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4097,16 +4247,16 @@
 		(uuid "000b2627-7e6e-470d-bf6f-1bfbc122369f")
 	)
 	(junction
-		(at 156.21 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0923a2b8-9709-4a4c-bf4c-65a75d7b66ce")
-	)
-	(junction
 		(at 60.96 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0a16389f-ea07-4346-9e31-2230dc7f35ef")
+	)
+	(junction
+		(at 175.26 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2b8817ad-0345-4d13-9349-455dcb5ec4ea")
 	)
 	(junction
 		(at 189.23 60.96)
@@ -4163,16 +4313,16 @@
 		(uuid "bdef157a-4123-4900-8e8b-6fc858ec8bb6")
 	)
 	(junction
+		(at 147.32 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bedfafa8-5d29-4811-868f-cce6b6e40495")
+	)
+	(junction
 		(at 63.5 127)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cabe678e-186b-4f61-9f83-a58dc443d40c")
-	)
-	(junction
-		(at 175.26 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "cb23b7c3-9735-49c1-878f-b6728f76610e")
 	)
 	(junction
 		(at 252.73 86.36)
@@ -4342,7 +4492,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 58.42) (xy 156.21 58.42)
+			(xy 137.16 58.42) (xy 147.32 58.42)
 		)
 		(stroke
 			(width 0)
@@ -4432,6 +4582,16 @@
 	)
 	(wire
 		(pts
+			(xy 160.02 58.42) (xy 175.26 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a40af04-9563-4e28-a103-6c5cd87debf6")
+	)
+	(wire
+		(pts
 			(xy 99.06 144.78) (xy 97.79 144.78)
 		)
 		(stroke
@@ -4439,6 +4599,16 @@
 			(type default)
 		)
 		(uuid "2bbee76c-1166-44de-b80d-a5d7a7b93904")
+	)
+	(wire
+		(pts
+			(xy 147.32 58.42) (xy 152.4 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2bc752d5-aa80-42f8-8236-52f09edc4407")
 	)
 	(wire
 		(pts
@@ -4682,7 +4852,7 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 49.53) (xy 156.21 48.26)
+			(xy 147.32 49.53) (xy 147.32 48.26)
 		)
 		(stroke
 			(width 0)
@@ -4839,16 +5009,6 @@
 			(type default)
 		)
 		(uuid "7e7d9faf-e59c-46fd-b4f8-c8c7a892c9c4")
-	)
-	(wire
-		(pts
-			(xy 156.21 58.42) (xy 175.26 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "81927826-3351-4371-84f1-d027d38b7cc6")
 	)
 	(wire
 		(pts
@@ -5232,7 +5392,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 54.61) (xy 146.05 58.42)
+			(xy 137.16 54.61) (xy 137.16 58.42)
 		)
 		(stroke
 			(width 0)
@@ -5242,7 +5402,7 @@
 	)
 	(wire
 		(pts
-			(xy 146.05 49.53) (xy 146.05 48.26)
+			(xy 137.16 49.53) (xy 137.16 48.26)
 		)
 		(stroke
 			(width 0)
@@ -5352,7 +5512,7 @@
 	)
 	(wire
 		(pts
-			(xy 156.21 54.61) (xy 156.21 58.42)
+			(xy 147.32 54.61) (xy 147.32 58.42)
 		)
 		(stroke
 			(width 0)
@@ -7179,6 +7339,92 @@
 		)
 	)
 	(symbol
+		(lib_id "Diode:1N5819WS")
+		(at 156.21 58.42 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "44c4bd72-ecb6-4d42-bf22-c66c608662de")
+		(property "Reference" "D1"
+			(at 156.5275 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "B5819"
+			(at 156.5275 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-323_HandSoldering"
+			(at 156.21 62.865 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 156.21 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 156.21 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C64886"
+			(at 156.21 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFR. Part #" "B5819WS"
+			(at 156.21 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b796c962-6511-4d79-93a5-9d77ebdbcc3f")
+		)
+		(pin "2"
+			(uuid "661ce9f1-fb2c-491f-a874-9eef8048967e")
+		)
+		(instances
+			(project ""
+				(path "/53f9535d-094b-439f-baf7-92a0b9b7a939/2e2155ce-e3ba-4327-89a0-259f1fcfea4e"
+					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 200.66 64.77 0)
 		(mirror y)
@@ -8085,7 +8331,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 146.05 52.07 0)
+		(at 137.16 52.07 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8094,7 +8340,7 @@
 		(dnp no)
 		(uuid "719803a1-4939-4f04-bad2-274124abd46c")
 		(property "Reference" "R14"
-			(at 148.59 50.7999 0)
+			(at 139.7 50.7999 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -8103,7 +8349,7 @@
 			)
 		)
 		(property "Value" "0R"
-			(at 148.59 53.3399 0)
+			(at 139.7 53.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8112,7 +8358,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8121,7 +8367,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8130,7 +8376,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8139,7 +8385,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C21189"
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8148,7 +8394,7 @@
 			)
 		)
 		(property "MFR. Part #" "0603WAF0000T5E"
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8157,7 +8403,7 @@
 			)
 		)
 		(property "Cal" ""
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8166,7 +8412,7 @@
 			)
 		)
 		(property "Sim.Pin" ""
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8541,7 +8787,7 @@
 	)
 	(symbol
 		(lib_id "power:+BATT")
-		(at 146.05 48.26 0)
+		(at 137.16 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8550,7 +8796,7 @@
 		(fields_autoplaced yes)
 		(uuid "7e21c0fd-6180-41d5-ad76-4d41d6a52328")
 		(property "Reference" "#PWR036"
-			(at 146.05 52.07 0)
+			(at 137.16 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8559,7 +8805,7 @@
 			)
 		)
 		(property "Value" "+BATT"
-			(at 146.05 43.18 0)
+			(at 137.16 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8567,7 +8813,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 146.05 48.26 0)
+			(at 137.16 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8576,7 +8822,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 146.05 48.26 0)
+			(at 137.16 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8585,7 +8831,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+BATT\""
-			(at 146.05 48.26 0)
+			(at 137.16 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10317,7 +10563,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 156.21 52.07 0)
+		(at 147.32 52.07 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10326,7 +10572,7 @@
 		(dnp yes)
 		(uuid "d180b8f4-5fed-4987-8491-44d3452bd1db")
 		(property "Reference" "R15"
-			(at 158.75 50.7999 0)
+			(at 149.86 50.7999 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -10335,7 +10581,7 @@
 			)
 		)
 		(property "Value" "0R"
-			(at 158.75 53.3399 0)
+			(at 149.86 53.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10344,7 +10590,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10353,7 +10599,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10362,7 +10608,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10371,7 +10617,7 @@
 			)
 		)
 		(property "JLCPCB Part #" "C21189"
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10380,7 +10626,7 @@
 			)
 		)
 		(property "MFR. Part #" "0603WAF0000T5E"
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10389,7 +10635,7 @@
 			)
 		)
 		(property "Cal" ""
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10398,7 +10644,7 @@
 			)
 		)
 		(property "Sim.Pin" ""
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11151,7 +11397,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 156.21 48.26 0)
+		(at 147.32 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11160,7 +11406,7 @@
 		(fields_autoplaced yes)
 		(uuid "f7af4579-cdb3-4c1b-a928-60fdf0095a1e")
 		(property "Reference" "#PWR037"
-			(at 156.21 52.07 0)
+			(at 147.32 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11169,7 +11415,7 @@
 			)
 		)
 		(property "Value" "VDDH"
-			(at 156.21 43.18 0)
+			(at 147.32 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11177,7 +11423,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 156.21 48.26 0)
+			(at 147.32 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11186,7 +11432,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 156.21 48.26 0)
+			(at 147.32 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11195,7 +11441,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 156.21 48.26 0)
+			(at 147.32 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
