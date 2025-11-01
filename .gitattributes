@@ -1,7 +1,25 @@
-*.kicad_pro linguist-detectable=true
-*.kicad_prl linguist-detectable=true
-*.kicad_pcb linguist-detectable=true
-*.kicad_sch linguist-detectable=true
-*.kicad_dru linguist-detectable=true
-*.kicad_mod linguist-detectable=true
-*.kicad_sym linguist-detectable=true
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# KiCad requires automatic normalization
+# https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml
+*.kicad_pro text linguist-detectable
+*.kicad_prl text linguist-detectable
+*.kicad_pcb text linguist-detectable
+*.kicad_sch text linguist-detectable
+*.kicad_dru text linguist-detectable
+*.kicad_mod text linguist-detectable
+*.kicad_sym text linguist-detectable
+*.kicad_wks text linguist-detectable
+fp-lib-table text
+sym-lib-table text
+
+# Explicitly declare the binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.bmp binary
+*.pdf binary

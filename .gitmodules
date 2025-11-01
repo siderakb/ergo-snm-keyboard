@@ -1,3 +1,6 @@
 [submodule "key-switches.pretty"]
 	path = key-switches.pretty
 	url = https://github.com/siderakb/key-switches.pretty.git
+[submodule "ziteh_kicad_lib"]
+	path = ziteh_kicad_lib
+	url = https://github.com/ziteh/kicad-lib.git
