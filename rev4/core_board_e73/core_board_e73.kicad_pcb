@@ -5010,7 +5010,7 @@
 			(uuid "5d19e048-9ce7-4888-853d-fec2fc4f305f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../../ziteh_kicad_lib/ZiTe_Lib.3dshapes/PJ-393_8PJ.step"
+		(model "${KIPRJMOD}/../../ziteh_kicad_lib/ZiTe_Lib.3dshapes/PJ-393_8PJ.step"
 			(offset
 				(xyz -1 0 0)
 			)
@@ -5744,7 +5744,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KIPRJMOD}/../../../ziteh_kicad_lib/ZiTe_Lib.3dshapes/USB_Type-C_12pin_HRO_TYPE-C-31-M-12.step"
+		(model "${KIPRJMOD}/../../ziteh_kicad_lib/ZiTe_Lib.3dshapes/USB_Type-C_12pin_HRO_TYPE-C-31-M-12.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14596,7 +14596,7 @@
 			(uuid "c954c287-e9ea-4dc5-8e0f-9b3161dc3855")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../../ziteh_kicad_lib/ZiTe_Lib.3dshapes/SK19_G2.step"
+		(model "${KIPRJMOD}/../../ziteh_kicad_lib/ZiTe_Lib.3dshapes/SK19_G2.step"
 			(offset
 				(xyz 0 0 0)
 			)
