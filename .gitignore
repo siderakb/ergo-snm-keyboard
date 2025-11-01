@@ -36,14 +36,25 @@ production/
 *.gbr
 *.gm1
 *.drl
-fabrication-toolkit-options.json
+*.zip
 
 # Backup
 *-backups/
 
 # FreeCAD
 *.FCBak
+*.FCStd1
+*.FCStd~
+*.step
+*.stp
+*.stl
+*.obj
+*.3mf
+*.dxf
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Others
+*.log
