@@ -543,7 +543,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "core_board_e73.step",
       "svg": "",
       "vrml": ""
     },
