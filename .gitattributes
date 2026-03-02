@@ -3,16 +3,16 @@
 
 # KiCad requires automatic normalization
 # https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml
-*.kicad_pro text linguist-detectable
-*.kicad_prl text linguist-detectable
-*.kicad_pcb text linguist-detectable
-*.kicad_sch text linguist-detectable
-*.kicad_dru text linguist-detectable
-*.kicad_mod text linguist-detectable
-*.kicad_sym text linguist-detectable
-*.kicad_wks text linguist-detectable
-fp-lib-table text
-sym-lib-table text
+*.kicad_pro text eol=lf linguist-detectable
+*.kicad_prl text eol=lf linguist-detectable
+*.kicad_pcb text eol=lf linguist-detectable
+*.kicad_sch text eol=lf linguist-detectable
+*.kicad_dru text eol=lf linguist-detectable
+*.kicad_mod text eol=lf linguist-detectable
+*.kicad_sym text eol=lf linguist-detectable
+*.kicad_wks text eol=lf linguist-detectable
+fp-lib-table text eol=lf
+sym-lib-table text eol=lf
 
 # FreeCAD
 *.FCStd binary
