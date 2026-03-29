@@ -21,13 +21,13 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": false,
+      "lockedItems": true,
       "otherItems": true,
       "pads": true,
       "text": false,
       "tracks": true,
       "vias": true,
-      "zones": true
+      "zones": false
     },
     "visible_items": [
       "vias",
@@ -52,7 +52,7 @@
       "ly_points"
     ],
     "visible_layers": "ffffffff_ffffffff_fffffff5_ffffff5f",
-    "zone_display_mode": 0
+    "zone_display_mode": 1
   },
   "git": {
     "integration_disabled": false,
@@ -90,16 +90,16 @@
       9
     ],
     "col_widths": [
-      294,
-      279,
-      173,
+      125,
+      118,
+      149,
       120,
-      173,
-      173,
-      173,
+      129,
+      152,
+      132,
       126,
-      173,
-      173
+      74,
+      63
     ],
     "custom_group_rules": [],
     "expanded_rows": [],
