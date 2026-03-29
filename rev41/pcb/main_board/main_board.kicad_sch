@@ -119,322 +119,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector_Generic:Conn_01x08"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 0 10.16 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x08"
-				(at 0 -12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Conn_01x08_1_1"
-				(rectangle
-					(start -1.27 8.89)
-					(end 1.27 -11.43)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start -1.27 7.747)
-					(end 0 7.493)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 5.207)
-					(end 0 4.953)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -7.493)
-					(end 0 -7.747)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -10.033)
-					(end 0 -10.287)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 7.62 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 5.08 0)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 2.54 0)
-					(length 3.81)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -5.08 0)
-					(length 3.81)
-					(name "Pin_6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -7.62 0)
-					(length 3.81)
-					(name "Pin_7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -10.16 0)
-					(length 3.81)
-					(name "Pin_8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Connector_Generic:Conn_02x10_Odd_Even"
 			(pin_names
 				(offset 1.016)
@@ -2631,7 +2315,7 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 139.7) (xy 88.9 154.94)
+			(xy 88.9 139.7) (xy 88.9 156.21)
 		)
 		(stroke
 			(width 0)
@@ -2941,7 +2625,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 139.7) (xy 165.1 154.94)
+			(xy 165.1 139.7) (xy 165.1 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3701,7 +3385,7 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 139.7) (xy 114.3 155.0214)
+			(xy 114.3 139.7) (xy 114.3 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3791,7 +3475,7 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 139.7) (xy 139.7 154.94)
+			(xy 139.7 139.7) (xy 139.7 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3841,7 +3525,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 139.7) (xy 63.5 154.94)
+			(xy 63.5 139.7) (xy 63.5 156.21)
 		)
 		(stroke
 			(width 0)
@@ -4762,7 +4446,7 @@
 			(uuid "06738838-2fb5-435e-b258-5956cf1d68e5")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "TP6")
 					(unit 1)
@@ -5362,7 +5046,7 @@
 			(uuid "393f292d-ed17-41db-b6a8-41449a7c26a6")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "R1")
 					(unit 1)
@@ -5752,7 +5436,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 139.7 154.94 180)
+		(at 139.7 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5760,8 +5444,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "315e7625-1851-4e6f-9006-3bb2a90e2803")
-		(property "Reference" "TP9"
-			(at 142.24 156.9719 0)
+		(property "Reference" "TP10"
+			(at 142.24 158.2419 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5770,7 +5454,7 @@
 			)
 		)
 		(property "Value" "C4"
-			(at 142.24 159.5119 0)
+			(at 142.24 160.7819 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5779,7 +5463,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 134.62 154.94 0)
+			(at 134.62 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5788,7 +5472,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 134.62 154.94 0)
+			(at 134.62 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5797,7 +5481,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 139.7 154.94 0)
+			(at 139.7 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5811,7 +5495,7 @@
 		(instances
 			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
-					(reference "TP9")
+					(reference "TP10")
 					(unit 1)
 				)
 			)
@@ -6500,94 +6184,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x08")
-		(at 237.49 128.27 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4ef2c6c3-59e8-40fb-885d-0c9d21e8c901")
-		(property "Reference" "J3"
-			(at 240.03 128.2699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Conn_01x08"
-			(at 240.03 130.8099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "ErgoSNM_Keyboard:FPC_8P_0.5mm_AFC01-S08FCA-00"
-			(at 237.49 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 237.49 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 237.49 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "475843ec-f98d-4fbe-8681-7a51fc079e57")
-		)
-		(pin "5"
-			(uuid "c24d3c31-0e95-440a-aff7-aaed12c64077")
-		)
-		(pin "7"
-			(uuid "53437409-6dbe-4072-95ad-db72246ec091")
-		)
-		(pin "4"
-			(uuid "d5af674f-5fc1-4288-b87a-2c09e6f7b210")
-		)
-		(pin "8"
-			(uuid "54f59297-a17a-4c16-98c3-7688022b6b60")
-		)
-		(pin "3"
-			(uuid "bcce20e3-01a0-485c-8e4a-d56c8832624c")
-		)
-		(pin "2"
-			(uuid "ab338ae4-e182-41c6-a1a7-9a103e12545e")
-		)
-		(pin "6"
-			(uuid "5c02bb1c-3e9c-4ac3-8121-2ed826f7954a")
-		)
-		(instances
-			(project ""
-				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Diode:1N4148W")
 		(at 152.4 46.99 270)
 		(mirror x)
@@ -6979,7 +6575,7 @@
 			(uuid "62bcfdef-756d-4065-b80d-147ea553044c")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "D1")
 					(unit 1)
@@ -7058,7 +6654,7 @@
 			(uuid "4e78d350-0567-4430-b000-de5ca9edd88c")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "LD2")
 					(unit 1)
@@ -8507,7 +8103,7 @@
 			(uuid "ae3b59c8-b52e-4b3d-934e-c9b518fa4457")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "BTN1")
 					(unit 1)
@@ -8573,7 +8169,7 @@
 			(uuid "e97d30c9-b2fc-4b79-89ca-81cf25289bed")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "#PWR04")
 					(unit 1)
@@ -9096,7 +8692,7 @@
 			(uuid "1bf4b179-fa37-431a-9cfc-987a8e80fe30")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "J1")
 					(unit 1)
@@ -9160,7 +8756,7 @@
 			)
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "H2")
 					(unit 1)
@@ -9238,7 +8834,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 114.3 155.0214 180)
+		(at 114.3 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9246,8 +8842,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ad1cd841-48cb-44b8-b032-f7f7b69fb49b")
-		(property "Reference" "TP11"
-			(at 116.84 157.0533 0)
+		(property "Reference" "TP9"
+			(at 116.84 158.2419 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9256,7 +8852,7 @@
 			)
 		)
 		(property "Value" "C3"
-			(at 116.84 159.5933 0)
+			(at 116.84 160.7819 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9265,7 +8861,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 109.22 155.0214 0)
+			(at 109.22 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9274,7 +8870,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 109.22 155.0214 0)
+			(at 109.22 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9283,7 +8879,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 114.3 155.0214 0)
+			(at 114.3 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9297,7 +8893,7 @@
 		(instances
 			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
-					(reference "TP11")
+					(reference "TP9")
 					(unit 1)
 				)
 			)
@@ -9373,7 +8969,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 88.9 154.94 180)
+		(at 88.9 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9382,7 +8978,7 @@
 		(fields_autoplaced yes)
 		(uuid "b37bdd57-9b38-4933-a8ac-0486162a207e")
 		(property "Reference" "TP8"
-			(at 91.44 156.9719 0)
+			(at 91.44 158.2419 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9391,7 +8987,7 @@
 			)
 		)
 		(property "Value" "C2"
-			(at 91.44 159.5119 0)
+			(at 91.44 160.7819 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9400,7 +8996,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 83.82 154.94 0)
+			(at 83.82 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9409,7 +9005,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 83.82 154.94 0)
+			(at 83.82 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9418,7 +9014,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 88.9 154.94 0)
+			(at 88.9 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9633,7 +9229,7 @@
 			(uuid "5103a422-b31c-469c-b366-079fee09e098")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "SW1")
 					(unit 1)
@@ -9887,7 +9483,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 165.1 154.94 180)
+		(at 165.1 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9895,8 +9491,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c4102ebf-890d-420e-b0ff-f09c1579d80c")
-		(property "Reference" "TP10"
-			(at 167.64 156.9719 0)
+		(property "Reference" "TP11"
+			(at 167.64 158.2419 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9905,7 +9501,7 @@
 			)
 		)
 		(property "Value" "C5"
-			(at 167.64 159.5119 0)
+			(at 167.64 160.7819 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9914,7 +9510,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 160.02 154.94 0)
+			(at 160.02 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9923,7 +9519,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 160.02 154.94 0)
+			(at 160.02 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9932,7 +9528,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 165.1 154.94 0)
+			(at 165.1 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9946,7 +9542,7 @@
 		(instances
 			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
-					(reference "TP10")
+					(reference "TP11")
 					(unit 1)
 				)
 			)
@@ -10298,7 +9894,7 @@
 			(uuid "df6ab44f-aa90-4527-8b0b-cd4d315d310d")
 		)
 		(instances
-			(project ""
+			(project "main_board"
 				(path "/2a2761ca-cea7-46c5-81c5-d1241812e760"
 					(reference "#PWR01")
 					(unit 1)
@@ -10548,7 +10144,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 63.5 154.94 180)
+		(at 63.5 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10557,7 +10153,7 @@
 		(fields_autoplaced yes)
 		(uuid "e8e0ca29-f81a-407d-a552-76eb292ae216")
 		(property "Reference" "TP7"
-			(at 66.04 156.9719 0)
+			(at 66.04 158.2419 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10566,7 +10162,7 @@
 			)
 		)
 		(property "Value" "C1"
-			(at 66.04 159.5119 0)
+			(at 66.04 160.7819 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10575,7 +10171,7 @@
 			)
 		)
 		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
-			(at 58.42 154.94 0)
+			(at 58.42 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10584,7 +10180,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 58.42 154.94 0)
+			(at 58.42 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10593,7 +10189,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 63.5 154.94 0)
+			(at 63.5 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
