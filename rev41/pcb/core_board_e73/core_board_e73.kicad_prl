@@ -21,10 +21,10 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": true,
+      "lockedItems": false,
       "otherItems": true,
       "pads": true,
-      "text": true,
+      "text": false,
       "tracks": true,
       "vias": true,
       "zones": true
@@ -46,11 +46,13 @@
       "pads",
       "zones",
       "drc_warnings",
+      "drc_exclusions",
       "conflict_shadows",
-      "shapes"
+      "shapes",
+      "ly_points"
     ],
-    "visible_layers": "ffffffff_ffffffff_fffffff5_ffffffff",
-    "zone_display_mode": 1
+    "visible_layers": "ffffffff_ffffffff_fffffff5_ffffff5f",
+    "zone_display_mode": 0
   },
   "git": {
     "integration_disabled": false,
@@ -88,16 +90,16 @@
       9
     ],
     "col_widths": [
-      125,
-      118,
-      149,
+      294,
+      279,
+      173,
       120,
-      129,
-      152,
-      132,
+      173,
+      173,
+      173,
       126,
-      74,
-      63
+      173,
+      173
     ],
     "custom_group_rules": [],
     "expanded_rows": [],
