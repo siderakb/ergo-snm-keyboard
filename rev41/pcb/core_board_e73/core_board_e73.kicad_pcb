@@ -8,7 +8,11 @@
 	)
 	(paper "A4")
 	(title_block
+		(title "ErgoSNM Keyboard - Core Board (E73)")
 		(rev "4.1.A")
+		(company "SideraKB")
+		(comment 1 "Open source hardware, CERN-OHL-P_v2")
+		(comment 2 "https://github.com/siderakb/ergo-snm-keyboard")
 	)
 	(layers
 		(0 "F.Cu" signal)

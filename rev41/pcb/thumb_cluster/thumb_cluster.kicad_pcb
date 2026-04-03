@@ -7,6 +7,13 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "ErgoSNM Keyboard - Thumb Cluster")
+		(rev "4.1.A")
+		(company "SideraKB")
+		(comment 1 "Open source hardware, CERN-OHL-P_v2")
+		(comment 2 "https://github.com/siderakb/ergo-snm-keyboard")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" signal)
