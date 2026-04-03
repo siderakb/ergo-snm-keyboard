@@ -146,7 +146,7 @@
         "min_track_width": 0.15,
         "min_via_annular_width": 0.075,
         "min_via_diameter": 0.45,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -623,6 +623,18 @@
           "group_by": false,
           "label": "#",
           "name": "${ITEM_NUMBER}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "JLCPCB Part #",
+          "name": "JLCPCB Part #",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MFR. Part #",
+          "name": "MFR. Part #",
           "show": false
         }
       ],

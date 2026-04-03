@@ -214,6 +214,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C165948"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "93a25c9a-97f5-444a-b9ce-bcf4255d7b9b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "TYPE-C-31-M-12"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e9cfb86a-0446-4d11-89e6-de0390a80314")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a80c8f0f-1bf4-4e21-8702-ab6f038afdbb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "USB*C*Receptacle*")
 		(path "/a4cce058-5d03-4bf2-95bb-41d7d3bc1b89")
 		(sheetname "/")
@@ -692,6 +731,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C1547"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "526f06bb-67be-4394-a6c3-6116ba9e79b2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402CG120J500NT"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cd4c5343-d450-4c56-a6b9-dab71f0c8c2d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bf854691-c104-45ae-8329-e37343517825")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/c8544844-5caa-419d-bc45-f6c388efa842")
 		(sheetname "/")
@@ -869,6 +947,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "43b06ce7-de1f-4fc4-8125-a888ab831599")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C25744"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e282f497-3717-4de9-aa4d-4b1cd4111172")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "139e5f52-d917-4cad-ab60-74d77e02a673")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7247d545-b30d-4851-84e1-5791d6debeaf")
 			(effects
 				(font
 					(size 1 1)
@@ -1060,6 +1177,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C19702"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9bcaa75a-fda6-4ab8-bc54-323be4f4d4b9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL10A106KP8NNNC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "664e0c48-1e75-48bd-8bce-7e846c20d72e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7608d9c6-5eab-40af-9af3-32969d4a09b6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/b4d2a1e7-e976-4754-a73a-6ce7fedeea60")
 		(sheetname "/")
@@ -1227,6 +1383,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5982c21b-0959-48e5-90d2-1ef5adde17b2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C2856797"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fd869ac0-4763-4612-91e9-1d465dcb2a5c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "FPC-05F-8PH20"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b88f16d1-cd8b-4de5-9e66-7b1e48ce3b4b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "27ebfc5d-1318-495b-89dc-d50a8857a8ea")
 			(effects
 				(font
 					(size 1 1)
@@ -1539,6 +1734,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C25905"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c448658e-dcf2-4674-aaa4-ce5c870103d4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF5101TCE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "28b3f2d2-60a1-4dc1-9a1b-6d03458813d4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f193b492-b033-48d0-a1ec-1cf412b7e6a3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/cbebaf89-6171-4706-a63d-589f93ab9720")
 		(sheetname "/power/")
@@ -1716,6 +1950,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "92633b0f-3398-4337-a2fe-9f80fa141764")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C295747"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5179a55c-2850-4bec-a4d7-0f29c70e4ecd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "S2B-PH-SM4-TB(LF)(SN)"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f55e21e0-63ee-4023-b266-66547fcd9dea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "22ed1865-82f2-4674-9277-a0a3cb5c4d78")
 			(effects
 				(font
 					(size 1 1)
@@ -2247,6 +2520,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C5179446"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dbeb0b06-5274-4b58-a4f6-51187dd5cd11")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "FWP252012P-2R2ML"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "559cec00-b930-45aa-b888-b203ed0a98e6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4b245b37-cd5c-41a2-b3ff-f38e658d6ff5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Choke_* *Coil* Inductor_* L_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/c6261f5f-c8b9-45d5-95f1-8ff3762d6477")
 		(sheetname "/power/")
@@ -2426,6 +2738,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d354a7bc-8e63-4dfe-81cd-a189ad8d6609")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C269104"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b066bd25-1646-4be3-8a5f-66229c6c4fd6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "SMD0805B050TF"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5f2b5ab2-9913-4f73-a4d1-bd5becc411e1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "50e8f4c2-4d81-4df9-a8be-2c59852c260a")
 			(effects
 				(font
 					(size 1 1)
@@ -2617,6 +2968,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C22809"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b27198c1-9af6-411d-95b9-095bfcffe20b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF1502T5E"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8a05faba-df39-460f-8569-a160a3b1e1df")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e3148a58-fdf3-4358-8315-208e6878e2bd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/5b86ad5a-3679-40fe-ae49-3a001d8c26d0")
 		(sheetname "/power/")
@@ -2794,6 +3184,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5a305498-1438-47cc-ae69-256c992709f2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C21189"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "41fbb494-a94e-4aaa-9011-13a4c2e0d67d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b5c7fd08-174f-4b53-b907-ed2a9a0883b3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dd66ccba-ef10-434a-a7fa-32a53138c690")
 			(effects
 				(font
 					(size 1 1)
@@ -2985,6 +3414,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C4109"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e0313373-0027-4ad8-bf44-1c2ed5ff8ae9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF2001TCE"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bc3fb11d-2f1a-4c5a-9c65-8ee2eb07dc18")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "87258e28-e331-4fcd-9b4b-1810ca3c92d8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/83cee223-ff38-421e-b89a-342001395bcb")
 		(sheetname "/power/")
@@ -3152,6 +3620,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c69fa68d-9253-41c2-8bc1-6248baf3d91b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C2856797"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e46f523e-6019-4fd4-8fff-adced54a6480")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "FPC-05F-8PH20"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cd70ad0d-5191-4c77-95e5-147d650e1327")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b85edde1-95f2-4892-a39d-340af93be5ca")
 			(effects
 				(font
 					(size 1 1)
@@ -3464,6 +3971,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C25905"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "41d3b41c-9430-4a03-96a2-271260ca754c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF5101TCE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "03f49402-a5b7-4d40-bea4-51e5c2f5724f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "74d7b000-c471-46c5-973d-445bd11ab262")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/afd0bbb9-9fba-4165-b8a8-8e5ed6416530")
 		(sheetname "/power/")
@@ -3641,6 +4187,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "4d74136a-84e7-4e72-a923-ba40664bcc8b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C1518762"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "94a6add4-91f4-42c8-8716-bff40ef3fdec")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "TPS63900DSKR"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "300cab57-27a9-41d6-96b5-74f0f96d47a8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1790eb45-7c04-4329-bcd4-e8431bb6e113")
 			(effects
 				(font
 					(size 1 1)
@@ -4057,6 +4642,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "029c409e-dc10-427f-8c9d-0b095bdb2c5f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C356849"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "31812555-f7f7-4e4b-ba84-4cbc9290ae0d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "E73-2G4M08S1C"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "907a6d87-ab68-4faf-a5f4-ebdf94b7782d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e7345a29-a83f-49a1-a699-cf70b8ecd5a1")
 			(effects
 				(font
 					(size 1 1)
@@ -4918,6 +5542,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C4184"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ca5e39a9-dff8-481b-99c7-55cf3585ae65")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF2002T5E"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2f028a50-5220-4a0c-8bb1-885d45fb9271")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0cf96af5-52f0-45ea-bcd0-0c0c2e9409d0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/74354653-66e6-47a8-848b-f05c0b24b4d9")
 		(sheetname "/power/")
@@ -5095,6 +5758,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "95dbd6b9-c16b-4040-a200-c2803ae62ff7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C25744"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "72673615-80aa-444a-9ac9-6911adeb8c0a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6158bde6-f230-463c-8e0f-5abe404f4a8b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b1dbf871-5dbb-4f9a-a915-f9b5cd686027")
 			(effects
 				(font
 					(size 1 1)
@@ -5286,6 +5988,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C22935"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "729ac768-f4ce-4973-a841-29513ff75d26")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF1004T5E"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7e64ff95-3bc8-45cf-8501-4c39d3350892")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ce07edbb-4cc0-476c-9872-fd1815ae66e7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/5b699660-7253-46e3-a326-52eee6011dce")
 		(sheetname "/power/")
@@ -5470,6 +6211,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C52923"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "65b799d3-53c9-42a4-b0bc-3917620ad6b2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL05A105KA5NQNC"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "33629052-de24-4db2-bfb6-ad1a57b9d333")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c7baaf5f-3cd3-4090-92dc-258cf71404f5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/9620db6a-d0f6-4a60-9c2d-dd12dec9ecca")
 		(sheetname "/power/")
@@ -5647,6 +6427,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1d07f874-082b-4b66-a5a6-cedafa0b1f7c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C15464"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "27c9fd1e-e20c-44ed-b19d-8b9404c1620b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "BQ24075RGTR"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7e8d48af-0910-4bda-a002-a6a4a43a39b4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c259f1b1-8d1b-4e51-b598-ca8960ee93c7")
 			(effects
 				(font
 					(size 1 1)
@@ -6283,6 +7102,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C2909386"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1bad1da6-3f6d-462f-805a-0b0a7ded50c8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "FRC0402F8203TS"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "41266318-fb68-4ea3-8dbd-8191506f783e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bf9107e1-ea9d-4f74-91ee-0aac02b8f3bc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/8822530e-2913-4d43-a834-facd296096bf")
 		(sheetname "/")
@@ -6453,6 +7311,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "031063cc-9428-448b-84cb-360fa287e20c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C165948"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "beb618eb-328e-46cd-8f64-a0994b9d8ffe")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "TYPE-C-31-M-12"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3e14e871-d928-4088-9abb-922ead81ada0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a420170f-055b-4cf5-a65b-5a942d8473f6")
 			(effects
 				(font
 					(size 1 1)
@@ -6938,6 +7835,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4db3d0b2-3841-4688-9bc2-7f3c9eb1bc1d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL05B104KO5NNNC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f5f2160f-d485-4805-8e7e-6339f733873a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e56d2500-11f9-44e2-adfd-6caf24a61ce3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/cd809160-c5b3-4381-86c7-db9016dc303e")
 		(sheetname "/")
@@ -7115,6 +8051,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "dc9451f2-8676-41c5-96ed-27f7de4c10d9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C25744"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "eb0724ac-1db0-4761-ba66-5e06ffe29314")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7f130190-d80c-498b-9376-ce92aa15ed07")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d727f5f3-222e-4f50-84c2-c0f929e91ac1")
 			(effects
 				(font
 					(size 1 1)
@@ -7306,6 +8281,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C25744"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "33e9dfe6-0f62-4ef1-b684-8068e1e3800d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9891f395-0c57-431b-a1ac-cfde89603b37")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "001bd453-ca90-4121-88d4-2b0b3955e50a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a0abd8be-5cbe-4e95-a15c-010a21cd575a")
 		(sheetname "/")
@@ -7490,6 +8504,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C21189"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "96caf9f9-84f6-4b66-a6a2-069d9695e989")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "69293f64-d3ee-44c1-8f46-ed27af64a600")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f2a1a319-05ed-4e8e-85f6-e732ca17b5ab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/b34a6b06-0fec-4a39-9aee-926039982de3")
 		(sheetname "/power/")
@@ -7659,6 +8712,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e3c8ee2b-2106-4e9d-921a-dbab8f8dacf4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C64886"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3aff2b14-f7b0-4ab3-9038-dea27a34ada7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "B5819WS"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "18216f5c-c827-4861-8da2-e3566cf8d94d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "06245bff-eb9a-426e-8b4e-dc1169deb902")
 			(effects
 				(font
 					(size 1 1)
@@ -7980,6 +9072,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C23733"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ff64cd41-062f-4eeb-bc29-f24fee47cfa7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL05A475MP5NRNC"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "36377d8c-297c-4ee4-a929-054614f6eaf2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "699c2ae5-efdf-4c08-8d1f-1b557afac4a8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/7ea0f550-66fe-4bc4-b5fb-3c816749366b")
 		(sheetname "/power/")
@@ -8157,6 +9288,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8e592440-0320-4c8e-8f09-d75c27ab76ef")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C21189"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9eed63fa-fa35-4fa2-8254-65155562c946")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bcc00631-6d2a-4293-9e7d-1b871d1cca05")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8eabd1e9-a982-42e7-9ed1-7de8002adadd")
 			(effects
 				(font
 					(size 1 1)
@@ -8348,6 +9518,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C11512"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "03d89222-e91b-49b4-a794-6e77e2bedfea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF2004TCE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3b959c46-4053-4398-b9c4-c85d343fb5be")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "25d26bd2-ee2c-403d-a407-c2b21768e7a3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/eade4a87-ad80-4467-8f75-a960a529f480")
 		(sheetname "/")
@@ -8525,6 +9734,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "03cc11ed-ee03-4694-a25d-c79fb26f75b8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C1547"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9cfc6de0-1116-4250-b265-f6053e382e95")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402CG120J500NT"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "66dd28c5-c273-450b-998a-0893ee57a227")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1279fe2c-6604-4a6a-80e0-7dcb5024dd64")
 			(effects
 				(font
 					(size 1 1)
@@ -8716,6 +9964,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C21189"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c6875eb9-e908-4b18-bf7a-dc1e5b229406")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "19ecf9c3-d74e-4d30-be5b-0d086a07ade2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "31a4a754-73f1-4285-b22e-2242d3e234b8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/dc26b556-1b8b-4e95-ba0e-99517164ac95")
 		(sheetname "/power/")
@@ -8900,6 +10187,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C21189"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "21d100de-26b0-4e60-9164-8505a51542be")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5ecd29b2-7efc-45bc-bbaf-484329136842")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e641901a-e1a5-47b2-9f7a-89746d54e243")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/805dfd5f-102d-41ef-9d35-ecf7d96d4000")
 		(sheetname "/power/")
@@ -9077,6 +10403,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fc0e6895-46bd-44e4-b4f1-c210349acb0f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d96e58d9-4a94-417f-92f4-155a3ac355a2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d2deeecc-84ce-4ff4-bdb9-3426e9448c92")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "12a7a046-e387-4b52-a683-d67d18f0df9b")
 			(effects
 				(font
 					(size 1 1)
@@ -9456,6 +10821,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7a64bfd3-30f7-4049-803f-2e88d10baf08")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7f3329fd-269f-4881-91d4-0eac8e9a7228")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "23322cf2-229c-44a4-95ac-63253d799479")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/fc55698c-ad7f-404f-b407-f8d507dbcd57")
 		(sheetname "/")
@@ -9691,6 +11095,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C45783"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3df34d88-0ce6-4e73-a972-47dcd1bd39ea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL21A226MAQNNNE"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "646572bc-9b2d-4b74-9f37-25566edf47a0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fd1a1f9f-705b-4341-9625-9be3cab59ca5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/62db94dc-308d-4268-9afb-b2c764c35436")
 		(sheetname "/power/")
@@ -9869,6 +11312,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d0b41939-d2aa-486d-b548-71ec10614db8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C1744"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "db79d044-32e7-47fe-9a25-d8d365ac6727")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0805B472K500NT"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "07da478a-76c7-4a6e-96bf-664800e0e16c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f76ed173-a884-413e-8a14-26f9b3c964da")
 			(effects
 				(font
 					(size 1 1)
@@ -10060,6 +11542,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C19702"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7dc507e3-b511-4ee2-a3d1-92405ea6456c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL10A106KP8NNNC"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "71bd8604-5f34-44a9-a88d-3fbfd9b1bc26")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4ce67695-ed06-487e-bc67-e736a364d93e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/c5440941-8da8-407b-8104-503b452a91f6")
 		(sheetname "/")
@@ -10238,6 +11759,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "82e4c026-01d7-4748-8f52-494fac891bf1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C2687116"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "23ae6489-e435-47dd-8c0f-4c4500bf376f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "USBLC6-2SC6"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "aa6b1a59-30ca-4807-a505-3f511d2dba9b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" "90"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "25db323b-03a5-48c5-81c3-cfeffbdf58b9")
 			(effects
 				(font
 					(size 1 1)
@@ -10633,6 +12193,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C21189"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b7aefac7-41ad-4b3d-8f71-bb8913d80fea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0603WAF0000T5E"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "09fda887-7712-47ff-8a4a-371d54bc31fc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c7ed274f-64a3-45ef-ad28-5c3b8cf3f20f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/fa62e4ae-beb2-447d-beab-9d47c8d05be7")
 		(sheetname "/power/")
@@ -10803,6 +12402,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "cc628858-e1c3-4ea6-9bef-4b77303a05ab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C165948"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "74fc753f-6275-40f1-b95f-22f3d5dd7262")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "TYPE-C-31-M-12"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "70de92f7-b28f-4c60-a169-9e2997d39b31")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "69b11be6-42bc-4b5c-b599-337042e1d4a1")
 			(effects
 				(font
 					(size 1 1)
@@ -11275,6 +12913,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "02b6136d-bee6-4b51-8535-cc31e86d61d1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8d39cc02-3796-4431-8953-d90e63bf34a1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6f0723e4-15c8-469a-98f1-7242ab5479af")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/62a0ed4c-8d0b-49d3-a714-0f2efbfa9a5c")
 		(sheetname "/")
@@ -11510,6 +13187,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C45783"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bd18961b-89ac-478f-b3b6-ed667b5d450e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL21A226MAQNNNE"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "be3ca33b-02d5-4d7f-bd11-0caa2906393d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b36da6c1-e7bb-4fd6-8dc0-e188da95c804")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/025301e6-dc89-45a4-83c8-05dd0cdb0334")
 		(sheetname "/power/")
@@ -11688,6 +13404,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8e7d5ada-8daa-4b82-95bf-89cd90093cef")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C25744"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f0ecb134-eba2-410e-af57-424cb5b82dc6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "0402WGF1002TCE"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a9ce14d-3279-4552-bd4d-0f2679f4a4b0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9c43bfb7-564e-4b7b-8c8d-de5fb4a9859c")
 			(effects
 				(font
 					(size 1 1)
@@ -11879,6 +13634,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C23733"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4eea182e-5691-4dc8-a275-391c4b42d851")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL05A475MP5NRNC"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bcd5f890-dbc8-4229-920e-f2a790afe258")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dfcbcf7d-3efd-40da-95b4-e160467077f6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/96d19129-3dbd-44a7-812c-791bf856b2aa")
 		(sheetname "/power/")
@@ -12048,6 +13842,45 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3c0dc1c5-56b8-4f94-896c-cfd17c6dee45")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "JLCPCB Part #" "C32346"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fe97555a-a3e7-4740-86a6-7fb5447b1d95")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "Q13FC13500004"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8fdd76c2-9641-4a4f-a4d8-d804d21ef4b9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a71de113-de42-4b0e-9199-14859f464408")
 			(effects
 				(font
 					(size 1 1)
@@ -12297,6 +14130,45 @@
 				)
 			)
 		)
+		(property "JLCPCB Part #" "C1525"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d20c5b83-4e97-4ea2-8ae6-5c1b00767020")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MFR. Part #" "CL05B104KO5NNNC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "67be1d8a-28de-4d36-9181-f75daba7acc0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e356a007-8a9d-4cb9-b301-b6d51a62ee82")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "C_*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/32ebce13-c369-4d49-a7ba-357428a47a3d")
 		(sheetname "/power/")
@@ -12472,6 +14344,48 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "f2b60eed-35d2-4dac-82bf-2193e9f02df4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "bd220188-32fa-4c8b-b2b4-3cc33a34d575")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9debf088-83cc-48b2-bd24-e71641a2baa0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9690a540-4dd8-4897-82d1-3b5ba72084ae")
 			(effects
 				(font
 					(size 1 1)
@@ -12674,6 +14588,48 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "055e448f-83f2-4d57-b35c-ee6916af8135")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5d03232d-761e-4938-bf2c-ebcfd569db56")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "2a34284c-2b0b-4d78-921c-9509ca116d8a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "cc93111c-76e8-44d9-838a-6ffdcf11454f")
 			(effects
 				(font
 					(size 1 1)
@@ -13150,6 +15106,48 @@
 				(justify mirror)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "81aca6cb-ba2c-46ca-a7fd-724cfe5b63f3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fd2db8b1-7e2d-4952-8a9c-9f43434b42f1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8b91b64c-7816-439a-a591-4aaf33e52336")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "SolderJumper*Open*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/8b437cf2-b7d9-42df-86ac-60f721638ef1")
 		(sheetname "/power/")
@@ -13491,6 +15489,48 @@
 				(justify mirror)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "98ee6524-e3f1-45de-a070-134f760e3600")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b5c32688-e022-4f19-844d-02c78e772893")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "71744dfd-f691-40a8-af78-26aaa926b0ca")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "SolderJumper*Open*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/c4b181ad-fd18-4e6a-bcf2-a040c897ee31")
 		(sheetname "/power/")
@@ -13799,6 +15839,48 @@
 				(justify mirror)
 			)
 		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "114e9306-153a-4676-a825-72d4a288cf5f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "462d98e3-c138-498d-9e42-99d105336d88")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "df6bac44-af62-49f5-aa55-b170d619657d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "SolderJumper*Open*")
 		(path "/a7c013b9-7832-4dbf-9217-3ef08b687a82/c49bb887-6628-43bf-900c-ffa12c69c34c")
 		(sheetname "/power/")
@@ -14099,6 +16181,48 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "a9f68002-3bfc-46e8-9346-9b8fddccc6d8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c70c0456-0da4-403c-8090-b1c639c1439e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "37a2ef55-ed9a-4e3b-b8a4-c47ae36a10e3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "16ae0219-b6c5-41c1-b490-38e0588b4e26")
 			(effects
 				(font
 					(size 1 1)
@@ -14417,6 +16541,48 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "83d9d6a2-25e8-4ed9-ad7a-7ab9b2e8aecd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "131aad95-3acd-41b9-b86e-c4a8e1ae6946")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c763f9c6-2324-45db-b27e-78383468db15")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b72b0c05-9573-417c-8ffd-5169611661cb")
 			(effects
 				(font
 					(size 1 1)
@@ -14914,6 +17080,48 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "3621b2d7-0462-4d09-a67d-e8ab30b316ca")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "JLCPCB Part #" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1fc7c76c-4b64-4b45-92c7-d7f409747a0e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFR. Part #" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fd2747ee-1182-4bb2-be53-58ad32e56cd9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Rotation Offset" ""
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "aaaadd3f-aeeb-45a4-8f30-b2fb975e2b57")
 			(effects
 				(font
 					(size 1 1)
