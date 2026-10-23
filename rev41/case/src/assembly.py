@@ -8,7 +8,7 @@ from ocp_vscode import show
 
 import params
 from geometry import placement
-from outline import top_case_draft
+from topcase import top_case_draft
 from parts import load_parts
 
 STEP_DIR = Path(__file__).resolve().parents[1] / "step"

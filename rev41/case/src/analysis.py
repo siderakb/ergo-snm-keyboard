@@ -20,7 +20,8 @@ def interference_volume(a, b):
     for sa in a.solids():
         for sb in b.solids():
             if _overlap(sa, sb):
-                total += (sa & sb).volume
+                common = sa & sb
+                total += common.volume if common else 0.0
     return total
 
 

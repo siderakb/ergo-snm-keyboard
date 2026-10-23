@@ -78,6 +78,19 @@ BATTERY_HOLDER = (58.3, 14.2, 32.2)
 # (4 rows each), the user's red circle. Key edge area; the holder sits inside it, long side along Y.
 HOTSWAP_SOCKET_PROTRUSION = 1.8   # Choc hot-swap socket sticks out of the PCB (total 3.05, rest is inside the board)
 BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)   # holder top below the main board lower face (Z=0): -2.3
+# Top case shell: walls hang this deep from the top surface (measured along the plane normal): plate
+# top to PCB underside 3.8, plus the hot-swap sockets below the PCB and a 0.5 mm margin. The seam to the
+# bottom case follows the same folded surface (flat under the main plate, tilted under the thumb plate).
+SEAM_DEPTH = round(PLATE_TOP_TO_PCB_TOP + PCB_T + HOTSWAP_SOCKET_PROTRUSION + 0.5, 3)
+# Screw posts in the free corners between the PCB outlines and the case wall: Ø7.8 so the wall around the
+# 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the nut sits at the seam (glued in),
+# the M2.5 screw comes up from the bottom case.
+# The tilted thumb board (1.6 mm thick, hot-swap sockets 1.8 mm below it) reaches sideways past its plan
+# corners by about (1.6 + 1.8) * sin(20 deg); the case plan outline grows by this around the thumb area.
+THUMB_TILT_MARGIN = 0.7
+BOSS_D = 7.8
+BOSS_PCB_CLEAR = 0.4
+BOSS_COUNT = 4
 BATTERY_AREA_LEFT = {"x": (73.7, 111.8), "y": (-117.5, -39.0)}   # 38.1 x 78.5 mm, free of the core board (X <= 66.7)
 
 # --- Trackball ---

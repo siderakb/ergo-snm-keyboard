@@ -1,0 +1,130 @@
+"""Top case draft, part 2: side walls and screw posts on top of the skin from outline.py.
+
+The shell hangs SEAM_DEPTH below the top surface (measured along the plane normal, so it follows the
+folded main/thumb surface). The walls are BOTTOM_WALL thick, flush with the outline. Screw posts sit in the
+free corners between the PCB outlines and the wall; each has a nut pocket open at the seam and a blind
+screw hole up to the skin.
+"""
+
+import numpy as np
+from shapely.geometry import MultiPoint, Point, Polygon
+from shapely.ops import unary_union
+from build123d import Align, Cylinder, Face, Location, Plane, Pos, Solid, Wire
+
+import params
+import outline
+from geometry import outline_in_case
+
+_BIG = outline._BIG
+
+
+def _face(poly):
+    def wire(ring):
+        return Wire.make_polygon([(x, y, 0) for x, y in list(ring.coords)[:-1]], close=True)
+
+    return Face(wire(poly.exterior), [wire(r) for r in poly.interiors])
+
+
+def _prism(poly):
+    return Pos(0, 0, -100) * Solid.extrude(_face(poly), (0, 0, 200))
+
+
+def _planes(hand):
+    thumb_p, thumb_n = outline.plate_plane(outline.thumb_board(hand), hand)
+    main_p, main_n = np.array((0.0, 0.0, params.PCB_T + params.PLATE_TOP_TO_PCB_TOP)), np.array((0.0, 0.0, 1.0))
+    return (main_p, main_n), (thumb_p, thumb_n)
+
+
+def _under(hand, shift):
+    """Everything below both top planes, each moved `shift` down along its normal."""
+    (mp, mn), (tp, tn) = _planes(hand)
+    return outline._half_space(mp, mn, shift) & outline._half_space(tp, tn, shift)
+
+
+def pcb_union(hand):
+    """Plan footprint of everything that must not touch a post: main and core board and the thumb area."""
+    polys = []
+    for board in ("main_board", "core_board_e73"):
+        loops = outline_in_case(board, hand)
+        polys.append(Polygon(max(loops, key=lambda l: Polygon(l).area)))
+    board = outline.thumb_board(hand)
+    polys.append(MultiPoint(outline._board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre"))
+    return unary_union(polys)
+
+
+def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
+    """Screw post centres: farthest-point spread over the free area around the PCBs (grid `step`)."""
+    r = params.BOSS_D / 2
+    inner = outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL)
+    free = inner.buffer(-(r - 1.0)).difference(pcb_union(hand).buffer(params.BOSS_PCB_CLEAR + r))
+    x0, y0, x1, y1 = free.bounds
+    cand = [(x, y) for x in np.arange(x0, x1, step) for y in np.arange(y0, y1, step) if free.contains(Point(x, y))]
+    if not cand:
+        return []
+    cand = np.array(cand)
+    chosen = [cand[np.argmax(np.hypot(cand[:, 0] - cand[:, 0].mean(), cand[:, 1] - cand[:, 1].mean()))]]
+    while len(chosen) < count:
+        d = np.min([np.hypot(cand[:, 0] - c[0], cand[:, 1] - c[1]) for c in chosen], axis=0)
+        if d.max() < 2 * r:
+            break
+        chosen.append(cand[np.argmax(d)])
+    return [tuple(float(v) for v in c) for c in chosen]
+
+
+def _seam_point_and_normal(hand, x, y):
+    """Point on the seam surface under plan position (x, y) and the unit normal of the local top plane."""
+    (mp, mn), (tp, tn) = _planes(hand)
+    z = lambda p, n: p[2] - (n[0] * (x - p[0]) + n[1] * (y - p[1])) / n[2]
+    p, n = (mp, mn) if z(mp, mn) <= z(tp, tn) else (tp, tn)    # the lower plane is the top surface there
+    point = np.array((x, y, z(p, n)))
+    return point - params.SEAM_DEPTH * n, n
+
+
+def walls(hand):
+    outer = outline.case_outline_polygon(hand)
+    ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
+    return (_prism(ring) & _under(hand, 0.0)) - _under(hand, params.SEAM_DEPTH)
+
+
+def posts(hand):
+    """Post bodies (fused to the skin) with the nut pockets and screw holes cut out."""
+    body = None
+    cuts = []
+    zone = _under(hand, params.PLATE_T) - _under(hand, params.SEAM_DEPTH)   # touches the skin underside; fused later
+    r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
+    for x, y in post_positions(hand):
+        cyl = Pos(x, y, 0) * Cylinder(params.BOSS_D / 2, 200, align=(Align.CENTER, Align.CENTER, Align.CENTER))
+        body = cyl if body is None else body + cyl
+        seam, n = _seam_point_and_normal(hand, x, y)
+        plane = Plane(origin=tuple(seam - 1.0 * n), z_dir=tuple(n))
+        nut_depth = params.NUT_M25_H + 0.5
+        hole_len = params.SEAM_DEPTH - params.PLATE_T - 0.5
+        cuts.append(Location(plane) * Cylinder(r_nut, 1.0 + nut_depth, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+        cuts.append(Location(plane) * Cylinder(params.SCREW_M25_CLEAR_D / 2, 1.0 + hole_len, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    if body is None:
+        return None
+    body = body & zone
+    for c in cuts:
+        body = body - c
+    return body
+
+
+def top_case(hand=None):
+    """Skin + walls + posts as one fused solid, with the nut pockets and screw holes cut."""
+    hand = hand or params.HAND
+    body = outline.top_skin(hand) + walls(hand)
+    p = posts(hand)
+    if p is not None:
+        # pockets must also be cut out of the walls/skin where they overlap: fuse bodies, then re-cut
+        body = body + p
+    return body
+
+
+def top_case_draft(hand=None):
+    """Separate pieces for viewing: skin, walls, posts (colours in viz.py)."""
+    hand = hand or params.HAND
+    out = {"top_skin": outline.top_skin(hand), "top_walls": walls(hand)}
+    p = posts(hand)
+    if p is not None:
+        out["top_posts"] = p
+    return out

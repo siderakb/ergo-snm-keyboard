@@ -11,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import viz  # noqa: E402
 from assembly import load_boards, load_case_parts  # noqa: E402
-from outline import top_case_draft  # noqa: E402
+from topcase import top_case_draft  # noqa: E402
 
 OUT = Path(__file__).resolve().parents[1] / "build" / "renders"
 
