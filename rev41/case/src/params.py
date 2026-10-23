@@ -37,6 +37,23 @@ BOTTOM_CLEAR = 0.5
 
 # --- Slide switch (SK12D07) on core_board_e73 ---
 SLIDE_SW_HANDLE = 7.0  # handle length (user-provided; confirm it is measured from the body top)
+# Placeholder bodies for alignment (src/placeholders.py), sizes read from refs/drawings:
+# SK12D07: body 8.6 x 4.5 in plan (footprint B.Fab), height 4.7 (drawing, TODO confirm), handle 2.0 wide x 2.7 high.
+SLIDE_SW_BODY = (8.6, 4.5, 4.7)
+SLIDE_SW_HANDLE_WH = (2.0, 2.7)
+# HRO TYPE-C-31-M-12: 8.94 wide, 7.35 deep (front = footprint silk edge, +3.9 from the origin), 3.26 high above the board.
+USB_C_BODY = (8.94, 7.35, 3.26)
+USB_C_FRONT_V = 3.9
+USB_C_FILLET = 1.2
+# The core board has three connector slots at the same Y (KiCad x 136.525 / 152.4 / 168.275): USB-C J4, J9, J1 on F.Cu,
+# and a switch SW1 / SW2 on B.Cu in the J4 / J1 slots. Population per hand (left: user, 2026-10-23).
+# JST S2B-PH-SM4-TB side-entry battery header J8 (F.Cu, rotation 0): footprint fab box x +-3.95, v -3.2..4.4 (7.9 wide = B in the
+# drawing; the opening faces +KiCad y), 5.5 high (drawing).
+JST_PH_BODY = (7.9, 7.6, 5.5)
+JST_PH_V_RANGE = (-3.2, 4.4)
+CORE_BATTERY_REFS = {"left": ("J8",)}
+CORE_USB_REFS = {"left": ("J4", "J9")}
+CORE_SWITCH_REFS = {"left": ("SW2",)}
 
 # --- Switch (Kailh Choc V2) ---
 KEY_PITCH = 19.05

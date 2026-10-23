@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import viz  # noqa: E402
 from assembly import load_boards, load_case_parts  # noqa: E402
+from placeholders import core_board_placeholders  # noqa: E402
 from topcase import top_case_draft  # noqa: E402
 
 OUT = Path(__file__).resolve().parents[1] / "build" / "renders"
@@ -31,6 +32,7 @@ def main():
         section = (axis, float(value))
     shapes = {b.label: b for b in load_boards(args.hand)}
     shapes.update({n: shape for n, (_, shape) in load_case_parts().items()})
+    shapes.update(core_board_placeholders(args.hand))
     if args.draft:
         shapes.update(top_case_draft(args.hand))
     path = OUT / f"{args.out or args.view}.png"

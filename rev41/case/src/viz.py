@@ -7,6 +7,7 @@ import pyvista as pv
 
 COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluster": "darkorange",
           "top_skin": "gold", "top_walls": "orange", "top_posts": "red"}
+COLORS.update({"usb": "silver", "switch": "magenta", "battery": "cyan"})
 VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz"}
 
 
@@ -31,7 +32,7 @@ def render(shapes, path, view="iso", section=None, size=(1200, 900), tolerance=0
             normal = {"x": (1, 0, 0), "y": (0, 1, 0), "z": (0, 0, 1)}[axis]
             origin = tuple(value if a == axis else 0 for a in "xyz")
             mesh = mesh.clip(normal=normal, origin=origin, invert=True)
-        pl.add_mesh(mesh, color=COLORS.get(name, "lightgray"))
+        pl.add_mesh(mesh, color=next((c for k, c in COLORS.items() if name == k or name.startswith(k + "_")), "lightgray"))
     pl.camera_position = VIEWS[view]
     pl.reset_camera()
     if view == "iso":

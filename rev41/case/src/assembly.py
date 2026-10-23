@@ -10,6 +10,7 @@ import params
 from geometry import placement
 from topcase import top_case_draft
 from parts import load_parts
+from placeholders import core_board_placeholders
 
 STEP_DIR = Path(__file__).resolve().parents[1] / "step"
 
@@ -97,4 +98,5 @@ if __name__ == "__main__":
     show(Compound(label=f"boards_{hand}", children=load_boards(hand)),
          Compound(label="top_case_draft", children=draft),
          Compound(label="case", children=case) if case else None,
-         names=["boards", "top_case_draft", "case"], alphas=[1.0, 0.6, 1.0])
+         Compound(label="placeholders", children=[Compound(label=n, children=[s]) for n, s in core_board_placeholders(hand).items()]),
+         names=["boards", "top_case_draft", "case", "placeholders"], alphas=[1.0, 0.6, 1.0, 1.0])
