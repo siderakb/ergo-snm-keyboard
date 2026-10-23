@@ -79,6 +79,7 @@ def _left_outline_polygon(offset=OUTLINE_OFFSET, fillet=CONCAVE_FILLET):
     board = thumb_board(hand)
     thumb_pts = _board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])
     thumb_area = MultiPoint(thumb_pts).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre")
+    thumb_pts = list(thumb_area.exterior.coords)[:-1]       # the grown corners: the bridge lines must lie on its edges
     # bridge: the thumb corners on the main side plus the main board's right-edge bottom corner and the
     # point of that edge level with the upper thumb corner (not the main hull's far-away vertices)
     thumb_inner = sorted(thumb_pts, key=lambda p: np.hypot(p[0] - main_area.centroid.x, p[1] - main_area.centroid.y))[:2]

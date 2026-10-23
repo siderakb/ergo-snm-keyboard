@@ -23,9 +23,9 @@ MJF_CLEAR_ASSEMBLED = 0.3
 MJF_CLEAR_MOVING = 0.6
 
 # --- Stack-up (top to bottom) ---
-PLATE_T = 1.5          # integrated plate thickness (user-confirmed)
+PLATE_T = 1.9          # integrated plate thickness (user-confirmed, 2026-10-23: 1.5 -> 1.9, JLC wall for 100-200 mm parts is 2.0)
 PLATE_TOP_TO_PCB_TOP = 2.2    # plate top face to PCB top face = Choc V2 flange underside height (measured; drawing 5.30 - 3.10)
-PLATE_PCB_GAP = round(PLATE_TOP_TO_PCB_TOP - PLATE_T, 3)   # 0.7: plate underside to PCB top (barbs top at 0.6)
+PLATE_PCB_GAP = round(PLATE_TOP_TO_PCB_TOP - PLATE_T, 3)   # 0.3: plate underside to PCB top (switch barbs top at 0.6: need relief)
 PCB_T = 1.6            # actual board thickness (user-confirmed); KiCad STEP substrate is 1.51 (copper/mask not modelled)
 STEP_PCB_T = 1.51       # KiCad STEP substrate thickness (copper/mask not modelled)
 BOARD_GAP = 5.5        # main_board <-> core_board (2x10 1.27 mm header + socket)
@@ -90,7 +90,11 @@ SEAM_DEPTH = round(PLATE_TOP_TO_PCB_TOP + PCB_T + HOTSWAP_SOCKET_PROTRUSION + 0.
 THUMB_TILT_MARGIN = 0.7
 BOSS_D = 7.8
 BOSS_PCB_CLEAR = 0.4
-BOSS_COUNT = 4
+BOSS_COUNT = 3
+# Extra left-hand post in the narrow strip along the top edge (about 6.8 mm between the PCB clearance and the
+# outer face, too narrow for a full boss): the centre is the middle of that strip near this point, and the boss is
+# trimmed by the PCB clearance and the outline (walls around the nut pocket ~1.5 mm there).
+BOSS_EXTRA_LEFT = ((77.0, -37.0),)
 BATTERY_AREA_LEFT = {"x": (73.7, 111.8), "y": (-117.5, -39.0)}   # 38.1 x 78.5 mm, free of the core board (X <= 66.7)
 
 # --- Trackball ---
@@ -128,7 +132,7 @@ THUMB_LEFT_SHIFT_IN = 3.0
 _FALL = (math.cos(math.radians(30)), -math.sin(math.radians(30)))
 # main_board is reversible: the right hand uses it F.Cu up (B.Cu parts such as the 29 SOD-323
 # diodes hang below, away from the plate); the left hand uses it flipped, B.Cu up, so those
-# parts sit under the plate (only PLATE_PCB_GAP = 0.7 mm clearance: relief pockets needed).
+# parts sit under the plate (only PLATE_PCB_GAP = 0.3 mm clearance: relief pockets needed).
 # Parts that exist on both faces (BTN1/BTN2, the 2x10 sockets, core board parts) are only
 # fitted on the physically lower side.
 HAND = "left"          # default hand for assembly / check / render

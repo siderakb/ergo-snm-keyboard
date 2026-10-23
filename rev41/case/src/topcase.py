@@ -8,7 +8,7 @@ screw hole up to the skin.
 
 import numpy as np
 from shapely.geometry import MultiPoint, Point, Polygon
-from shapely.ops import unary_union
+from shapely.ops import polylabel, unary_union
 from build123d import Align, Cylinder, Face, Location, Plane, Pos, Solid, Wire
 
 import params
@@ -26,7 +26,8 @@ def _face(poly):
 
 
 def _prism(poly):
-    return Pos(0, 0, -100) * Solid.extrude(_face(poly), (0, 0, 200))
+    solids = [Pos(0, 0, -100) * Solid.extrude(_face(g), (0, 0, 200)) for g in getattr(poly, "geoms", [poly])]
+    return sum(solids[1:], solids[0])
 
 
 def _planes(hand):
@@ -68,7 +69,19 @@ def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
         if d.max() < 2 * r:
             break
         chosen.append(cand[np.argmax(d)])
-    return [tuple(float(v) for v in c) for c in chosen]
+    out = [tuple(float(v) for v in c) for c in chosen]
+    if hand == "left":
+        out += [_strip_centre(hand, c) for c in params.BOSS_EXTRA_LEFT]
+    return out
+
+
+def _strip_centre(hand, near, reach=8.0):
+    """Centre of the widest part of the strip between the PCB clearance and the case outline, near `near`."""
+    strip = outline.case_outline_polygon(hand).difference(pcb_union(hand).buffer(params.BOSS_PCB_CLEAR))
+    strip = strip.intersection(Point(near).buffer(reach))
+    pole = max(getattr(strip, "geoms", [strip]), key=lambda g: g.area)
+    p = polylabel(pole, 0.05)
+    return (p.x, p.y)
 
 
 def _seam_point_and_normal(hand, x, y):
@@ -83,28 +96,38 @@ def _seam_point_and_normal(hand, x, y):
 def walls(hand):
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
-    return (_prism(ring) & _under(hand, 0.0)) - _under(hand, params.SEAM_DEPTH)
+    shell = (_prism(ring) & _under(hand, 0.0)) - _under(hand, params.SEAM_DEPTH)
+    for c in pockets(hand):
+        shell = shell - c
+    return shell
 
 
-def posts(hand):
-    """Post bodies (fused to the skin) with the nut pockets and screw holes cut out."""
-    body = None
+def pockets(hand):
+    """Nut pockets and screw holes of every post (also cut out of the wall where a pocket overlaps it)."""
     cuts = []
-    zone = _under(hand, params.PLATE_T) - _under(hand, params.SEAM_DEPTH)   # touches the skin underside; fused later
     r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
     for x, y in post_positions(hand):
-        cyl = Pos(x, y, 0) * Cylinder(params.BOSS_D / 2, 200, align=(Align.CENTER, Align.CENTER, Align.CENTER))
-        body = cyl if body is None else body + cyl
         seam, n = _seam_point_and_normal(hand, x, y)
         plane = Plane(origin=tuple(seam - 1.0 * n), z_dir=tuple(n))
         nut_depth = params.NUT_M25_H + 0.5
         hole_len = params.SEAM_DEPTH - params.PLATE_T - 0.5
         cuts.append(Location(plane) * Cylinder(r_nut, 1.0 + nut_depth, align=(Align.CENTER, Align.CENTER, Align.MIN)))
         cuts.append(Location(plane) * Cylinder(params.SCREW_M25_CLEAR_D / 2, 1.0 + hole_len, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    return cuts
+
+
+def posts(hand):
+    """Post bodies (fused to the skin) with the nut pockets and screw holes cut out."""
+    body = None
+    zone = _under(hand, params.PLATE_T) - _under(hand, params.SEAM_DEPTH)   # touches the skin underside; fused later
+    for x, y in post_positions(hand):
+        cyl = Pos(x, y, 0) * Cylinder(params.BOSS_D / 2, 200, align=(Align.CENTER, Align.CENTER, Align.CENTER))
+        body = cyl if body is None else body + cyl
     if body is None:
         return None
-    body = body & zone
-    for c in cuts:
+    keep_out = pcb_union(hand).buffer(params.BOSS_PCB_CLEAR)     # trims bosses that do not fit whole
+    body = body & zone & _prism(outline.case_outline_polygon(hand)) - _prism(keep_out)
+    for c in pockets(hand):
         body = body - c
     return body
 
@@ -115,8 +138,7 @@ def top_case(hand=None):
     body = outline.top_skin(hand) + walls(hand)
     p = posts(hand)
     if p is not None:
-        # pockets must also be cut out of the walls/skin where they overlap: fuse bodies, then re-cut
-        body = body + p
+        body = body + p      # walls and posts are already cut by the pockets; the skin stays whole above them
     return body
 
 
