@@ -75,3 +75,11 @@ def test_pockets_are_empty_in_walls_and_in_the_fused_case(case):
             u /= np.linalg.norm(u)
             pt = seam + n * 1.0 + u * (r_nut - 0.1)        # just inside the pocket wall
             assert not w.is_inside(tuple(pt)) and not case.is_inside(tuple(pt)), (x, y, ang)
+
+
+def test_key_openings_cut_the_skin_square_for_every_switch():
+    import outline
+    cuts = topcase.key_cutouts("left")
+    assert len(cuts) == 35                      # 29 main + 6 thumb keys
+    cut = outline.top_skin("left").volume - topcase.top_skin_keyed("left").volume
+    assert cut == pytest.approx(len(cuts) * params.SWITCH_BODY**2 * params.PLATE_T, rel=1e-3)

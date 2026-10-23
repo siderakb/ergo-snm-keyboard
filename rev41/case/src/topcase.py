@@ -9,11 +9,12 @@ screw hole up to the skin.
 import numpy as np
 from shapely.geometry import MultiPoint, Point, Polygon
 from shapely.ops import polylabel, unary_union
-from build123d import Align, Cylinder, Face, Location, Plane, Pos, Solid, Wire
+from build123d import Align, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Wire
 
 import params
 import outline
-from geometry import outline_in_case
+import pcb_ref
+from geometry import local_to_case, location, outline_in_case
 
 _BIG = outline._BIG
 
@@ -132,10 +133,34 @@ def posts(hand):
     return body
 
 
+def key_cutouts(hand):
+    """Square Choc housing openings (SWITCH_BODY + CUTOUT_COMP) through the skin, one per switch of the main
+    board and the thumb board, each along its own plate normal (so the tilted thumb keys are cut square)."""
+    side = params.SWITCH_BODY + params.CUTOUT_COMP
+    thumb = outline.thumb_board(hand)
+    x_lo, x_hi = params.THUMB_BOARDS[thumb]["x_range"]
+    cuts = []
+    for board in ("main_board", thumb):
+        z_top = -params.PLATE_TOP_TO_PCB_TOP if hand == "left" else params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
+        for _, x, y, rot in pcb_ref.switches(pcb_ref.load_board(params.BOARD_SOURCE[board])):
+            if board == thumb and not x_lo <= x <= x_hi:
+                continue
+            box = Box(side, side, 2 * params.PLATE_T + 2.0)
+            cuts.append(location(board, hand) * Pos(x, -y, z_top) * Rot(0, 0, -rot) * box)
+    return cuts
+
+
+def top_skin_keyed(hand):
+    skin = outline.top_skin(hand)
+    for c in key_cutouts(hand):
+        skin = skin - c
+    return skin
+
+
 def top_case(hand=None):
     """Skin + walls + posts as one fused solid, with the nut pockets and screw holes cut."""
     hand = hand or params.HAND
-    body = outline.top_skin(hand) + walls(hand)
+    body = top_skin_keyed(hand) + walls(hand)
     p = posts(hand)
     if p is not None:
         body = body + p      # walls and posts are already cut by the pockets; the skin stays whole above them
@@ -145,7 +170,7 @@ def top_case(hand=None):
 def top_case_draft(hand=None):
     """Separate pieces for viewing: skin, walls, posts (colours in viz.py)."""
     hand = hand or params.HAND
-    out = {"top_skin": outline.top_skin(hand), "top_walls": walls(hand)}
+    out = {"top_skin": top_skin_keyed(hand), "top_walls": walls(hand)}
     p = posts(hand)
     if p is not None:
         out["top_posts"] = p
