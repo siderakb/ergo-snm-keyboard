@@ -40,7 +40,7 @@ def test_posts_are_spread_and_clear_of_the_pcbs():
         assert topcase.pcb_union("left").distance(Point(p)) >= params.BOSS_PCB_CLEAR + r_nut + 1.4
         assert outer.exterior.distance(Point(p)) >= r_nut + 1.4
     union = topcase.pcb_union("left")
-    inner = outline.case_outline_polygon("left").buffer(-params.BOTTOM_WALL)
+    inner = outline.case_outline_polygon("left").buffer(-params.TOP_WALL)
     r = params.BOSS_D / 2
     for p in pts:
         assert union.distance(Point(p)) >= r + params.BOSS_PCB_CLEAR - 0.01

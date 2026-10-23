@@ -62,3 +62,11 @@ def test_every_boss_reaches_the_post_end_with_a_screw_hole_and_a_well_with_wall_
         assert vol(bottom & at(params.BOSS_HOLE_LEN + 3.0, params.BOSS_WELL_D / 2 - 0.2)) < 1e-6   # head well open
         ring = at(params.BOSS_HOLE_LEN + 3.0, params.BOSS_WELL_D / 2 + 0.7, 1.0) - at(params.BOSS_HOLE_LEN + 3.0, params.BOSS_WELL_D / 2, 1.0)
         assert vol((bottom + top) & ring) > 0.8 * ring.volume, (x, y)     # ~0.7 mm wall around the well (less where the boss is trimmed by the PCB clearance)
+
+
+def test_bottom_case_is_set_back_from_the_top_case_by_the_seam_inset(bottom, top):
+    t, b = top.bounding_box(), bottom.bounding_box()
+    assert b.min.X - t.min.X == pytest.approx(params.SEAM_INSET, abs=0.05)
+    assert t.max.Y - b.max.Y == pytest.approx(params.SEAM_INSET, abs=0.05)
+    # the top wall is TOP_WALL thick, so its inner face did not move: a 0.5 mm clearance to the PCBs is kept
+    assert params.TOP_WALL == params.BOTTOM_WALL + params.SEAM_INSET

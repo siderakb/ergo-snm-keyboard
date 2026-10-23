@@ -1,7 +1,7 @@
 """Top case draft, part 2: side walls and screw posts on top of the skin from outline.py.
 
 The shell hangs SEAM_DEPTH below the top surface (measured along the plane normal, so it follows the
-folded main/thumb surface). The walls are BOTTOM_WALL thick, flush with the outline. Screw posts sit in the
+folded main/thumb surface). The walls are TOP_WALL thick, flush with the outline. Screw posts sit in the
 free corners between the PCB outlines and the wall; each has a nut pocket open at the seam and a blind
 screw hole up to the skin.
 """
@@ -58,7 +58,7 @@ def pcb_union(hand):
 def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
     """Screw post centres: farthest-point spread over the free area around the PCBs (grid `step`)."""
     r = params.BOSS_D / 2
-    inner = outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL)
+    inner = outline.case_outline_polygon(hand).buffer(-params.TOP_WALL)
     free = inner.buffer(-(r - 1.0)).difference(pcb_union(hand).buffer(params.BOSS_PCB_CLEAR + r))
     x0, y0, x1, y1 = free.bounds
     cand = [(x, y) for x in np.arange(x0, x1, step) for y in np.arange(y0, y1, step) if free.contains(Point(x, y))]
@@ -102,7 +102,7 @@ def wall_openings(hand):
     from placeholders import core_board_placeholders
 
     ymax = outline.case_outline_polygon(hand).bounds[3]
-    y0, y1 = ymax - params.BOTTOM_WALL - 0.5, ymax + 1.0
+    y0, y1 = ymax - params.TOP_WALL - 0.5, ymax + 1.0
     c = params.WALL_OPEN_CLEAR
     probe = Pos(0, (y0 + y1) / 2 + 50, 0) * Box(2000, 100 + (y1 - y0), 2000)       # everything with Y > y0
     cuts = []
@@ -138,7 +138,7 @@ def _tongue_zone(hand):
 
 def walls(hand):
     outer = outline.case_outline_polygon(hand)
-    ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
+    ring = outer.difference(outer.buffer(-params.TOP_WALL))
     band = outline.plan_prism(hand, ring) & _under(hand, 0.0)
     shell = band - _under(hand, params.SEAM_DEPTH)
     cuts = wall_openings(hand)

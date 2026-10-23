@@ -17,7 +17,8 @@ import params
 import pcb_ref
 from geometry import location, placement, to_case
 
-OUTLINE_OFFSET = params.BOTTOM_CLEAR + params.BOTTOM_WALL   # PCB edge -> outer wall face: 0.5 + 2.0
+OUTLINE_OFFSET = params.BOTTOM_CLEAR + params.TOP_WALL   # PCB edge -> top case outer wall face: 0.5 + 2.0 + inset
+BOTTOM_OFFSET = params.BOTTOM_CLEAR + params.BOTTOM_WALL   # PCB edge -> bottom case outer wall face
 _BIG = 2000.0
 CONCAVE_FILLET = 2.5      # one radius for every corner (convex and concave) of the left-hand outline
 

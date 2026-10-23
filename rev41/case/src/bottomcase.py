@@ -46,12 +46,17 @@ def _under_seam(hand):
     return _under(hand, params.SEAM_DEPTH) - (_tongue_zone(hand) - _under(hand, params.SEAM_DEPTH_TONGUE))
 
 
+def bottom_outline(hand):
+    """Plan outline of the bottom case: the top case outline set back by SEAM_INSET."""
+    return outline.case_outline_polygon(hand, offset=outline.BOTTOM_OFFSET)
+
+
 def bosses(hand):
     """(bodies fused with the floor, well and hole cutters) for every screw post."""
     r = params.BOSS_D / 2
     keep_out = topcase.pcb_union(hand).buffer(params.BOSS_PCB_CLEAR)
     # a boss beside the deep +Y wall is cut back by it (the top case wall hangs lower than the post end there)
-    clip = (outline.plan_prism(hand, outline.case_outline_polygon(hand)) & _under(hand, params.SEAM_DEPTH)
+    clip = (outline.plan_prism(hand, bottom_outline(hand)) & _under(hand, params.SEAM_DEPTH)
             - _prism(keep_out) - _below_floor(hand) - topcase.walls(hand))
     bodies, cutters = [], []
     for x, y in topcase.post_positions(hand):
@@ -68,7 +73,7 @@ def bosses(hand):
 
 def bottom_case(hand=None):
     hand = hand or params.HAND
-    outer = outline.case_outline_polygon(hand)
+    outer = bottom_outline(hand)
     envelope = _under_seam(hand) - _below_floor(hand)
     shell = outline.plan_prism(hand, outer) & envelope
     cavity = outline.plan_prism(hand, outer.buffer(-params.BOTTOM_WALL)) - _below_floor(hand, params.BOTTOM_WALL)

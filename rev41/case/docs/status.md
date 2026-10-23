@@ -138,3 +138,9 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position (end/middle) from the SK12D07 dr
 - Tests: valid solid, rim = seam, no overlap with top case / boards / placeholders, bosses reach the post ends with hole and well.
 - Not yet: battery compartment and door, J8 wire opening, feet, alignment lip between halves, cable relief. Bosses use M2.5x6 (JLC's only
   lengths 6/4); longer screws would allow a thicker boss wall.
+
+## Seam set-back (shadow step)
+- `SEAM_INSET` 1.0: the bottom case outline is the top case outline set back by this much all round (`bottomcase.bottom_outline`), so
+  the seam reads as a step under the top case lip. The top outline grew by the same amount (`OUTLINE_OFFSET` = 0.5 + `TOP_WALL`), the
+  top wall is `TOP_WALL` = 3.0 thick so its inner face and everything inside (posts, PCB clearance) did not move; the bottom wall stays 2.0.
+- Still a butt joint at the seam surface (no lip / groove).

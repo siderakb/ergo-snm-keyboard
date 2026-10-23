@@ -34,6 +34,10 @@ CORE_J7_POPULATED = False  # J7 2x5 1.27 mm programming header: footprint only, 
                            # (its STEP model is the tallest on the board: 4.0 mm above PCB)
 BOTTOM_WALL = 2.0
 BOTTOM_CLEAR = 0.5
+# The bottom case is set back from the top case outline by SEAM_INSET all round, so the seam reads as a shadow step under
+# the top case lip instead of a flush line. The top case wall is that much thicker (its inner face stays where it was).
+SEAM_INSET = 1.0
+TOP_WALL = BOTTOM_WALL + SEAM_INSET
 
 # --- Slide switch (SK12D07) on core_board_e73 ---
 SLIDE_SW_HANDLE = 7.0  # handle length (user-provided; confirm it is measured from the body top)
