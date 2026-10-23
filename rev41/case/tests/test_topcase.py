@@ -117,3 +117,36 @@ def test_thumb_end_wall_is_perpendicular_to_the_tilted_plate():
     planar = [f for f in topcase.walls("left").faces() if str(f.geom_type).endswith("PLANE") and f.area > 100 and vec(f.normal_at()) @ np.array([*fall, 0.0]) > 0.9 * np.cos(np.radians(20))]
     end = max(planar, key=lambda f: vec(f.center())[:2] @ fall)
     assert abs(vec(end.normal_at()) @ n) < 1e-3       # face normal lies in the plate plane
+
+
+def test_wall_openings_for_usb_and_switch_sit_in_the_top_case_wall_with_wall_left_below():
+    from placeholders import core_board_placeholders
+
+    cuts = topcase.wall_openings("left")
+    assert len(cuts) == 3                      # J4, J9 and SW2
+    seam_z = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.SEAM_DEPTH_TONGUE
+    for c in cuts:
+        assert c.bounding_box().min.Z - seam_z >= params.WALL_OPEN_BELOW - 1e-6
+    for shape in core_board_placeholders("left").values():
+        bb = shape.bounding_box()
+        if bb.min.Z > seam_z + params.WALL_OPEN_BELOW + params.WALL_OPEN_CLEAR:    # connectors that live in the top case
+            assert sum(analysis.interference_volume(c, shape) for c in cuts) > 0
+    assert sum(analysis.interference_volume(c, topcase.walls("left")) for c in cuts) < 1e-3     # nothing left in the openings
+
+
+def test_edge_wall_is_a_tongue_under_the_openings_ramping_back_to_the_normal_seam():
+    from build123d import Box, Pos
+
+    w = topcase.walls("left")
+    top = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
+    ymax = outline.case_outline_polygon("left").bounds[3]
+    from shapely.geometry import LineString
+
+    outer = outline.case_outline_polygon("left")
+    side = outer.exterior.intersection(LineString([(-50, -110), (300, -110)]))    # the outer face where the main-board side wall crosses y = -60
+    x_far = max(p.x for p in side.geoms) - 1.0
+    probe = lambda x, y, depth: analysis.interference_volume(w, Pos(x, y, top - depth) * Box(0.2, 0.2, 0.2)) > 0.004
+    assert probe(x_far, -110.0, params.SEAM_DEPTH - 1.0)                # far edge: wall down to the normal seam only
+    assert not probe(x_far, -110.0, params.SEAM_DEPTH + 1.0)
+    assert probe(36.0, ymax - 1.0, params.SEAM_DEPTH_TONGUE - 0.5)           # between the switch and J9 slots: the tongue
+    assert not probe(36.0, ymax - 1.0, params.SEAM_DEPTH_TONGUE + 0.5)

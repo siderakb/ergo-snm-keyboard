@@ -107,7 +107,18 @@ BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)   # holder top below the
 # Top case shell: walls hang this deep from the top surface (measured along the plane normal): plate
 # top to PCB underside 3.8, plus the hot-swap sockets below the PCB and a 0.5 mm margin. The seam to the
 # bottom case follows the same folded surface (flat under the main plate, tilted under the thumb plate).
-SEAM_DEPTH = round(PLATE_TOP_TO_PCB_TOP + PCB_T + HOTSWAP_SOCKET_PROTRUSION + 0.5, 3)
+SEAM_DEPTH = round(PLATE_TOP_TO_PCB_TOP + PCB_T + HOTSWAP_SOCKET_PROTRUSION + 0.5, 3)    # 6.1
+# The USB-C and slide-switch openings are cut in the top case wall (the PCB is fixed to the top case, so no
+# top/bottom alignment error). Over the +Y band holding the core-board connectors, the wall hangs down to SEAM_DEPTH_TONGUE with
+# WALL_OPEN_BELOW of wall under the lowest opening edge: USB-C bottom at Z = -10.27 (left hand) - WALL_OPEN_CLEAR -
+# WALL_OPEN_BELOW = -12.87 -> depth 3.8 + 12.87 = 16.67, rounded up. The seam ramps back up to SEAM_DEPTH towards -Y at
+# TONGUE_RAMP_ANGLE (from horizontal); the screw posts stay at SEAM_DEPTH.
+WALL_OPEN_CLEAR = 0.6      # opening grown around the USB-C receptacle (plug entry) and the slide-switch handle
+WALL_OPEN_BELOW = 2.0      # wall left under the lowest opening edge (JLC SLA 2.0 mm)
+SLIDE_SW_TRAVEL = 3.0      # handle travel between the two positions (TODO confirm from the SK12D07 drawing)
+SEAM_DEPTH_TONGUE = 16.7
+TONGUE_RAMP_ANGLE = 45.0
+TONGUE_FLAT_MARGIN = 2.0   # the deep seam runs this far past the lowest-Y core-board placeholder (battery connector)
 # Screw posts in the free corners between the PCB outlines and the case wall: Ø7.8 so the wall around the
 # 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the nut sits at the seam (glued in),
 # the M2.5 screw comes up from the bottom case.

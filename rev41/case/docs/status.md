@@ -113,3 +113,15 @@
 - J7（2x5 燒錄座）NPI：不焊（`CORE_J7_POPULATED = False`）。
 - PCB 實際厚度 1.6 mm（使用者確認）；KiCad STEP 基板為 1.51 mm，差 0.09 mm，干涉檢查時略偏小。
 - STEP 中兩塊板的排針/排母模型互相穿插，是 KiCad 通用模型造成，不代表實際干涉。
+
+## Wall openings for USB-C and the slide switch (left)
+
+The PCB hangs on the top case, so the openings are cut in the top case wall (no top/bottom alignment error).
+`topcase.wall_openings`: the part of each placeholder that reaches the +Y wall, grown by `WALL_OPEN_CLEAR` 0.6 (the
+handle slot also by `SLIDE_SW_TRAVEL`/2 on each side), cut through the wall in `walls`.
+The seam is deep in a +Y band: walls hang down to `SEAM_DEPTH_TONGUE` 16.7 from the +Y edge to `TONGUE_FLAT_MARGIN` past
+the lowest core-board placeholder (battery connector), then ramp up towards -Y at 45 degrees (`TONGUE_RAMP_ANGLE`, ~10.6 mm)
+to the normal `SEAM_DEPTH` 6.1 (`_tongue_zone`, a Y-Z trapezoid extruded along X). Everything else (posts, nut pockets) keeps
+depth 6.1; the bottom case needs a matching stepped rim and screw bosses rising to the post ends.
+The battery connector J8 (bottom -12.51) is not in the top case yet.
+TODO: `SLIDE_SW_TRAVEL` and the handle position (end/middle) from the SK12D07 drawing; USB plug overmold size.

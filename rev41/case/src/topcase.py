@@ -95,11 +95,56 @@ def _seam_point_and_normal(hand, x, y):
     return point - params.SEAM_DEPTH * n, n
 
 
+def wall_openings(hand):
+    """Openings through the top edge wall (+Y side) for the USB-C receptacles and the slide-switch handle: the
+    part of each placeholder that reaches the wall, grown by WALL_OPEN_CLEAR (the handle slot also by the
+    travel). The PCB hangs on the top case, so these need no alignment to the bottom case."""
+    from placeholders import core_board_placeholders
+
+    ymax = outline.case_outline_polygon(hand).bounds[3]
+    y0, y1 = ymax - params.BOTTOM_WALL - 0.5, ymax + 1.0
+    c = params.WALL_OPEN_CLEAR
+    probe = Pos(0, (y0 + y1) / 2 + 50, 0) * Box(2000, 100 + (y1 - y0), 2000)       # everything with Y > y0
+    cuts = []
+    for label, shape in core_board_placeholders(hand).items():
+        if not label.startswith(("usb_", "switch_")):
+            continue
+        piece = shape & probe
+        if not piece or piece.volume < 1e-6:
+            continue
+        b = piece.bounding_box()
+        along = c + (params.SLIDE_SW_TRAVEL / 2 if label.startswith("switch_") else 0.0)
+        cuts.append(Pos((b.min.X + b.max.X) / 2, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2)
+                    * Box(b.size.X + 2 * along, y1 - y0, b.size.Z + 2 * c))
+    return cuts
+
+
+def _tongue_zone(hand):
+    """Region where the walls hang down to SEAM_DEPTH_TONGUE: a trapezoid in the Y-Z plane (flat bottom from the +Y
+    edge past the lowest core-board placeholder, then ramping up towards -Y to the normal seam at TONGUE_RAMP_ANGLE),
+    extruded along X over the whole case."""
+    from placeholders import core_board_placeholders
+
+    top = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
+    zs, zd = top - params.SEAM_DEPTH, top - params.SEAM_DEPTH_TONGUE
+    x0, y_lo, x1, y_hi = outline.case_outline_polygon(hand).bounds
+    y_flat = min(s.bounding_box().min.Y for s in core_board_placeholders(hand).values()) - params.TONGUE_FLAT_MARGIN
+    run = (zs - zd) / np.tan(np.radians(params.TONGUE_RAMP_ANGLE))
+    up = 0.5                                                          # overlap above the seam
+    flare = up / np.tan(np.radians(params.TONGUE_RAMP_ANGLE))
+    pts = [(x0 - 1.0, y_hi + 1.0, zs + up), (x0 - 1.0, y_hi + 1.0, zd), (x0 - 1.0, y_flat, zd), (x0 - 1.0, y_flat - run - flare, zs + up)]
+    return Solid.extrude(Face(Wire.make_polygon(pts, close=True)), (x1 - x0 + 2.0, 0, 0))
+
+
 def walls(hand):
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
-    shell = (outline.plan_prism(hand, ring) & _under(hand, 0.0)) - _under(hand, params.SEAM_DEPTH)
-    for c in pockets(hand):
+    band = outline.plan_prism(hand, ring) & _under(hand, 0.0)
+    shell = band - _under(hand, params.SEAM_DEPTH)
+    cuts = wall_openings(hand)
+    if cuts:
+        shell = shell + (((band & _under(hand, params.SEAM_DEPTH)) - _under(hand, params.SEAM_DEPTH_TONGUE)) & _tongue_zone(hand))
+    for c in pockets(hand) + cuts:
         shell = shell - c
     return shell
 
