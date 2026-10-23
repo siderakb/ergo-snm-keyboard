@@ -61,6 +61,15 @@ SWITCH_BODY = 13.95    # lower housing, plate cutout nominal
 SWITCH_FLANGE = 15.0
 CUTOUT_COMP = 0.0      # TODO: cutout compensation, decide from coupon_choc_cutout
 
+# Relief pockets in the skin underside over parts that stand taller than PLATE_PCB_GAP on the plate side
+# (diodes, resistors, 2x10 socket pins): plan clearance around the part and clearance above its top.
+RELIEF_XY_CLEAR = 0.3
+RELIEF_Z_CLEAR = 0.2
+
+# Light-guide slots: each LED gets a slot in the skin underside from the LED to the nearest key opening;
+# the skin keeps LED_SLOT_SKIN above the slot.
+LED_SLOT_SKIN = 0.8
+
 # --- Fasteners (what is on hand; new sizes are allowed if really needed) ---
 M2_HOLE = 2.2          # main_board / thumb PCB mounting holes: too small for M2.5, use them as locating pins only
 # Screws: M2.5 x 6 and M2.5 x 4, head dia 5.5, head thickness 1.3.

@@ -8,7 +8,7 @@ import pyvista as pv
 COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluster": "darkorange",
           "top_skin": "gold", "top_walls": "orange", "top_posts": "red"}
 COLORS.update({"usb": "silver", "switch": "magenta", "battery": "cyan"})
-VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz"}
+VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz", "bottom": "xy"}
 
 
 def to_mesh(shape, tolerance=0.1):
@@ -37,6 +37,9 @@ def render(shapes, path, view="iso", section=None, size=(1200, 900), tolerance=0
     pl.reset_camera()
     if view == "iso":
         pl.camera.azimuth = 180
+    if view == "bottom":                  # look up from below, X to the right
+        pl.camera.elevation = 180
+        pl.camera.up = (0, -1, 0)
     pl.show_axes()
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     pl.screenshot(str(path))

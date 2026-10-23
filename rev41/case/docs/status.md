@@ -34,7 +34,12 @@
 
 ## 鍵軸開孔（`topcase.key_cutouts`，左手）
 - 主板 29 + 拇指 6 個軸，各開 `SWITCH_BODY`(13.95) + `CUTOUT_COMP` 的方孔，沿各自板面法線切穿蒙皮（拇指區斜面也是正方形）。
-- 尚未做：板下避讓槽（板與蒙皮間隙只有 0.3 mm）；`CUTOUT_COMP` 待 coupon 決定。
+- 板下避讓槽（`topcase.relief_cutouts`）：由主板／拇指板 STEP 取板面朝定位板側高於 `PLATE_PCB_GAP` 的零件（二極體 1.2 mm、
+  兩排 2x10 排母凸出的針腳 12.5×2.1），在蒙皮底面挖出外擴 `RELIEF_XY_CLEAR` 0.3、上方留 `RELIEF_Z_CLEAR` 0.2 的槽，
+  蒙皮與兩板的干涉為 0。二極體處蒙皮剩約 0.8 mm（< JLC 2.0 mm 壁厚建議，待評估）。軸體卡榫在方孔內，不另開。
+- LED 導光槽（`topcase.led_slots`）：板面朝定位板側的 2 顆 LED（LD1、LD3）各挖一條槽，寬 = LED + 0.6，沿板 Y 軸通到
+  最近且對齊的鍵軸孔；槽頂留蒙皮 `LED_SLOT_SKIN` 0.8 mm。
+- `CUTOUT_COMP` 待 coupon 決定。
 
 ## 對位用的簡化模型（`src/placeholders.py`，僅左手）
 - 核心板有三個連接器槽（KiCad x 136.525 / 152.4 / 168.275，y = 50.8）：F.Cu 的 USB-C J4、J9、J1，以及 B.Cu 的開關 SW1 / SW2（與 J4 / J1 同位置）。

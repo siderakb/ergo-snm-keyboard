@@ -150,9 +150,86 @@ def key_cutouts(hand):
     return cuts
 
 
+def relief_cutouts(hand):
+    """Pockets in the skin underside over every PCB part that stands taller than PLATE_PCB_GAP on the plate
+    side: the bounding box of the part above the board face, grown by RELIEF_XY_CLEAR and topped
+    RELIEF_Z_CLEAR above the part. Taken from the placed STEP models, so the 2x10 socket pins are included."""
+    from assembly import load_boards      # assembly imports this module for its viewer
+
+    face, s = (0.0, -1.0) if hand == "left" else (params.STEP_PCB_T, 1.0)    # plate-side face, direction away from the PCB
+    thumb = outline.thumb_board(hand)
+    cuts = []
+    for placed in load_boards(hand):
+        if placed.label not in ("main_board", thumb):
+            continue
+        local = location(placed.label, hand).inverse() * placed
+        slab = Pos(0, 0, face + s * 50) * Box(2000, 2000, 100)
+        for child in local.children:
+            bb = child.bounding_box()
+            reach = (face - bb.min.Z) if s < 0 else (bb.max.Z - face)
+            if reach <= params.PLATE_PCB_GAP - params.RELIEF_Z_CLEAR + 1e-6:
+                continue
+            for solid in child.solids():
+                piece = solid & slab
+                if not piece or piece.volume < 1e-6:
+                    continue
+                b = piece.bounding_box()
+                h = (face - b.min.Z) if s < 0 else (b.max.Z - face)
+                if h <= params.PLATE_PCB_GAP - params.RELIEF_Z_CLEAR:
+                    continue
+                c = params.RELIEF_XY_CLEAR
+                depth = h + params.RELIEF_Z_CLEAR
+                box = Box(b.size.X + 2 * c, b.size.Y + 2 * c, depth + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+                z0 = face - 1.0 if s > 0 else face - depth      # 1 mm overlap on the PCB side, `depth` the other way
+                cuts.append(location(placed.label, hand) * Pos((b.min.X + b.max.X) / 2, (b.min.Y + b.max.Y) / 2, z0) * box)
+    return cuts
+
+
+def led_slots(hand):
+    """Light-guide slot over each LED (the one fitted on the plate-side face): LED footprint plus
+    RELIEF_XY_CLEAR wide, running along the board Y axis to the nearest key opening it is in line with."""
+    from assembly import load_boards
+
+    side = params.SWITCH_BODY + params.CUTOUT_COMP
+    depth = params.PLATE_T - params.LED_SLOT_SKIN
+    face, s = (0.0, -1.0) if hand == "left" else (params.STEP_PCB_T, 1.0)
+    cuts = []
+    for placed in load_boards(hand):
+        if placed.label != "main_board":
+            continue
+        keys = [(x, -y) for _, x, y, _ in pcb_ref.switches(pcb_ref.load_board(params.BOARD_SOURCE["main_board"]))]
+        local = location("main_board", hand).inverse() * placed
+        for child in local.children:
+            if not child.label.startswith("LED_"):
+                continue
+            b = child.bounding_box()
+            if (b.min.Z + b.max.Z) / 2 * s < face * s:        # the LED footprint is fitted on both faces: only the plate-side one
+                continue
+            lx, ly = (b.min.X + b.max.X) / 2, (b.min.Y + b.max.Y) / 2
+            best = None
+            for kx, ky in keys:
+                if abs(kx - lx) >= side / 2:
+                    continue
+                d = 1.0 if ky > ly else -1.0
+                edge = ky - d * side / 2
+                if best is None or abs(edge - ly) < abs(best[1] - ly):
+                    best = (d, edge)
+            if best is None:
+                continue
+            d, edge = best
+            c = params.RELIEF_XY_CLEAR
+            far = (b.min.Y - c) if d > 0 else (b.max.Y + c)
+            end = edge + d * 0.5                                  # reaches into the opening
+            y0, y1 = sorted((far, end))
+            box = Box(b.size.X + 2 * c, y1 - y0, depth + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            z0 = face - 1.0 if s > 0 else face - depth
+            cuts.append(location("main_board", hand) * Pos(lx, (y0 + y1) / 2, z0) * box)
+    return cuts
+
+
 def top_skin_keyed(hand):
     skin = outline.top_skin(hand)
-    for c in key_cutouts(hand):
+    for c in key_cutouts(hand) + relief_cutouts(hand) + led_slots(hand):
         skin = skin - c
     return skin
 

@@ -81,5 +81,30 @@ def test_key_openings_cut_the_skin_square_for_every_switch():
     import outline
     cuts = topcase.key_cutouts("left")
     assert len(cuts) == 35                      # 29 main + 6 thumb keys
-    cut = outline.top_skin("left").volume - topcase.top_skin_keyed("left").volume
+    skin = outline.top_skin("left")
+    for c in cuts:
+        skin = skin - c
+    cut = outline.top_skin("left").volume - skin.volume
     assert cut == pytest.approx(len(cuts) * params.SWITCH_BODY**2 * params.PLATE_T, rel=1e-3)
+
+
+def test_relief_pockets_clear_the_skin_of_main_and_thumb_board_parts():
+    skin = topcase.top_skin_keyed("left")
+    plain = outline.top_skin("left")
+    for board in load_boards("left"):
+        if board.label in ("main_board", "thumb_2x3"):
+            assert analysis.interference_volume(plain, board) > 1.0      # without relief the parts hit the skin
+            assert analysis.interference_volume(skin, board) == pytest.approx(0.0, abs=1e-6)
+
+
+def test_relief_includes_both_2x10_socket_pin_rows():
+    wide = [c for c in topcase.relief_cutouts("left") if c.bounding_box().size.X > 10]
+    assert len(wide) == 2
+
+
+def test_led_slots_join_each_plate_side_led_to_a_key_opening():
+    slots = topcase.led_slots("left")
+    assert len(slots) == 2                     # LD1, LD3 sit on the plate side in the left hand (LD2, LD4 are the alternates)
+    keys = topcase.key_cutouts("left")
+    for slot in slots:
+        assert any(analysis.interference_volume(slot, k) > 0.5 for k in keys)
