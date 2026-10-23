@@ -126,6 +126,11 @@ TONGUE_FLAT_MARGIN = 2.0   # the deep seam runs this far past the lowest-Y core-
 # corners by about (1.6 + 1.8) * sin(20 deg); the case plan outline grows by this around the thumb area.
 THUMB_TILT_MARGIN = 0.7
 BOSS_D = 7.8
+# Bottom case: M2.5 x 6 screws come up from below. The head sits at the ceiling of a well (BOSS_WELL_D = head + 0.5)
+# bored from the outer floor face, so the shank only spans BOSS_HOLE_LEN of boss before the nut at the top-case seam
+# (6 - head 1.3 = 4.7 shank; nut pocket ceiling 2.5 above the seam, the nut 0.5 below it; the tip passes the nut by 0.2).
+BOSS_WELL_D = SCREW_M25_HEAD_D + 0.5
+BOSS_HOLE_LEN = 2.0
 BOSS_PCB_CLEAR = 0.4
 BOSS_COUNT = 3
 # Extra left-hand post in the narrow strip along the top edge (about 6.8 mm between the PCB clearance and the

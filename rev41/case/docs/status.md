@@ -125,3 +125,16 @@ to the normal `SEAM_DEPTH` 6.1 (`_tongue_zone`, a Y-Z trapezoid extruded along X
 depth 6.1; the bottom case needs a matching stepped rim and screw bosses rising to the post ends.
 The battery connector J8 (bottom -12.51) is not in the top case yet.
 TODO: `SLIDE_SW_TRAVEL` and the handle position (end/middle) from the SK12D07 drawing; USB plug overmold size.
+
+## Bottom case (left, `src/bottomcase.py`, `render.py --bottom`)
+- Outline and walls = the top case outline (2.0 mm wall); the rim top is the top case seam: SEAM_DEPTH 6.1 folded surface, stepped
+  down to SEAM_DEPTH_TONGUE 16.7 in the +Y band (complement of the top case tongue). Butt joint, no lip yet.
+- Floor 2.0 mm; outer face = lower of two planes: Z = -19.0 under the main plate (battery holder bottom -16.5 + 0.5 + 2.0), and
+  8.1 mm below the thumb plate along its normal (thumb board + sockets, STEP has no sockets: 5.6 + 0.5 + 2.0). Flat 19 mm-deep slab
+  under the whole main side for now; shaping the underside (shallow where nothing is below) is open.
+- Screw bosses: Ø7.8 from the floor up to each post end (along the plane normal), cut back by the deep +Y wall where they meet it.
+  M2.5x6 head sits at the ceiling of a Ø6.0 well bored from the outside; only `BOSS_HOLE_LEN` 2.0 of boss with a Ø2.8 hole under the nut.
+  Well wall is only 0.9 mm (Ø7.8 vs Ø6.0), thinner where the boss is trimmed by the PCB clearance (the +Y strip post) - below JLC 2.0.
+- Tests: valid solid, rim = seam, no overlap with top case / boards / placeholders, bosses reach the post ends with hole and well.
+- Not yet: battery compartment and door, J8 wire opening, feet, alignment lip between halves, cable relief. Bosses use M2.5x6 (JLC's only
+  lengths 6/4); longer screws would allow a thicker boss wall.
