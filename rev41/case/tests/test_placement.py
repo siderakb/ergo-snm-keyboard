@@ -55,3 +55,42 @@ def test_core_board_is_below_main_for_both_hands():
         zc = max(to_case("core_board_e73", 0, 0, z, hand=hand)[2] for z in (0, params.PCB_T))
         zm = min(to_case("main_board", 0, 0, z, hand=hand)[2] for z in (0, params.PCB_T))
         assert abs((zm - zc) - params.BOARD_GAP) < 1e-6
+
+
+def test_right_thumb_1x2_is_mirror_image_of_left_first_column():
+    # right SW4/SW8 (X=187.452) correspond to left 2x3 SW1/SW5 (X=127.0); compare on the plate-facing face
+    for ky in (76.2, 95.25):
+        xl, yl, zl = to_case("thumb_2x3", 127.0, ky, 0.0, hand="left")
+        xr, yr, zr = to_case("thumb_1x2", 187.452, ky, params.PCB_T, hand="right")
+        assert abs(xr - (203.847 - xl)) < 0.01 and abs(yr - yl) < 0.01 and abs(zr - zl) < 0.01
+
+
+def test_ball_top_is_level_with_keycap_top():
+    import numpy as np
+    from geometry import ball_center
+
+    n = placement("thumb_1x2", "right")[0][:, 2]
+    top = np.array(ball_center()) + params.BALL_D / 2 * n          # ball point farthest along the normal
+    plate_top = np.array(params.BALL_HOLE_CENTER_RIGHT)
+    assert abs((top - plate_top) @ n - params.KEYCAP_TOP) < 1e-3
+
+
+def test_sensor_lens_plane_is_working_distance_below_ball():
+    import numpy as np
+    from geometry import ball_center, sensor_lens_plane_center
+
+    n = placement("thumb_1x2", "right")[0][:, 2]
+    gap = (np.array(ball_center()) - np.array(sensor_lens_plane_center())) @ n
+    assert abs(gap - (params.BALL_D / 2 + params.PMW3610_WORKING_DISTANCE)) < 1e-3
+
+
+def test_sensor_stack_matches_pmw3610_section_drawing():
+    import numpy as np
+    from geometry import sensor_lens_plane_center, sensor_stack
+
+    st = sensor_stack()
+    assert np.allclose(st["lens"], sensor_lens_plane_center(), atol=1e-3)
+    n = placement("thumb_1x2", "right")[0][:, 2]
+    d = lambda a, b: float((np.array(st[a]) - np.array(st[b])) @ n)
+    assert abs(d("board_ball_face", "board_sensor_face") - params.PMW3610_BOARD_T) < 1e-3
+    assert abs(d("lens", "board_ball_face") - params.PMW3610_LENS_PROTRUSION) < 1e-3   # 3.40 gap in the drawing

@@ -53,9 +53,34 @@ M3_NUT_T = 2.4
 AA_D = 14.5
 AA_L = 50.5
 
+# --- Heights above the plate top surface, along the plate normal ---
+SWITCH_STEM_TOP = 6.4     # Choc V2 drawing: stem top above the flange underside (= plate top)
+STEM_ABOVE_HOUSING = 3.1  # Choc V2 drawing: stem top above the housing top
+HOUSING_TOP = round(SWITCH_STEM_TOP - STEM_ABOVE_HOUSING, 3)   # 3.3
+KEYCAP_H = 4.0            # TODO: low-profile keycap height, user estimate; set from the real keycap
+KEYCAP_TOP = round(HOUSING_TOP + KEYCAP_H, 3)   # 7.3: keycap bottom rim assumed at the housing top
+
+# --- Battery holder (off-the-shelf 2x AA) ---
+# User gave "583 x 142 x 322"; read as 58.3 x 14.2 x 32.2 mm (value / 10). TODO: confirm units and
+# which axis is length / height / width (14.2 is below an AA diameter of 14.5).
+BATTERY_HOLDER = (58.3, 14.2, 32.2)
+
 # --- Trackball ---
 BALL_D = 34.0
 BEARING_BALL_D = 2.5
+PMW3610_WORKING_DISTANCE = 2.4   # lens reference plane (lowest plane of the lens) to ball surface, PMW3610 spec
+PMW3610_WD_TOL = 0.2             # +-; equal to the JLC SLA tolerance, so the sensor mount needs adjustment (shims)
+# PMW3610 reference section (refs/drawings/pmw3610-lens.png), distances to the tracking (ball) surface.
+# The sensor body sits on one PCB face ("sensor face"); the lens passes through a window in the board
+# and sticks out of the other face. On the breakout (user-confirmed, same as the drawing) the IC is on
+# F.Cu and the lens protrudes from B.Cu, so in the trackball the board is below the ball with its B.Cu
+# toward the ball and F.Cu (IC, headers) facing down.
+PMW3610_SENSOR_FACE_TO_SURFACE = 7.40   # PCB face carrying the sensor body
+PMW3610_BODY_TOP_TO_SURFACE = 9.05      # top of the sensor body
+PMW3610_DIE_TO_SURFACE = 7.83
+PMW3610_BOARD_T = 1.60                  # drawing's PCB thickness (breakout board assumed the same)
+PMW3610_LENS_FACE_TO_SURFACE = round(PMW3610_SENSOR_FACE_TO_SURFACE - PMW3610_BOARD_T, 3)   # 5.8: board face toward the ball
+PMW3610_LENS_PROTRUSION = round(PMW3610_LENS_FACE_TO_SURFACE - PMW3610_WORKING_DISTANCE, 3)  # 3.4 beyond that face
 PMW3610_BOARD = (23.5, 31.5)
 PMW3610_HOLES = (17.5, 25.5)   # M3 x4
 
@@ -92,7 +117,15 @@ PLACEMENTS = {
     "right": {
         "main_board": (_IDENT, (0.0, 0.0, 0.0)),
         "core_board_e73": (_FLIP_Y, (2 * _CORE_MIRROR_X, _CORE_DY, -BOARD_GAP)),
-        # TODO: thumb_1x2 (right hand, next to the trackball) position is not defined yet.
+        # thumb_1x2: the right hand keeps the outer 1x2 keys of the thumb area; the inner 2x2 keys
+        # become the trackball. rev4/case/ErgoSNM_case_right.FCStd keeps exactly the two key holes of
+        # the left file that fit the 2x3 board's first column (SW1/SW5, X=127.0), so the 1x2 board
+        # (SW4/SW8, X=187.452) sits where that column is: the right-hand image of the left
+        # geometry (X mirrored, PCB unflipped, F.Cu toward the plate) shifted -60.452 along board X.
+        "thumb_1x2": (
+            ((0.813798, -0.5, -0.296198), (0.469846, 0.866025, -0.17101), (0.34202, 0.0, 0.939693)),
+            (-140.4698, -168.6489, -84.3596),
+        ),
     },
     "left": {
         "main_board": (_FLIP_Y, (_MAIN_FLIP_X, 0.0, PCB_T)),
@@ -112,6 +145,16 @@ PLACEMENTS = {
         "core_board_e73": (_FLIP_Y, (_MAIN_FLIP_X - _SOCKET_CX + _HEADER_CX, _CORE_DY, -BOARD_GAP)),
     },
 }
+
+# Right-hand trackball: hole in the thumb plate (rev4 right FCStd), centre on the plate-top plane
+# in the right-hand case frame; plate normal is (-0.2962, -0.171, 0.9397) (tilt 20 deg).
+# The hole's bounding box is 35.3 x 36.5 mm (an ellipse from the tilt): hole diameter ~36.5 for
+# the 34 mm ball. Ball centre depth below the plate is not decided yet.
+BALL_HOLE_CENTER_RIGHT = (106.559, -144.51, 1.357)
+BALL_HOLE_D = 36.5
+# Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
+BALL_TOP = KEYCAP_TOP
+BALL_CENTER_DEPTH = round(BALL_D / 2 - BALL_TOP, 3)   # 9.7 below the plate top, along the plate normal
 
 # thumb_cluster.kicad_pcb is a panel of two boards joined by mouse bites; KiCad x range of each.
 THUMB_BOARDS = {
