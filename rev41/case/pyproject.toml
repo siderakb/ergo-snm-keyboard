@@ -1,0 +1,15 @@
+[project]
+name = "ergosnm-case"
+version = "0.1.0"
+description = "ErgoSNM rev4.1 case (build123d)"
+requires-python = ">=3.10"
+dependencies = [
+    "build123d",
+    "ocp_vscode",
+    "pyvista>=0.49.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

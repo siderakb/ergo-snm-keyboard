@@ -1,0 +1,6 @@
+.venv/
+build/
+step/
+__pycache__/
+*.local.md
+.pytest_cache/
