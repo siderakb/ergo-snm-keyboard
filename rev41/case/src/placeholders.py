@@ -67,3 +67,14 @@ def core_board_placeholders(hand):
     for ref in params.CORE_SWITCH_REFS.get(hand, ()):
         out[f"switch_{ref}"] = loc * slide_switch(ref)
     return out
+
+
+def battery_holder(hand):
+    """2x AA holder (BATTERY_HOLDER, read as length x height x width) in the case frame: long side along Y, centred in
+    BATTERY_AREA_LEFT, top at BATTERY_TOP_Z_LEFT. Left hand only."""
+    assert hand == "left"
+    L, H, W = params.BATTERY_HOLDER
+    a = params.BATTERY_AREA_LEFT
+    cx, cy = sum(a["x"]) / 2, sum(a["y"]) / 2
+    top = params.BATTERY_TOP_Z_LEFT
+    return _box(cx - W / 2, cx + W / 2, cy - L / 2, cy + L / 2, top - H, top)
