@@ -42,12 +42,20 @@ SWITCH_BODY = 13.95    # lower housing, plate cutout nominal
 SWITCH_FLANGE = 15.0
 CUTOUT_COMP = 0.0      # TODO: cutout compensation, decide from coupon_choc_cutout
 
-# --- Fasteners ---
-M2_HOLE = 2.2          # PCB mounting holes
-M2_NUT_AF = 4.0
-M2_NUT_T = 1.6
-M3_NUT_AF = 5.5
-M3_NUT_T = 2.4
+# --- Fasteners (what is on hand; new sizes are allowed if really needed) ---
+M2_HOLE = 2.2          # main_board / thumb PCB mounting holes: too small for M2.5, use them as locating pins only
+# Screws: M2.5 x 6 and M2.5 x 4, head dia 5.5, head thickness 1.3.
+SCREW_M25_LENGTHS = (6.0, 4.0)
+SCREW_M25_HEAD_D = 5.5
+SCREW_M25_HEAD_H = 1.3
+SCREW_M25_CLEAR_D = 2.8        # TODO: through-hole for M2.5 in SLA (JLC holes shrink up to 0.3), set from coupon
+# Nuts: knurled brass insert M2.5 x 2 x 3.5 (thread dia x height x outer dia), glued into the resin
+# (refs/drawings/螺母參考.png is the vendor table; this size is the user's, not a row of it).
+NUT_M25_THREAD = 2.5
+NUT_M25_H = 2.0
+NUT_M25_OD = 3.5
+NUT_POCKET_CLEAR = 0.3         # TODO: diametral clearance for glue, set from coupon_nut_trap
+# The PMW3610 breakout has M3 holes (3.2 mm); M2.5 screws pass through them.
 
 # --- Battery (2x AA, series) ---
 AA_D = 14.5
@@ -64,6 +72,11 @@ KEYCAP_TOP = round(HOUSING_TOP + KEYCAP_H, 3)   # 7.3: keycap bottom rim assumed
 # User gave "583 x 142 x 322"; read as 58.3 x 14.2 x 32.2 mm (value / 10). TODO: confirm units and
 # which axis is length / height / width (14.2 is below an AA diameter of 14.5).
 BATTERY_HOLDER = (58.3, 14.2, 32.2)
+# Planned place (left-hand case frame): under the two left-hand-view key columns kx = 101.6 and 120.65
+# (4 rows each), the user's red circle. Key edge area; the holder sits inside it, long side along Y.
+HOTSWAP_SOCKET_PROTRUSION = 1.8   # Choc hot-swap socket sticks out of the PCB (total 3.05, rest is inside the board)
+BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)   # holder top below the main board lower face (Z=0): -2.3
+BATTERY_AREA_LEFT = {"x": (73.7, 111.8), "y": (-117.5, -39.0)}   # 38.1 x 78.5 mm, free of the core board (X <= 66.7)
 
 # --- Trackball ---
 BALL_D = 34.0

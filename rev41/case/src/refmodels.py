@@ -26,3 +26,15 @@ CHOC_V2["stem_above_plate"] = round(CHOC_V2["stem_top"] - CHOC_V2["flange_bottom
 
 def choc_v2():
     return import_step(STEP_DIR / "vendor" / "choc_v2.step")
+
+
+# Kailh Choc hot-swap socket (koktoh/keyswitch_model, socket/step/choc.step): total height 3.05, part of
+# it overlaps the PCB thickness and reaches the other face; only 1.8 mm (user-confirmed) sticks out of the
+# board. It is on the face opposite the switch, so it is always on the lower side of the main board
+# (right hand: B.Cu, left hand, flipped board: F.Cu) -- the tallest part there.
+HOTSWAP_SOCKET_H = 3.05           # total, model Z = 0 .. 3.05
+HOTSWAP_SOCKET_PROTRUSION = 1.8   # beyond the PCB face
+
+
+def hotswap_socket():
+    return import_step(STEP_DIR / "vendor" / "hotswap_choc.step")

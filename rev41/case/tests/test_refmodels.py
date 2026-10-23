@@ -27,3 +27,16 @@ def test_choc_model_matches_drawing_and_constants():
     assert _width(m, 1.8) == pytest.approx(c["body_w"], abs=0.02)        # 13.95 through the plate
     assert _width(m, 2.5) == pytest.approx(15.0, abs=0.02)               # flange
     assert _width(m, c["flange_bottom"] - 0.05) < 14.0 < _width(m, c["flange_bottom"] + 0.05)
+
+
+SOCKET = MODEL.parent / "hotswap_choc.step"
+
+
+@pytest.mark.skipif(not SOCKET.exists(), reason="run tools/setup.py to fetch the model")
+def test_hotswap_socket_height():
+    bb = refmodels.hotswap_socket().bounding_box()
+    assert abs(bb.max.Z - refmodels.HOTSWAP_SOCKET_H) < 0.01 and abs(bb.min.Z) < 0.01
+
+
+def test_hotswap_protrusion_is_less_than_total_height():
+    assert refmodels.HOTSWAP_SOCKET_PROTRUSION == 1.8 < refmodels.HOTSWAP_SOCKET_H

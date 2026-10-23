@@ -1,6 +1,6 @@
 """Download third-party 3D models into step/vendor/ (not tracked by git).
 
-- koktoh/keyswitch_model (Kailh Choc V2 STEP), pinned to a commit. The repository carries no
+- koktoh/keyswitch_model (Kailh Choc V2 switch and hot-swap socket STEP), pinned to a commit. The repository carries no
   licence file, so the models are fetched, never committed.
 """
 
@@ -9,6 +9,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 CASE_DIR = Path(__file__).resolve().parents[1]
@@ -17,6 +18,8 @@ VENDOR = CASE_DIR / "step" / "vendor"
 MODELS = {
     "choc_v2.step": ("https://github.com/koktoh/keyswitch_model",
                      "2b6bcfac0032f1547e27b18b9a897e065e544b37", "choc/v2/step/blue.step"),
+    "hotswap_choc.step": ("https://github.com/koktoh/keyswitch_model",
+                          "2b6bcfac0032f1547e27b18b9a897e065e544b37", "socket/step/choc.step"),
 }
 
 
@@ -26,6 +29,17 @@ def _rmtree(path):
         os.chmod(p, stat.S_IWRITE)
         func(p)
     shutil.rmtree(path, onerror=onerror)
+
+
+def _git(repo, *args, tries=3):
+    """git with retries: GitHub connections reset now and then."""
+    for attempt in range(tries):
+        try:
+            return subprocess.run(["git", "-C", str(repo), *args], check=True)
+        except subprocess.CalledProcessError:
+            if attempt == tries - 1:
+                raise
+            time.sleep(2 * (attempt + 1))
 
 
 def main():
@@ -39,9 +53,13 @@ def main():
         if tmp.exists():
             _rmtree(tmp)
         tmp.mkdir()
-        for cmd in (["init", "-q"], ["fetch", "-q", "--depth", "1", url, rev],
-                    ["checkout", "-q", "FETCH_HEAD", "--", path]):
-            subprocess.run(["git", "-C", str(tmp), *cmd], check=True)
+        try:
+            for cmd in (["init", "-q"], ["fetch", "-q", "--depth", "1", url, rev],
+                        ["checkout", "-q", "FETCH_HEAD", "--", path]):
+                _git(tmp, *cmd)
+        except subprocess.CalledProcessError:
+            _rmtree(tmp)
+            raise
         shutil.copy(tmp / path, dest)
         _rmtree(tmp)
         print(f"fetched {dest.relative_to(CASE_DIR)} ({url}@{rev[:7]})")
