@@ -7,6 +7,7 @@ dependencies = [
     "build123d",
     "ocp_vscode",
     "pyvista>=0.49.1",
+    "shapely>=2.1.2",
 ]
 
 [dependency-groups]

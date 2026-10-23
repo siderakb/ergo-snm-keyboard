@@ -62,6 +62,8 @@ def test_right_thumb_1x2_is_mirror_image_of_left_first_column():
     for ky in (76.2, 95.25):
         xl, yl, zl = to_case("thumb_2x3", 127.0, ky, 0.0, hand="left")
         xr, yr, zr = to_case("thumb_1x2", 187.452, ky, params.PCB_T, hand="right")
+        xl += params.THUMB_LEFT_SHIFT_IN * params._FALL[0]      # undo the left-only slide toward the main board
+        yl += params.THUMB_LEFT_SHIFT_IN * params._FALL[1]
         assert abs(xr - (203.847 - xl)) < 0.01 and abs(yr - yl) < 0.01 and abs(zr - zl) < 0.01
 
 
@@ -94,3 +96,13 @@ def test_sensor_stack_matches_pmw3610_section_drawing():
     d = lambda a, b: float((np.array(st[a]) - np.array(st[b])) @ n)
     assert abs(d("board_ball_face", "board_sensor_face") - params.PMW3610_BOARD_T) < 1e-3
     assert abs(d("lens", "board_ball_face") - params.PMW3610_LENS_PROTRUSION) < 1e-3   # 3.40 gap in the drawing
+
+
+def test_ball_hole_is_centred_on_the_inner_2x2_keys():
+    import numpy as np
+
+    kx, ky = (146.05 + 165.1) / 2, (76.2 + 95.25) / 2          # 2x3 board SW2, SW3, SW6, SW7
+    xs = kx + (187.452 - 127.0)                                # same column position in 1x2 board coordinates
+    zs_top = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
+    c = np.array(local_to_case("thumb_1x2", xs, -ky, zs_top, hand="right"))
+    assert np.allclose(c, params.BALL_HOLE_CENTER_RIGHT, atol=0.01)

@@ -8,6 +8,7 @@ from ocp_vscode import show
 
 import params
 from geometry import placement
+from outline import top_case_draft
 from parts import load_parts
 
 STEP_DIR = Path(__file__).resolve().parents[1] / "step"
@@ -92,5 +93,8 @@ def load_case_parts():
 if __name__ == "__main__":
     hand = sys.argv[1] if len(sys.argv) > 1 else params.HAND
     case = [shape for _, shape in load_case_parts().values()]
+    draft = [Compound(label=n, children=[s]) for n, s in top_case_draft(hand).items()]
     show(Compound(label=f"boards_{hand}", children=load_boards(hand)),
-         Compound(label="case", children=case) if case else None)
+         Compound(label="top_case_draft", children=draft),
+         Compound(label="case", children=case) if case else None,
+         names=["boards", "top_case_draft", "case"], alphas=[1.0, 0.6, 1.0])

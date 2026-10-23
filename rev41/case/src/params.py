@@ -3,6 +3,8 @@
 Values marked TODO are assumptions or unverified readings; see docs/status.md.
 """
 
+import math
+
 # --- Process (JLC3DP) ---
 SLA_TOL = 0.2          # JLC Black Resin, within 100 mm
 MJF_TOL = 0.3          # PA12, within 100 mm
@@ -101,6 +103,16 @@ PMW3610_HOLES = (17.5, 25.5)   # M3 x4
 TENT_DEG = 0.0         # TODO
 
 # --- Hand and board placement ---
+# The top case is one printed piece: the flat main plate and the tilted thumb plate meet along a crease
+# where the two top planes intersect. The rev4 thumb position put the thumb plane's highest plate edge
+# 3.07 mm below the main plate top; lift the thumb boards (both hands, the planes mirror each other) so
+# that edge reaches the main plate top (Z = PLATE_TOP_TO_PCB_TOP + PCB_T = 3.8).
+THUMB_LIFT_Z = 3.07
+# Left hand: the whole thumb board slides this far toward the main board, horizontally along the
+# (outward) fall line of the tilted plane at yaw 30 deg, so the crease moves with it (moves the crease
+# and the thumb area closer to the main board; the keys keep their relative layout).
+THUMB_LEFT_SHIFT_IN = 3.0
+_FALL = (math.cos(math.radians(30)), -math.sin(math.radians(30)))
 # main_board is reversible: the right hand uses it F.Cu up (B.Cu parts such as the 29 SOD-323
 # diodes hang below, away from the plate); the left hand uses it flipped, B.Cu up, so those
 # parts sit under the plate (only PLATE_PCB_GAP = 0.7 mm clearance: relief pockets needed).
@@ -137,7 +149,7 @@ PLACEMENTS = {
         # geometry (X mirrored, PCB unflipped, F.Cu toward the plate) shifted -60.452 along board X.
         "thumb_1x2": (
             ((0.813798, -0.5, -0.296198), (0.469846, 0.866025, -0.17101), (0.34202, 0.0, 0.939693)),
-            (-140.3069, -168.5549, -84.3265),
+            (-140.3069, -168.5549, -84.3265 + THUMB_LIFT_Z),
         ),
     },
     "left": {
@@ -149,7 +161,7 @@ PLACEMENTS = {
         # Board is flipped (B.Cu toward the plate), so local +Z points down: tilt 160 deg, yaw 150 deg.
         "thumb_2x3": (
             ((-0.813798, 0.5, -0.296198), (0.469846, 0.866025, 0.17101), (0.34202, 0.0, -0.939693)),
-            (295.4318, -140.4253, -62.1471),
+            (295.4318 - THUMB_LEFT_SHIFT_IN * _FALL[0], -140.4253 - THUMB_LEFT_SHIFT_IN * _FALL[1], -62.1471 + THUMB_LIFT_Z),
         ),
         # core_board_e73 below (-Z) the flipped main_board, same 5.5 mm between facing faces; the core
         # board is symmetric, so it keeps the right-hand pose (flip about Y, USB edge at the back) and
@@ -159,11 +171,13 @@ PLACEMENTS = {
     },
 }
 
-# Right-hand trackball: hole in the thumb plate (rev4 right FCStd), centre on the plate-top plane
-# in the right-hand case frame; plate normal is (-0.2962, -0.171, 0.9397) (tilt 20 deg).
-# The hole's bounding box is 35.3 x 36.5 mm (an ellipse from the tilt): hole diameter ~36.5 for
-# the 34 mm ball. Ball centre depth below the plate is not decided yet.
-BALL_HOLE_CENTER_RIGHT = (106.559, -144.51, 1.907)
+# Right-hand trackball: the inner 2x2 keys of the thumb area (2x3 board SW2, SW3, SW6, SW7) are replaced
+# by the ball, so the hole is centred on those four keys, on the plate-top plane of the right-hand case
+# frame (it includes THUMB_LIFT_Z); plate normal (-0.2962, -0.171, 0.9397), tilt 20 deg. rev4's right
+# FreeCAD file put the ball hole ~29 mm further towards the main board; that is not used.
+# Hole diameter: rev4's hole bounding box is 35.3 x 36.5 (an ellipse from the tilt) -> ~36.5 for the
+# 34 mm ball. Ball centre depth below the plate follows BALL_CENTER_DEPTH.
+BALL_HOLE_CENTER_RIGHT = (77.232, -141.945, -3.8)
 BALL_HOLE_D = 36.5
 # Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
 BALL_TOP = KEYCAP_TOP

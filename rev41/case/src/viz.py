@@ -5,7 +5,8 @@ from pathlib import Path
 import numpy as np
 import pyvista as pv
 
-COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluster": "darkorange"}
+COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluster": "darkorange",
+          "top_skin": "gold"}
 VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz"}
 
 

@@ -53,3 +53,24 @@ def sensor_stack(hand="right"):
         "body_top": params.PMW3610_BODY_TOP_TO_SURFACE,
     }
     return {k: tuple(surface - d * n) for k, d in below.items()}
+
+
+def outline_in_case(board, hand=None, source=None):
+    """Edge.Cuts loops of the board as case-frame (X, Y) polygons (arcs discretised).
+
+    `board` is the placed board name; `source` the PCB it comes from (default: params.BOARD_SOURCE).
+    The two thumb boards share one panel outline, so both return the whole panel (one outer loop
+    plus the cut-out between the tabs); split it with params.THUMB_BOARDS x ranges if needed.
+    """
+    import pcb_ref
+
+    loops = pcb_ref.outline_loops(pcb_ref.load_board(source or params.BOARD_SOURCE[board]))
+    return [[to_case(board, x, y, hand=hand)[:2] for x, y in loop] for loop in loops]
+
+
+def location(board, hand=None):
+    """build123d Location that places a STEP-local shape of `board` in the case frame."""
+    from build123d import Location, Plane
+
+    R, t = placement(board, hand)
+    return Location(Plane(origin=tuple(t), x_dir=tuple(R[:, 0]), z_dir=tuple(R[:, 2])))
