@@ -75,7 +75,8 @@ def _left_outline_polygon(offset=OUTLINE_OFFSET, fillet=CONCAVE_FILLET):
     main_pts = _board_plan_points("main_board", hand)
     # the main board's bottom edge is one straight line parallel to X: add its two bottom corners
     x_lo, x_hi, y_lo = min(p[0] for p in main_pts), max(p[0] for p in main_pts), min(p[1] for p in main_pts)
-    main_area = MultiPoint(main_pts + _board_plan_points("core_board_e73", hand) + [(x_lo, y_lo), (x_hi, y_lo)]).convex_hull
+    y_up_right = max(p[1] for p in main_pts if p[0] > x_hi - 1e-6) + params.MAIN_TOP_RIGHT_GROW   # pushes the +Y edge out at the right
+    main_area = MultiPoint(main_pts + _board_plan_points("core_board_e73", hand) + [(x_lo, y_lo), (x_hi, y_lo), (x_hi, y_up_right)]).convex_hull
     board = thumb_board(hand)
     thumb_pts = _board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])
     thumb_area = MultiPoint(thumb_pts).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre")

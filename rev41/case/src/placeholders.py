@@ -74,7 +74,17 @@ def battery_holder(hand):
     BATTERY_AREA_LEFT, top at BATTERY_TOP_Z_LEFT. Left hand only."""
     assert hand == "left"
     L, H, W = params.BATTERY_HOLDER
-    a = params.BATTERY_AREA_LEFT
-    cx, cy = sum(a["x"]) / 2, sum(a["y"]) / 2
+    cx = sum(params.BATTERY_AREA_LEFT["x"]) / 2
     top = params.BATTERY_TOP_Z_LEFT
-    return _box(cx - W / 2, cx + W / 2, cy - L / 2, cy + L / 2, top - H, top)
+    y1 = battery_y_top(hand, cx - W / 2, cx + W / 2)
+    return _box(cx - W / 2, cx + W / 2, y1 - L, y1, top - H, top)
+
+
+def battery_y_top(hand, x0, x1):
+    """+Y end of the battery holder: pushed against the +Y wall (inner face plus clearance) over its X range."""
+    from shapely.geometry import LineString
+
+    import outline
+
+    inner = outline.case_outline_polygon(hand).buffer(-(params.BOTTOM_WALL + params.BOTTOM_CLEAR))
+    return min(inner.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3] for x in (x0, x1))

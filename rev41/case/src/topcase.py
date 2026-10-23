@@ -54,6 +54,11 @@ def pcb_union(hand):
         polys.append(Polygon(max(loops, key=lambda l: Polygon(l).area)))
     board = outline.thumb_board(hand)
     polys.append(MultiPoint(outline._board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre"))
+    if hand == "left":                                        # the posts run down beside the battery holder
+        from placeholders import battery_holder
+
+        bb = battery_holder(hand).bounding_box()
+        polys.append(Polygon([(bb.min.X, bb.min.Y), (bb.max.X, bb.min.Y), (bb.max.X, bb.max.Y), (bb.min.X, bb.max.Y)]))
     return unary_union(polys)
 
 
@@ -89,25 +94,56 @@ def _strip_centre(hand, near, reach=8.0):
 
 
 @functools.lru_cache(maxsize=None)
-def floor_depths(hand):
-    """(main, thumb) depth of the bottom plate's outer face below the top surface, each along its plane normal.
-    Main: under the battery holder (+ clearance + plate). Thumb: under the tilted thumb board and its hot-swap sockets."""
+def floor_profile(hand):
+    """Bottom plate outer face under the main plate, as a function of Y only: flat at z_deep from the +Y edge to y_flat
+    (past the battery holder tail), a ramp at BOTTOM_RAMP_ANGLE, then flat at z_shallow. Plus the depth of the plane
+    parallel to the thumb plate (along its normal) under the tilted thumb board and its sockets."""
     from assembly import load_boards
+    from placeholders import battery_holder
 
-    (mp, _), (tp, tn) = _planes(hand)
-    main_z = params.BATTERY_TOP_Z_LEFT - params.BATTERY_HOLDER[1] - params.BOTTOM_CLEAR - params.BOTTOM_WALL
+    (_, _), (tp, tn) = _planes(hand)
+    z_deep = params.BATTERY_TOP_Z_LEFT - params.BATTERY_HOLDER[1] - params.BOTTOM_CLEAR - params.BOTTOM_WALL
+    z_shallow = -(params.HOTSWAP_SOCKET_PROTRUSION + params.BOTTOM_CLEAR + params.BOTTOM_WALL)
+    y_flat = battery_holder(hand).bounding_box().min.Y - params.BOTTOM_DEEP_MARGIN
     board = next(b for b in load_boards(hand) if b.label == outline.thumb_board(hand))
     reach = max(float((tp - np.array((v.X, v.Y, v.Z))) @ tn) for v in board.vertices())
     reach = max(reach, params.PLATE_TOP_TO_PCB_TOP + params.PCB_T + params.HOTSWAP_SOCKET_PROTRUSION)   # STEP has no sockets
-    return float(mp[2] - main_z), reach + params.BOTTOM_CLEAR + params.BOTTOM_WALL
+    return {"z_deep": z_deep, "z_shallow": z_shallow, "y_flat": y_flat,
+            "thumb_depth": reach + params.BOTTOM_CLEAR + params.BOTTOM_WALL}
+
+
+def _profile_points(hand, lift):
+    """(y, z) corners of the main-side floor surface raised by `lift` (perpendicular to each face)."""
+    f = floor_profile(hand)
+    phi = np.radians(params.BOTTOM_RAMP_ANGLE)
+    t, k = np.tan(phi), 1.0 / np.cos(phi) - 1.0
+    zd, zs = f["z_deep"] + lift, f["z_shallow"] + lift
+    y1 = f["y_flat"] - lift * k / t                      # flat meets the ramp
+    y2 = f["y_flat"] - (f["z_shallow"] - f["z_deep"] + lift * (1 - 1 / np.cos(phi))) / t   # ramp meets the shallow flat
+    return (y1, zd), (y2, zs)
 
 
 def below_floor(hand, lift=0.0):
-    """Everything below the bottom plate's outer face raised by `lift` (the lower of the main and thumb planes):
-    lift = BOTTOM_WALL is the plate's inner face, lift = -BOTTOM_RECESS the bottom edge of the top case walls."""
-    (mp, mn), (tp, tn) = _planes(hand)
-    dm, dt = floor_depths(hand)
-    return outline._half_space(mp, mn, dm - lift) & outline._half_space(tp, tn, dt - lift)
+    """Everything below the bottom plate's outer face raised by `lift`: the lower of the main profile (see
+    floor_profile) and the plane parallel to the thumb plate. lift = BOTTOM_WALL is the plate's inner face,
+    lift = -BOTTOM_RECESS the bottom edge of the top case walls."""
+    (_, _), (tp, tn) = _planes(hand)
+    (y1, zd), (y2, zs) = _profile_points(hand, lift)
+    x0, y_lo, x1, y_hi = outline.case_outline_polygon(hand).bounds
+    lo, hi = y_lo - 50.0, y_hi + 50.0
+    pts = [(x0 - 5.0, hi, zd - 100.0), (x0 - 5.0, hi, zd), (x0 - 5.0, y1, zd), (x0 - 5.0, y2, zs), (x0 - 5.0, lo, zs), (x0 - 5.0, lo, zd - 100.0)]
+    main = Solid.extrude(Face(Wire.make_polygon(pts, close=True)), (x1 - x0 + 10.0, 0, 0))
+    return main & outline._half_space(tp, tn, floor_profile(hand)["thumb_depth"] - lift)
+
+
+def _inner_z(hand, x, y, lift):
+    """Height of the floor surface raised by `lift` at plan position (x, y): the lower of the main and thumb faces."""
+    (y1, zd), (y2, zs) = _profile_points(hand, lift)
+    zm = zd if y >= y1 else zs if y <= y2 else zd + (zs - zd) * (y1 - y) / (y1 - y2)
+    (_, _), (tp, tn) = _planes(hand)
+    pt = tp - (floor_profile(hand)["thumb_depth"] - lift) * tn
+    zt = pt[2] - (tn[0] * (x - pt[0]) + tn[1] * (y - pt[1])) / tn[2]
+    return min(zm, zt)
 
 
 def post_axis(hand, x, y):
@@ -117,11 +153,12 @@ def post_axis(hand, x, y):
     z = lambda p, n: p[2] - (n[0] * (x - p[0]) + n[1] * (y - p[1])) / n[2]
     p, n = (mp, mn) if z(mp, mn) <= z(tp, tn) else (tp, tn)    # the lower plane is the top surface there
     top = np.array((x, y, z(p, n)))
-    dm, dt = floor_depths(hand)
-    inner = params.BOTTOM_WALL
-    # below both inner-face planes once t passes each plane's crossing
-    t = max(((top - q) @ m + d - inner) / (n @ m) for (q, m), d in (((mp, mn), dm), ((tp, tn), dt)))
-    return top, n, float(t)
+    g = lambda t: (top - t * n)[2] - _inner_z(hand, *(top - t * n)[:2], params.BOTTOM_WALL)
+    lo, hi = 0.0, 80.0
+    for _ in range(50):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if g(mid) > 0 else (lo, mid)
+    return top, n, float(hi)
 
 
 def wall_openings(hand):
@@ -130,14 +167,18 @@ def wall_openings(hand):
     travel)."""
     from placeholders import core_board_placeholders
 
-    ymax = outline.case_outline_polygon(hand).bounds[3]
-    y0, y1 = ymax - params.BOTTOM_WALL - 0.5, ymax + 1.0
+    from shapely.geometry import LineString
+
+    outer = outline.case_outline_polygon(hand)
     c = params.WALL_OPEN_CLEAR
-    probe = Pos(0, (y0 + y1) / 2 + 50, 0) * Box(2000, 100 + (y1 - y0), 2000)       # everything with Y > y0
     cuts = []
     for label, shape in core_board_placeholders(hand).items():
         if not label.startswith(("usb_", "switch_")):
             continue
+        bx = shape.bounding_box()
+        ymax = outer.intersection(LineString([((bx.min.X + bx.max.X) / 2, -1000), ((bx.min.X + bx.max.X) / 2, 1000)])).bounds[3]
+        y0, y1 = ymax - params.BOTTOM_WALL - 0.5, ymax + 1.0           # the +Y wall in front of this part
+        probe = Pos(0, (y0 + y1) / 2 + 50, 0) * Box(2000, 100 + (y1 - y0), 2000)       # everything with Y > y0
         piece = shape & probe
         if not piece or piece.volume < 1e-6:
             continue
@@ -185,7 +226,8 @@ def pockets(hand):
     for x, y in post_positions(hand):
         top, n, t = post_axis(hand, x, y)
         cuts.append(_along(top, n, t - nut_depth, nut_depth + 1.0, r_nut))
-        cuts.append(_along(top, n, t - params.POST_HOLE_LEN, params.POST_HOLE_LEN, params.SCREW_M25_CLEAR_D / 2))
+        hole = min(params.POST_HOLE_LEN, t - params.PLATE_T - 0.5)         # blind: stays 0.5 under the skin
+        cuts.append(_along(top, n, t - hole, hole, params.SCREW_M25_CLEAR_D / 2))
     return cuts
 
 

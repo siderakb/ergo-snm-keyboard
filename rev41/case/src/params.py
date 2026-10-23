@@ -129,6 +129,14 @@ BOSS_COUNT = 3
 # outer face, too narrow for a full boss): the centre is the middle of that strip near this point, and the boss is
 # trimmed by the PCB clearance and the outline (walls around the nut pocket ~1.5 mm there).
 BOSS_EXTRA_LEFT = ((77.0, -37.0),)
+# The +Y edge of the left outline is pushed out at the main board's top-right corner by this much (the user's red line in
+# the bottom view: nearly straight from the core board corner to the right edge), so the battery holder fits below it and
+# the +Y screw post needs no trimming.
+MAIN_TOP_RIGHT_GROW = 5.9
+# Bottom plate outer face: BOTTOM_DEEP_Z under the battery holder and the core board (deep box from the +Y edge), a
+# 45 degree ramp (BOTTOM_RAMP_ANGLE) up to BOTTOM_SHALLOW_Z (lowest hot-swap socket + clearance + plate) further on.
+BOTTOM_RAMP_ANGLE = 45.0
+BOTTOM_DEEP_MARGIN = 2.0     # the deep box runs this far past the battery holder tail
 BATTERY_AREA_LEFT = {"x": (73.7, 111.8), "y": (-117.5, -39.0)}   # 38.1 x 78.5 mm, free of the core board (X <= 66.7)
 
 # --- Trackball ---

@@ -35,7 +35,8 @@ def test_plate_sits_inside_the_walls_recessed_from_their_bottom_edge(bottom, top
     t, b = top.bounding_box(), bottom.bounding_box()
     gap = params.BOTTOM_WALL + params.PLATE_SIDE_CLEAR
     assert b.min.X - t.min.X == pytest.approx(gap, abs=0.05) and t.max.Y - b.max.Y == pytest.approx(gap, abs=0.05)
-    assert b.max.Z == pytest.approx(-19.0 + params.BOTTOM_WALL, abs=1e-6)          # main plate inner face
+    f = topcase.floor_profile("left")
+    assert b.max.Z == pytest.approx(f["z_shallow"] + params.BOTTOM_WALL, abs=1e-6)     # shallow flat inner face
     for x, y in ((40.0, -60.0),):                                                   # main side: outer face 0.8 above the wall edge
         assert bottom.is_inside((x, y, -19.0 + 0.3)) and not bottom.is_inside((x, y, -19.0 - 0.3))
     assert t.min.Z < b.min.Z                                                        # walls hang past the plate everywhere
@@ -59,3 +60,17 @@ def test_screw_holes_and_counterbores_line_up_with_the_posts(bottom):
         assert bottom.is_inside(tuple(on_axis(0.5) + u * (params.SCREW_M25_CLEAR_D / 2 + 0.5)))   # plate around the hole
         sink = on_axis(params.BOTTOM_WALL - params.SCREW_HEAD_SINK / 2) + u * (params.SCREW_HEAD_CBORE_D / 2 - 0.2)
         assert not bottom.is_inside(tuple(sink))                                                  # head counterbore
+
+
+def test_floor_is_deep_under_the_battery_holder_and_ramps_up_beyond_its_tail(bottom):
+    from placeholders import battery_holder
+
+    f = topcase.floor_profile("left")
+    bb = battery_holder("left").bounding_box()
+    assert f["y_flat"] == pytest.approx(bb.min.Y - params.BOTTOM_DEEP_MARGIN)
+    x = (bb.min.X + bb.max.X) / 2
+    assert bottom.is_inside((x, bb.min.Y + 5, f["z_deep"] + 0.3)) and not bottom.is_inside((x, bb.min.Y + 5, f["z_deep"] - 0.3))
+    run = (f["z_shallow"] - f["z_deep"]) / np.tan(np.radians(params.BOTTOM_RAMP_ANGLE))
+    y = f["y_flat"] - run - 5
+    assert bottom.is_inside((x, y, f["z_shallow"] + 0.3)) and not bottom.is_inside((x, y, f["z_shallow"] - 0.3))
+    assert vol(bottom & battery_holder("left")) < 1e-3

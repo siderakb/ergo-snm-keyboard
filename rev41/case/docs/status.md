@@ -132,3 +132,14 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   the wall; the one at (76.3, -36.1) has its hole only 1.2 mm from the plate edge, so the plate is notched there (TODO move that post).
 - Not yet: battery compartment and door, J8 wire, feet, the plate's support between posts (it only rests on the 4 post ends),
   posts vs the battery holder (no holder model yet), shaping the underside shallower away from the battery / core board.
+
+## Floor profile, battery holder and +Y edge (2026-10-24)
+- +Y outline edge: the hull gets an extra point at the main board's right edge (`MAIN_TOP_RIGHT_GROW` 5.9, from the user's red line), so the
+  edge runs nearly straight from the core board corner (66.6, -30.8) to (115, -35.8) instead of dropping to -39.9.
+- Battery holder placeholder (`placeholders.battery_holder`): X 76.65-108.85, pushed against the +Y wall (Y -94.3 ~ -36.0, Z -16.5 ~ -2.3);
+  its footprint is a post keep-out (`pcb_union`).
+- Bottom plate outer face (`topcase.floor_profile`, only a function of Y on the main side): Z -19.0 from the +Y wall to 2.0 mm past the
+  battery tail (Y -96.3), 45 degree ramp (`BOTTOM_RAMP_ANGLE`) up to Z -4.3 (socket 1.8 + 0.5 + plate 2.0); thumb side unchanged
+  (plane 8.1 deep, lower envelope). Posts in the shallow zone are 6.1 long and their blind hole is limited to stay 0.5 under the skin.
+- The +Y strip post (73.8, -34.2) is still trimmed (about 57% of the boss kept): a whole boss needs the edge about 4 mm further out there.
+- Wall openings now use the wall position at each part's X (the outline max Y is no longer the flat edge).
