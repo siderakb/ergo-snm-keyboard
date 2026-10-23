@@ -108,3 +108,12 @@ def test_led_slots_join_each_plate_side_led_to_a_key_opening():
     keys = topcase.key_cutouts("left")
     for slot in slots:
         assert any(analysis.interference_volume(slot, k) > 0.5 for k in keys)
+
+
+def test_thumb_end_wall_is_perpendicular_to_the_tilted_plate():
+    _, n = outline.plate_plane("thumb_2x3", "left")
+    fall = np.array(n[:2]) / np.hypot(n[0], n[1])
+    vec = lambda v: np.array([v.X, v.Y, v.Z])
+    planar = [f for f in topcase.walls("left").faces() if str(f.geom_type).endswith("PLANE") and f.area > 100 and vec(f.normal_at()) @ np.array([*fall, 0.0]) > 0.9 * np.cos(np.radians(20))]
+    end = max(planar, key=lambda f: vec(f.center())[:2] @ fall)
+    assert abs(vec(end.normal_at()) @ n) < 1e-3       # face normal lies in the plate plane

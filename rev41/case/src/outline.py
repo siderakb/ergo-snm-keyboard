@@ -79,6 +79,12 @@ def _left_outline_polygon(offset=OUTLINE_OFFSET, fillet=CONCAVE_FILLET):
     board = thumb_board(hand)
     thumb_pts = _board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])
     thumb_area = MultiPoint(thumb_pts).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre")
+    # the thumb walls are cut perpendicular to the tilted plate, so at depth they lean towards the main board:
+    # push the downhill end out by that lean at the PCB underside
+    _, n = plate_plane(board, hand)
+    lean = (params.PLATE_TOP_TO_PCB_TOP + params.PCB_T) * math.hypot(n[0], n[1]) / n[2]
+    fall = np.array(n[:2]) / math.hypot(n[0], n[1])
+    thumb_area = MultiPoint(list(thumb_area.exterior.coords) + [(x + lean * fall[0], y + lean * fall[1]) for x, y in thumb_area.exterior.coords]).convex_hull
     thumb_pts = list(thumb_area.exterior.coords)[:-1]       # the grown corners: the bridge lines must lie on its edges
     # bridge: the thumb corners on the main side plus the main board's right-edge bottom corner and the
     # point of that edge level with the upper thumb corner (not the main hull's far-away vertices)
@@ -128,14 +134,44 @@ def _half_space(point, normal, shift=0.0):
     return Location(Plane(origin=origin, x_dir=x_dir, z_dir=tuple(n))) * Pos(0, 0, -_BIG / 2) * Box(_BIG, _BIG, _BIG)
 
 
+def _planes(hand):
+    thumb_p, thumb_n = plate_plane(thumb_board(hand), hand)
+    main_p, main_n = np.array((0.0, 0.0, params.PCB_T + params.PLATE_TOP_TO_PCB_TOP)), np.array((0.0, 0.0, 1.0))
+    return (main_p, main_n), (thumb_p, thumb_n)
+
+
+def _crease_point(hand):
+    (mp, mn), (tp, tn) = _planes(hand)
+    return np.linalg.solve(np.array([mn, tn, np.cross(mn, tn)]), np.array([mn @ mp, tn @ tp, 0.0]))
+
+
+def _ring_wire(ring, z_of):
+    return Wire.make_polygon([(x, y, z_of(x, y)) for x, y in list(ring.coords)[:-1]], close=True)
+
+
+def plan_prism(hand, poly):
+    """Plan region `poly` as a solid: a vertical prism under the main plate plane and, on the thumb side of
+    the crease (the bisector plane of the two top planes), a prism perpendicular to the tilted thumb plane,
+    so the thumb walls and the seam meet the plate at 90 degrees."""
+    (mp, mn), (tp, tn) = _planes(hand)
+    z_thumb = lambda x, y: tp[2] - ((x - tp[0]) * tn[0] + (y - tp[1]) * tn[1]) / tn[2]
+    out = None
+    for g in getattr(poly, "geoms", [poly]):
+        vertical = Pos(0, 0, -100) * Solid.extrude(Face(_ring_wire(g.exterior, lambda x, y: 0.0), [_ring_wire(r, lambda x, y: 0.0) for r in g.interiors]), (0, 0, 200))
+        face = Face(_ring_wire(g.exterior, z_thumb), [_ring_wire(r, z_thumb) for r in g.interiors])
+        tilted = Pos(*(-100 * tn)) * Solid.extrude(face, tuple(200 * tn))
+        c = _crease_point(hand)
+        part = (vertical & _half_space(c, tn - mn)) + (tilted & _half_space(c, mn - tn))
+        out = part if out is None else out + part
+    return out
+
+
 def top_skin(hand=None, offset=OUTLINE_OFFSET):
     """The exterior top skin (plate thickness PLATE_T): below both planes, above the same planes lowered."""
     hand = hand or params.HAND
     outline = case_outline_polygon(hand, offset)
-    face = Face(Wire.make_polygon([(x, y, 0) for x, y in outline.exterior.coords[:-1]], close=True))
-    prism = Pos(0, 0, -100) * Solid.extrude(face, (0, 0, 200))
-    main_p, main_n = (0.0, 0.0, params.PCB_T + params.PLATE_TOP_TO_PCB_TOP), (0.0, 0.0, 1.0)
-    thumb_p, thumb_n = plate_plane(thumb_board(hand), hand)
+    prism = plan_prism(hand, outline)
+    (main_p, main_n), (thumb_p, thumb_n) = _planes(hand)
 
     def below(shift):
         return prism & _half_space(main_p, main_n, shift) & _half_space(thumb_p, thumb_n, shift)

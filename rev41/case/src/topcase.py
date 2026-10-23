@@ -27,6 +27,7 @@ def _face(poly):
 
 
 def _prism(poly):
+    """Vertical prism of a plan region (PCB keep-outs: the boards themselves are not cut at an angle)."""
     solids = [Pos(0, 0, -100) * Solid.extrude(_face(g), (0, 0, 200)) for g in getattr(poly, "geoms", [poly])]
     return sum(solids[1:], solids[0])
 
@@ -97,7 +98,7 @@ def _seam_point_and_normal(hand, x, y):
 def walls(hand):
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
-    shell = (_prism(ring) & _under(hand, 0.0)) - _under(hand, params.SEAM_DEPTH)
+    shell = (outline.plan_prism(hand, ring) & _under(hand, 0.0)) - _under(hand, params.SEAM_DEPTH)
     for c in pockets(hand):
         shell = shell - c
     return shell
@@ -127,7 +128,7 @@ def posts(hand):
     if body is None:
         return None
     keep_out = pcb_union(hand).buffer(params.BOSS_PCB_CLEAR)     # trims bosses that do not fit whole
-    body = body & zone & _prism(outline.case_outline_polygon(hand)) - _prism(keep_out)
+    body = body & zone & outline.plan_prism(hand, outline.case_outline_polygon(hand)) - _prism(keep_out)
     for c in pockets(hand):
         body = body - c
     return body
