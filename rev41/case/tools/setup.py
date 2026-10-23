@@ -4,6 +4,7 @@ import shutil
 import sys
 
 import export_step
+import fetch_models
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
     print(f"kicad-cli: {cli} ({export_step.kicad_version(cli)})")
     sys.argv = [sys.argv[0]]
     export_step.main()
+    fetch_models.main()
 
 
 if __name__ == "__main__":

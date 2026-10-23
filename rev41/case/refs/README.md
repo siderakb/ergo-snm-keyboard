@@ -12,3 +12,10 @@
 | `drawings/E73-2G4M08S1C.png` | E73-2G4M08S1C 模組尺寸圖 | 天線淨空待確認 |
 
 規格書 PDF 放在 `datasheets/`。建模前才從圖面讀尺寸；讀到的數字寫進 `src/params.py` 並註明來源。
+
+## 3D 模型（由 `tools/setup.py` 取得，不進版控）
+
+| 模型 | 來源 | 備註 |
+| :--- | :--- | :--- |
+| `step/vendor/choc_v2.step` | https://github.com/koktoh/keyswitch_model @2b6bcfa（`choc/v2/step/blue.step`） | 無授權檔，只下載不提交；量測值見 `src/refmodels.py` |
+| `step/pmw3610_board.step` | `../pmw3610-pcb/pmw3610_pcb.kicad_pcb`（可用環境變數 `PMW3610_PCB_DIR` 指定，CERN-OHL-P v2） | IC（U1）與 FPC 座沒有 3D 模型，需補簡化方塊；1x7 排針在 F.Cu 面 |

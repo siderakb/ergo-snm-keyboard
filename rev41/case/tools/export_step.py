@@ -7,6 +7,7 @@ Use --force to re-export everything.
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -18,6 +19,23 @@ PCB_DIR = CASE_DIR.parent / "pcb"
 STEP_DIR = CASE_DIR / "step"
 MANIFEST = STEP_DIR / "manifest.json"
 BOARDS = ("main_board", "thumb_cluster", "core_board_e73")
+
+# Boards that live outside this repository. Override the directory with the env var.
+EXTERNAL = {
+    "pmw3610_board": (os.environ.get("PMW3610_PCB_DIR") or CASE_DIR.parents[2] / "pmw3610-pcb",
+                      "pmw3610_pcb.kicad_pcb"),
+}
+
+
+def pcb_path(board):
+    if board in EXTERNAL:
+        return Path(EXTERNAL[board][0]) / EXTERNAL[board][1]
+    return PCB_DIR / board / f"{board}.kicad_pcb"
+
+
+def available_boards():
+    """In-repo boards plus external ones whose files exist (missing externals are skipped)."""
+    return [b for b in (*BOARDS, *EXTERNAL) if pcb_path(b).exists()]
 
 
 def find_kicad_cli():
@@ -36,7 +54,7 @@ def kicad_version(cli):
 
 
 def pcb_hash(board):
-    return hashlib.sha256((PCB_DIR / board / f"{board}.kicad_pcb").read_bytes()).hexdigest()
+    return hashlib.sha256(pcb_path(board).read_bytes()).hexdigest()
 
 
 def load_manifest():
@@ -49,7 +67,7 @@ def load_manifest():
 def stale_boards(version, manifest):
     return [
         b
-        for b in BOARDS
+        for b in available_boards()
         if not (STEP_DIR / f"{b}.step").exists()
         or manifest.get("kicad") != version
         or manifest.get("boards", {}).get(b, {}).get("sha256") != pcb_hash(b)
@@ -82,7 +100,7 @@ def main():
         # --user-origin 0x0mm: keep KiCad coordinates (STEP Y is the negated KiCad y).
         subprocess.run(
             [cli, "pcb", "export", "step", "--output", str(out), "--subst-models",
-             "--user-origin", "0x0mm", str(PCB_DIR / b / f"{b}.kicad_pcb")],
+             "--user-origin", "0x0mm", str(pcb_path(b))],
             check=True, capture_output=True,
         )
         boards[b] = {"sha256": pcb_hash(b)}

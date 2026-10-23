@@ -22,8 +22,8 @@ MJF_CLEAR_MOVING = 0.6
 
 # --- Stack-up (top to bottom) ---
 PLATE_T = 1.5          # integrated plate thickness (user-confirmed)
-PLATE_TOP_TO_PCB_TOP = 1.65   # plate outer face to PCB top face, includes the plate (user-confirmed)
-PLATE_PCB_GAP = round(PLATE_TOP_TO_PCB_TOP - PLATE_T, 3)   # 0.15: plate underside to PCB top
+PLATE_TOP_TO_PCB_TOP = 2.2    # plate top face to PCB top face = Choc V2 flange underside height (measured; drawing 5.30 - 3.10)
+PLATE_PCB_GAP = round(PLATE_TOP_TO_PCB_TOP - PLATE_T, 3)   # 0.7: plate underside to PCB top (barbs top at 0.6)
 PCB_T = 1.6            # actual board thickness (user-confirmed); KiCad STEP substrate is 1.51 (copper/mask not modelled)
 STEP_PCB_T = 1.51       # KiCad STEP substrate thickness (copper/mask not modelled)
 BOARD_GAP = 5.5        # main_board <-> core_board (2x10 1.27 mm header + socket)
@@ -90,7 +90,7 @@ TENT_DEG = 0.0         # TODO
 # --- Hand and board placement ---
 # main_board is reversible: the right hand uses it F.Cu up (B.Cu parts such as the 29 SOD-323
 # diodes hang below, away from the plate); the left hand uses it flipped, B.Cu up, so those
-# parts sit under the plate (only PLATE_PCB_GAP clearance: relief pockets needed).
+# parts sit under the plate (only PLATE_PCB_GAP = 0.7 mm clearance: relief pockets needed).
 # Parts that exist on both faces (BTN1/BTN2, the 2x10 sockets, core board parts) are only
 # fitted on the physically lower side.
 HAND = "left"          # default hand for assembly / check / render
@@ -99,7 +99,7 @@ HAND = "left"          # default hand for assembly / check / render
 # Z up with the plate top at PLATE_TOP_TO_PCB_TOP + PCB_T above the main board's lower face.
 # Each placement maps board STEP-local (X, Y, Z) to the case frame: p = R @ local + t.
 # STEP-local: X = KiCad x, Y = -KiCad y, Z = 0 at the B.Cu face, PCB_T at the F.Cu face.
-_PLATE_TOP = PLATE_TOP_TO_PCB_TOP + PCB_T      # 3.25
+_PLATE_TOP = PLATE_TOP_TO_PCB_TOP + PCB_T      # 3.8
 _FLIP_Y = ((-1, 0, 0), (0, 1, 0), (0, 0, -1))  # rotation 180 deg about Y
 _IDENT = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 _MAIN_FLIP_X = 203.847   # left hand: X = 203.847 - local X (from rev4 FCStd fit)
@@ -124,7 +124,7 @@ PLACEMENTS = {
         # geometry (X mirrored, PCB unflipped, F.Cu toward the plate) shifted -60.452 along board X.
         "thumb_1x2": (
             ((0.813798, -0.5, -0.296198), (0.469846, 0.866025, -0.17101), (0.34202, 0.0, 0.939693)),
-            (-140.4698, -168.6489, -84.3596),
+            (-140.3069, -168.5549, -84.3265),
         ),
     },
     "left": {
@@ -136,7 +136,7 @@ PLACEMENTS = {
         # Board is flipped (B.Cu toward the plate), so local +Z points down: tilt 160 deg, yaw 150 deg.
         "thumb_2x3": (
             ((-0.813798, 0.5, -0.296198), (0.469846, 0.866025, 0.17101), (0.34202, 0.0, -0.939693)),
-            (295.5947, -140.5194, -62.1803),
+            (295.4318, -140.4253, -62.1471),
         ),
         # core_board_e73 below (-Z) the flipped main_board, same 5.5 mm between facing faces; the core
         # board is symmetric, so it keeps the right-hand pose (flip about Y, USB edge at the back) and
@@ -150,7 +150,7 @@ PLACEMENTS = {
 # in the right-hand case frame; plate normal is (-0.2962, -0.171, 0.9397) (tilt 20 deg).
 # The hole's bounding box is 35.3 x 36.5 mm (an ellipse from the tilt): hole diameter ~36.5 for
 # the 34 mm ball. Ball centre depth below the plate is not decided yet.
-BALL_HOLE_CENTER_RIGHT = (106.559, -144.51, 1.357)
+BALL_HOLE_CENTER_RIGHT = (106.559, -144.51, 1.907)
 BALL_HOLE_D = 36.5
 # Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
 BALL_TOP = KEYCAP_TOP
@@ -174,7 +174,7 @@ ALLOWED_INTERFERENCE = {}
 # exactly 20.00 deg, and its 6 key holes fit the thumb_cluster switches (6/6, 0.3 mm), while the
 # 29 flat-face holes fit main_board (28/29). FreeCAD frame -> case frame:
 #   X = 203.847 - X_fc, Y = Y_fc - 60.023, Z = Z_fc - 6.6 + (PLATE_TOP_TO_PCB_TOP + PCB_T)
-# (the FreeCAD file has the main plate top at Z=6.6; the plate top is 3.25 above the main
+# (the FreeCAD file has the main plate top at Z=6.6; the plate top is 3.8 above the main
 # board's B.Cu surface). Assumes the F.Cu-up orientation used for main_board here.
 # Maps thumb STEP-local (X, -KiCad y, Z) -> case frame: p = R @ local + t.
 THUMB_TILT_DEG = 20.0
