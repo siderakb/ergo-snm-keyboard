@@ -1,10 +1,12 @@
 """Top case draft, part 2: side walls and screw posts on top of the skin from outline.py.
 
-The shell hangs SEAM_DEPTH below the top surface (measured along the plane normal, so it follows the
-folded main/thumb surface). The walls are TOP_WALL thick, flush with the outline. Screw posts sit in the
-free corners between the PCB outlines and the wall; each has a nut pocket open at the seam and a blind
-screw hole up to the skin.
+The walls run from the top surface all the way down, BOTTOM_RECESS past the outer face of the bottom plate, which sits
+inside them (the seam only shows from below). The plate faces follow the folded main/thumb surface: the lower of a
+plane parallel to each top plane. Screw posts sit in the free corners between the PCB outlines and the wall and run
+down to the plate's inner face; each has a nut pocket open at its lower end and a blind screw hole above it.
 """
+
+import functools
 
 import numpy as np
 from shapely.geometry import MultiPoint, Point, Polygon
@@ -58,7 +60,7 @@ def pcb_union(hand):
 def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
     """Screw post centres: farthest-point spread over the free area around the PCBs (grid `step`)."""
     r = params.BOSS_D / 2
-    inner = outline.case_outline_polygon(hand).buffer(-params.TOP_WALL)
+    inner = outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL)
     free = inner.buffer(-(r - 1.0)).difference(pcb_union(hand).buffer(params.BOSS_PCB_CLEAR + r))
     x0, y0, x1, y1 = free.bounds
     cand = [(x, y) for x in np.arange(x0, x1, step) for y in np.arange(y0, y1, step) if free.contains(Point(x, y))]
@@ -86,23 +88,50 @@ def _strip_centre(hand, near, reach=8.0):
     return (p.x, p.y)
 
 
-def _seam_point_and_normal(hand, x, y):
-    """Point on the seam surface under plan position (x, y) and the unit normal of the local top plane."""
+@functools.lru_cache(maxsize=None)
+def floor_depths(hand):
+    """(main, thumb) depth of the bottom plate's outer face below the top surface, each along its plane normal.
+    Main: under the battery holder (+ clearance + plate). Thumb: under the tilted thumb board and its hot-swap sockets."""
+    from assembly import load_boards
+
+    (mp, _), (tp, tn) = _planes(hand)
+    main_z = params.BATTERY_TOP_Z_LEFT - params.BATTERY_HOLDER[1] - params.BOTTOM_CLEAR - params.BOTTOM_WALL
+    board = next(b for b in load_boards(hand) if b.label == outline.thumb_board(hand))
+    reach = max(float((tp - np.array((v.X, v.Y, v.Z))) @ tn) for v in board.vertices())
+    reach = max(reach, params.PLATE_TOP_TO_PCB_TOP + params.PCB_T + params.HOTSWAP_SOCKET_PROTRUSION)   # STEP has no sockets
+    return float(mp[2] - main_z), reach + params.BOTTOM_CLEAR + params.BOTTOM_WALL
+
+
+def below_floor(hand, lift=0.0):
+    """Everything below the bottom plate's outer face raised by `lift` (the lower of the main and thumb planes):
+    lift = BOTTOM_WALL is the plate's inner face, lift = -BOTTOM_RECESS the bottom edge of the top case walls."""
+    (mp, mn), (tp, tn) = _planes(hand)
+    dm, dt = floor_depths(hand)
+    return outline._half_space(mp, mn, dm - lift) & outline._half_space(tp, tn, dt - lift)
+
+
+def post_axis(hand, x, y):
+    """(top point, unit axis normal, length): the post under plan position (x, y) runs from the top surface down
+    along the local top plane normal to the bottom plate's inner face."""
     (mp, mn), (tp, tn) = _planes(hand)
     z = lambda p, n: p[2] - (n[0] * (x - p[0]) + n[1] * (y - p[1])) / n[2]
     p, n = (mp, mn) if z(mp, mn) <= z(tp, tn) else (tp, tn)    # the lower plane is the top surface there
-    point = np.array((x, y, z(p, n)))
-    return point - params.SEAM_DEPTH * n, n
+    top = np.array((x, y, z(p, n)))
+    dm, dt = floor_depths(hand)
+    inner = params.BOTTOM_WALL
+    # below both inner-face planes once t passes each plane's crossing
+    t = max(((top - q) @ m + d - inner) / (n @ m) for (q, m), d in (((mp, mn), dm), ((tp, tn), dt)))
+    return top, n, float(t)
 
 
 def wall_openings(hand):
     """Openings through the top edge wall (+Y side) for the USB-C receptacles and the slide-switch handle: the
     part of each placeholder that reaches the wall, grown by WALL_OPEN_CLEAR (the handle slot also by the
-    travel). The PCB hangs on the top case, so these need no alignment to the bottom case."""
+    travel)."""
     from placeholders import core_board_placeholders
 
     ymax = outline.case_outline_polygon(hand).bounds[3]
-    y0, y1 = ymax - params.TOP_WALL - 0.5, ymax + 1.0
+    y0, y1 = ymax - params.BOTTOM_WALL - 0.5, ymax + 1.0
     c = params.WALL_OPEN_CLEAR
     probe = Pos(0, (y0 + y1) / 2 + 50, 0) * Box(2000, 100 + (y1 - y0), 2000)       # everything with Y > y0
     cuts = []
@@ -119,60 +148,58 @@ def wall_openings(hand):
     return cuts
 
 
-def _tongue_zone(hand):
-    """Region where the walls hang down to SEAM_DEPTH_TONGUE: a trapezoid in the Y-Z plane (flat bottom from the +Y
-    edge past the lowest core-board placeholder, then ramping up towards -Y to the normal seam at TONGUE_RAMP_ANGLE),
-    extruded along X over the whole case."""
-    from placeholders import core_board_placeholders
-
-    top = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
-    zs, zd = top - params.SEAM_DEPTH, top - params.SEAM_DEPTH_TONGUE
-    x0, y_lo, x1, y_hi = outline.case_outline_polygon(hand).bounds
-    y_flat = min(s.bounding_box().min.Y for s in core_board_placeholders(hand).values()) - params.TONGUE_FLAT_MARGIN
-    run = (zs - zd) / np.tan(np.radians(params.TONGUE_RAMP_ANGLE))
-    up = 0.5                                                          # overlap above the seam
-    flare = up / np.tan(np.radians(params.TONGUE_RAMP_ANGLE))
-    pts = [(x0 - 1.0, y_hi + 1.0, zs + up), (x0 - 1.0, y_hi + 1.0, zd), (x0 - 1.0, y_flat, zd), (x0 - 1.0, y_flat - run - flare, zs + up)]
-    return Solid.extrude(Face(Wire.make_polygon(pts, close=True)), (x1 - x0 + 2.0, 0, 0))
-
-
 def walls(hand):
+    """Outer walls from the top surface down to BOTTOM_RECESS below the bottom plate's outer face: the bottom plate sits
+    inside them, so the seam only shows from below."""
     outer = outline.case_outline_polygon(hand)
-    ring = outer.difference(outer.buffer(-params.TOP_WALL))
-    band = outline.plan_prism(hand, ring) & _under(hand, 0.0)
-    shell = band - _under(hand, params.SEAM_DEPTH)
-    cuts = wall_openings(hand)
-    if cuts:
-        shell = shell + (((band & _under(hand, params.SEAM_DEPTH)) - _under(hand, params.SEAM_DEPTH_TONGUE)) & _tongue_zone(hand))
-    for c in pockets(hand) + cuts:
+    ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
+    shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS)
+    for c in pockets(hand) + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c
     return shell
 
 
+def screw_counterbores(hand):
+    """Head pockets under each post: SCREW_HEAD_SINK into the bottom plate and on down past the wall's bottom edge
+    (posts close to the wall have the head partly under it)."""
+    cuts = []
+    for x, y in post_positions(hand):
+        top, n, t = post_axis(hand, x, y)
+        start = t + params.BOTTOM_WALL - params.SCREW_HEAD_SINK
+        cuts.append(_along(top, n, start, params.SCREW_HEAD_SINK + params.BOTTOM_RECESS + 1.0, params.SCREW_HEAD_CBORE_D / 2))
+    return cuts
+
+
+def _along(top, n, start, length, r):
+    """Cylinder of radius r on the axis through `top` along -n, from `start` to `start + length` below `top`."""
+    plane = Plane(origin=tuple(top - start * n), z_dir=tuple(-n))
+    return Location(plane) * Cylinder(r, length, align=(Align.CENTER, Align.CENTER, Align.MIN))
+
+
 def pockets(hand):
-    """Nut pockets and screw holes of every post (also cut out of the wall where a pocket overlaps it)."""
+    """Nut pocket open at each post's lower end and the blind screw hole above it (also cut out of the wall where a
+    pocket overlaps it)."""
     cuts = []
     r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
+    nut_depth = params.NUT_M25_H + 0.5
     for x, y in post_positions(hand):
-        seam, n = _seam_point_and_normal(hand, x, y)
-        plane = Plane(origin=tuple(seam - 1.0 * n), z_dir=tuple(n))
-        nut_depth = params.NUT_M25_H + 0.5
-        hole_len = params.SEAM_DEPTH - params.PLATE_T - 0.5
-        cuts.append(Location(plane) * Cylinder(r_nut, 1.0 + nut_depth, align=(Align.CENTER, Align.CENTER, Align.MIN)))
-        cuts.append(Location(plane) * Cylinder(params.SCREW_M25_CLEAR_D / 2, 1.0 + hole_len, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+        top, n, t = post_axis(hand, x, y)
+        cuts.append(_along(top, n, t - nut_depth, nut_depth + 1.0, r_nut))
+        cuts.append(_along(top, n, t - params.POST_HOLE_LEN, params.POST_HOLE_LEN, params.SCREW_M25_CLEAR_D / 2))
     return cuts
 
 
 def posts(hand):
-    """Post bodies (fused to the skin) with the nut pockets and screw holes cut out."""
+    """Post bodies from the skin underside down to the bottom plate's inner face, with the pockets cut out."""
     body = None
-    zone = _under(hand, params.PLATE_T) - _under(hand, params.SEAM_DEPTH)   # touches the skin underside; fused later
     for x, y in post_positions(hand):
-        cyl = Pos(x, y, 0) * Cylinder(params.BOSS_D / 2, 200, align=(Align.CENTER, Align.CENTER, Align.CENTER))
+        top, n, t = post_axis(hand, x, y)
+        cyl = _along(top, n, -1.0, t + 1.0, params.BOSS_D / 2)
         body = cyl if body is None else body + cyl
     if body is None:
         return None
     keep_out = pcb_union(hand).buffer(params.BOSS_PCB_CLEAR)     # trims bosses that do not fit whole
+    zone = _under(hand, params.PLATE_T) - below_floor(hand, params.BOTTOM_WALL)
     body = body & zone & outline.plan_prism(hand, outline.case_outline_polygon(hand)) - _prism(keep_out)
     for c in pockets(hand):
         body = body - c

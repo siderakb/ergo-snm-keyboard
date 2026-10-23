@@ -34,10 +34,10 @@ CORE_J7_POPULATED = False  # J7 2x5 1.27 mm programming header: footprint only, 
                            # (its STEP model is the tallest on the board: 4.0 mm above PCB)
 BOTTOM_WALL = 2.0
 BOTTOM_CLEAR = 0.5
-# The bottom case is set back from the top case outline by SEAM_INSET all round, so the seam reads as a shadow step under
-# the top case lip instead of a flush line. The top case wall is that much thicker (its inner face stays where it was).
-SEAM_INSET = 1.0
-TOP_WALL = BOTTOM_WALL + SEAM_INSET
+# The bottom case is a plate inside the top case walls (the seam only shows from below); its outer face sits BOTTOM_RECESS
+# up from the bottom edge of the walls, and PLATE_SIDE_CLEAR from their inner face in plan.
+BOTTOM_RECESS = 0.8
+PLATE_SIDE_CLEAR = 0.2      # TODO: set from a fit coupon (SLA)
 
 # --- Slide switch (SK12D07) on core_board_e73 ---
 SLIDE_SW_HANDLE = 7.0  # handle length (user-provided; confirm it is measured from the body top)
@@ -108,33 +108,21 @@ BATTERY_HOLDER = (58.3, 14.2, 32.2)
 # (4 rows each), the user's red circle. Key edge area; the holder sits inside it, long side along Y.
 HOTSWAP_SOCKET_PROTRUSION = 1.8   # Choc hot-swap socket sticks out of the PCB (total 3.05, rest is inside the board)
 BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)   # holder top below the main board lower face (Z=0): -2.3
-# Top case shell: walls hang this deep from the top surface (measured along the plane normal): plate
-# top to PCB underside 3.8, plus the hot-swap sockets below the PCB and a 0.5 mm margin. The seam to the
-# bottom case follows the same folded surface (flat under the main plate, tilted under the thumb plate).
-SEAM_DEPTH = round(PLATE_TOP_TO_PCB_TOP + PCB_T + HOTSWAP_SOCKET_PROTRUSION + 0.5, 3)    # 6.1
-# The USB-C and slide-switch openings are cut in the top case wall (the PCB is fixed to the top case, so no
-# top/bottom alignment error). Over the +Y band holding the core-board connectors, the wall hangs down to SEAM_DEPTH_TONGUE with
-# WALL_OPEN_BELOW of wall under the lowest opening edge: USB-C bottom at Z = -10.27 (left hand) - WALL_OPEN_CLEAR -
-# WALL_OPEN_BELOW = -12.87 -> depth 3.8 + 12.87 = 16.67, rounded up. The seam ramps back up to SEAM_DEPTH towards -Y at
-# TONGUE_RAMP_ANGLE (from horizontal); the screw posts stay at SEAM_DEPTH.
+# The USB-C and slide-switch openings are cut in the top case wall (the walls run down to the bottom).
 WALL_OPEN_CLEAR = 0.6      # opening grown around the USB-C receptacle (plug entry) and the slide-switch handle
-WALL_OPEN_BELOW = 2.0      # wall left under the lowest opening edge (JLC SLA 2.0 mm)
 SLIDE_SW_TRAVEL = 3.0      # handle travel between the two positions (TODO confirm from the SK12D07 drawing)
-SEAM_DEPTH_TONGUE = 16.7
-TONGUE_RAMP_ANGLE = 45.0
-TONGUE_FLAT_MARGIN = 2.0   # the deep seam runs this far past the lowest-Y core-board placeholder (battery connector)
 # Screw posts in the free corners between the PCB outlines and the case wall: Ø7.8 so the wall around the
-# 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the nut sits at the seam (glued in),
-# the M2.5 screw comes up from the bottom case.
+# 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the posts run down to the bottom plate, the nut
+# sits in the post's lower end (glued in), the M2.5 x 6 screw comes up through the plate.
+# Screw: head 1.3 in a SCREW_HEAD_SINK counterbore (0.7 proud, inside the 0.8 recess), 1.4 of plate, so the 4.7 shank
+# reaches 3.3 into the post (nut pocket 2.5); POST_HOLE_LEN is the blind hole above the post end.
 # The tilted thumb board (1.6 mm thick, hot-swap sockets 1.8 mm below it) reaches sideways past its plan
 # corners by about (1.6 + 1.8) * sin(20 deg); the case plan outline grows by this around the thumb area.
 THUMB_TILT_MARGIN = 0.7
 BOSS_D = 7.8
-# Bottom case: M2.5 x 6 screws come up from below. The head sits at the ceiling of a well (BOSS_WELL_D = head + 0.5)
-# bored from the outer floor face, so the shank only spans BOSS_HOLE_LEN of boss before the nut at the top-case seam
-# (6 - head 1.3 = 4.7 shank; nut pocket ceiling 2.5 above the seam, the nut 0.5 below it; the tip passes the nut by 0.2).
-BOSS_WELL_D = SCREW_M25_HEAD_D + 0.5
-BOSS_HOLE_LEN = 2.0
+SCREW_HEAD_SINK = 0.6
+SCREW_HEAD_CBORE_D = SCREW_M25_HEAD_D + 0.5
+POST_HOLE_LEN = 5.0
 BOSS_PCB_CLEAR = 0.4
 BOSS_COUNT = 3
 # Extra left-hand post in the narrow strip along the top edge (about 6.8 mm between the PCB clearance and the

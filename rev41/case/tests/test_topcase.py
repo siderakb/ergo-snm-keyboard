@@ -23,11 +23,13 @@ def test_top_case_is_one_valid_solid(case):
     assert case.is_valid and len(case.solids()) == 1
 
 
-def test_walls_hang_seam_depth_below_the_top_surface():
+def test_walls_run_from_the_top_surface_past_the_bottom_plate():
     w = topcase.walls("left")
     bb = w.bounding_box()
-    assert bb.max.Z == pytest.approx(params.PCB_T + params.PLATE_TOP_TO_PCB_TOP, abs=1e-6)
-    assert bb.min.Z < params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.SEAM_DEPTH   # thumb side is lower
+    top = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
+    assert bb.max.Z == pytest.approx(top, abs=1e-6)
+    assert topcase.floor_depths("left")[0] == pytest.approx(top + 19.0)      # main plate outer face at Z = -19 (battery)
+    assert bb.min.Z <= -19.0 - params.BOTTOM_RECESS + 1e-6                     # thumb downhill end is lower still
 
 
 def test_posts_are_spread_and_clear_of_the_pcbs():
@@ -40,7 +42,7 @@ def test_posts_are_spread_and_clear_of_the_pcbs():
         assert topcase.pcb_union("left").distance(Point(p)) >= params.BOSS_PCB_CLEAR + r_nut + 1.4
         assert outer.exterior.distance(Point(p)) >= r_nut + 1.4
     union = topcase.pcb_union("left")
-    inner = outline.case_outline_polygon("left").buffer(-params.TOP_WALL)
+    inner = outline.case_outline_polygon("left").buffer(-params.BOTTOM_WALL)
     r = params.BOSS_D / 2
     for p in pts:
         assert union.distance(Point(p)) >= r + params.BOSS_PCB_CLEAR - 0.01
@@ -56,19 +58,22 @@ def test_walls_and_posts_do_not_touch_the_boards():
         assert analysis.interference_volume(shell, board) < 1e-3, board.label
 
 
-def test_nut_pocket_is_open_at_the_seam_and_screw_hole_is_blind(case):
-    x, y = topcase.post_positions("left")[0]
-    seam, n = topcase._seam_point_and_normal("left", x, y)
-    probe = lambda d: case.is_inside(tuple(seam + n * d + np.array([0, 0, 0])))
-    assert not probe(0.5) and not probe(params.NUT_M25_H)            # in the nut pocket
-    assert probe(params.SEAM_DEPTH - params.PLATE_T / 2)             # skin above is solid
+def test_posts_reach_the_bottom_plate_with_the_nut_pocket_at_the_lower_end(case):
+    for x, y in topcase.post_positions("left"):
+        top, n, t = topcase.post_axis("left", x, y)
+        end = top - t * n
+        probe = lambda d: case.is_inside(tuple(end + n * d))
+        assert not probe(0.5) and not probe(params.NUT_M25_H)            # in the nut pocket
+        assert not probe(params.POST_HOLE_LEN - 0.3)                     # blind screw hole
+        assert probe(t - params.PLATE_T / 2)                             # skin above is solid
 
 
 def test_pockets_are_empty_in_walls_and_in_the_fused_case(case):
     r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
     w = topcase.walls("left")
     for x, y in topcase.post_positions("left"):
-        seam, n = topcase._seam_point_and_normal("left", x, y)
+        top, n, t = topcase.post_axis("left", x, y)
+        seam = top - t * n
         for ang in np.linspace(0, 2 * np.pi, 12, endpoint=False):
             u = np.array([np.cos(ang), np.sin(ang), 0.0])
             u = u - n * np.dot(u, n)                       # in the plane perpendicular to the post axis
@@ -124,29 +129,19 @@ def test_wall_openings_for_usb_and_switch_sit_in_the_top_case_wall_with_wall_lef
 
     cuts = topcase.wall_openings("left")
     assert len(cuts) == 3                      # J4, J9 and SW2
-    seam_z = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.SEAM_DEPTH_TONGUE
-    for c in cuts:
-        assert c.bounding_box().min.Z - seam_z >= params.WALL_OPEN_BELOW - 1e-6
-    for shape in core_board_placeholders("left").values():
-        bb = shape.bounding_box()
-        if bb.min.Z > seam_z + params.WALL_OPEN_BELOW + params.WALL_OPEN_CLEAR:    # connectors that live in the top case
-            assert sum(analysis.interference_volume(c, shape) for c in cuts) > 0
+    for label, shape in core_board_placeholders("left").items():
+        if label.startswith(("usb_", "switch_")):
+            assert sum(analysis.interference_volume(c, shape) for c in cuts) > 0, label
     assert sum(analysis.interference_volume(c, topcase.walls("left")) for c in cuts) < 1e-3     # nothing left in the openings
 
 
-def test_edge_wall_is_a_tongue_under_the_openings_ramping_back_to_the_normal_seam():
+def test_walls_end_bottom_recess_below_the_plate_outer_face():
     from build123d import Box, Pos
-
-    w = topcase.walls("left")
-    top = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP
-    ymax = outline.case_outline_polygon("left").bounds[3]
     from shapely.geometry import LineString
 
-    outer = outline.case_outline_polygon("left")
-    side = outer.exterior.intersection(LineString([(-50, -110), (300, -110)]))    # the outer face where the main-board side wall crosses y = -60
-    x_far = max(p.x for p in side.geoms) - 1.0
-    probe = lambda x, y, depth: analysis.interference_volume(w, Pos(x, y, top - depth) * Box(0.2, 0.2, 0.2)) > 0.004
-    assert probe(x_far, -110.0, params.SEAM_DEPTH - 1.0)                # far edge: wall down to the normal seam only
-    assert not probe(x_far, -110.0, params.SEAM_DEPTH + 1.0)
-    assert probe(36.0, ymax - 1.0, params.SEAM_DEPTH_TONGUE - 0.5)           # between the switch and J9 slots: the tongue
-    assert not probe(36.0, ymax - 1.0, params.SEAM_DEPTH_TONGUE + 0.5)
+    w = topcase.walls("left")
+    side = outline.case_outline_polygon("left").exterior.intersection(LineString([(-50, -110), (300, -110)]))
+    x_far = min(p.x for p in side.geoms) + 1.0                # left wall (the right one is sheared near the thumb)
+    probe = lambda z: w.is_inside((x_far, -110.0, z))
+    bottom = -19.0 - params.BOTTOM_RECESS
+    assert probe(bottom + 0.3) and not probe(bottom - 0.3)

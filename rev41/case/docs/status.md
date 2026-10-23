@@ -115,32 +115,20 @@
 - STEP 中兩塊板的排針/排母模型互相穿插，是 KiCad 通用模型造成，不代表實際干涉。
 
 ## Wall openings for USB-C and the slide switch (left)
+The PCB hangs on the top case, so the openings are cut in the top case wall. `topcase.wall_openings`: the part of each
+placeholder that reaches the +Y wall, grown by `WALL_OPEN_CLEAR` 0.6 (the handle slot also by `SLIDE_SW_TRAVEL`/2 each side).
+TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB plug overmold size; battery J8 wire exit.
 
-The PCB hangs on the top case, so the openings are cut in the top case wall (no top/bottom alignment error).
-`topcase.wall_openings`: the part of each placeholder that reaches the +Y wall, grown by `WALL_OPEN_CLEAR` 0.6 (the
-handle slot also by `SLIDE_SW_TRAVEL`/2 on each side), cut through the wall in `walls`.
-The seam is deep in a +Y band: walls hang down to `SEAM_DEPTH_TONGUE` 16.7 from the +Y edge to `TONGUE_FLAT_MARGIN` past
-the lowest core-board placeholder (battery connector), then ramp up towards -Y at 45 degrees (`TONGUE_RAMP_ANGLE`, ~10.6 mm)
-to the normal `SEAM_DEPTH` 6.1 (`_tongue_zone`, a Y-Z trapezoid extruded along X). Everything else (posts, nut pockets) keeps
-depth 6.1; the bottom case needs a matching stepped rim and screw bosses rising to the post ends.
-The battery connector J8 (bottom -12.51) is not in the top case yet.
-TODO: `SLIDE_SW_TRAVEL` and the handle position (end/middle) from the SK12D07 drawing; USB plug overmold size.
-
-## Bottom case (left, `src/bottomcase.py`, `render.py --bottom`)
-- Outline and walls = the top case outline (2.0 mm wall); the rim top is the top case seam: SEAM_DEPTH 6.1 folded surface, stepped
-  down to SEAM_DEPTH_TONGUE 16.7 in the +Y band (complement of the top case tongue). Butt joint, no lip yet.
-- Floor 2.0 mm; outer face = lower of two planes: Z = -19.0 under the main plate (battery holder bottom -16.5 + 0.5 + 2.0), and
-  8.1 mm below the thumb plate along its normal (thumb board + sockets, STEP has no sockets: 5.6 + 0.5 + 2.0). Flat 19 mm-deep slab
-  under the whole main side for now; shaping the underside (shallow where nothing is below) is open.
-- Screw bosses: Ø7.8 from the floor up to each post end (along the plane normal), cut back by the deep +Y wall where they meet it.
-  M2.5x6 head sits at the ceiling of a Ø6.0 well bored from the outside; only `BOSS_HOLE_LEN` 2.0 of boss with a Ø2.8 hole under the nut.
-  Well wall is only 0.9 mm (Ø7.8 vs Ø6.0), thinner where the boss is trimmed by the PCB clearance (the +Y strip post) - below JLC 2.0.
-- Tests: valid solid, rim = seam, no overlap with top case / boards / placeholders, bosses reach the post ends with hole and well.
-- Not yet: battery compartment and door, J8 wire opening, feet, alignment lip between halves, cable relief. Bosses use M2.5x6 (JLC's only
-  lengths 6/4); longer screws would allow a thicker boss wall.
-
-## Seam set-back (shadow step)
-- `SEAM_INSET` 1.0: the bottom case outline is the top case outline set back by this much all round (`bottomcase.bottom_outline`), so
-  the seam reads as a step under the top case lip. The top outline grew by the same amount (`OUTLINE_OFFSET` = 0.5 + `TOP_WALL`), the
-  top wall is `TOP_WALL` = 3.0 thick so its inner face and everything inside (posts, PCB clearance) did not move; the bottom wall stays 2.0.
-- Still a butt joint at the seam surface (no lip / groove).
+## Nested bottom plate (left, 2026-10-24; replaces the seam at 6.1 / 16.7 deep and the set-back step)
+- The top case walls run from the top surface all the way down. The bottom case is a 2.0 mm plate inside them
+  (`PLATE_SIDE_CLEAR` 0.2 to the wall's inner face), its outer face `BOTTOM_RECESS` 0.8 up from the wall's bottom edge:
+  from the side only the top case shows, from below the seam is a ring inside the wall edge.
+- Plate outer face (`topcase.floor_depths` / `below_floor`) = lower of two planes: Z = -19.0 under the main plate (battery
+  holder bottom -16.5 + 0.5 + 2.0) and 8.1 mm below the thumb plate along its normal. The main side is one flat 23 mm deep box for now.
+- Posts (Ø7.8) run along the local top-plane normal from the skin down to the plate's inner face (`post_axis`); the nut pocket is
+  open at the post's lower end, blind Ø2.8 hole `POST_HOLE_LEN` 5.0 above. M2.5 x 6 from below: head in a 0.6 counterbore
+  (0.7 proud, inside the 0.8 recess), 1.4 of plate, 3.3 into the post.
+- Head counterbores (Ø6.0) are cut through the plate and the wall's bottom edge alike (`topcase.screw_counterbores`): two posts sit near
+  the wall; the one at (76.3, -36.1) has its hole only 1.2 mm from the plate edge, so the plate is notched there (TODO move that post).
+- Not yet: battery compartment and door, J8 wire, feet, the plate's support between posts (it only rests on the 4 post ends),
+  posts vs the battery holder (no holder model yet), shaping the underside shallower away from the battery / core board.
