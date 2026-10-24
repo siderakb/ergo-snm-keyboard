@@ -143,3 +143,19 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   (plane 8.1 deep, lower envelope). Posts in the shallow zone are 6.1 long and their blind hole is limited to stay 0.5 under the skin.
 - The +Y strip post (73.8, -34.2) is still trimmed (about 57% of the boss kept): a whole boss needs the edge about 4 mm further out there.
 - Wall openings now use the wall position at each part's X (the outline max Y is no longer the flat edge).
+
+## Stepped underside, tenting, feet and support pillars (left, 2026-10-24)
+- Plate outer face (`topcase.floor_profile` / `floor_z`) = the shallower of two stepped profiles, each with ramps:
+  X: Z -4.3 at -X (sockets only) -> -15.0 under the core board (J8 bottom -12.5) -> -19.0 under the battery holder;
+  Y: -19.0 from the +Y wall to 2 mm past the battery tail (Y -96.3) -> -4.3. Thumb side: plane 8.1 mm below the thumb plate.
+  The top case walls follow it (BOTTOM_RECESS below). Screw heads must sit on a flat level: a ramp moves off a post or
+  gets steeper (X ramps now ~72 deg at X 17.6-21.0, ~57 deg at X 67.2-69.8; the +Y post (73.8, -34.2) sits on the deep level).
+- Tenting (`TENT_ANGLE` 10 deg, TODO user): desk plane tilted about Y, +X (thumb side) up (`bottomcase.desk_plane`), as high
+  as the walls' bottom edge allows with `FOOT_PAD_T` 1.5 + `FOOT_MIN_CLEAR` 1.0. Feet columns Ø8 (`FEET_LEFT`, near the
+  user's four circles) perpendicular to the desk, ending on the pads: lengths ~11.5 / 11.5 (-X), 14.9 (battery corner), 28.1 (thumb neck).
+- Support pillars at main-board holes H2, H3, H4 (`SUPPORT_HOLES_LEFT`): a Ø5 body up to Z -2.3 (under the hot-swap sockets)
+  and a Ø1.8 pin through the Ø2.2 hole touching the skin underside. Free radius around the holes from the F.Cu socket pads
+  (estimate, the STEP has no sockets): H3/H4 ~3.4 mm, H2 ~1.3 mm. H1 is under the battery holder; H5, H6 unused for now.
+  At H2/H4 (shallow level) the pillar is only the pin. Pin top touches the skin at zero nominal gap (SLA +-0.2: check on print).
+- Not yet: rubber pad recess at the column ends, thumb-key stability outside the feet (6 thumb keys + a few edge keys are outside
+  the four feet), battery door, J8 wire.

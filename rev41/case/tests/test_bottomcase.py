@@ -36,10 +36,10 @@ def test_plate_sits_inside_the_walls_recessed_from_their_bottom_edge(bottom, top
     gap = params.BOTTOM_WALL + params.PLATE_SIDE_CLEAR
     assert b.min.X - t.min.X == pytest.approx(gap, abs=0.05) and t.max.Y - b.max.Y == pytest.approx(gap, abs=0.05)
     f = topcase.floor_profile("left")
-    assert b.max.Z == pytest.approx(f["z_shallow"] + params.BOTTOM_WALL, abs=1e-6)     # shallow flat inner face
-    for x, y in ((40.0, -60.0),):                                                   # main side: outer face 0.8 above the wall edge
+    skin_under = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.PLATE_T
+    assert b.max.Z == pytest.approx(skin_under, abs=1e-6)                         # the support pins touch the skin
+    for x, y in ((90.0, -60.0),):                                                   # main side: outer face 0.8 above the wall edge
         assert bottom.is_inside((x, y, -19.0 + 0.3)) and not bottom.is_inside((x, y, -19.0 - 0.3))
-    assert t.min.Z < b.min.Z                                                        # walls hang past the plate everywhere
 
 
 def test_bottom_case_does_not_touch_the_top_case_or_the_boards(bottom, top):
@@ -74,3 +74,35 @@ def test_floor_is_deep_under_the_battery_holder_and_ramps_up_beyond_its_tail(bot
     y = f["y_flat"] - run - 5
     assert bottom.is_inside((x, y, f["z_shallow"] + 0.3)) and not bottom.is_inside((x, y, f["z_shallow"] - 0.3))
     assert vol(bottom & battery_holder("left")) < 1e-3
+
+
+def test_x_profile_steps_down_from_minus_x_to_the_battery_and_keeps_screw_heads_flat():
+    f = topcase.floor_profile("left")
+    assert topcase.floor_z("left", 5.0, -60.0) == pytest.approx(f["z_shallow"])      # -X: thinnest
+    assert topcase.floor_z("left", 45.0, -60.0) == pytest.approx(f["z_core"])        # under the core board
+    assert topcase.floor_z("left", 90.0, -60.0) == pytest.approx(f["z_deep"])        # under the battery holder
+    assert topcase.floor_z("left", 90.0, -130.0) == pytest.approx(f["z_shallow"])    # past the battery tail (Y profile)
+    r = params.SCREW_HEAD_CBORE_D / 2
+    for x, y in topcase.post_positions("left"):
+        zs = [topcase.floor_z("left", x + r * np.cos(a), y + r * np.sin(a)) for a in np.linspace(0, 2 * np.pi, 16)]
+        assert np.ptp(zs) < params.SCREW_HEAD_SINK, (x, y)        # the flat counterbore bottom still seats the head
+
+
+def test_feet_end_on_the_tented_desk_plane(bottom):
+    n, d = bottomcase.desk_plane("left")
+    assert np.degrees(np.arccos(n[2])) == pytest.approx(params.TENT_ANGLE) and n[0] > 0     # +X (thumb side) up
+    for foot in bottomcase.feet("left"):
+        low = min(n @ np.array((v.X, v.Y, v.Z)) for v in foot.vertices())
+        assert low == pytest.approx(d + params.FOOT_PAD_T, abs=1e-3)
+    # nothing else of the case comes closer to the desk than the pads plus the clearance (sampled along the outline)
+    walls = topcase.walls("left")
+    assert min(n @ np.array((v.X, v.Y, v.Z)) for v in walls.vertices()) >= d + params.FOOT_PAD_T + params.FOOT_MIN_CLEAR - 0.5
+
+
+def test_support_pillars_go_through_the_main_board_holes_to_the_skin(bottom):
+    skin_under = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.PLATE_T
+    holes = bottomcase.support_holes("left")
+    assert set(holes) == set(params.SUPPORT_HOLES_LEFT)
+    for x, y in holes.values():
+        assert bottom.is_inside((x, y, skin_under - 0.2)) and bottom.is_inside((x, y, params.PCB_T / 2))
+        assert not bottom.is_inside((x + params.PIN_D / 2 + 0.1, y, params.PCB_T / 2))      # only the thin pin in the hole

@@ -9,7 +9,7 @@ down to the plate's inner face; each has a nut pocket open at its lower end and 
 import functools
 
 import numpy as np
-from shapely.geometry import MultiPoint, Point, Polygon
+from shapely.geometry import LineString, MultiPoint, Point, Polygon
 from shapely.ops import polylabel, unary_union
 from build123d import Align, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Wire
 
@@ -95,55 +95,89 @@ def _strip_centre(hand, near, reach=8.0):
 
 @functools.lru_cache(maxsize=None)
 def floor_profile(hand):
-    """Bottom plate outer face under the main plate, as a function of Y only: flat at z_deep from the +Y edge to y_flat
-    (past the battery holder tail), a ramp at BOTTOM_RAMP_ANGLE, then flat at z_shallow. Plus the depth of the plane
-    parallel to the thumb plate (along its normal) under the tilted thumb board and its sockets."""
+    """Outer face of the bottom plate. Main side: the shallower (higher) of two stepped profiles, one along Y (deep from the
+    +Y wall to past the battery holder tail) and one along X (shallow at -X, the core board level in the middle, deep
+    under the battery holder), each with BOTTOM_RAMP_ANGLE ramps; (s, z) corner points sorted by s.
+    Thumb side: the plane parallel to the thumb plate, thumb_depth below it along its normal (lower envelope)."""
     from assembly import load_boards
-    from placeholders import battery_holder
+    from placeholders import battery_holder, core_board_placeholders
 
     (_, _), (tp, tn) = _planes(hand)
-    z_deep = params.BATTERY_TOP_Z_LEFT - params.BATTERY_HOLDER[1] - params.BOTTOM_CLEAR - params.BOTTOM_WALL
-    z_shallow = -(params.HOTSWAP_SOCKET_PROTRUSION + params.BOTTOM_CLEAR + params.BOTTOM_WALL)
-    y_flat = battery_holder(hand).bounding_box().min.Y - params.BOTTOM_DEEP_MARGIN
+    clear, wall = params.BOTTOM_CLEAR, params.BOTTOM_WALL
+    run = lambda dz: dz / np.tan(np.radians(params.BOTTOM_RAMP_ANGLE))
+    bat = battery_holder(hand).bounding_box()
+    z_deep = bat.min.Z - clear - wall
+    z_shallow = -(params.HOTSWAP_SOCKET_PROTRUSION + clear + wall)
+    core = [b for b in load_boards(hand) if b.label == "core_board_e73"][0].bounding_box()
+    z_core = min([core.min.Z] + [s.bounding_box().min.Z for s in core_board_placeholders(hand).values()]) - clear - wall
+    y_flat = bat.min.Y - params.BOTTOM_DEEP_MARGIN
+    # each lower level starts this far before its parts; the extra wall keeps the plate's inner (offset) corner clear too
+    x_core = core.min.X - clear - wall
+    x_deep = bat.min.X - clear - wall
+    # screw heads must sit on a flat level, never on a ramp: a ramp moves off a post (or gets steeper)
+    heads = [x for x, y in post_positions(hand) if y > y_flat]
+    h = params.SCREW_HEAD_CBORE_D / 2 + 1.0
+    x1 = x_core - run(z_shallow - z_core)                 # shallow -> core ramp: x1 .. x_core
+    for px in heads:
+        if px - h < x_core and px + h > x1:
+            x1 = px + h                                   # the post stays on the shallow level
+    x2 = x_deep - run(z_core - z_deep)                    # core -> deep ramp: x2 .. x_deep
+    for px in heads:
+        if px - h < x_deep and px + h > x2:
+            x_deep = px - h                               # the post goes onto the deep level
+            x2 = x_deep - run(z_core - z_deep)
+    x2 = max(x2, core.max.X + clear)                      # steeper rather than into the core board
+    assert x1 < x_core - 1.0 and x2 < x_deep - 1.0, "no room for the X ramps"
+    big = 1000.0
+    x_pts = [(-big, z_shallow), (x1, z_shallow), (x_core, z_core), (x2, z_core), (x_deep, z_deep), (big, z_deep)]
+    y_pts = [(-big, z_shallow), (y_flat - run(z_shallow - z_deep), z_shallow), (y_flat, z_deep), (big, z_deep)]
     board = next(b for b in load_boards(hand) if b.label == outline.thumb_board(hand))
     reach = max(float((tp - np.array((v.X, v.Y, v.Z))) @ tn) for v in board.vertices())
     reach = max(reach, params.PLATE_TOP_TO_PCB_TOP + params.PCB_T + params.HOTSWAP_SOCKET_PROTRUSION)   # STEP has no sockets
-    return {"z_deep": z_deep, "z_shallow": z_shallow, "y_flat": y_flat,
-            "thumb_depth": reach + params.BOTTOM_CLEAR + params.BOTTOM_WALL}
+    return {"x_pts": x_pts, "y_pts": y_pts, "z_deep": z_deep, "z_core": z_core, "z_shallow": z_shallow,
+            "y_flat": y_flat, "thumb_depth": reach + clear + wall}
 
 
-def _profile_points(hand, lift):
-    """(y, z) corners of the main-side floor surface raised by `lift` (perpendicular to each face)."""
-    f = floor_profile(hand)
-    phi = np.radians(params.BOTTOM_RAMP_ANGLE)
-    t, k = np.tan(phi), 1.0 / np.cos(phi) - 1.0
-    zd, zs = f["z_deep"] + lift, f["z_shallow"] + lift
-    y1 = f["y_flat"] - lift * k / t                      # flat meets the ramp
-    y2 = f["y_flat"] - (f["z_shallow"] - f["z_deep"] + lift * (1 - 1 / np.cos(phi))) / t   # ramp meets the shallow flat
-    return (y1, zd), (y2, zs)
+def _lifted(pts, lift):
+    """Profile polyline moved by `lift` perpendicular to each segment (up for lift > 0), as sorted (s, z) points."""
+    if abs(lift) < 1e-9:
+        return list(pts)
+    line = LineString(pts).offset_curve(lift, join_style="mitre")      # left of the +s direction is +z
+    return sorted(line.coords)
+
+
+def _profile_below(pts, axis, bounds, lift):
+    """Solid below the lifted profile, extruded across the case (the profile runs along `axis`, 'x' or 'y')."""
+    x0, y0, x1, y1 = bounds
+    p = _lifted(pts, lift)
+    ring = p + [(p[-1][0], -300.0), (p[0][0], -300.0)]
+    if axis == "x":
+        face = Face(Wire.make_polygon([(s, y0 - 5.0, z) for s, z in ring], close=True))
+        return Solid.extrude(face, (0, y1 - y0 + 10.0, 0))
+    face = Face(Wire.make_polygon([(x0 - 5.0, s, z) for s, z in ring], close=True))
+    return Solid.extrude(face, (x1 - x0 + 10.0, 0, 0))
 
 
 def below_floor(hand, lift=0.0):
-    """Everything below the bottom plate's outer face raised by `lift`: the lower of the main profile (see
-    floor_profile) and the plane parallel to the thumb plate. lift = BOTTOM_WALL is the plate's inner face,
-    lift = -BOTTOM_RECESS the bottom edge of the top case walls."""
+    """Everything below the bottom plate's outer face raised by `lift`: below the higher of the X and Y profiles and
+    below the thumb plane (see floor_profile). lift = BOTTOM_WALL is the plate's inner face, lift = -BOTTOM_RECESS the
+    bottom edge of the top case walls."""
     (_, _), (tp, tn) = _planes(hand)
-    (y1, zd), (y2, zs) = _profile_points(hand, lift)
-    x0, y_lo, x1, y_hi = outline.case_outline_polygon(hand).bounds
-    lo, hi = y_lo - 50.0, y_hi + 50.0
-    pts = [(x0 - 5.0, hi, zd - 100.0), (x0 - 5.0, hi, zd), (x0 - 5.0, y1, zd), (x0 - 5.0, y2, zs), (x0 - 5.0, lo, zs), (x0 - 5.0, lo, zd - 100.0)]
-    main = Solid.extrude(Face(Wire.make_polygon(pts, close=True)), (x1 - x0 + 10.0, 0, 0))
-    return main & outline._half_space(tp, tn, floor_profile(hand)["thumb_depth"] - lift)
+    f = floor_profile(hand)
+    bounds = outline.case_outline_polygon(hand).bounds
+    main = _profile_below(f["x_pts"], "x", bounds, lift) + _profile_below(f["y_pts"], "y", bounds, lift)
+    return main & outline._half_space(tp, tn, f["thumb_depth"] - lift)
 
 
-def _inner_z(hand, x, y, lift):
-    """Height of the floor surface raised by `lift` at plan position (x, y): the lower of the main and thumb faces."""
-    (y1, zd), (y2, zs) = _profile_points(hand, lift)
-    zm = zd if y >= y1 else zs if y <= y2 else zd + (zs - zd) * (y1 - y) / (y1 - y2)
+def floor_z(hand, x, y, lift=0.0):
+    """Height of the floor surface raised by `lift` at plan position (x, y)."""
+    f = floor_profile(hand)
+    zx = np.interp(x, *zip(*_lifted(f["x_pts"], lift)))
+    zy = np.interp(y, *zip(*_lifted(f["y_pts"], lift)))
     (_, _), (tp, tn) = _planes(hand)
-    pt = tp - (floor_profile(hand)["thumb_depth"] - lift) * tn
+    pt = tp - (f["thumb_depth"] - lift) * tn
     zt = pt[2] - (tn[0] * (x - pt[0]) + tn[1] * (y - pt[1])) / tn[2]
-    return min(zm, zt)
+    return float(min(max(zx, zy), zt))
 
 
 def post_axis(hand, x, y):
@@ -153,7 +187,7 @@ def post_axis(hand, x, y):
     z = lambda p, n: p[2] - (n[0] * (x - p[0]) + n[1] * (y - p[1])) / n[2]
     p, n = (mp, mn) if z(mp, mn) <= z(tp, tn) else (tp, tn)    # the lower plane is the top surface there
     top = np.array((x, y, z(p, n)))
-    g = lambda t: (top - t * n)[2] - _inner_z(hand, *(top - t * n)[:2], params.BOTTOM_WALL)
+    g = lambda t: (top - t * n)[2] - floor_z(hand, *(top - t * n)[:2], params.BOTTOM_WALL)
     lo, hi = 0.0, 80.0
     for _ in range(50):
         mid = (lo + hi) / 2

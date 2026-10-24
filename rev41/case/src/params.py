@@ -137,6 +137,20 @@ MAIN_TOP_RIGHT_GROW = 5.9
 # 45 degree ramp (BOTTOM_RAMP_ANGLE) up to BOTTOM_SHALLOW_Z (lowest hot-swap socket + clearance + plate) further on.
 BOTTOM_RAMP_ANGLE = 45.0
 BOTTOM_DEEP_MARGIN = 2.0     # the deep box runs this far past the battery holder tail
+# Tenting: the whole half sits on the desk tilted about the Y axis, inner (+X, thumb) side up. The feet are columns on the
+# bottom plate, perpendicular to the desk, ending FOOT_PAD_T above it (rubber pads); the lowest point of the case stays
+# FOOT_MIN_CLEAR above the pads' underside plane plus the pads.
+TENT_ANGLE = 10.0          # TODO: user to set the tenting angle
+FOOT_D = 8.0
+FOOT_PAD_T = 1.5           # TODO: rubber foot thickness
+FOOT_MIN_CLEAR = 1.0
+FEET_LEFT = ((2.0, -124.0), (99.0, -125.0), (2.0, -55.0), (105.0, -45.0))    # near the user's four circles
+# Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
+# PILLAR_TOP_Z (below the hot-swap sockets) and a pin through the Ø2.2 hole touching the skin.
+SUPPORT_HOLES_LEFT = ("H2", "H3", "H4")
+PILLAR_D = 5.0
+PILLAR_TOP_Z = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)
+PIN_D = 1.8
 BATTERY_AREA_LEFT = {"x": (73.7, 111.8), "y": (-117.5, -39.0)}   # 38.1 x 78.5 mm, free of the core board (X <= 66.7)
 
 # --- Trackball ---

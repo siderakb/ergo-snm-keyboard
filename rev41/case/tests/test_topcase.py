@@ -143,5 +143,5 @@ def test_walls_end_bottom_recess_below_the_plate_outer_face():
     side = outline.case_outline_polygon("left").exterior.intersection(LineString([(-50, -60), (300, -60)]))
     x_far = min(p.x for p in side.geoms) + 1.0                # left wall (the right one is sheared near the thumb)
     probe = lambda z: w.is_inside((x_far, -60.0, z))
-    bottom = -19.0 - params.BOTTOM_RECESS
+    bottom = topcase.floor_z("left", x_far, -60.0, -params.BOTTOM_RECESS)
     assert probe(bottom + 0.3) and not probe(bottom - 0.3)
