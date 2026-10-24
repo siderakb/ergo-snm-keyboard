@@ -229,9 +229,20 @@ def walls(hand):
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
     shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS)
+    if hand == "left":
+        shell = shell + thumb_ledge(hand)
     for c in pockets(hand) + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c
     return shell
+
+
+def thumb_ledge(hand):
+    """Short ledge on the inside of the thumb end wall, from the bottom plate's inner face up to THUMB_LEDGE_GAP under
+    the thumb PCB underside (measured along the thumb plate normal)."""
+    inner = outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL)
+    band = inner.difference(inner.buffer(-params.THUMB_LEDGE_W)).intersection(Point(params.THUMB_LEDGE_AT).buffer(params.THUMB_LEDGE_LEN / 2))
+    top = params.PLATE_TOP_TO_PCB_TOP + params.PCB_T + params.THUMB_LEDGE_GAP
+    return outline.plan_prism(hand, band) & (_under(hand, top) - below_floor(hand, params.BOTTOM_WALL))
 
 
 def screw_counterbores(hand):

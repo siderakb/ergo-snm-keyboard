@@ -162,7 +162,8 @@ def plan_prism(hand, poly):
         face = Face(_ring_wire(g.exterior, z_thumb), [_ring_wire(r, z_thumb) for r in g.interiors])
         tilted = Pos(*(-100 * tn)) * Solid.extrude(face, tuple(200 * tn))
         c = _crease_point(hand)
-        part = (vertical & _half_space(c, tn - mn)) + (tilted & _half_space(c, mn - tn))
+        pieces = [p for p in (vertical & _half_space(c, tn - mn), tilted & _half_space(c, mn - tn)) if p]
+        part = pieces[0] if len(pieces) == 1 else pieces[0] + pieces[1]     # a region may lie wholly on one side
         out = part if out is None else out + part
     return out
 

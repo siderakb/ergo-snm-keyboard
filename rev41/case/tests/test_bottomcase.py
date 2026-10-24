@@ -106,3 +106,12 @@ def test_support_pillars_go_through_the_main_board_holes_to_the_skin(bottom):
     for x, y in holes.values():
         assert bottom.is_inside((x, y, skin_under - 0.2)) and bottom.is_inside((x, y, params.PCB_T / 2))
         assert not bottom.is_inside((x + params.PIN_D / 2 + 0.1, y, params.PCB_T / 2))      # only the thin pin in the hole
+
+
+def test_thumb_ledge_sits_on_the_plate_under_the_thumb_pcb_edge(bottom):
+    ledge = topcase.thumb_ledge("left")
+    assert ledge.is_valid and ledge.volume > 10
+    thumb = next(b for b in load_boards("left") if b.label == "thumb_2x3")
+    assert vol(ledge & thumb) < 1e-6
+    assert vol(ledge & bottom) < 1e-3                       # touches the plate's inner face, no overlap
+    assert bottom.distance(ledge) < 1e-3
