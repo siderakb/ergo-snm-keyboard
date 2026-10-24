@@ -144,7 +144,7 @@ TENT_ANGLE = 10.0          # TODO: user to set the tenting angle
 FOOT_D = 8.0
 FOOT_PAD_T = 1.5           # TODO: rubber foot thickness
 FOOT_MIN_CLEAR = 1.0
-FEET_LEFT = ((2.0, -124.0), (99.0, -125.0), (2.0, -55.0), (105.0, -45.0),     # near the user's four circles
+FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (105.0, -45.0),                       # near the user's circles
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 # Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
 # PILLAR_TOP_Z (below the hot-swap sockets) and a pin through the Ø2.2 hole touching the skin.
