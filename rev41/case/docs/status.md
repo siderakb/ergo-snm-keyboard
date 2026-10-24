@@ -160,5 +160,5 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - Not yet: rubber pad recess at the column ends, thumb-key stability outside the feet (6 thumb keys + a few edge keys are outside
   the four feet), battery door, J8 wire.
 - Thumb: a 5th foot column at thumb board hole H5 (123.4, -140.1), ~24.8 long; a 10 mm ledge on the thumb end wall
-  (`thumb_ledge`, centre THUMB_LEDGE_AT estimated from the user's screenshot) 2.0 past the wall's inner face, from the plate's
+  (`thumb_ledge`, a rectangle centred on the middle of the thumb end edge) 2.0 past the wall's inner face, from the plate's
   inner face up to 0.3 under the thumb PCB; the thumb board goes in tilted past it.

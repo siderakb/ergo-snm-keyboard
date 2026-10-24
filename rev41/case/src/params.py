@@ -150,7 +150,6 @@ FEET_LEFT = ((2.0, -124.0), (99.0, -125.0), (2.0, -55.0), (105.0, -45.0),     # 
 # PILLAR_TOP_Z (below the hot-swap sockets) and a pin through the Ø2.2 hole touching the skin.
 # A short ledge on the thumb end wall, sitting on the bottom plate (the top case rests on the plate there). It reaches
 # THUMB_LEDGE_W past the wall's inner face, under the thumb PCB edge: the small thumb board goes in tilted past it.
-THUMB_LEDGE_AT = (156.7, -155.2)     # on the thumb end wall (user's circle; position estimated from the screenshot)
 THUMB_LEDGE_W = 2.0
 THUMB_LEDGE_LEN = 10.0
 THUMB_LEDGE_GAP = 0.3                # to the thumb PCB underside

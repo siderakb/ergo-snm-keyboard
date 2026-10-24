@@ -239,8 +239,19 @@ def walls(hand):
 def thumb_ledge(hand):
     """Short ledge on the inside of the thumb end wall, from the bottom plate's inner face up to THUMB_LEDGE_GAP under
     the thumb PCB underside (measured along the thumb plate normal)."""
+    # rectangle centred on the middle of the thumb board's far (downhill) end edge, along that edge
+    pts = [np.array(p) for p in outline._board_plan_points(outline.thumb_board(hand), hand, params.THUMB_BOARDS[outline.thumb_board(hand)]["x_range"])]
+    _, n = outline.plate_plane(outline.thumb_board(hand), hand)
+    fall = np.array(n[:2]) / np.hypot(n[0], n[1])
+    a, b = sorted(pts, key=lambda p: p @ fall)[-2:]          # the two corners furthest downhill
+    u = (b - a) / np.linalg.norm(b - a)
+    v = -fall                                                 # inwards, back up the slope
     inner = outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL)
-    band = inner.difference(inner.buffer(-params.THUMB_LEDGE_W)).intersection(Point(params.THUMB_LEDGE_AT).buffer(params.THUMB_LEDGE_LEN / 2))
+    mid = (a + b) / 2
+    edge = inner.exterior.interpolate(inner.exterior.project(Point(mid)))
+    m = np.array((edge.x, edge.y))
+    h, w = params.THUMB_LEDGE_LEN / 2, params.THUMB_LEDGE_W
+    band = Polygon([tuple(m + s * h * u + t * v) for s, t in ((-1, -1.0), (1, -1.0), (1, w), (-1, w))])   # 1.0 into the wall
     top = params.PLATE_TOP_TO_PCB_TOP + params.PCB_T + params.THUMB_LEDGE_GAP
     return outline.plan_prism(hand, band) & (_under(hand, top) - below_floor(hand, params.BOTTOM_WALL))
 
