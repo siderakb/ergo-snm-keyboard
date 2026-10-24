@@ -7,7 +7,7 @@ import pyvista as pv
 
 COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluster": "darkorange",
           "top_skin": "gold", "top_walls": "orange", "top_posts": "red"}
-COLORS.update({"usb": "silver", "switch": "magenta", "battery_holder": "purple", "battery": "cyan", "bottom_case": "lightgray"})
+COLORS.update({"usb": "silver", "switch": "magenta", "battery_holder": "purple", "battery": "cyan", "bottom_case": "lightgray", "battery_door": "royalblue"})
 VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz", "bottom": "xy"}
 
 

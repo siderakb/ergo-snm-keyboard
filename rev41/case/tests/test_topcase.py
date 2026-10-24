@@ -35,11 +35,15 @@ def test_walls_run_from_the_top_surface_past_the_bottom_plate():
 def test_posts_are_spread_and_clear_of_the_pcbs():
     all_pts = topcase.post_positions("left")
     pts, extra = all_pts[:params.BOSS_COUNT], all_pts[params.BOSS_COUNT:]
-    assert len(pts) >= 3 and len(extra) == len(params.BOSS_EXTRA_LEFT)
+    assert len(pts) >= 3 and extra == list(params.BOSS_FIXED_LEFT)
     r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
     outer = outline.case_outline_polygon("left")
-    for p in extra:      # trimmed boss: at least 1.0 mm of material around the nut pocket on both sides (JLC wants 2.0, see status)
-        assert topcase.pcb_union("left").distance(Point(p)) >= params.BOSS_PCB_CLEAR + r_nut + 1.0
+    from shapely.geometry import Polygon
+    from geometry import outline_in_case
+
+    boards = [Polygon(max(outline_in_case(b, "left"), key=lambda l: Polygon(l).area)) for b in ("main_board", "core_board_e73")]
+    for p in extra:      # corner post, slightly trimmed: at least 1.0 mm of material around the nut pocket on both sides
+        assert min(b.distance(Point(p)) for b in boards) >= params.BOSS_PCB_CLEAR + r_nut + 1.0     # the door pocket is notched
         assert outer.exterior.distance(Point(p)) >= r_nut + 1.0
     union = topcase.pcb_union("left")
     inner = outline.case_outline_polygon("left").buffer(-params.BOTTOM_WALL)

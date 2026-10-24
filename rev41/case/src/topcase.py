@@ -10,7 +10,7 @@ import functools
 
 import numpy as np
 from shapely.geometry import LineString, MultiPoint, Point, Polygon
-from shapely.ops import polylabel, unary_union
+from shapely.ops import unary_union
 from build123d import Align, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Wire
 
 import params
@@ -54,11 +54,11 @@ def pcb_union(hand):
         polys.append(Polygon(max(loops, key=lambda l: Polygon(l).area)))
     board = outline.thumb_board(hand)
     polys.append(MultiPoint(outline._board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre"))
-    if hand == "left":                                        # the posts run down beside the battery holder
-        from placeholders import battery_holder
+    if hand == "left":                                        # the posts stay off the battery door pocket
+        import batterydoor
 
-        bb = battery_holder(hand).bounding_box()
-        polys.append(Polygon([(bb.min.X, bb.min.Y), (bb.max.X, bb.min.Y), (bb.max.X, bb.max.Y), (bb.min.X, bb.max.Y)]))
+        x0, y0, x1, y1 = batterydoor.layout(hand)["pocket"]
+        polys.append(Polygon([(x0, y0), (x1, y0), (x1, y1), (x0, y1)]))
     return unary_union(polys)
 
 
@@ -84,17 +84,8 @@ def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
             for (sx, sy), (dx, dy) in params.BOSS_SHIFT_LEFT.items():
                 if np.hypot(x - sx, y - sy) < 1.0:
                     out[i] = (x + dx, y + dy)
-        out += [_strip_centre(hand, c) for c in params.BOSS_EXTRA_LEFT]
+        out += list(params.BOSS_FIXED_LEFT)
     return out
-
-
-def _strip_centre(hand, near, reach=8.0):
-    """Centre of the widest part of the strip between the PCB clearance and the case outline, near `near`."""
-    strip = outline.case_outline_polygon(hand).difference(pcb_union(hand).buffer(params.BOSS_PCB_CLEAR))
-    strip = strip.intersection(Point(near).buffer(reach))
-    pole = max(getattr(strip, "geoms", [strip]), key=lambda g: g.area)
-    p = polylabel(pole, 0.05)
-    return (p.x, p.y)
 
 
 @functools.lru_cache(maxsize=None)
@@ -109,15 +100,19 @@ def floor_profile(hand):
     (_, _), (tp, tn) = _planes(hand)
     clear, wall = params.BOTTOM_CLEAR, params.BOTTOM_WALL
     run = lambda dz: dz / np.tan(np.radians(params.BOTTOM_RAMP_ANGLE))
+    import batterydoor
+
     bat = battery_holder(hand).bounding_box()
-    z_deep = bat.min.Z - clear - wall
+    pocket = batterydoor.layout(hand)["pocket"]
+    z_deep = bat.min.Z - params.BATTERY_DOOR_T            # the holder sits on the door, flush with the floor
     z_shallow = -(params.HOTSWAP_SOCKET_PROTRUSION + clear + wall)
     core = [b for b in load_boards(hand) if b.label == "core_board_e73"][0].bounding_box()
     z_core = min([core.min.Z] + [s.bounding_box().min.Z for s in core_board_placeholders(hand).values()]) - clear - wall
-    y_flat = bat.min.Y - params.BOTTOM_DEEP_MARGIN
-    # each lower level starts this far before its parts; the extra wall keeps the plate's inner (offset) corner clear too
+    # the door pocket lies on the deep level (it reaches under the core board, which only needs the core level)
+    y_flat = pocket[1] - params.BOTTOM_DEEP_MARGIN
+    # the core level starts this far before its parts; the extra wall keeps the plate's inner (offset) corner clear too
     x_core = core.min.X - clear - wall
-    x_deep = bat.min.X - clear - wall
+    x_deep = pocket[0] - params.BOTTOM_DEEP_MARGIN
     # screw heads must sit on a flat level, never on a ramp: a ramp moves off a post (or gets steeper)
     heads = [x for x, y in post_positions(hand) if y > y_flat]
     h = params.SCREW_HEAD_CBORE_D / 2 + 1.0
@@ -130,7 +125,6 @@ def floor_profile(hand):
         if px - h < x_deep and px + h > x2:
             x_deep = px - h                               # the post goes onto the deep level
             x2 = x_deep - run(z_core - z_deep)
-    x2 = max(x2, core.max.X + clear)                      # steeper rather than into the core board
     assert x1 < x_core - 1.0 and x2 < x_deep - 1.0, "no room for the X ramps"
     big = 1000.0
     x_pts = [(-big, z_shallow), (x1, z_shallow), (x_core, z_core), (x2, z_core), (x_deep, z_deep), (big, z_deep)]

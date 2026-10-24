@@ -11,8 +11,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import viz  # noqa: E402
 from assembly import load_boards, load_case_parts  # noqa: E402
-from placeholders import core_board_placeholders  # noqa: E402
-from bottomcase import bottom_case  # noqa: E402
+import params  # noqa: E402
+from placeholders import battery_holder, core_board_placeholders  # noqa: E402
+from bottomcase import battery_door, bottom_case  # noqa: E402
 from topcase import top_case_draft  # noqa: E402
 
 OUT = Path(__file__).resolve().parents[1] / "build" / "renders"
@@ -39,6 +40,9 @@ def main():
         shapes.update(top_case_draft(args.hand))
     if args.bottom:
         shapes["bottom_case"] = bottom_case(args.hand)
+        if (args.hand or params.HAND) == "left":
+            shapes["battery_door"] = battery_door("left")
+            shapes["battery_holder"] = battery_holder("left")
     path = OUT / f"{args.out or args.view}.png"
     viz.render(shapes, path, args.view, section)
     print(path)

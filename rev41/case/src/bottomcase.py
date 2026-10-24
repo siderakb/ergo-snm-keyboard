@@ -3,7 +3,7 @@
 Its outer face follows `topcase.below_floor`, BOTTOM_RECESS up from the bottom edge of the walls, so the seam only shows
 from below. The M2.5 screws go up through it into the nuts at the lower ends of the top case posts (heads in shallow
 counterbores). Feet columns stand perpendicular to the tented desk plane (`desk_plane`); support pillars rise through the
-main board's mounting holes to the skin underside.
+main board's mounting holes to the skin underside. The left plate carries the battery door (batterydoor.py).
 """
 
 import functools
@@ -11,6 +11,7 @@ import functools
 import numpy as np
 from build123d import Align, Cylinder, Location, Plane, Pos
 
+import batterydoor
 import outline
 import params
 import pcb_ref
@@ -36,14 +37,18 @@ def desk_plane(hand):
     return n, float(low - params.FOOT_PAD_T - params.FOOT_MIN_CLEAR)
 
 
-def feet(hand):
-    """Feet columns: from the plate's inner face down along the desk normal to FOOT_PAD_T above the desk."""
+def feet(hand, on_door=False):
+    """Feet columns: from the plate's inner face (or the battery door's top) down along the desk normal to FOOT_PAD_T
+    above the desk. on_door picks the feet standing on the battery door."""
     n, d = desk_plane(hand)
     out = []
     for x, y in params.FEET_LEFT:
+        if batterydoor.on_door(hand, x, y) != on_door:
+            continue
         # start inside the plate, low enough that the tilted top disc stays under its inner face
         sink = params.FOOT_D / 2 * np.sin(np.radians(params.TENT_ANGLE)) + 0.1
-        top = np.array((x, y, floor_z(hand, x, y, params.BOTTOM_WALL) - sink))
+        z = batterydoor.levels(hand)["top"] if on_door else floor_z(hand, x, y, params.BOTTOM_WALL)
+        top = np.array((x, y, z - sink))
         length = n @ top - (d + params.FOOT_PAD_T)
         plane = Plane(origin=tuple(top), z_dir=tuple(-n))
         out.append(Location(plane) * Cylinder(params.FOOT_D / 2, length, align=(Align.CENTER, Align.CENTER, Align.MIN)))
@@ -72,6 +77,13 @@ def pillars(hand):
 def bottom_case(hand=None):
     hand = hand or params.HAND
     body = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL) - below_floor(hand)
+    if hand == "left":
+        rim = batterydoor.plate_rim(hand)
+        for x, y in topcase.post_positions(hand):                   # the top case posts stand on the plate
+            rim = rim - Pos(x, y, -50) * Cylinder(params.BOSS_D / 2 + 0.3, 100)
+        body = body + rim
+        for c in batterydoor.plate_cuts(hand):
+            body = body - c
     for x, y in topcase.post_positions(hand):
         top, n, t = post_axis(hand, x, y)
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
@@ -82,3 +94,12 @@ def bottom_case(hand=None):
     solids = sorted(body.solids(), key=lambda s: s.volume)
     assert all(s.volume < 0.1 for s in solids[:-1]), "bottom case falls apart"
     return solids[-1]                                    # drops boolean slivers (counterbore against a ramp)
+
+
+def battery_door(hand=None):
+    """The battery door (locked position) with its feet."""
+    hand = hand or params.HAND
+    body = batterydoor.door(hand)
+    for part in feet(hand, on_door=True):
+        body = body + part
+    return body

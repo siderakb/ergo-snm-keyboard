@@ -4,6 +4,7 @@ Everything is built in the STEP-local frame of its board (X = KiCad x, Y = -KiCa
 footprint position in the .kicad_pcb, then placed with geometry.location().
 """
 
+import numpy as np
 from build123d import Axis, Box, Pos, fillet
 
 import params
@@ -70,21 +71,26 @@ def core_board_placeholders(hand):
 
 
 def battery_holder(hand):
-    """2x AA holder (BATTERY_HOLDER, read as length x height x width) in the case frame: long side along Y, centred in
-    BATTERY_AREA_LEFT, top at BATTERY_TOP_Z_LEFT. Left hand only."""
+    """2x AA holder (BATTERY_HOLDER, read as length x height x width) in the case frame, locked position: long side along
+    Y, -X side BATTERY_CORE_CLEAR past the core board, top at BATTERY_TOP_Z_LEFT, +Y end from battery_y_top. Left hand only."""
     assert hand == "left"
+    import outline
+
     L, H, W = params.BATTERY_HOLDER
-    cx = sum(params.BATTERY_AREA_LEFT["x"]) / 2
+    x0 = max(x for x, _ in outline._board_plan_points("core_board_e73", hand)) + params.BATTERY_CORE_CLEAR
     top = params.BATTERY_TOP_Z_LEFT
-    y1 = battery_y_top(hand, cx - W / 2, cx + W / 2)
-    return _box(cx - W / 2, cx + W / 2, y1 - L, y1, top - H, top)
+    y1 = battery_y_top(hand, x0, x0 + W)
+    return _box(x0, x0 + W, y1 - L, y1, top - H, top)
 
 
 def battery_y_top(hand, x0, x1):
-    """+Y end of the battery holder: pushed against the +Y wall (inner face plus clearance) over its X range."""
+    """+Y end of the locked holder: the pocket of the sliding battery door (holder travel, opening clearance, door lap,
+    pocket travel) ends BATTERY_EDGE_MARGIN short of the plate edge over the door's X range."""
     from shapely.geometry import LineString
 
     import outline
 
-    inner = outline.case_outline_polygon(hand).buffer(-(params.BOTTOM_WALL + params.BOTTOM_CLEAR))
-    return min(inner.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3] for x in (x0, x1))
+    plate = outline.case_outline_polygon(hand).buffer(-(params.BOTTOM_WALL + params.PLATE_SIDE_CLEAR))
+    reach = params.BATTERY_OPEN_CLEAR + params.BATTERY_DOOR_LAP_KEY
+    edge = min(plate.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3] for x in np.linspace(x0 - reach, x1 + reach, 30))
+    return edge - (2 * params.BATTERY_SLIDE + params.BATTERY_OPEN_CLEAR + params.BATTERY_DOOR_LAP_TOP + params.BATTERY_EDGE_MARGIN)

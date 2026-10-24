@@ -104,10 +104,9 @@ KEYCAP_TOP = round(HOUSING_TOP + KEYCAP_H, 3)   # 7.3: keycap bottom rim assumed
 # User gave "583 x 142 x 322"; read as 58.3 x 14.2 x 32.2 mm (value / 10). TODO: confirm units and
 # which axis is length / height / width (14.2 is below an AA diameter of 14.5).
 BATTERY_HOLDER = (58.3, 14.2, 32.2)
-# Planned place (left-hand case frame): under the two left-hand-view key columns kx = 101.6 and 120.65
-# (4 rows each), the user's red circle. Key edge area; the holder sits inside it, long side along Y.
+# Place (left-hand case frame): long side along Y, next to the core board, on the battery door (see BATTERY_* below).
 HOTSWAP_SOCKET_PROTRUSION = 1.8   # Choc hot-swap socket sticks out of the PCB (total 3.05, rest is inside the board)
-BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)   # holder top below the main board lower face (Z=0): -2.3
+BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 1.0)   # -2.8: the holder sits on the battery door (see below)
 # The USB-C and slide-switch openings are cut in the top case wall (the walls run down to the bottom).
 WALL_OPEN_CLEAR = 0.6      # opening grown around the USB-C receptacle (plug entry) and the slide-switch handle
 SLIDE_SW_TRAVEL = 3.0      # handle travel between the two positions (TODO confirm from the SK12D07 drawing)
@@ -129,10 +128,9 @@ BOSS_COUNT = 3
 # (57.6, -135.2): 1.0 towards +Y, away from the -Y wall (PCB side wall of the pocket drops to ~1.1 mm, the boss is trimmed there);
 # (95.1, -141.7): 4.0 along +Y/-X, away from the wall and the thumb area (the whole boss still fits).
 BOSS_SHIFT_LEFT = {(57.6, -135.2): (0.0, 1.0), (95.1, -141.7): (-2.83, 2.83)}
-# Extra left-hand post in the narrow strip along the top edge (about 6.8 mm between the PCB clearance and the
-# outer face, too narrow for a full boss): the centre is the middle of that strip near this point, and the boss is
-# trimmed by the PCB clearance and the outline (walls around the nut pocket ~1.5 mm there).
-BOSS_EXTRA_LEFT = ((77.0, -37.0),)
+# Extra left-hand post in the +Y/+X corner above the main board (user's red circle): about 95% of the boss fits, nut
+# pocket walls ~1.5 mm on the PCB side and ~3.0 mm on the wall side.
+BOSS_FIXED_LEFT = ((109.5, -38.6),)
 # The +Y edge of the left outline is pushed out at the main board's top-right corner by this much (the user's red line in
 # the bottom view: nearly straight from the core board corner to the right edge), so the battery holder fits below it and
 # the +Y screw post needs no trimming.
@@ -140,7 +138,7 @@ MAIN_TOP_RIGHT_GROW = 5.9
 # Bottom plate outer face: BOTTOM_DEEP_Z under the battery holder and the core board (deep box from the +Y edge), a
 # 45 degree ramp (BOTTOM_RAMP_ANGLE) up to BOTTOM_SHALLOW_Z (lowest hot-swap socket + clearance + plate) further on.
 BOTTOM_RAMP_ANGLE = 45.0
-BOTTOM_DEEP_MARGIN = 2.0     # the deep box runs this far past the battery holder tail
+BOTTOM_DEEP_MARGIN = 1.0     # the deep box runs this far past the battery door pocket (-X and -Y)
 # Tenting: the whole half sits on the desk tilted about the Y axis, inner (+X, thumb) side up. The feet are columns on the
 # bottom plate, perpendicular to the desk, ending FOOT_PAD_T above it (rubber pads); the lowest point of the case stays
 # FOOT_MIN_CLEAR above the pads' underside plane plus the pads.
@@ -148,7 +146,7 @@ TENT_ANGLE = 10.0          # TODO: user to set the tenting angle
 FOOT_D = 8.0
 FOOT_PAD_T = 1.5           # TODO: rubber foot thickness
 FOOT_MIN_CLEAR = 1.0
-FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (105.0, -45.0),                       # near the user's circles
+FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (100.0, -45.0),                       # near the user's circles; (100, -45) on the battery door
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 # Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
 # PILLAR_TOP_Z (below the hot-swap sockets) and a pin through the Ø2.2 hole touching the skin.
@@ -161,7 +159,38 @@ SUPPORT_HOLES_LEFT = ("H2", "H3", "H4")
 PILLAR_D = 5.0
 PILLAR_TOP_Z = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)
 PIN_D = 1.8
-BATTERY_AREA_LEFT = {"x": (73.7, 111.8), "y": (-117.5, -39.0)}   # 38.1 x 78.5 mm, free of the core board (X <= 66.7)
+# Battery door (left): the 2xAA holder is glued onto a door (MJF PA12) that sits flush in a pocket of the bottom plate's
+# outer face and hangs from three keyholes (two on the -X edge, one on the +X edge). Push it BATTERY_SLIDE towards +Y and
+# it drops out with the holder (the holder wires stay connected, left long enough); push back towards -Y to lock, a bump
+# on a sprung tongue at the door's -Y end clicks into a dimple. The plate around the opening is thickened inside.
+# The holder's -X side is BATTERY_CORE_CLEAR past the core board; its +Y end leaves room for the slide, the opening
+# clearance, the door's +Y lap, the pocket's travel and BATTERY_EDGE_MARGIN to the plate edge.
+# Clearances follow the JLC guideline for moving parts (SLA 0.5, MJF 0.6 total; tolerance +-0.2 SLA / +-0.3 MJF, holes
+# +-0.3 and usually small): 0.6 total play between the sliding faces; walls of positioning/snap features >= 1.5; the door
+# (about 46 x 67, MJF) 2.0 thick. Still to be checked on a test print (keyhole + stud at 0.3 / 0.4 / 0.5 per side).
+BATTERY_CORE_CLEAR = 0.5
+BATTERY_SLIDE = 4.0
+BATTERY_OPEN_CLEAR = 0.5       # holder -> opening edge
+BATTERY_DOOR_T = 2.0
+BATTERY_DOOR_LAP = 2.5         # door under the plate on the -Y edge
+BATTERY_DOOR_LAP_KEY = 7.5     # on the X edges, where the keyholes are (1.5 of plate between big hole and opening)
+BATTERY_DOOR_LAP_TOP = 1.0     # at the +Y end
+BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
+BATTERY_POCKET_CLEAR = 0.3     # pocket around the door
+BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with KEY_HEAD_GAP: 0.6 vertical play)
+BATTERY_RIM_H = 2.0            # plate thickened on the inside around the opening (1.7 above the pocket)
+BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
+KEY_STUD_D, KEY_HEAD_D, KEY_HEAD_T = 2.5, 5.0, 1.5       # mushroom studs on the door
+KEY_HOLE_D, KEY_SLOT_W = 6.0, 3.1                        # keyholes in the plate
+KEY_HEAD_GAP = 0.3                                       # head above the rim
+KEY_X_FLOAT = 0.6              # the +X keyhole is this much wider along X: only the -X pair locates the door in X
+KEY_HEAD_CHAMFER, KEY_HOLE_CHAMFER, KEY_ROOT_FILLET = 0.5, 0.4, 0.3     # lead-ins and the stud root
+BATTERY_DOOR_CHAMFER, BATTERY_POCKET_CHAMFER = 0.4, 0.3                  # door top edge, pocket edge in the floor
+# Locking bump: the door has 0.6 vertical play, so the bump engages BATTERY_BUMP_H - 0.6 with the door hanging and
+# BATTERY_BUMP_H with it pressed up (keyboard upside down, or on its feet); a 6 x 12 x 2.0 PA12 tongue bends that far
+# with roughly 6-10 N (to be tuned on the test print).
+BATTERY_TONGUE_W, BATTERY_TONGUE_L, BATTERY_TONGUE_SLOT = 6.0, 12.0, 1.0
+BATTERY_BUMP_H, BATTERY_BUMP_W = 0.8, 2.0
 
 # --- Trackball ---
 BALL_D = 34.0

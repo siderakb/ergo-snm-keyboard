@@ -8,7 +8,7 @@ from ocp_vscode import show
 
 import params
 from geometry import placement
-from bottomcase import bottom_case
+from bottomcase import battery_door, bottom_case
 from topcase import top_case_draft
 from parts import load_parts
 from placeholders import battery_holder, core_board_placeholders
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     draft = [Compound(label=n, children=[s]) for n, s in top_case_draft(hand).items()]
     show(Compound(label=f"boards_{hand}", children=load_boards(hand)),
          Compound(label="top_case_draft", children=draft),
-         Compound(label="bottom_case", children=[bottom_case(hand)]),
+         Compound(label="bottom_case", children=[bottom_case(hand)] + ([battery_door(hand)] if hand == "left" else [])),
          Compound(label="case", children=case) if case else None,
          Compound(label="placeholders", children=[Compound(label=n, children=[s]) for n, s in core_board_placeholders(hand).items()]
                   + ([Compound(label="battery_holder", children=[battery_holder(hand)])] if hand == "left" else [])),

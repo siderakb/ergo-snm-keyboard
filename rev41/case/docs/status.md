@@ -162,3 +162,21 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - Thumb: a 5th foot column at thumb board hole H5 (123.4, -140.1), ~24.8 long; a 10 mm ledge on the thumb end wall
   (`thumb_ledge`, a rectangle centred on the middle of the thumb end edge) 2.0 past the wall's inner face, from the plate's
   inner face up to 0.3 under the thumb PCB; the thumb board goes in tilted past it.
+- Later: the thumb-neck foot was dropped; feet are now (2, -124), (2, -55), (100, -45) (on the battery door), H5. Two posts are
+  hand-shifted away from the edge (`BOSS_SHIFT_LEFT`): (57.6, -134.2) and (92.3, -138.9).
+
+## Battery door (left, 2026-10-24)
+- `batterydoor.py`: the 2xAA holder is glued onto a 2.0 mm door (MJF PA12) flush in a pocket of the plate's outer face.
+  Three mushroom studs (Ø2.5, head Ø5 x 1.5 with a 0.5 lead-in chamfer, root fillet 0.3; two on the -X edge, one on the
+  +X edge) hang it from keyholes (Ø6.0 with a 0.4 entry chamfer + 3.1 slot along Y; the +X one 0.6 wider along X so only
+  the -X pair locates) in the plate, which is thickened 2.0 inside around the opening. Push the door 4 mm towards +Y and
+  it drops out with the holder (wires stay connected); pushed back to -Y a 0.8 bump on a 6 x 12 tongue at the -Y end
+  clicks into a dimple. Clearances from the JLC guideline for moving parts (0.6 total): slot/stud and pocket sides 0.3 per
+  side, vertical 0.3 + 0.3. The door's X edges lap 7.5 under the plate, -Y 2.5, +Y 1.0; door and pocket are notched around
+  the corner post's counterbore (1.5 of plate kept). Door top edge chamfer 0.4, pocket floor edge 0.3; grip grooves.
+- Holder moved to X 67.2-99.4 (0.5 past the core board), Y -104.4 ~ -46.1, Z -17.0 ~ -2.8 (on the door). The deep level of
+  the floor now covers the pocket + 1 mm: X from 58.2 (under the core board's right part, the core-level step is X 21-54),
+  Y down to -108.4.
+- The +Y strip post (73.8, -34.2) is replaced by a fixed corner post (109.5, -38.6) (`BOSS_FIXED_LEFT`, ~95% of the boss).
+- Foot (105, -45) moved to (100, -45) so it stands wholly on the door; the door carries it (desk load goes into the laps).
+- TODO: wire slack routing, bump/tongue stiffness on a print test.
