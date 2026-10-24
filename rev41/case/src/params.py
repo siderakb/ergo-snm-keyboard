@@ -125,6 +125,10 @@ SCREW_HEAD_CBORE_D = SCREW_M25_HEAD_D + 0.5
 POST_HOLE_LEN = 5.0
 BOSS_PCB_CLEAR = 0.4
 BOSS_COUNT = 3
+# Hand-placed shifts of automatically chosen left-hand posts: {(x, y) of the automatic centre: (dx, dy)}. Matched within 1 mm.
+# (57.6, -135.2): 1.0 towards +Y, away from the -Y wall (PCB side wall of the pocket drops to ~1.1 mm, the boss is trimmed there);
+# (95.1, -141.7): 4.0 along +Y/-X, away from the wall and the thumb area (the whole boss still fits).
+BOSS_SHIFT_LEFT = {(57.6, -135.2): (0.0, 1.0), (95.1, -141.7): (-2.83, 2.83)}
 # Extra left-hand post in the narrow strip along the top edge (about 6.8 mm between the PCB clearance and the
 # outer face, too narrow for a full boss): the centre is the middle of that strip near this point, and the boss is
 # trimmed by the PCB clearance and the outline (walls around the nut pocket ~1.5 mm there).

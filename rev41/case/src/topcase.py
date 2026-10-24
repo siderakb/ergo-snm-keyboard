@@ -80,6 +80,10 @@ def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
         chosen.append(cand[np.argmax(d)])
     out = [tuple(float(v) for v in c) for c in chosen]
     if hand == "left":
+        for i, (x, y) in enumerate(out):
+            for (sx, sy), (dx, dy) in params.BOSS_SHIFT_LEFT.items():
+                if np.hypot(x - sx, y - sy) < 1.0:
+                    out[i] = (x + dx, y + dy)
         out += [_strip_centre(hand, c) for c in params.BOSS_EXTRA_LEFT]
     return out
 
