@@ -152,3 +152,23 @@ def test_walls_end_bottom_recess_below_the_plate_outer_face():
     probe = lambda z: w.is_inside((x_far, -60.0, z))
     bottom = topcase.floor_z("left", x_far, -60.0, -params.BOTTOM_RECESS)
     assert probe(bottom + 0.3) and not probe(bottom - 0.3)
+
+
+def test_tactile_dots_mark_the_middle_usb_and_the_switch_on_the_wall_outside():
+    cuts = topcase._opening_cuts("left")
+    bumps = topcase.tactile_bumps("left")
+    assert len(bumps) == len(params.TACTILE_BUMPS_LEFT) == 2
+    wall = topcase.walls("left")
+    for (label, where), dome in zip(params.TACTILE_BUMPS_LEFT, bumps):
+        b, o = dome.bounding_box(), cuts[label].bounding_box()
+        assert b.size.Y == pytest.approx(params.TACTILE_BUMP_H + 0.1, abs=0.02) and b.size.X == pytest.approx(params.TACTILE_BUMP_D, abs=0.4)
+        cx, cz = (b.min.X + b.max.X) / 2, (b.min.Z + b.max.Z) / 2
+        if where == "below":                                        # centred under the opening
+            assert cx == pytest.approx((o.min.X + o.max.X) / 2, abs=0.01)
+        else:                                                       # at the opening's mid height, beside it
+            assert cz == pytest.approx((o.min.Z + o.max.Z) / 2, abs=0.01)
+        assert dome.distance(cuts[label]) > 0.5                     # clear of the opening (plug entry)
+        assert analysis.interference_volume(dome, wall) > 0.5         # fused with the wall
+        assert wall.is_inside((cx, b.max.Y - 0.3, cz)) and not wall.is_inside((cx, b.max.Y + 0.05, cz))   # proud of the face
+        for other in cuts.values():
+            assert analysis.interference_volume(dome, other) < 1e-6

@@ -11,7 +11,7 @@ import functools
 import numpy as np
 from shapely.geometry import LineString, MultiPoint, Point, Polygon
 from shapely.ops import unary_union
-from build123d import Align, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Wire
+from build123d import Align, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Sphere, Wire
 
 import params
 import outline
@@ -193,9 +193,9 @@ def post_axis(hand, x, y):
     return top, n, float(hi)
 
 
-def wall_openings(hand):
-    """Openings through the top edge wall (+Y side) for the USB-C receptacles and the slide-switch handle: the
-    part of each placeholder that reaches the wall, grown by WALL_OPEN_CLEAR (the handle slot also by the
+def _opening_cuts(hand):
+    """{label: box} of the openings through the top edge wall (+Y side) for the USB-C receptacles and the slide-switch
+    handle: the part of each placeholder that reaches the wall, grown by WALL_OPEN_CLEAR (the handle slot also by the
     travel)."""
     from placeholders import core_board_placeholders
 
@@ -203,7 +203,7 @@ def wall_openings(hand):
 
     outer = outline.case_outline_polygon(hand)
     c = params.WALL_OPEN_CLEAR
-    cuts = []
+    cuts = {}
     for label, shape in core_board_placeholders(hand).items():
         if not label.startswith(("usb_", "switch_")):
             continue
@@ -216,9 +216,42 @@ def wall_openings(hand):
             continue
         b = piece.bounding_box()
         along = c + (params.SLIDE_SW_TRAVEL / 2 if label.startswith("switch_") else 0.0)
-        cuts.append(Pos((b.min.X + b.max.X) / 2, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2)
-                    * Box(b.size.X + 2 * along, y1 - y0, b.size.Z + 2 * c))
+        cuts[label] = (Pos((b.min.X + b.max.X) / 2, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2)
+                       * Box(b.size.X + 2 * along, y1 - y0, b.size.Z + 2 * c))
     return cuts
+
+
+def wall_openings(hand):
+    return list(_opening_cuts(hand).values())
+
+
+def tactile_bumps(hand):
+    """Small domes on the outer face of the +Y wall that mark the USB-C and switch openings by touch: a spherical cap
+    TACTILE_BUMP_D wide and TACTILE_BUMP_H high, centre TACTILE_BUMP_GAP from the opening's edge, lined up with the
+    opening's centre (below it for 'below', beside it on the +X / -X side, at the opening's mid height, for '+x' / '-x')."""
+    from shapely.geometry import LineString
+
+    cuts = _opening_cuts(hand)
+    outer = outline.case_outline_polygon(hand)
+    a, h = params.TACTILE_BUMP_D / 2, params.TACTILE_BUMP_H
+    radius = (a * a + h * h) / (2 * h)
+    out = []
+    for label, where in params.TACTILE_BUMPS_LEFT:
+        if label not in cuts:
+            continue
+        b = cuts[label].bounding_box()
+        x, z = (b.min.X + b.max.X) / 2, (b.min.Z + b.max.Z) / 2
+        if where == "below":
+            z = b.min.Z - params.TACTILE_BUMP_GAP
+        elif where == "+x":
+            x = b.max.X + params.TACTILE_BUMP_GAP
+        else:
+            x = b.min.X - params.TACTILE_BUMP_GAP
+        y = outer.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3]                 # outer face of the +Y wall
+        dome = Pos(x, y + h - radius, z) * Sphere(radius)
+        keep = Pos(x, y + (h + 1.0 - 0.1) / 2, z) * Box(2 * radius, h + 1.0 + 0.1, 2 * radius)    # outside the face, 0.1 into it
+        out.append(dome & keep)
+    return out
 
 
 def walls(hand):
@@ -231,6 +264,9 @@ def walls(hand):
         shell = shell + thumb_ledge(hand)
     for c in pockets(hand) + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c
+    if hand == "left":
+        for dome in tactile_bumps(hand):
+            shell = shell + dome
     return shell
 
 

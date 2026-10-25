@@ -109,6 +109,12 @@ HOTSWAP_SOCKET_PROTRUSION = 1.8   # Choc hot-swap socket sticks out of the PCB (
 BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 1.0)   # -2.8: the holder sits on the battery door (see below)
 # The USB-C and slide-switch openings are cut in the top case wall (the walls run down to the bottom).
 WALL_OPEN_CLEAR = 0.6      # opening grown around the USB-C receptacle (plug entry) and the slide-switch handle
+# Tactile dots on the +Y wall's outer face: spherical caps (0.8 high = the JLC minimum emboss), centre 2.5 from the opening edge,
+# lined up with the opening centre: below the middle USB-C (J9), beside the slide switch (on its +X side, at its mid height).
+TACTILE_BUMP_D = 3.0
+TACTILE_BUMP_H = 0.8
+TACTILE_BUMP_GAP = 2.5
+TACTILE_BUMPS_LEFT = (("usb_J9", "below"), ("switch_SW2", "+x"))
 SLIDE_SW_TRAVEL = 3.0      # handle travel between the two positions (TODO confirm from the SK12D07 drawing)
 # Screw posts in the free corners between the PCB outlines and the case wall: Ø7.8 so the wall around the
 # 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the posts run down to the bottom plate, the nut

@@ -189,6 +189,10 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - Support pillars (H2-H4): a 45 degree shoulder at the Ø1.8 pin root (1.0 wide at H2 where the plate is 7 mm below; only 0.3 at H3/H4
   where the plate's inner face is already 0.7 under the sockets) and a 0.3 chamfer at the pin tip as a lead-in into the PCB hole.
   The shoulder top stays 0.2 under the sockets (`PIN_SHOULDER*`, `PIN_TIP_CHAMFER`).
+- Tactile dots (`topcase.tactile_bumps`, `TACTILE_*`): two Ø3.0 x 0.8 domes on the +Y wall's outer face, 2.5 from the opening edge to
+  the dot centre: below the middle USB-C (J9, centred on its opening, z -13.4) and beside the slide switch (SW2, at the opening's mid
+  height, on its +X side, x 35.8). 0.8 is the JLC minimum emboss. TODO: the USB plug overmold size is unknown (the dot is 1.0 from the
+  opening's lower edge); the case's +Y bounding box now stands 0.8 proud of the wall there.
 - TODO: bump/tongue stiffness on a print test.
 - Rubber feet Ø6 x 2.0 (user): each column end has a Ø6.4 x 0.5 recess, so the column ends `FOOT_END_T` = 1.5 above the
   desk (same geometry as before) and the pad stands 1.5 proud.

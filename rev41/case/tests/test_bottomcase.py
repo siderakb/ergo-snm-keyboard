@@ -36,7 +36,7 @@ def test_bottom_case_is_one_valid_solid(bottom):
 def test_plate_sits_inside_the_walls_recessed_from_their_bottom_edge(bottom, top):
     t, b = top.bounding_box(), bottom.bounding_box()
     gap = params.BOTTOM_WALL + params.PLATE_SIDE_CLEAR
-    assert b.min.X - t.min.X == pytest.approx(gap, abs=0.05) and t.max.Y - b.max.Y == pytest.approx(gap, abs=0.05)
+    assert b.min.X - t.min.X == pytest.approx(gap, abs=0.05) and t.max.Y - params.TACTILE_BUMP_H - b.max.Y == pytest.approx(gap, abs=0.05)   # the dots stand proud of the +Y wall
     f = topcase.floor_profile("left")
     skin_under = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.PLATE_T
     assert b.max.Z == pytest.approx(skin_under, abs=1e-6)                         # the support pins touch the skin
