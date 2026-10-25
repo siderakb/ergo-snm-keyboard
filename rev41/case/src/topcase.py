@@ -4,7 +4,8 @@ The walls run from the top surface all the way down, BOTTOM_RECESS past the oute
 inside them (the seam only shows from below). The plate faces follow the folded main/thumb surface: the lower of a
 plane parallel to each top plane. Screw posts sit in the free corners between the PCB outlines and the wall and run
 down to the plate's inner face; each has a nut pocket open at its lower end and a blind screw hole above it.
-The right case takes the left one's floor and posts mirrored (params.MIRROR_X), plus the trackball pod.
+The right case takes the left one's floor and posts mirrored (params.MIRROR_X); the trackball pod hangs below it (bottom plate
+only, the walls stay as on the left).
 """
 
 import functools
@@ -165,14 +166,16 @@ def _profile_below(pts, axis, bounds, lift):
     return Solid.extrude(face, (x1 - x0 + 10.0, 0, 0))
 
 
-def below_floor(hand, lift=0.0):
+def below_floor(hand, lift=0.0, pod=True):
     """Everything below the bottom plate's outer face raised by `lift`: below the higher of the X and Y profiles and
     below the thumb plane (see floor_profile). lift = BOTTOM_WALL is the plate's inner face, lift = -BOTTOM_RECESS the
-    bottom edge of the top case walls."""
-    if hand == "right":                                       # plus the trackball pod
+    bottom edge of the top case walls. Right hand: the left one mirrored, less the trackball pod unless pod=False (the walls
+    and the plate around the pod follow the mirrored floor)."""
+    if hand == "right":
         import trackball
 
-        return mirror_shape(below_floor("left", lift)) - trackball.pod_cut(lift)
+        out = mirror_shape(below_floor("left", lift))
+        return out - trackball.pod_cut(lift) if pod else out
     (_, _), (tp, tn) = _planes(hand)
     f = floor_profile(hand)
     bounds = outline.case_outline_polygon(hand).bounds
@@ -180,13 +183,14 @@ def below_floor(hand, lift=0.0):
     return main & outline._half_space(tp, tn, f["thumb_depth"] - lift)
 
 
-def floor_z(hand, x, y, lift=0.0):
+def floor_z(hand, x, y, lift=0.0, pod=True):
     """Height of the floor surface raised by `lift` at plan position (x, y)."""
     if hand == "right":
         import trackball
 
-        z, pod = floor_z("left", mirror_x(x), y, lift), trackball.pod_floor_z(x, y, lift)
-        return z if pod is None else min(z, pod)
+        z = floor_z("left", mirror_x(x), y, lift)
+        zp = trackball.pod_floor_z(x, y, lift) if pod else None
+        return z if zp is None else min(z, zp)
     f = floor_profile(hand)
     zx = np.interp(x, *zip(*_lifted(f["x_pts"], lift)))
     zy = np.interp(y, *zip(*_lifted(f["y_pts"], lift)))
@@ -281,7 +285,7 @@ def walls(hand):
     inside them, so the seam only shows from below."""
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
-    shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS)
+    shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS, pod=False)
     shell = shell + thumb_ledge(hand)
     for c in pockets(hand) + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c

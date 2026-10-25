@@ -37,7 +37,11 @@ def desk_plane(hand):
     n = np.array((np.sin(t) * (1.0 if hand == "left" else -1.0), 0.0, np.cos(t)))
     ring = outline.case_outline_polygon(hand).exterior
     pts = [ring.interpolate(s) for s in np.arange(0.0, ring.length, 1.0)]
-    low = min(n @ np.array((p.x, p.y, floor_z(hand, p.x, p.y, -params.BOTTOM_RECESS))) for p in pts)
+    low = min(n @ np.array((p.x, p.y, floor_z(hand, p.x, p.y, -params.BOTTOM_RECESS, pod=False))) for p in pts)
+    if hand == "right":                                  # the trackball pod hangs below the walls
+        import trackball
+
+        low = min([low] + [float(n @ p) for p in trackball.lowest_points()])
     return n, float(low - params.FOOT_END_T - params.FOOT_MIN_CLEAR)
 
 
@@ -157,9 +161,16 @@ def ribs(hand):
 
 def bottom_case(hand=None):
     hand = hand or params.HAND
-    envelope = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL)
-    outer_below = below_floor(hand)
+    envelope = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL, pod=False)
+    outer_below = below_floor(hand, pod=False)
     body = envelope - outer_below
+    zone = envelope                                      # where feet and flares may be: the plate, and the pod's shell
+    if hand == "right":                                  # the trackball pod hangs below the plate
+        import trackball
+
+        shell = trackball.pod_shell()
+        body = body - trackball.pod_cavity() + shell
+        zone = envelope - trackball.pod_cavity() + shell
     rim = batterydoor.plate_rim(hand)
     for x, y in topcase.post_positions(hand):                       # the top case posts stand on the plate
         rim = rim - Pos(x, y, -50) * Cylinder(params.BOSS_D / 2 + 0.3, 100)
@@ -169,7 +180,7 @@ def bottom_case(hand=None):
     for rib in ribs(hand):
         body = body + rib
     for flare in foot_flares(hand):
-        body = body + (flare & envelope)
+        body = body + (flare & zone)
     for x, y in topcase.post_positions(hand):
         top, n, t = post_axis(hand, x, y)
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
@@ -183,7 +194,7 @@ def bottom_case(hand=None):
         for c in trackball.mount_cuts():
             body = body - c
     for part in feet(hand):                              # on a ramp the column's flat top would stick out of the inner face
-        body = body + (part & envelope)
+        body = body + (part & zone)
     for part in pillars(hand):                           # ... and a pillar's flat base out of the outer face
         body = body + (part - outer_below)
     solids = sorted(body.solids(), key=lambda s: s.volume)

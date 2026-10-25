@@ -28,6 +28,15 @@ def test_outline_is_the_left_outline_mirrored():
     assert np.allclose(right.bounds, (params.MIRROR_X - x1, y0, params.MIRROR_X - x0, y1), atol=1e-6)
 
 
+def test_walls_are_the_left_walls_height_the_pod_hangs_below():
+    left, right = topcase.walls("left").bounding_box(), topcase.walls("right").bounding_box()
+    assert right.min.Z == pytest.approx(left.min.Z, abs=0.01)                       # walls not wrapped round the pod
+    shell = trackball.pod_shell()
+    assert shell.bounding_box().min.Z < right.min.Z - 10.0
+    assert shell.distance_to(topcase.walls("right")) >= params.BALL_POD_EDGE_CLEAR - 0.01
+    assert trackball.ball().distance_to(shell) == pytest.approx(params.BALL_POD_TOP_CLEAR, abs=0.02)
+
+
 def test_posts_and_battery_door_are_mirrored():
     for (xl, yl), (xr, yr) in zip(topcase.post_positions("left"), topcase.post_positions("right")):
         shift = next((d for s, d in params.BOSS_SHIFT_RIGHT.items() if np.hypot(xr - d[0] - s[0], yr - d[1] - s[1]) < 1.0), (0.0, 0.0))
@@ -95,6 +104,17 @@ def test_second_seat_set_is_in_the_gaps_at_the_steeper_angle(right_case):
 
 def test_cup_rim_clears_the_arm_walls(right_case):
     assert right_case["cup"].distance_to(right_case["top"]) >= 0.5 - 0.05
+
+
+def test_board_corners_clear_the_round_pod_wall(right_case):
+    from build123d import Vertex
+
+    for w in (trackball.W_BOARD, trackball.W_SENSOR):
+        for a, b in trackball.board_holes():                 # the rounded corners' farthest points from the axis
+            k = params.PMW3610_BOARD_CORNER_R / np.hypot(a, b)
+            corner = Vertex(*trackball.to_case(a * (1 + k), b * (1 + k), w))
+            for part in ("top", "bottom"):
+                assert right_case[part].distance_to(corner) >= params.BALL_POD_BOARD_CLEAR - 0.01, (part, a, b, w)
 
 
 def test_sensor_stack_and_pod_depths():

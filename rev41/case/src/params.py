@@ -243,6 +243,7 @@ PMW3610_LENS_FACE_TO_SURFACE = round(PMW3610_SENSOR_FACE_TO_SURFACE - PMW3610_BO
 PMW3610_LENS_PROTRUSION = round(PMW3610_LENS_FACE_TO_SURFACE - PMW3610_WORKING_DISTANCE, 3)  # 3.4 beyond that face
 PMW3610_BOARD = (23.5, 31.5)
 PMW3610_HOLES = (17.5, 25.5)   # M3 x4
+PMW3610_BOARD_CORNER_R = 3.0    # Edge.Cuts: the corners are arcs about the hole centres
 PMW3610_BOARD_CENTRE = (150.0, 100.0)    # KiCad; the optical centre (U1 Cmts.User mark) is the board centre
 PMW3610_IC_BOX = (16.2, 10.1, 1.65)      # package (pmw3610.png) along the board's long side, body below the sensor face
 PMW3610_IC_REF_Y = 102.988               # U1 footprint origin (package centre), KiCad y: 2.988 off the optical centre
@@ -281,9 +282,17 @@ SENSOR_SCREW_CBORE_D = SENSOR_SCREW_HEAD_D + 0.5
 SENSOR_SCREW_PROUD = 0.8           # head stands this far out of the pod's outer face (= BOTTOM_RECESS: no lower than the walls)
 SENSOR_STANDOFF_D = 5.0            # on the pod floor under each board hole: carries the whole head, 1.1 wall around the hole
 BALL_POD_CLEAR = 0.5               # lowest part (FPC connector) -> pod floor
-# Inner extent of the pod from the ball axis: downhill (-u), uphill (+u), across (+-v; the arm walls bound it). Uphill it ends
-# 2.1 past the FPC connector (room for the cable to bend up) and clears the post next to the crease (BOSS_SHIFT_RIGHT).
-BALL_POD_HALF = (19.5, 17.0, 19.0)
+# The pod is a round cup of the bottom plate on the ball axis, hanging below the arm; the top case walls stay as on the left
+# (user). Inner radius = the sensor board's rounded corner (hole centre 15.46 + R3 = 18.46 from the axis) + 0.5 (the board
+# shifts up to 0.35 on its screws, + SLA / PCB tolerance), so its outer face is flush with the arm walls (20.96 vs 20.98).
+# Just under the walls' bottom edge (BALL_POD_EDGE_CLEAR) it starts at the plate's edge and widens at 45 degrees. Its opening
+# up into the arm keeps BALL_POD_TOP_CLEAR around the ball. The bottom edge is rounded, BALL_POD_FILLET on the inside (the
+# board corners keep 0.5 to it), + BOTTOM_WALL outside.
+BALL_POD_BOARD_CLEAR = 0.5
+BALL_POD_R_IN = round(math.hypot(PMW3610_HOLES[0] / 2, PMW3610_HOLES[1] / 2) + PMW3610_BOARD_CORNER_R + BALL_POD_BOARD_CLEAR, 3)
+BALL_POD_FILLET = 2.5
+BALL_POD_EDGE_CLEAR = 0.2
+BALL_POD_TOP_CLEAR = 0.6
 
 # --- Tenting ---
 TENT_DEG = 0.0         # TODO

@@ -9,7 +9,7 @@ board. Four screws from below clamp pod floor (standoffs), board and shims to th
 import functools
 
 import numpy as np
-from build123d import Align, Box, Compound, Cylinder, Location, Plane, Pos, Sphere, import_step
+from build123d import Align, Axis, Box, Compound, Cone, Cylinder, Location, Plane, Pos, Sphere, fillet, import_step
 
 import geometry
 import outline
@@ -98,8 +98,8 @@ def cup_local():
     body = Sphere(r_out) + _box(-bu / 2, bu / 2, -bv / 2, bv / 2, W_SEAT, params.CUP_BLOCK_TOP)
     for p in bearings() + alt_bearings():
         body = body + Pos(*p) * Sphere(params.BEARING_BOSS_D / 2)
-    down, up, _ = params.BALL_POD_HALF                    # nothing above the rim; uphill the shell is cut flat inside the pod
-    body = body & _box(-down + params.BALL_POD_CLEAR, up - params.BALL_POD_CLEAR, -50, 50, W_POD_IN - 1.0, -params.BALL_CUP_RIM)
+    r_keep = params.BALL_POD_R_IN - params.BALL_POD_CLEAR    # nothing above the rim, nothing outside the pod's wall
+    body = body & (Pos(0, 0, W_POD_IN - 1.0) * Cylinder(r_keep, -params.BALL_CUP_RIM - W_POD_IN + 1.0, align=MIN))
     body = body - Sphere(r_in)
     lu, lv = params.PMW3610_LENS_BOX
     c = params.LENS_WINDOW_CLEAR
@@ -152,26 +152,108 @@ def _step_path(name):
     return Path(__file__).resolve().parents[1] / "step" / f"{name}.step"
 
 
-def _pod_extent(lift):
-    """(u0, u1, v) of the pod's outer face lifted by `lift` (shrinks inwards with the lift)."""
-    down, up, v = (h + params.BOTTOM_WALL - lift for h in params.BALL_POD_HALF)
-    return -down, up, v
+def _pod_size(lift):
+    """(radius, bottom edge radius) of the pod's outer face lifted by `lift` (an offset surface: both shrink with the lift)."""
+    return params.BALL_POD_R_IN + params.BOTTOM_WALL - lift, params.BALL_POD_FILLET + params.BOTTOM_WALL - lift
 
 
 def pod_cut(lift=0.0):
-    """What the pod takes away from `below_floor(right, lift)`: the pod box (outer face lifted by `lift`) and up."""
-    u0, u1, hv = _pod_extent(lift)
-    return loc() * _box(u0, u1, -hv, hv, W_POD_OUT + lift, 200.0)
+    """What the pod takes away from `below_floor(right, lift)`: the round pod (outer face lifted by `lift`) and up."""
+    r, f = _pod_size(lift)
+    pod = Pos(0, 0, W_POD_OUT + lift) * Cylinder(r, 200.0, align=MIN)
+    return loc() * fillet(pod.edges().sort_by(Axis.Z)[0:1], f)
+
+
+def _pod_cylinder(r, f, w0):
+    pod = Pos(0, 0, w0) * Cylinder(r, 200.0, align=MIN)
+    return fillet(pod.edges().sort_by(Axis.Z)[0:1], f)
+
+
+@functools.lru_cache(maxsize=None)
+def _pod_top():
+    """(w_ref, r_edge): just under the walls' bottom edge over the arm (ball frame) and the plate edge's distance from the axis."""
+    from shapely.geometry import Point
+
+    import bottomcase
+    import topcase
+
+    depth = topcase.floor_profile("right")["thumb_depth"] + params.BOTTOM_RECESS          # wall edge below the thumb plate
+    w_ref = params.BALL_CENTER_DEPTH - depth - params.BALL_POD_EDGE_CLEAR
+    c = params.BALL_HOLE_CENTER_RIGHT
+    return w_ref, bottomcase.bottom_outline("right").exterior.distance(Point(c[0], c[1]))
+
+
+def _cone_down(r_top, w_top, w_bottom):
+    """45 degree cone, r_top at w_top, widening down to w_bottom."""
+    h = w_top - w_bottom
+    return Pos(0, 0, w_bottom) * Cone(r_top + h, r_top, h, align=MIN)
+
+
+@functools.lru_cache(maxsize=None)
+def pod_outer():
+    """Outer body of the pod (to be cut by `pod_cavity` and kept below the plate's inner face): the round cup, inside the plate
+    outline up to the floor, outside it (over the arm walls) starting at the plate edge just under the walls and widening at
+    45 degrees."""
+    import bottomcase
+    import topcase
+
+    w_ref, r_edge = _pod_top()
+    r, f = _pod_size(0.0)
+    cyl = loc() * _pod_cylinder(r, f, W_POD_OUT)
+    flared = cyl & (loc() * _cone_down(r_edge, w_ref, W_POD_OUT - 1.0))
+    inside = cyl & outline.plan_prism("right", bottomcase.bottom_outline("right"))
+    under_walls = topcase.below_floor("right", -params.BOTTOM_RECESS - params.BALL_POD_EDGE_CLEAR, pod=False)
+    return inside + (flared & under_walls)
+
+
+@functools.lru_cache(maxsize=None)
+def pod_cavity():
+    """Inside of the pod and its opening up into the arm: BALL_POD_R_IN with the rounded bottom edge, narrowing at 45 degrees
+    (BOTTOM_WALL from the outer flare) to the ball + BALL_POD_TOP_CLEAR."""
+    w_ref, r_edge = _pod_top()
+    r_top = R + params.BALL_POD_TOP_CLEAR
+    w_neck = w_ref - (params.BOTTOM_WALL * np.sqrt(2) - (r_edge - r_top))
+    r, f = _pod_size(params.BOTTOM_WALL)
+    neck = _cone_down(r_top, w_neck, W_POD_IN - 1.0) + Pos(0, 0, w_neck - 0.01) * Cylinder(r_top, 200.0, align=MIN)
+    return loc() * (_pod_cylinder(r, f, W_POD_IN) & neck)
+
+
+def pod_shell():
+    import topcase
+
+    return (pod_outer() - pod_cavity()) & topcase.below_floor("right", params.BOTTOM_WALL, pod=False)
+
+
+def lowest_points():
+    """Case-frame points on the pod's rounded bottom edge and the board screw heads, for the desk plane."""
+    c, u, v, n = frame()
+    r, f = _pod_size(0.0)
+    pts = []
+    for a in np.radians(np.arange(0, 360, 5)):
+        d = np.cos(a) * u + np.sin(a) * v
+        for p in np.radians(np.arange(0, 91, 5)):
+            pts.append(c + (r - f + f * np.sin(p)) * d + (W_POD_OUT + f - f * np.cos(p)) * n)
+    w_head = W_HEAD - params.SENSOR_SCREW_HEAD_H
+    for a0, b0 in board_holes():
+        for a in np.radians(np.arange(0, 360, 15)):
+            pts.append(to_case(a0 + params.SENSOR_SCREW_HEAD_D / 2 * np.cos(a), b0 + params.SENSOR_SCREW_HEAD_D / 2 * np.sin(a), w_head))
+    return pts
 
 
 def pod_floor_z(x, y, lift=0.0):
-    """Height of the pod's floor (lifted) at plan (x, y), or None outside the pod."""
+    """Height of the pod's floor (lifted) at plan (x, y), or None outside the pod; the rounded edge rises from the flat
+    floor (offset along n converted to height)."""
     c, u, v, n = frame()
     p0 = to_case(0.0, 0.0, W_POD_OUT + lift)
     z = p0[2] - (n[0] * (x - p0[0]) + n[1] * (y - p0[1])) / n[2]
     d = np.array((x, y, z)) - c
-    u0, u1, hv = _pod_extent(lift)
-    return float(z) if u0 <= d @ u <= u1 and abs(d @ v) <= hv else None
+    rho = np.hypot(d @ u, d @ v)
+    r, f = _pod_size(lift)
+    if rho > r:
+        return None
+    k = rho - (r - f)
+    rise = 0.0 if k <= 0 else f - np.sqrt(max(f * f - k * k, 0.0))
+    return float(z + rise / n[2])
 
 
 def foot_xy():
