@@ -103,7 +103,9 @@ def pillars(hand):
     r, c = params.PIN_D / 2, params.PIN_TIP_CHAMFER
     for x, y in support_holes(hand).values():
         inner = floor_z(hand, x, y, params.BOTTOM_WALL)
-        base = inner - 0.5                                                # sunk into the plate
+        # sunk deep: the caller trims everything below the outer face (a ramp drops it by up to the body's radius)
+        base = min(floor_z(hand, x + params.PILLAR_D / 2 * np.cos(a), y + params.PILLAR_D / 2 * np.sin(a))
+                   for a in np.linspace(0, 2 * np.pi, 16, endpoint=False)) - 0.5
         if params.PILLAR_TOP_Z > base:
             out.append(Pos(x, y, base) * Cylinder(params.PILLAR_D / 2, params.PILLAR_TOP_Z - base, align=mn))
         z0 = min(base, params.PILLAR_TOP_Z)
@@ -147,7 +149,8 @@ def ribs(hand):
 def bottom_case(hand=None):
     hand = hand or params.HAND
     envelope = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL)
-    body = envelope - below_floor(hand)
+    outer_below = below_floor(hand)
+    body = envelope - outer_below
     if hand == "left":
         rim = batterydoor.plate_rim(hand)
         for x, y in topcase.post_positions(hand):                   # the top case posts stand on the plate
@@ -164,8 +167,10 @@ def bottom_case(hand=None):
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
     for c in topcase.screw_counterbores(hand):
         body = body - c
-    for part in feet(hand) + pillars(hand):
-        body = body + part
+    for part in feet(hand):                              # on a ramp the column's flat top would stick out of the inner face
+        body = body + (part & envelope)
+    for part in pillars(hand):                           # ... and a pillar's flat base out of the outer face
+        body = body + (part - outer_below)
     solids = sorted(body.solids(), key=lambda s: s.volume)
     assert all(s.volume < 0.1 for s in solids[:-1]), "bottom case falls apart"
     return solids[-1]                                    # drops boolean slivers (counterbore against a ramp)
@@ -181,6 +186,7 @@ def battery_door(hand=None):
         slab = slab - batterydoor.post_notch(hand)
     for flare in foot_flares(hand, on_door=True):
         body = body + (flare & slab)
+    above = batterydoor._box((-500.0, -500.0, 500.0, 500.0), z["bottom"] - 200.0, z["top"])         # nothing above the door's top
     for part in feet(hand, on_door=True):
-        body = body + part
+        body = body + (part & above)
     return body

@@ -6,8 +6,9 @@ import numpy as np
 import pyvista as pv
 
 COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluster": "darkorange",
-          "top_skin": "gold", "top_walls": "orange", "top_posts": "red"}
-COLORS.update({"usb": "silver", "switch": "magenta", "battery_holder": "purple", "battery": "cyan", "bottom_case": "lightgray", "battery_door": "royalblue"})
+          "top_skin": "orange", "top_walls": "orange", "top_posts": "orange"}                    # one colour per case part:
+COLORS.update({"usb": "silver", "switch": "magenta", "battery_holder": "purple", "battery": "cyan",
+               "bottom_case": "slategray", "battery_door": "deepskyblue"})                       # top orange, bottom slategray, door blue
 VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz", "bottom": "xy"}
 
 

@@ -3,7 +3,7 @@
 import sys
 from pathlib import Path
 
-from build123d import Box, Compound, Location, Plane, Pos, import_step
+from build123d import Box, Color, Compound, Location, Plane, Pos, import_step
 from ocp_vscode import show
 
 import params
@@ -14,6 +14,7 @@ from parts import load_parts
 from placeholders import battery_holder, core_board_placeholders
 
 STEP_DIR = Path(__file__).resolve().parents[1] / "step"
+TOP_COLOR, BOTTOM_COLOR, DOOR_COLOR = "orange", "slategray", "deepskyblue"      # top case, bottom case, battery door (also in viz.py)
 
 
 def _without(shape, prefix):
@@ -95,11 +96,16 @@ def load_case_parts():
 if __name__ == "__main__":
     hand = sys.argv[1] if len(sys.argv) > 1 else params.HAND
     case = [shape for _, shape in load_case_parts().values()]
-    draft = [Compound(label=n, children=[s]) for n, s in top_case_draft(hand).items()]
+    tint = lambda shape, color: setattr(shape, "color", Color(color)) or shape
+    draft = [Compound(label=n, children=[tint(s, TOP_COLOR)]) for n, s in top_case_draft(hand).items()]
+    left = hand == "left"
     show(Compound(label=f"boards_{hand}", children=load_boards(hand)),
          Compound(label="top_case_draft", children=draft),
-         Compound(label="bottom_case", children=[bottom_case(hand)] + ([battery_door(hand)] if hand == "left" else [])),
+         Compound(label="bottom_case", children=[tint(bottom_case(hand), BOTTOM_COLOR)]),
+         Compound(label="battery_door", children=[tint(battery_door(hand), DOOR_COLOR)]) if left else None,
          Compound(label="case", children=case) if case else None,
          Compound(label="placeholders", children=[Compound(label=n, children=[s]) for n, s in core_board_placeholders(hand).items()]
-                  + ([Compound(label="battery_holder", children=[battery_holder(hand)])] if hand == "left" else [])),
-         names=["boards", "top_case_draft", "bottom_case", "case", "placeholders"], alphas=[1.0, 0.6, 0.6, 1.0, 1.0])
+                  + ([Compound(label="battery_holder", children=[battery_holder(hand)])] if left else [])),
+         names=["boards", "top_case_draft", "bottom_case", "battery_door", "case", "placeholders"] if left
+         else ["boards", "top_case_draft", "bottom_case", "case", "placeholders"],
+         alphas=[1.0, 0.6, 0.6, 1.0, 1.0, 1.0] if left else [1.0, 0.6, 0.6, 1.0, 1.0])

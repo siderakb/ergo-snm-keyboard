@@ -136,6 +136,19 @@ def test_foot_columns_flare_at_the_root(bottom, door):
             assert not solid.is_inside(tuple(p)), (x, y)
 
 
+def test_feet_and_pillars_do_not_poke_through_the_plate_faces(bottom):
+    angles = np.linspace(0, 2 * np.pi, 24, endpoint=False)
+    for top, n, _ in bottomcase._foot_axes("left", False):          # columns end at the plate's inner face, also on a ramp
+        x, y = top[0], top[1]
+        for a in angles:
+            px, py = x + 0.9 * params.FOOT_D / 2 * np.cos(a), y + 0.9 * params.FOOT_D / 2 * np.sin(a)
+            assert not bottom.is_inside((px, py, topcase.floor_z("left", px, py, params.BOTTOM_WALL) + 0.3)), (x, y, a)
+    for x, y in bottomcase.support_holes("left").values():          # pillars stop at the outer face, also on a ramp
+        for a in angles:
+            px, py = x + 0.95 * params.PILLAR_D / 2 * np.cos(a), y + 0.95 * params.PILLAR_D / 2 * np.sin(a)
+            assert not bottom.is_inside((px, py, topcase.floor_z("left", px, py) - 0.3)), (x, y, a)
+
+
 def test_ribs_stand_on_the_plate_and_keep_the_wire_gap_and_posts_clear(bottom):
     z = batterydoor.levels("left")
     z_in = z["bottom"] + params.BOTTOM_WALL
