@@ -9,7 +9,9 @@ main board's mounting holes to the skin underside. The left plate carries the ba
 import functools
 
 import numpy as np
-from build123d import Align, Cylinder, Location, Plane, Pos
+from build123d import Align, Box, Cone, Cylinder, Location, Plane, Pos
+from shapely.geometry import MultiPolygon
+from shapely.geometry import box as sbox
 
 import batterydoor
 import outline
@@ -34,12 +36,11 @@ def desk_plane(hand):
     ring = outline.case_outline_polygon(hand).exterior
     pts = [ring.interpolate(s) for s in np.arange(0.0, ring.length, 1.0)]
     low = min(n @ np.array((p.x, p.y, floor_z(hand, p.x, p.y, -params.BOTTOM_RECESS))) for p in pts)
-    return n, float(low - params.FOOT_PAD_T - params.FOOT_MIN_CLEAR)
+    return n, float(low - params.FOOT_END_T - params.FOOT_MIN_CLEAR)
 
 
-def feet(hand, on_door=False):
-    """Feet columns: from the plate's inner face (or the battery door's top) down along the desk normal to FOOT_PAD_T
-    above the desk. on_door picks the feet standing on the battery door."""
+def _foot_axes(hand, on_door):
+    """[(top point, desk normal, desk d)] of the feet columns: the axis runs from `top` down along -n."""
     n, d = desk_plane(hand)
     out = []
     for x, y in params.FEET_LEFT:
@@ -48,10 +49,42 @@ def feet(hand, on_door=False):
         # start inside the plate, low enough that the tilted top disc stays under its inner face
         sink = params.FOOT_D / 2 * np.sin(np.radians(params.TENT_ANGLE)) + 0.1
         z = batterydoor.levels(hand)["top"] if on_door else floor_z(hand, x, y, params.BOTTOM_WALL)
-        top = np.array((x, y, z - sink))
-        length = n @ top - (d + params.FOOT_PAD_T)
+        out.append((np.array((x, y, z - sink)), n, d))
+    return out
+
+
+def _floor_normal(hand, x, y, e=1.0):
+    fx = (floor_z(hand, x + e, y) - floor_z(hand, x - e, y)) / (2 * e)
+    fy = (floor_z(hand, x, y + e) - floor_z(hand, x, y - e)) / (2 * e)
+    v = np.array((-fx, -fy, 1.0))
+    return v / np.linalg.norm(v)
+
+
+def foot_flares(hand, on_door=False):
+    """Conical flares at the column roots (the strengthening for the long thin columns), as raw cones: clip them to the
+    plate envelope (or the door slab). The wide end sits just inside the floor, tilted like the column axis."""
+    r, rw = params.FOOT_D / 2, params.FOOT_D / 2 + params.FOOT_FLARE_R
+    out = []
+    for top, n, _ in _foot_axes(hand, on_door):
+        x, y = top[0], top[1]
+        rel = np.arccos(np.clip(n @ _floor_normal(hand, x, y), -1.0, 1.0))        # axis against the floor normal
+        h = 0.3 + rw * np.sin(rel)                                                # lowest rim point 0.3 above the floor
+        p0 = top + n * ((floor_z(hand, x, y) + h / n[2] - top[2]) / n[2])
+        out.append(Location(Plane(origin=tuple(p0), z_dir=tuple(-n))) * Cone(rw, r, params.FOOT_FLARE_L, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    return out
+
+
+def feet(hand, on_door=False):
+    """Feet columns: from the plate's inner face (or the battery door's top) down along the desk normal to FOOT_END_T
+    above the desk, with a FOOT_PAD_D rubber pad recess in the end. on_door picks the feet standing on the battery door."""
+    out = []
+    for top, n, d in _foot_axes(hand, on_door):
+        length = n @ top - (d + params.FOOT_END_T)
         plane = Plane(origin=tuple(top), z_dir=tuple(-n))
-        out.append(Location(plane) * Cylinder(params.FOOT_D / 2, length, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+        column = Location(plane) * Cylinder(params.FOOT_D / 2, length, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        r, depth = (params.FOOT_PAD_D + params.FOOT_PAD_RECESS_CLEAR) / 2, params.FOOT_PAD_RECESS
+        recess = Location(plane) * Pos(0, 0, length - depth) * Cylinder(r, depth + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        out.append(column - recess)
     return out
 
 
@@ -62,21 +95,59 @@ def support_holes(hand):
 
 
 def pillars(hand):
-    """Pillar body from the plate up to PILLAR_TOP_Z (below the sockets) and a pin through the hole to the skin underside."""
+    """Pillar body from the plate up to PILLAR_TOP_Z (below the sockets), a pin through the hole to the skin underside with a
+    45 degree shoulder at its root and a chamfered tip."""
     skin_under = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.PLATE_T
     out = []
+    mn = (Align.CENTER, Align.CENTER, Align.MIN)
+    r, c = params.PIN_D / 2, params.PIN_TIP_CHAMFER
     for x, y in support_holes(hand).values():
-        base = floor_z(hand, x, y, params.BOTTOM_WALL) - 0.5            # sunk into the plate
+        inner = floor_z(hand, x, y, params.BOTTOM_WALL)
+        base = inner - 0.5                                                # sunk into the plate
         if params.PILLAR_TOP_Z > base:
-            out.append(Pos(x, y, base) * Cylinder(params.PILLAR_D / 2, params.PILLAR_TOP_Z - base, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+            out.append(Pos(x, y, base) * Cylinder(params.PILLAR_D / 2, params.PILLAR_TOP_Z - base, align=mn))
         z0 = min(base, params.PILLAR_TOP_Z)
-        out.append(Pos(x, y, z0) * Cylinder(params.PIN_D / 2, skin_under - z0, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+        out.append(Pos(x, y, z0) * Cylinder(r, skin_under - c - z0, align=mn))
+        out.append(Pos(x, y, skin_under - c - 0.01) * Cone(r, r - c, c + 0.01, align=mn))
+        top = params.PILLAR_TOP_Z + params.PIN_SHOULDER_UP
+        s = min(params.PIN_SHOULDER, top - inner)
+        if s > 0.05:
+            out.append(Pos(x, y, top - s) * Cone(r + s, r, s + 0.01, align=mn))
+    return out
+
+
+def ribs(hand):
+    """Ribs on the plate's inner face (left): an edge rim along the +Y and +X plate edge on the deep level, and a bar across
+    the strip between the battery opening and the pocket's +Y end, with a gap for the wire. Posts are kept clear."""
+    f, lay, z = topcase.floor_profile(hand), batterydoor.layout(hand), batterydoor.levels(hand)
+    plate = bottom_outline(hand)
+    from assembly import load_boards
+
+    core = next(b for b in load_boards(hand) if b.label == "core_board_e73").bounding_box()
+    x_start, y_flat = max(f["x_pts"][4][0], core.max.X + 1.0), f["y_flat"]          # clear of the core board's USB-C at +Y
+    band = plate.difference(plate.buffer(-params.RIB_T)).intersection(sbox(x_start, y_flat, x_start + 500, 500))
+    band = MultiPolygon([g for g in getattr(band, "geoms", [band]) if g.geom_type == "Polygon" and g.area > 1.0])
+    z0 = z["bottom"] + params.BOTTOM_WALL - 0.1
+    slab = Pos(0, 0, z0 + (params.EDGE_RIB_H + 0.1) / 2) * Box(1000, 1000, params.EDGE_RIB_H + 0.1)
+    edge = topcase._prism(band) & slab
+    px0, _, px1, _ = lay["pocket"]
+    px0 = max(px0, x_start)                                                          # nor under the USB-C
+    y0 = lay["opening"][3] + params.STRIP_RIB_GAP
+    strip = batterydoor._box((px0, y0, px1, y0 + params.RIB_T), z["rim"] - 0.1, z["rim"] + params.STRIP_RIB_H)
+    cx, w = (lay["holder"][0] + lay["holder"][2]) / 2, params.STRIP_RIB_NOTCH_W / 2
+    strip = strip - batterydoor._box((cx - w, y0 - 1.0, cx + w, y0 + params.RIB_T + 1.0), z["rim"] - 1.0, z["rim"] + params.STRIP_RIB_H + 1.0)
+    out = []
+    for rib in (edge, strip):
+        for x, y in topcase.post_positions(hand):
+            rib = rib - Pos(x, y, -50) * Cylinder(params.BOSS_D / 2 + 0.3, 100)
+        out.append(rib)
     return out
 
 
 def bottom_case(hand=None):
     hand = hand or params.HAND
-    body = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL) - below_floor(hand)
+    envelope = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL)
+    body = envelope - below_floor(hand)
     if hand == "left":
         rim = batterydoor.plate_rim(hand)
         for x, y in topcase.post_positions(hand):                   # the top case posts stand on the plate
@@ -84,6 +155,10 @@ def bottom_case(hand=None):
         body = body + rim
         for c in batterydoor.plate_cuts(hand):
             body = body - c
+        for rib in ribs(hand):
+            body = body + rib
+        for flare in foot_flares(hand):
+            body = body + (flare & envelope)
     for x, y in topcase.post_positions(hand):
         top, n, t = post_axis(hand, x, y)
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
@@ -100,6 +175,12 @@ def battery_door(hand=None):
     """The battery door (locked position) with its feet."""
     hand = hand or params.HAND
     body = batterydoor.door(hand)
+    z = batterydoor.levels(hand)
+    slab = batterydoor._box(batterydoor.layout(hand)["door"], z["bottom"] - 20.0, z["top"])        # flares stay on the door
+    if batterydoor.post_notch(hand):
+        slab = slab - batterydoor.post_notch(hand)
+    for flare in foot_flares(hand, on_door=True):
+        body = body + (flare & slab)
     for part in feet(hand, on_door=True):
         body = body + part
     return body

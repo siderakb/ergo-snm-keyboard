@@ -140,12 +140,24 @@ MAIN_TOP_RIGHT_GROW = 5.9
 BOTTOM_RAMP_ANGLE = 45.0
 BOTTOM_DEEP_MARGIN = 1.0     # the deep box runs this far past the battery door pocket (-X and -Y)
 # Tenting: the whole half sits on the desk tilted about the Y axis, inner (+X, thumb) side up. The feet are columns on the
-# bottom plate, perpendicular to the desk, ending FOOT_PAD_T above it (rubber pads); the lowest point of the case stays
-# FOOT_MIN_CLEAR above the pads' underside plane plus the pads.
+# bottom plate, perpendicular to the desk, ending FOOT_END_T above it (rubber pads in a recess); the lowest point of the
+# case stays FOOT_MIN_CLEAR above the plane of the column ends.
 TENT_ANGLE = 10.0          # TODO: user to set the tenting angle
 FOOT_D = 8.0
-FOOT_PAD_T = 1.5           # TODO: rubber foot thickness
+FOOT_PAD_D = 6.0           # rubber feet: Ø6 x 2.0 (user), glued into a shallow recess at the column end
+FOOT_PAD_T = 2.0
+FOOT_PAD_RECESS = 0.5      # depth of the recess; the pad stands FOOT_PAD_T - FOOT_PAD_RECESS proud of the column end
+FOOT_PAD_RECESS_CLEAR = 0.4   # recess diameter = pad + this (rim 0.8 on the Ø8 column)
+FOOT_END_T = FOOT_PAD_T - FOOT_PAD_RECESS   # column end above the desk
 FOOT_MIN_CLEAR = 1.0
+FOOT_FLARE_R, FOOT_FLARE_L = 2.5, 3.75   # conical flare at the column root (radial x along the axis), clipped to the plate outline
+# Ribs on the plate (SLA, so as thick as the walls, >= 1.5): a standing edge rim along the plate edge on the deep level
+# (+Y and +X sides), and a bar across the strip between the battery opening and the pocket's +Y end (with a gap for the wire).
+RIB_T = 1.5
+EDGE_RIB_H = 4.0
+STRIP_RIB_H = 5.0
+STRIP_RIB_GAP = 1.0        # from the opening's +Y edge
+STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire through
 FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (100.0, -45.0),                       # near the user's circles; (100, -45) on the battery door
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 # Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
@@ -159,6 +171,12 @@ SUPPORT_HOLES_LEFT = ("H2", "H3", "H4")
 PILLAR_D = 5.0
 PILLAR_TOP_Z = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)
 PIN_D = 1.8
+# 45 degree shoulder at the pin root (up to PIN_SHOULDER wide), its top PIN_SHOULDER_UP above PILLAR_TOP_Z (0.2 under the
+# sockets); where the plate's inner face is close under the sockets (H3, H4) it shrinks to the room that is left (0.3).
+# The pin tip has a lead-in chamfer for entering the PCB hole from below.
+PIN_SHOULDER = 1.0
+PIN_SHOULDER_UP = 0.3
+PIN_TIP_CHAMFER = 0.3
 # Battery door (left): the 2xAA holder is glued onto a door (MJF PA12) that sits flush in a pocket of the bottom plate's
 # outer face and hangs from three keyholes (two on the -X edge, one on the +X edge). Push it BATTERY_SLIDE towards +Y and
 # it drops out with the holder (the holder wires stay connected, left long enough); push back towards -Y to lock, a bump

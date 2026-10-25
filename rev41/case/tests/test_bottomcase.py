@@ -101,10 +101,49 @@ def test_feet_end_on_the_tented_desk_plane(bottom):
     assert len(plate_feet) + len(door_feet) == len(params.FEET_LEFT) and door_feet
     for foot in plate_feet + door_feet:
         low = min(n @ np.array((v.X, v.Y, v.Z)) for v in foot.vertices())
-        assert low == pytest.approx(d + params.FOOT_PAD_T, abs=1e-3)
+        assert low == pytest.approx(d + params.FOOT_END_T, abs=1e-3)                     # column end (rim of the pad recess)
+        floor = d + params.FOOT_PAD_T                                                     # pad top = recess floor
+        assert any(abs(n @ np.array((v.X, v.Y, v.Z)) - floor) < 1e-3 for v in foot.vertices())
+    assert (params.FOOT_PAD_D + params.FOOT_PAD_RECESS_CLEAR) / 2 < params.FOOT_D / 2 - 0.5     # rim around the recess
     # nothing else of the case comes closer to the desk than the pads plus the clearance (sampled along the outline)
     walls = topcase.walls("left")
-    assert min(n @ np.array((v.X, v.Y, v.Z)) for v in walls.vertices()) >= d + params.FOOT_PAD_T + params.FOOT_MIN_CLEAR - 0.5
+    assert min(n @ np.array((v.X, v.Y, v.Z)) for v in walls.vertices()) >= d + params.FOOT_END_T + params.FOOT_MIN_CLEAR - 0.5
+
+
+def test_foot_columns_flare_at_the_root(bottom, door):
+    r = params.FOOT_D / 2
+    for on_door, solid in ((False, bottom), (True, door)):
+        for top, n, _ in bottomcase._foot_axes("left", on_door):
+            x, y = top[0], top[1]
+            z = batterydoor.levels("left")["bottom"] if on_door else topcase.floor_z("left", x, y)
+            u = np.array((1.0, 0.0, 0.0)); u -= n * (u @ n); u /= np.linalg.norm(u)       # across the axis
+            for sign in (1, -1):
+                p = top + n * ((z - 0.5 - top[2]) / n[2]) + sign * u * (r + 0.8)            # 0.5 below the floor, beside the column
+                if sign == -1 and abs(x) < r + 3:
+                    continue                                                                   # the -X edge clips the flare
+                assert solid.is_inside(tuple(p)), (x, y, sign)
+            p = top + n * ((z - params.FOOT_FLARE_L - 2.0 - top[2]) / n[2]) + u * (r + 0.8)   # below the flare: bare column
+            assert not solid.is_inside(tuple(p)), (x, y)
+
+
+def test_ribs_stand_on_the_plate_and_keep_the_wire_gap_and_posts_clear(bottom):
+    z = batterydoor.levels("left")
+    z_in = z["bottom"] + params.BOTTOM_WALL
+    lay = batterydoor.layout("left")
+    ribs = bottomcase.ribs("left")
+    assert len(ribs) == 2 and all(r.is_valid and r.volume > 50 for r in ribs)
+    edge, strip = ribs
+    plate = bottomcase.bottom_outline("left")
+    x, y = 90.0, plate.intersection(__import__("shapely.geometry", fromlist=["LineString"]).LineString([(90, -300), (90, 50)])).bounds[3]
+    assert bottom.is_inside((x, y - params.RIB_T / 2, z_in + params.EDGE_RIB_H - 0.3))            # +Y edge rim
+    assert not bottom.is_inside((x, y - params.RIB_T - 0.4, z_in + params.EDGE_RIB_H - 0.3))       # nothing beside it
+    y0 = lay["opening"][3] + params.STRIP_RIB_GAP + params.RIB_T / 2
+    cx = (lay["holder"][0] + lay["holder"][2]) / 2
+    assert bottom.is_inside((lay["holder"][0] + 3.0, y0, z["rim"] + params.STRIP_RIB_H - 0.3))   # bar
+    assert not bottom.is_inside((cx, y0, z["rim"] + 1.0))                                           # wire gap
+    for r in ribs:
+        for px, py in topcase.post_positions("left"):
+            assert vol(r & (Pos(px, py, -50) * Cylinder(params.BOSS_D / 2, 100))) < 1e-3
 
 
 def test_support_pillars_go_through_the_main_board_holes_to_the_skin(bottom):
@@ -114,6 +153,13 @@ def test_support_pillars_go_through_the_main_board_holes_to_the_skin(bottom):
     for x, y in holes.values():
         assert bottom.is_inside((x, y, skin_under - 0.2)) and bottom.is_inside((x, y, params.PCB_T / 2))
         assert not bottom.is_inside((x + params.PIN_D / 2 + 0.1, y, params.PCB_T / 2))      # only the thin pin in the hole
+        inner = topcase.floor_z("left", x, y, params.BOTTOM_WALL)
+        top = params.PILLAR_TOP_Z + params.PIN_SHOULDER_UP
+        r = params.PIN_D / 2 + 0.1
+        assert top - inner >= 0.15
+        assert bottom.is_inside((x + r, y, top - 0.15))                                       # 45 degree shoulder under the sockets
+        assert not bottom.is_inside((x + r, y, top + 0.05))                                   # nothing above it, 0.1+ under the sockets
+        assert bottom.is_inside((x, y, skin_under - 0.02))                                    # the chamfered tip still reaches the skin
 
 
 @pytest.fixture(scope="module")

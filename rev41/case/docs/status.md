@@ -151,7 +151,7 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   The top case walls follow it (BOTTOM_RECESS below). Screw heads must sit on a flat level: a ramp moves off a post or
   gets steeper (X ramps now ~72 deg at X 17.6-21.0, ~57 deg at X 67.2-69.8; the +Y post (73.8, -34.2) sits on the deep level).
 - Tenting (`TENT_ANGLE` 10 deg, TODO user): desk plane tilted about Y, +X (thumb side) up (`bottomcase.desk_plane`), as high
-  as the walls' bottom edge allows with `FOOT_PAD_T` 1.5 + `FOOT_MIN_CLEAR` 1.0. Feet columns Ø8 (`FEET_LEFT`, near the
+  as the walls' bottom edge allows with `FOOT_END_T` 1.5 + `FOOT_MIN_CLEAR` 1.0. Feet columns Ø8 (`FEET_LEFT`, near the
   user's four circles) perpendicular to the desk, ending on the pads: lengths ~11.5 / 11.5 (-X), 14.9 (battery corner), 28.1 (thumb neck).
 - Support pillars at main-board holes H2, H3, H4 (`SUPPORT_HOLES_LEFT`): a Ø5 body up to Z -2.3 (under the hot-swap sockets)
   and a Ø1.8 pin through the Ø2.2 hole touching the skin underside. Free radius around the holes from the F.Cu socket pads
@@ -179,4 +179,16 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   Y down to -108.4.
 - The +Y strip post (73.8, -34.2) is replaced by a fixed corner post (109.5, -38.6) (`BOSS_FIXED_LEFT`, ~95% of the boss).
 - Foot (105, -45) moved to (100, -45) so it stands wholly on the door; the door carries it (desk load goes into the laps).
-- TODO: wire slack routing, bump/tongue stiffness on a print test.
+- Battery wire (J8 to the holder): not modelled, it lies loose inside the shell (user). J8 is about 54-80 mm from the holder's
+  +Y end in a straight line; leave about 150 mm so the door can be pushed 4 mm and the holder dropped out of the plate.
+- Ribs (`bottomcase.ribs`, `foot_flares`): (1) every foot column root gets a conical flare (+2.5 radial over 3.75, clipped to the
+  plate outline / door slab, the door's one also to the post notch); (2) an edge rim 1.5 x 4.0 along the +Y and +X plate edge on
+  the deep level, starting 1.0 past the core board's right edge (the USB-C is there); (3) a bar 1.5 x 5.0 across the strip between
+  the battery opening and the pocket's +Y end, 1.0 from the opening, with a 12 mm gap centred on the holder for the wire. Both rims
+  keep clear of the post cylinders (Ø8.4).
+- Support pillars (H2-H4): a 45 degree shoulder at the Ø1.8 pin root (1.0 wide at H2 where the plate is 7 mm below; only 0.3 at H3/H4
+  where the plate's inner face is already 0.7 under the sockets) and a 0.3 chamfer at the pin tip as a lead-in into the PCB hole.
+  The shoulder top stays 0.2 under the sockets (`PIN_SHOULDER*`, `PIN_TIP_CHAMFER`).
+- TODO: bump/tongue stiffness on a print test.
+- Rubber feet Ø6 x 2.0 (user): each column end has a Ø6.4 x 0.5 recess, so the column ends `FOOT_END_T` = 1.5 above the
+  desk (same geometry as before) and the pad stands 1.5 proud.

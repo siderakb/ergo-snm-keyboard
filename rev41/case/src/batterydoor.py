@@ -65,6 +65,20 @@ def _post_keep(hand):
     return None
 
 
+def post_notch(hand):
+    """Solid the door must stay out of: the corner post's keep-out circle swept over the whole slide (a stadium from
+    y - SLIDE to y), or None."""
+    keep = _post_keep(hand)
+    if not keep:
+        return None
+    x, y, r = keep
+    r += params.BATTERY_POCKET_CLEAR
+    s, z = params.BATTERY_SLIDE, levels(hand)
+    z0, h = z["bottom"] - 20.0, z["top"] + 1.0 - (z["bottom"] - 20.0)
+    return (Pos(x, y, z0) * Cylinder(r, h, align=MIN) + Pos(x, y - s, z0) * Cylinder(r, h, align=MIN)
+            + _box((x - r, y - s, x + r, y), z0, z0 + h))
+
+
 def _tongue(hand):
     """(x0, y0, x1, y1) of the sprung tongue at the door's -Y end and the y of its bump."""
     d = layout(hand)["door"]
@@ -77,13 +91,9 @@ def door(hand):
     lay, z = layout(hand), levels(hand)
     body = _box(lay["door"], z["bottom"], z["top"])
     body = chamfer(body.edges().group_by(Axis.Z)[-1], params.BATTERY_DOOR_CHAMFER)
-    keep = _post_keep(hand)
-    if keep:                     # clear of the post's keep-out over the whole slide: a stadium from y - SLIDE to y
-        x, y, r = keep
-        r += params.BATTERY_POCKET_CLEAR
-        s, h = params.BATTERY_SLIDE, (z["bottom"] - 1.0, z["top"] + 1.0)
-        body = body - Pos(x, y, h[0]) * Cylinder(r, h[1] - h[0], align=MIN) - Pos(x, y - s, h[0]) * Cylinder(r, h[1] - h[0], align=MIN)
-        body = body - _box((x - r, y - s, x + r, y), *h)
+    notch = post_notch(hand)
+    if notch:
+        body = body - notch
     head_z = z["rim"] + params.KEY_HEAD_GAP
     rs, rf = params.KEY_STUD_D / 2, params.KEY_ROOT_FILLET
     for x, y in lay["studs"]:

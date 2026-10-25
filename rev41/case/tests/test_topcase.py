@@ -51,7 +51,7 @@ def test_posts_are_spread_and_clear_of_the_pcbs():
     r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
     for p in pts:
         shifted = any(np.hypot(p[0] - sx - dx, p[1] - sy - dy) < 1.0 for (sx, sy), (dx, dy) in params.BOSS_SHIFT_LEFT.items())
-        need = r_nut + 1.0 if shifted and p[1] < -130 and p[0] < 60 else r        # hand-shifted post, trimmed by the PCB
+        need = r_nut + 1.0 if shifted and p[1] < -130 and p[0] < 60 else r       # hand-shifted post, trimmed by the PCB
         assert union.distance(Point(p)) >= need + params.BOSS_PCB_CLEAR - 0.01
         assert inner.buffer(-(r - 1.0) + 1e-6).contains(Point(p))
     a = np.array(all_pts)
