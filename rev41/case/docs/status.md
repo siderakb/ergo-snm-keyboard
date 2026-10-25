@@ -193,6 +193,8 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   the dot centre: below the middle USB-C (J9, centred on its opening, z -13.4) and beside the slide switch (SW2, at the opening's mid
   height, on its +X side, x 35.8). 0.8 is the JLC minimum emboss. TODO: the USB plug overmold size is unknown (the dot is 1.0 from the
   opening's lower edge); the case's +Y bounding box now stands 0.8 proud of the wall there.
+- USB-C wall openings are rounded rectangles: corner radius = shell fillet 1.2 (drawing TYPE-C-31-M-12, shell 8.94 x 3.26, corner R about
+  1.2-1.3) + 0.6 clearance = 1.8, concentric with the receptacle; the switch slot stays rectangular.
 - TODO: bump/tongue stiffness on a print test.
 - Rubber feet Ø6 x 2.0 (user): each column end has a Ø6.4 x 0.5 recess, so the column ends `FOOT_END_T` = 1.5 above the
   desk (same geometry as before) and the pad stands 1.5 proud.

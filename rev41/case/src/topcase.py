@@ -11,7 +11,7 @@ import functools
 import numpy as np
 from shapely.geometry import LineString, MultiPoint, Point, Polygon
 from shapely.ops import unary_union
-from build123d import Align, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Sphere, Wire
+from build123d import Align, Axis, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Sphere, Wire, fillet
 
 import params
 import outline
@@ -216,8 +216,10 @@ def _opening_cuts(hand):
             continue
         b = piece.bounding_box()
         along = c + (params.SLIDE_SW_TRAVEL / 2 if label.startswith("switch_") else 0.0)
-        cuts[label] = (Pos((b.min.X + b.max.X) / 2, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2)
-                       * Box(b.size.X + 2 * along, y1 - y0, b.size.Z + 2 * c))
+        cut = Pos((b.min.X + b.max.X) / 2, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2) * Box(b.size.X + 2 * along, y1 - y0, b.size.Z + 2 * c)
+        if label.startswith("usb_"):         # follows the receptacle shell's rounded corners, grown by the clearance
+            cut = fillet(cut.edges().filter_by(Axis.Y), min(params.USB_C_FILLET + c, min(b.size.X, b.size.Z + 2 * c) / 2 - 0.01))
+        cuts[label] = cut
     return cuts
 
 

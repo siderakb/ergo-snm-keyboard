@@ -172,3 +172,19 @@ def test_tactile_dots_mark_the_middle_usb_and_the_switch_on_the_wall_outside():
         assert wall.is_inside((cx, b.max.Y - 0.3, cz)) and not wall.is_inside((cx, b.max.Y + 0.05, cz))   # proud of the face
         for other in cuts.values():
             assert analysis.interference_volume(dome, other) < 1e-6
+
+
+def test_usb_wall_openings_have_rounded_corners_like_the_receptacle_shell():
+    cuts = topcase._opening_cuts("left")
+    r = params.USB_C_FILLET + params.WALL_OPEN_CLEAR
+    for label, cut in cuts.items():
+        b = cut.bounding_box()
+        mid_y = (b.min.Y + b.max.Y) / 2
+        corner = (b.max.X - 0.15, mid_y, b.max.Z - 0.15)
+        if label.startswith("usb_"):
+            assert not cut.is_inside(corner)                                       # rounded off
+            inset = r * (1 - 2 ** -0.5) + 0.05                                      # a point just inside the arc
+            assert cut.is_inside((b.max.X - inset, mid_y, b.max.Z - inset))
+            assert cut.is_inside(((b.min.X + b.max.X) / 2, mid_y, b.max.Z - 0.05))
+        else:
+            assert cut.is_inside(corner)                                           # the switch slot stays rectangular
