@@ -127,7 +127,9 @@ BOSS_COUNT = 3
 # Hand-placed shifts of automatically chosen left-hand posts: {(x, y) of the automatic centre: (dx, dy)}. Matched within 1 mm.
 # (57.6, -135.2): 1.0 towards +Y, away from the -Y wall (PCB side wall of the pocket drops to ~1.1 mm, the boss is trimmed there);
 # (95.1, -141.7): 4.0 along +Y/-X, away from the wall and the thumb area (the whole boss still fits).
-BOSS_SHIFT_LEFT = {(57.6, -135.2): (0.0, 1.0), (95.1, -141.7): (-2.83, 2.83)}
+# (13.6, -40.2): 1.2 mm perpendicular to the slanted -X/+Y wall, so the head counterbore (Ø6.0) clears the plate edge by 0.9
+# (PCB side wall of the nut pocket drops to ~1.1 mm, the boss is trimmed a little there).
+BOSS_SHIFT_LEFT = {(57.6, -135.2): (0.0, 1.0), (95.1, -141.7): (-2.83, 2.83), (13.6, -40.2): (0.46, -1.11)}
 # Extra left-hand post in the +Y/+X corner above the main board (user's red circle): about 95% of the boss fits, nut
 # pocket walls ~1.5 mm on the PCB side and ~3.0 mm on the wall side.
 BOSS_FIXED_LEFT = ((109.5, -38.6),)

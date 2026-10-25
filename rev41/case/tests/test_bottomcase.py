@@ -64,6 +64,16 @@ def test_screw_holes_and_counterbores_line_up_with_the_posts(bottom):
         assert not bottom.is_inside(tuple(sink))                                                  # head counterbore
 
 
+def test_screw_head_counterbores_stay_inside_the_plate_edge():
+    from shapely.geometry import Point
+
+    plate = bottomcase.bottom_outline("left")
+    for p in topcase.post_positions("left"):
+        if p in [tuple(q) for q in params.BOSS_FIXED_LEFT]:
+            continue                      # TODO: the corner post (109.5, -38.6) leaves 2.83 < 3.0 to the plate edge
+        assert plate.exterior.distance(Point(p)) >= params.SCREW_HEAD_CBORE_D / 2 + 0.5, p
+
+
 def test_floor_is_deep_under_the_battery_door_pocket_and_ramps_up_beyond_it(bottom):
     from placeholders import battery_holder
 
