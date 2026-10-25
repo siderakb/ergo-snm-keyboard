@@ -24,6 +24,18 @@ def to_case(board, kx, ky, kz=0.0, hand=None):
     return local_to_case(board, kx, -ky, kz, hand)
 
 
+def mirror_x(x):
+    """X in the other hand's case frame (see params.MIRROR_X)."""
+    return params.MIRROR_X - x
+
+
+def mirror_shape(shape):
+    """A left-hand case shape mirrored into the right-hand frame (or back)."""
+    from build123d import Plane
+
+    return shape.mirror(Plane.YZ.offset(params.MIRROR_X / 2))
+
+
 def ball_center(hand="right"):
     """Trackball centre in the case frame: below the plate-top hole centre along the plate normal."""
     if hand != "right":

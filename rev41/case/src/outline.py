@@ -9,6 +9,7 @@ the skin is that surface and the same surface PLATE_T lower. No walls, key holes
 import math
 
 import numpy as np
+from shapely.affinity import scale
 from shapely.geometry import MultiPoint, Polygon
 from shapely.ops import unary_union
 from build123d import Box, Face, Kind, Location, Plane, Pos, Solid, Wire
@@ -111,9 +112,10 @@ def _left_outline_polygon(offset=OUTLINE_OFFSET, fillet=CONCAVE_FILLET):
 def case_outline_polygon(hand=None, offset=OUTLINE_OFFSET):
     """Plan outline of the top case as a shapely polygon (already grown by `offset`)."""
     hand = hand or params.HAND
+    left = _left_outline_polygon(offset)
     if hand == "left":
-        return _left_outline_polygon(offset)
-    return Polygon(_hull(case_outline_points(hand))).buffer(offset, quad_segs=16)
+        return left
+    return scale(left, xfact=-1.0, origin=(params.MIRROR_X / 2, 0.0))    # the right case is the left one mirrored
 
 
 def plate_plane(board, hand):

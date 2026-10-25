@@ -172,7 +172,7 @@ def test_ribs_stand_on_the_plate_and_keep_the_wire_gap_and_posts_clear(bottom):
 def test_support_pillars_go_through_the_main_board_holes_to_the_skin(bottom):
     skin_under = params.PCB_T + params.PLATE_TOP_TO_PCB_TOP - params.PLATE_T
     holes = bottomcase.support_holes("left")
-    assert set(holes) == set(params.SUPPORT_HOLES_LEFT)
+    assert set(holes) == set(params.SUPPORT_HOLES)
     for x, y in holes.values():
         assert bottom.is_inside((x, y, skin_under - 0.2)) and bottom.is_inside((x, y, params.PCB_T / 2))
         assert not bottom.is_inside((x + params.PIN_D / 2 + 0.1, y, params.PCB_T / 2))      # only the thin pin in the hole

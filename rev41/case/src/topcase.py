@@ -4,6 +4,7 @@ The walls run from the top surface all the way down, BOTTOM_RECESS past the oute
 inside them (the seam only shows from below). The plate faces follow the folded main/thumb surface: the lower of a
 plane parallel to each top plane. Screw posts sit in the free corners between the PCB outlines and the wall and run
 down to the plate's inner face; each has a nut pocket open at its lower end and a blind screw hole above it.
+The right case takes the left one's floor and posts mirrored (params.MIRROR_X), plus the trackball pod.
 """
 
 import functools
@@ -16,7 +17,7 @@ from build123d import Align, Axis, Box, Cylinder, Rot, Face, Location, Plane, Po
 import params
 import outline
 import pcb_ref
-from geometry import local_to_case, location, outline_in_case
+from geometry import ball_center, local_to_case, location, mirror_shape, mirror_x, outline_in_case
 
 _BIG = outline._BIG
 
@@ -54,16 +55,23 @@ def pcb_union(hand):
         polys.append(Polygon(max(loops, key=lambda l: Polygon(l).area)))
     board = outline.thumb_board(hand)
     polys.append(MultiPoint(outline._board_plan_points(board, hand, params.THUMB_BOARDS[board]["x_range"])).convex_hull.buffer(params.THUMB_TILT_MARGIN, join_style="mitre"))
-    if hand == "left":                                        # the posts stay off the battery door pocket
-        import batterydoor
+    import batterydoor
 
-        x0, y0, x1, y1 = batterydoor.layout(hand)["pocket"]
-        polys.append(Polygon([(x0, y0), (x1, y0), (x1, y1), (x0, y1)]))
+    x0, y0, x1, y1 = batterydoor.layout(hand)["pocket"]                 # the posts stay off the battery door pocket
+    polys.append(Polygon([(x0, y0), (x1, y0), (x1, y1), (x0, y1)]))
     return unary_union(polys)
 
 
 def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
-    """Screw post centres: farthest-point spread over the free area around the PCBs (grid `step`)."""
+    """Screw post centres: farthest-point spread over the free area around the PCBs (grid `step`), with the hand-placed
+    shifts and extra posts. Right hand: the left posts mirrored, with BOSS_SHIFT_RIGHT."""
+    if hand == "right":
+        out = [(mirror_x(x), y) for x, y in post_positions("left", count, step)]
+        for i, (x, y) in enumerate(out):
+            for (sx, sy), (dx, dy) in params.BOSS_SHIFT_RIGHT.items():
+                if np.hypot(x - sx, y - sy) < 1.0:
+                    out[i] = (x + dx, y + dy)
+        return out
     r = params.BOSS_D / 2
     inner = outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL)
     free = inner.buffer(-(r - 1.0)).difference(pcb_union(hand).buffer(params.BOSS_PCB_CLEAR + r))
@@ -79,13 +87,11 @@ def post_positions(hand, count=params.BOSS_COUNT, step=0.5):
             break
         chosen.append(cand[np.argmax(d)])
     out = [tuple(float(v) for v in c) for c in chosen]
-    if hand == "left":
-        for i, (x, y) in enumerate(out):
-            for (sx, sy), (dx, dy) in params.BOSS_SHIFT_LEFT.items():
-                if np.hypot(x - sx, y - sy) < 1.0:
-                    out[i] = (x + dx, y + dy)
-        out += list(params.BOSS_FIXED_LEFT)
-    return out
+    for i, (x, y) in enumerate(out):
+        for (sx, sy), (dx, dy) in params.BOSS_SHIFT_LEFT.items():
+            if np.hypot(x - sx, y - sy) < 1.0:
+                out[i] = (x + dx, y + dy)
+    return out + list(params.BOSS_FIXED_LEFT)
 
 
 @functools.lru_cache(maxsize=None)
@@ -93,7 +99,10 @@ def floor_profile(hand):
     """Outer face of the bottom plate. Main side: the shallower (higher) of two stepped profiles, one along Y (deep from the
     +Y wall to past the battery holder tail) and one along X (shallow at -X, the core board level in the middle, deep
     under the battery holder), each with BOTTOM_RAMP_ANGLE ramps; (s, z) corner points sorted by s.
-    Thumb side: the plane parallel to the thumb plate, thumb_depth below it along its normal (lower envelope)."""
+    Thumb side: the plane parallel to the thumb plate, thumb_depth below it along its normal (lower envelope).
+    Right hand: the left profile (X mirrored in below_floor / floor_z)."""
+    if hand == "right":
+        return floor_profile("left")
     from assembly import load_boards
     from placeholders import battery_holder, core_board_placeholders
 
@@ -160,6 +169,10 @@ def below_floor(hand, lift=0.0):
     """Everything below the bottom plate's outer face raised by `lift`: below the higher of the X and Y profiles and
     below the thumb plane (see floor_profile). lift = BOTTOM_WALL is the plate's inner face, lift = -BOTTOM_RECESS the
     bottom edge of the top case walls."""
+    if hand == "right":                                       # plus the trackball pod
+        import trackball
+
+        return mirror_shape(below_floor("left", lift)) - trackball.pod_cut(lift)
     (_, _), (tp, tn) = _planes(hand)
     f = floor_profile(hand)
     bounds = outline.case_outline_polygon(hand).bounds
@@ -169,6 +182,11 @@ def below_floor(hand, lift=0.0):
 
 def floor_z(hand, x, y, lift=0.0):
     """Height of the floor surface raised by `lift` at plan position (x, y)."""
+    if hand == "right":
+        import trackball
+
+        z, pod = floor_z("left", mirror_x(x), y, lift), trackball.pod_floor_z(x, y, lift)
+        return z if pod is None else min(z, pod)
     f = floor_profile(hand)
     zx = np.interp(x, *zip(*_lifted(f["x_pts"], lift)))
     zy = np.interp(y, *zip(*_lifted(f["y_pts"], lift)))
@@ -231,6 +249,8 @@ def tactile_bumps(hand):
     """Small domes on the outer face of the +Y wall that mark the USB-C and switch openings by touch: a spherical cap
     TACTILE_BUMP_D wide and TACTILE_BUMP_H high, centre TACTILE_BUMP_GAP from the opening's edge, lined up with the
     opening's centre (below it for 'below', beside it on the +X / -X side, at the opening's mid height, for '+x' / '-x')."""
+    if hand not in params.TACTILE_BUMPS:
+        return []
     from shapely.geometry import LineString
 
     cuts = _opening_cuts(hand)
@@ -238,7 +258,7 @@ def tactile_bumps(hand):
     a, h = params.TACTILE_BUMP_D / 2, params.TACTILE_BUMP_H
     radius = (a * a + h * h) / (2 * h)
     out = []
-    for label, where in params.TACTILE_BUMPS_LEFT:
+    for label, where in params.TACTILE_BUMPS[hand]:
         if label not in cuts:
             continue
         b = cuts[label].bounding_box()
@@ -262,13 +282,11 @@ def walls(hand):
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
     shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS)
-    if hand == "left":
-        shell = shell + thumb_ledge(hand)
+    shell = shell + thumb_ledge(hand)
     for c in pockets(hand) + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c
-    if hand == "left":
-        for dome in tactile_bumps(hand):
-            shell = shell + dome
+    for dome in tactile_bumps(hand):
+        shell = shell + dome
     return shell
 
 
@@ -434,9 +452,17 @@ def led_slots(hand):
     return cuts
 
 
+def ball_hole(hand):
+    """Right hand: the trackball opening through the thumb plate, BALL_HOLE_D wide along the plate normal."""
+    if hand != "right":
+        return []
+    _, n = outline.plate_plane(outline.thumb_board(hand), hand)
+    return [_along(np.array(params.BALL_HOLE_CENTER_RIGHT) + 5.0 * n, n, 0.0, params.PLATE_T + 10.0, params.BALL_HOLE_D / 2)]
+
+
 def top_skin_keyed(hand):
     skin = outline.top_skin(hand)
-    for c in key_cutouts(hand) + relief_cutouts(hand) + led_slots(hand):
+    for c in key_cutouts(hand) + relief_cutouts(hand) + led_slots(hand) + ball_hole(hand):
         skin = skin - c
     return skin
 

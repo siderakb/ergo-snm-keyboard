@@ -1,9 +1,10 @@
-"""Bottom case (left): a plate inside the top case walls, with feet columns and support pillars.
+"""Bottom case: a plate inside the top case walls, with feet columns and support pillars.
 
 Its outer face follows `topcase.below_floor`, BOTTOM_RECESS up from the bottom edge of the walls, so the seam only shows
 from below. The M2.5 screws go up through it into the nuts at the lower ends of the top case posts (heads in shallow
 counterbores). Feet columns stand perpendicular to the tented desk plane (`desk_plane`); support pillars rise through the
-main board's mounting holes to the skin underside. The left plate carries the battery door (batterydoor.py).
+main board's mounting holes to the skin underside. The plate carries the battery door (batterydoor.py). The right hand
+uses the left feet and ribs mirrored (params.MIRROR_X), except the thumb foot, which stands under the trackball pod.
 """
 
 import functools
@@ -18,7 +19,7 @@ import outline
 import params
 import pcb_ref
 import topcase
-from geometry import to_case
+from geometry import mirror_shape, mirror_x, to_case
 from topcase import _along, below_floor, floor_z, post_axis
 
 
@@ -29,10 +30,11 @@ def bottom_outline(hand):
 
 @functools.lru_cache(maxsize=None)
 def desk_plane(hand):
-    """(unit normal, d) of the desk in the case frame, n . p = d: tilted by TENT_ANGLE about Y with the +X side up, as
+    """(unit normal, d) of the desk in the case frame, n . p = d: tilted by TENT_ANGLE about Y with the inner side up
+    (+X on the left hand, -X on the right), as
     high as the lowest point of the case allows (the walls' bottom edge along the outline, plus pads and clearance)."""
     t = np.radians(params.TENT_ANGLE)
-    n = np.array((np.sin(t), 0.0, np.cos(t)))
+    n = np.array((np.sin(t) * (1.0 if hand == "left" else -1.0), 0.0, np.cos(t)))
     ring = outline.case_outline_polygon(hand).exterior
     pts = [ring.interpolate(s) for s in np.arange(0.0, ring.length, 1.0)]
     low = min(n @ np.array((p.x, p.y, floor_z(hand, p.x, p.y, -params.BOTTOM_RECESS))) for p in pts)
@@ -43,7 +45,11 @@ def _foot_axes(hand, on_door):
     """[(top point, desk normal, desk d)] of the feet columns: the axis runs from `top` down along -n."""
     n, d = desk_plane(hand)
     out = []
-    for x, y in params.FEET_LEFT:
+    for i, (x, y) in enumerate(params.FEET_LEFT):
+        if hand == "right":
+            import trackball
+
+            x, y = trackball.foot_xy() if i == params.THUMB_FOOT else (mirror_x(x), y)
         if batterydoor.on_door(hand, x, y) != on_door:
             continue
         # start inside the plate, low enough that the tilted top disc stays under its inner face
@@ -91,7 +97,7 @@ def feet(hand, on_door=False):
 def support_holes(hand):
     """{ref: (x, y)} of the main-board mounting holes used for support pillars, in the case frame."""
     holes = {r: (x, y) for r, x, y in pcb_ref.mounting_holes(pcb_ref.load_board(params.BOARD_SOURCE["main_board"]))}
-    return {r: tuple(to_case("main_board", *holes[r], 0.0, hand=hand)[:2]) for r in params.SUPPORT_HOLES_LEFT}
+    return {r: tuple(to_case("main_board", *holes[r], 0.0, hand=hand)[:2]) for r in params.SUPPORT_HOLES}
 
 
 def pillars(hand):
@@ -120,7 +126,10 @@ def pillars(hand):
 
 def ribs(hand):
     """Ribs on the plate's inner face (left): an edge rim along the +Y and +X plate edge on the deep level, and a bar across
-    the strip between the battery opening and the pocket's +Y end, with a gap for the wire. Posts are kept clear."""
+    the strip between the battery opening and the pocket's +Y end, with a gap for the wire. Posts are kept clear.
+    Right hand: the left ribs mirrored."""
+    if hand == "right":
+        return [mirror_shape(r) for r in ribs("left")]
     f, lay, z = topcase.floor_profile(hand), batterydoor.layout(hand), batterydoor.levels(hand)
     plate = bottom_outline(hand)
     from assembly import load_boards
@@ -151,22 +160,26 @@ def bottom_case(hand=None):
     envelope = outline.plan_prism(hand, bottom_outline(hand)) & below_floor(hand, params.BOTTOM_WALL)
     outer_below = below_floor(hand)
     body = envelope - outer_below
-    if hand == "left":
-        rim = batterydoor.plate_rim(hand)
-        for x, y in topcase.post_positions(hand):                   # the top case posts stand on the plate
-            rim = rim - Pos(x, y, -50) * Cylinder(params.BOSS_D / 2 + 0.3, 100)
-        body = body + rim
-        for c in batterydoor.plate_cuts(hand):
-            body = body - c
-        for rib in ribs(hand):
-            body = body + rib
-        for flare in foot_flares(hand):
-            body = body + (flare & envelope)
+    rim = batterydoor.plate_rim(hand)
+    for x, y in topcase.post_positions(hand):                       # the top case posts stand on the plate
+        rim = rim - Pos(x, y, -50) * Cylinder(params.BOSS_D / 2 + 0.3, 100)
+    body = body + rim
+    for c in batterydoor.plate_cuts(hand):
+        body = body - c
+    for rib in ribs(hand):
+        body = body + rib
+    for flare in foot_flares(hand):
+        body = body + (flare & envelope)
     for x, y in topcase.post_positions(hand):
         top, n, t = post_axis(hand, x, y)
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
     for c in topcase.screw_counterbores(hand):
         body = body - c
+    if hand == "right":                                  # the ball cup's two feet are screwed on from below
+        import trackball
+
+        for c in trackball.mount_cuts():
+            body = body - c
     for part in feet(hand):                              # on a ramp the column's flat top would stick out of the inner face
         body = body + (part & envelope)
     for part in pillars(hand):                           # ... and a pillar's flat base out of the outer face

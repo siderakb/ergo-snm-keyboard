@@ -9,6 +9,8 @@ COLORS = {"main_board": "seagreen", "core_board_e73": "royalblue", "thumb_cluste
           "top_skin": "orange", "top_walls": "orange", "top_posts": "orange"}                    # one colour per case part:
 COLORS.update({"usb": "silver", "switch": "magenta", "battery_holder": "purple", "battery": "cyan",
                "bottom_case": "slategray", "battery_door": "deepskyblue"})                       # top orange, bottom slategray, door blue
+COLORS.update({"ball_cup": "gold", "trackball": "whitesmoke", "steel": "silver", "pmw3610": "teal"})     # right-hand trackball
+OPACITY = {"trackball": 0.35}                                                            # see the cup through the ball
 VIEWS = {"iso": "iso", "top": "xy", "front": "xz", "side": "yz", "bottom": "xy"}
 
 
@@ -35,7 +37,8 @@ def render(shapes, path, view="iso", section=None, size=(1200, 900), tolerance=0
             mesh = mesh.clip(normal=normal, origin=origin, invert=True)
             if mesh.n_points == 0:
                 continue
-        pl.add_mesh(mesh, color=next((c for k, c in COLORS.items() if name == k or name.startswith(k + "_")), "lightgray"))
+        pl.add_mesh(mesh, color=next((c for k, c in COLORS.items() if name == k or name.startswith(k + "_")), "lightgray"),
+                    opacity=OPACITY.get(name, 1.0))
     pl.camera_position = VIEWS[view]
     pl.reset_camera()
     if view == "iso":

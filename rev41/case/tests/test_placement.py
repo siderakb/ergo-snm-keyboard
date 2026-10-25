@@ -62,9 +62,7 @@ def test_right_thumb_1x2_is_mirror_image_of_left_first_column():
     for ky in (76.2, 95.25):
         xl, yl, zl = to_case("thumb_2x3", 127.0, ky, 0.0, hand="left")
         xr, yr, zr = to_case("thumb_1x2", 187.452, ky, params.PCB_T, hand="right")
-        xl += params.THUMB_LEFT_SHIFT_IN * params._FALL[0]      # undo the left-only slide toward the main board
-        yl += params.THUMB_LEFT_SHIFT_IN * params._FALL[1]
-        assert abs(xr - (203.847 - xl)) < 0.01 and abs(yr - yl) < 0.01 and abs(zr - zl) < 0.01
+        assert abs(xr - (params.MIRROR_X - xl)) < 0.01 and abs(yr - yl) < 0.01 and abs(zr - zl) < 0.01   # both slide in
 
 
 def test_ball_top_is_level_with_keycap_top():

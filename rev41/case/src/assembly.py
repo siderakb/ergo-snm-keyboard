@@ -15,6 +15,7 @@ from placeholders import battery_holder, core_board_placeholders
 
 STEP_DIR = Path(__file__).resolve().parents[1] / "step"
 TOP_COLOR, BOTTOM_COLOR, DOOR_COLOR = "orange", "slategray", "deepskyblue"      # top case, bottom case, battery door (also in viz.py)
+CUP_COLOR = "gold"
 
 
 def _without(shape, prefix):
@@ -93,19 +94,41 @@ def load_case_parts():
     return load_parts()
 
 
+def trackball_parts(hand):
+    """Right hand: the ball cup, the steel balls and the sensor parts (None for the left; the ball is shown on its own)."""
+    if hand != "right":
+        return None
+    import trackball
+
+    cup = trackball.cup()
+    cup.color = Color(CUP_COLOR)
+    rest = {f"steel_{i}": s for i, s in enumerate(trackball.steel_balls())} | trackball.sensor_parts()
+    return Compound(label="trackball", children=[Compound(label="ball_cup", children=[cup])]
+                    + [Compound(label=n, children=[s]) for n, s in rest.items()])
+
+
+def ball(hand):
+    """Right hand: the trackball (shown half transparent), None for the left."""
+    if hand != "right":
+        return None
+    import trackball
+
+    return Compound(label="ball", children=[trackball.ball()])
+
+
 if __name__ == "__main__":
     hand = sys.argv[1] if len(sys.argv) > 1 else params.HAND
     case = [shape for _, shape in load_case_parts().values()]
     tint = lambda shape, color: setattr(shape, "color", Color(color)) or shape
     draft = [Compound(label=n, children=[tint(s, TOP_COLOR)]) for n, s in top_case_draft(hand).items()]
-    left = hand == "left"
     show(Compound(label=f"boards_{hand}", children=load_boards(hand)),
          Compound(label="top_case_draft", children=draft),
          Compound(label="bottom_case", children=[tint(bottom_case(hand), BOTTOM_COLOR)]),
-         Compound(label="battery_door", children=[tint(battery_door(hand), DOOR_COLOR)]) if left else None,
+         Compound(label="battery_door", children=[tint(battery_door(hand), DOOR_COLOR)]),
          Compound(label="case", children=case) if case else None,
          Compound(label="placeholders", children=[Compound(label=n, children=[s]) for n, s in core_board_placeholders(hand).items()]
-                  + ([Compound(label="battery_holder", children=[battery_holder(hand)])] if left else [])),
-         names=["boards", "top_case_draft", "bottom_case", "battery_door", "case", "placeholders"] if left
-         else ["boards", "top_case_draft", "bottom_case", "case", "placeholders"],
-         alphas=[1.0, 0.6, 0.6, 1.0, 1.0, 1.0] if left else [1.0, 0.6, 0.6, 1.0, 1.0])
+                  + [Compound(label="battery_holder", children=[battery_holder(hand)])]),
+         trackball_parts(hand),
+         ball(hand),
+         names=["boards", "top_case_draft", "bottom_case", "battery_door", "case", "placeholders", "trackball", "ball"],
+         alphas=[1.0, 0.6, 0.6, 1.0, 1.0, 1.0, 1.0, 0.35])

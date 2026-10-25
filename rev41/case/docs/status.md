@@ -45,13 +45,13 @@
   最近且對齊的鍵軸孔；槽頂留蒙皮 `LED_SLOT_SKIN` 0.8 mm。
 - `CUTOUT_COMP` 待 coupon 決定。
 
-## 對位用的簡化模型（`src/placeholders.py`，僅左手）
+## 對位用的簡化模型（`src/placeholders.py`）
 - 核心板有三個連接器槽（KiCad x 136.525 / 152.4 / 168.275，y = 50.8）：F.Cu 的 USB-C J4、J9、J1，以及 B.Cu 的開關 SW1 / SW2（與 J4 / J1 同位置）。
   左手依使用者指示：兩個 USB-C = J4、J9，開關 = SW2（案體座標 X 29.2 / 45.1 / 61.0，俯視由左到右：開關、USB、USB）。
 - USB-C：8.94 × 7.35 × 3.26，前緣在 footprint +3.9，超出核心板邊 1.36 mm；開關 SK12D07：本體 8.6 × 4.5 × 4.7（高度讀自圖面，待確認），
   手柄 2.0 × 2.7 × 7 mm 伸出板邊約 6.7 mm。`render.py` 與 `assembly.py` 會顯示（洋紅=開關、銀=USB）。
 - 電池連接器 JST S2B-PH-SM4-TB（`J8`，F.Cu）：7.9 × 7.6 × 5.5 方塊（footprint fab 外框，高度讀自圖面），掛在核心板下方（最低 z = −12.6），開口朝板下緣方向；青色顯示。
-- 之後：外牆要開 USB / 開關孔，開口位置以這些模型為準。右手尚未指定。
+- 右手：假設為左手的鏡像（USB-C J1、J9，開關 SW1，J8；見「Right hand, R1」，待確認）。
 
 ## 下一步
 0. （已完成）PCB 外框多邊形：`pcb_ref.outline_loops/outline_area`（含封裝內的郵票孔邊緣）、
@@ -198,3 +198,36 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - TODO: bump/tongue stiffness on a print test.
 - Rubber feet Ø6 x 2.0 (user): each column end has a Ø6.4 x 0.5 recess, so the column ends `FOOT_END_T` = 1.5 above the
   desk (same geometry as before) and the pad stands 1.5 proud.
+
+## Right hand, R1: the left case mirrored (2026-10-25)
+- The right case frame is the left one mirrored about X = `MIRROR_X`/2 (X_right = 203.847 - X_left): main board and core board
+  map exactly. `THUMB_SHIFT_IN` (3.0 towards the main board) now applies to both hands, so the right 1x2 keys sit exactly where
+  the left 2x3 outer column is mirrored; `BALL_HOLE_CENTER_RIGHT` moved with it (ball centre now (82.7, -138.8, -12.9)).
+- Mirrored from the left (no right-hand tuning): outline (`case_outline_polygon`), floor (`floor_profile` / `below_floor` /
+  `floor_z`), posts incl. shifts and the corner post, battery holder and door (two studs on the core board side, the third floats),
+  ribs, feet positions; the desk tilts with the inner (-X) side up. Right bottom case and door have the left ones' volume exactly.
+- Computed for the right boards: key openings (main + 1x2), PCB reliefs and LED slots (F.Cu up), USB-C / switch openings and
+  tactile dots, thumb ledge, Ø36.5 ball hole through the thumb plate along its normal.
+- Right core board population assumed as the mirror of the left (TODO confirm): USB-C J1 + J9, switch SW1 (dot on its -X side), J8.
+- Ball hole 0.7 from the wall's inner face, ball 2.3 from the thumb_1x2 board (handled in R2 below).
+
+## Right hand, R2: ball cup, sensor and pod (2026-10-25, `src/trackball.py`)
+- User: nothing holds the ball (tip the keyboard over to take it out; also before opening the battery door); PMW3610 board on
+  FPC (J2 AFC01-S08FCA-00, 2.0 high, no pin header), cable 150 mm (not modelled, like the battery wire); keep the outline and
+  lower the cup rim instead.
+- Ball frame: ball centre, u uphill along the thumb plate, v across, n plate normal; sensor axis along n.
+- Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 6.0 below the ball centre (0.64 to the arm walls); flat cut
+  0.5 short of the pod on the uphill side; three Ø2.5 steel balls at 45 deg from the pole (user; test print 35-45) (azimuth 0/120/240 from +u) in blind
+  seats Ø2.5 with Ø5.5 bosses; seat block 32 x 25 for the board; lens window 19 x 11 + 0.5 (TODO lens outline); two Ø6 feet at
+  u = 0, v = +-15.25 down to the pod floor.
+- PMW3610 board: long side along u, FPC end uphill, B.Cu (lens) up; four M2.5 x 6 from below (heads 1.3 under the board) into
+  nuts in the seat block; the seat sits 0.2 nearer the ball than nominal, shims set the 2.4 working distance (+-0.2).
+- Pod in the bottom plate: floor parallel to the thumb plate, 0.5 under the FPC connector (outer face 28.9 below the ball centre
+  = 38.6 below the plate top); inner extent u -19.5 .. +17.0 (2.1 past the FPC connector for the cable bend), v bounded by the
+  arm walls, which come down around it. Cup feet screwed on from below (M2.5 x 6, counterbores in the pod floor).
+- The thumb foot (FEET_LEFT[THUMB_FOOT]) stands under the middle of the pod on the right. The post next to the crease moves
+  2.5 uphill (`BOSS_SHIFT_RIGHT`, at the 0.4 PCB clearance) so it stays out of the pod.
+- Height: the pod is now the lowest part; the desk plane is 14.9 lower than in R1, so every foot column is ~15 longer (raise the
+  ball or change the tent angle to win some back).
+- TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
+  outline from drawings; FPC route from the pod to the core board; pod ends are vertical steps (no ramps).

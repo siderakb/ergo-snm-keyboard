@@ -55,9 +55,10 @@ USB_C_FILLET = 1.2
 # drawing; the opening faces +KiCad y), 5.5 high (drawing).
 JST_PH_BODY = (7.9, 7.6, 5.5)
 JST_PH_V_RANGE = (-3.2, 4.4)
-CORE_BATTERY_REFS = {"left": ("J8",)}
-CORE_USB_REFS = {"left": ("J4", "J9")}
-CORE_SWITCH_REFS = {"left": ("SW2",)}
+# Right: the mirror image of the left population (the J1 slot carries a USB-C, the J4 slot the switch). TODO: confirm.
+CORE_BATTERY_REFS = {"left": ("J8",), "right": ("J8",)}
+CORE_USB_REFS = {"left": ("J4", "J9"), "right": ("J1", "J9")}
+CORE_SWITCH_REFS = {"left": ("SW2",), "right": ("SW1",)}
 
 # --- Switch (Kailh Choc V2) ---
 KEY_PITCH = 19.05
@@ -105,16 +106,17 @@ KEYCAP_TOP = round(HOUSING_TOP + KEYCAP_H, 3)   # 7.3: keycap bottom rim assumed
 # which axis is length / height / width (14.2 is below an AA diameter of 14.5).
 BATTERY_HOLDER = (58.3, 14.2, 32.2)
 # Place (left-hand case frame): long side along Y, next to the core board, on the battery door (see BATTERY_* below).
+# The right hand has the same holder and door, mirrored (see MIRROR_X).
 HOTSWAP_SOCKET_PROTRUSION = 1.8   # Choc hot-swap socket sticks out of the PCB (total 3.05, rest is inside the board)
-BATTERY_TOP_Z_LEFT = -(HOTSWAP_SOCKET_PROTRUSION + 1.0)   # -2.8: the holder sits on the battery door (see below)
+BATTERY_TOP_Z = -(HOTSWAP_SOCKET_PROTRUSION + 1.0)   # -2.8: the holder sits on the battery door (see below)
 # The USB-C and slide-switch openings are cut in the top case wall (the walls run down to the bottom).
 WALL_OPEN_CLEAR = 0.6      # opening grown around the USB-C receptacle (plug entry) and the slide-switch handle
 # Tactile dots on the +Y wall's outer face: spherical caps (0.8 high = the JLC minimum emboss), centre 2.5 from the opening edge,
-# lined up with the opening centre: below the middle USB-C (J9), beside the slide switch (on its +X side, at its mid height).
+# lined up with the opening centre: below the middle USB-C (J9), beside the slide switch (on its outer side, at its mid height).
 TACTILE_BUMP_D = 3.0
 TACTILE_BUMP_H = 0.8
 TACTILE_BUMP_GAP = 2.5
-TACTILE_BUMPS_LEFT = (("usb_J9", "below"), ("switch_SW2", "+x"))
+TACTILE_BUMPS = {"left": (("usb_J9", "below"), ("switch_SW2", "+x")), "right": (("usb_J9", "below"), ("switch_SW1", "-x"))}
 SLIDE_SW_TRAVEL = 3.0      # handle travel between the two positions (TODO confirm from the SK12D07 drawing)
 # Screw posts in the free corners between the PCB outlines and the case wall: Ø7.8 so the wall around the
 # 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the posts run down to the bottom plate, the nut
@@ -130,6 +132,7 @@ SCREW_HEAD_CBORE_D = SCREW_M25_HEAD_D + 0.5
 POST_HOLE_LEN = 5.0
 BOSS_PCB_CLEAR = 0.4
 BOSS_COUNT = 3
+# The right hand uses the left-hand posts, feet and floor mirrored (see MIRROR_X), so these are only given for the left.
 # Hand-placed shifts of automatically chosen left-hand posts: {(x, y) of the automatic centre: (dx, dy)}. Matched within 1 mm.
 # (57.6, -135.2): 1.0 towards +Y, away from the -Y wall (PCB side wall of the pocket drops to ~1.1 mm, the boss is trimmed there);
 # (95.1, -141.7): 4.0 along +Y/-X, away from the wall and the thumb area (the whole boss still fits).
@@ -139,6 +142,9 @@ BOSS_SHIFT_LEFT = {(57.6, -135.2): (0.0, 1.0), (95.1, -141.7): (-2.83, 2.83), (1
 # Extra left-hand post in the +Y/+X corner above the main board (user's red circle): about 95% of the boss fits, nut
 # pocket walls ~1.5 mm on the PCB side and ~3.0 mm on the wall side.
 BOSS_FIXED_LEFT = ((109.5, -38.6),)
+# Right hand only, applied after mirroring: the post next to the crease moves 2.5 uphill along the thumb plate (to the 0.4 PCB
+# clearance) so its lower end stays out of the trackball pod.
+BOSS_SHIFT_RIGHT = {(111.53, -138.90): (2.165, 1.25)}
 # The +Y edge of the left outline is pushed out at the main board's top-right corner by this much (the user's red line in
 # the bottom view: nearly straight from the core board corner to the right edge), so the battery holder fits below it and
 # the +Y screw post needs no trimming.
@@ -168,6 +174,7 @@ STRIP_RIB_GAP = 1.0        # from the opening's +Y edge
 STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire through
 FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (100.0, -45.0),                       # near the user's circles; (100, -45) on the battery door
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
+THUMB_FOOT = 3             # index in FEET_LEFT; the right hand puts this foot under the middle of the trackball pod instead
 # Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
 # PILLAR_TOP_Z (below the hot-swap sockets) and a pin through the Ø2.2 hole touching the skin.
 # A short ledge on the thumb end wall, sitting on the bottom plate (the top case rests on the plate there). It reaches
@@ -175,7 +182,7 @@ FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (100.0, -45.0),                       
 THUMB_LEDGE_W = 2.0
 THUMB_LEDGE_LEN = 10.0
 THUMB_LEDGE_GAP = 0.3                # to the thumb PCB underside
-SUPPORT_HOLES_LEFT = ("H2", "H3", "H4")
+SUPPORT_HOLES = ("H2", "H3", "H4")
 PILLAR_D = 5.0
 PILLAR_TOP_Z = -(HOTSWAP_SOCKET_PROTRUSION + 0.5)
 PIN_D = 1.8
@@ -236,6 +243,38 @@ PMW3610_LENS_FACE_TO_SURFACE = round(PMW3610_SENSOR_FACE_TO_SURFACE - PMW3610_BO
 PMW3610_LENS_PROTRUSION = round(PMW3610_LENS_FACE_TO_SURFACE - PMW3610_WORKING_DISTANCE, 3)  # 3.4 beyond that face
 PMW3610_BOARD = (23.5, 31.5)
 PMW3610_HOLES = (17.5, 25.5)   # M3 x4
+PMW3610_BOARD_CENTRE = (150.0, 100.0)    # KiCad; the optical centre (U1 Cmts.User mark) is the board centre
+PMW3610_IC_BOX = (16.2, 10.1, 1.65)      # package (pmw3610.png) along the board's long side, body below the sensor face
+PMW3610_IC_REF_Y = 102.988               # U1 footprint origin (package centre), KiCad y: 2.988 off the optical centre
+PMW3610_LENS_BOX = (19.0, 11.0)          # TODO: lens outline (no drawing of the lens part yet); 3.4 high (PMW3610_LENS_PROTRUSION)
+PMW3610_FPC_REF_Y = 87.35                # J2 AFC01-S08FCA-00 (F.Cu, the face away from the ball), KiCad y
+PMW3610_FPC_BOX = (9.0, 4.5, 2.0)        # along the board edge x depth x height (2.0: user); width/depth TODO from the AFC01 drawing
+
+# --- Ball cup (right hand, separate part; R2) ---
+# Frame: ball centre, u = uphill along the thumb plate (towards the crease), v = n x u (level), n = plate normal.
+# The ball rests on three Ø2.5 steel balls; nothing holds it in (tip the keyboard over to take it out), so the cup is only the
+# lower part: its rim is BALL_CUP_RIM below the centre, where the cup clears the thumb arm walls (inner face 18.98 from the
+# axis) by 0.5 (user: lower rim, keep the outline). Above the rim the top case hole (1.25 per side) guides the ball.
+BALL_CUP_GAP = 0.8                 # ball -> cup inner surface = steel ball protrusion
+BALL_CUP_WALL = 1.5
+BALL_CUP_RIM = 6.0                 # >= 5.2 for 0.5 to the walls
+BEARING_POLAR = 45.0               # steel balls this far from the bottom pole (azimuths 0 / 120 / 240 from +u); <= ~49 for the uphill boss
+BEARING_HOLE_D = 2.5               # TODO: press fit + glue, set from the test print
+BEARING_BOSS_D = 5.5
+# PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat, screwed with four
+# M2.5 x 6 from below (heads 1.3 < FPC 2.0) into nuts in the cup, shims between seat and board set the working distance:
+# the seat is SENSOR_SHIM_NOM nearer the ball than nominal, so shims can make up +-0.2 either way.
+SENSOR_SHIM_NOM = 0.2
+LENS_WINDOW_CLEAR = 0.5
+CUP_BLOCK = (32.0, 25.0)           # seat block under the cup (u x v), carries the four board screws
+CUP_BLOCK_TOP = -16.0              # block top below the ball centre (merges with the shell)
+# The module stands on the floor of a pod in the bottom plate on two feet across the arm, screwed from below (M2.5 x 6).
+CUP_FOOT_D = 6.0
+CUP_FOOT_V = 15.25                 # feet at u = 0, v = +-this
+BALL_POD_CLEAR = 0.5               # lowest part (FPC connector) -> pod floor
+# Inner extent of the pod from the ball axis: downhill (-u), uphill (+u), across (+-v; the arm walls bound it). Uphill it ends
+# 2.1 past the FPC connector (room for the cable to bend up) and clears the post next to the crease (BOSS_SHIFT_RIGHT).
+BALL_POD_HALF = (19.5, 17.0, 19.0)
 
 # --- Tenting ---
 TENT_DEG = 0.0         # TODO
@@ -246,10 +285,10 @@ TENT_DEG = 0.0         # TODO
 # 3.07 mm below the main plate top; lift the thumb boards (both hands, the planes mirror each other) so
 # that edge reaches the main plate top (Z = PLATE_TOP_TO_PCB_TOP + PCB_T = 3.8).
 THUMB_LIFT_Z = 3.07
-# Left hand: the whole thumb board slides this far toward the main board, horizontally along the
+# The whole thumb board slides this far toward the main board, horizontally along the
 # (outward) fall line of the tilted plane at yaw 30 deg, so the crease moves with it (moves the crease
 # and the thumb area closer to the main board; the keys keep their relative layout).
-THUMB_LEFT_SHIFT_IN = 3.0
+THUMB_SHIFT_IN = 3.0          # both hands (the right thumb board slides the mirror-image way)
 _FALL = (math.cos(math.radians(30)), -math.sin(math.radians(30)))
 # main_board is reversible: the right hand uses it F.Cu up (B.Cu parts such as the 29 SOD-323
 # diodes hang below, away from the plate); the left hand uses it flipped, B.Cu up, so those
@@ -266,6 +305,11 @@ _PLATE_TOP = PLATE_TOP_TO_PCB_TOP + PCB_T      # 3.8
 _FLIP_Y = ((-1, 0, 0), (0, 1, 0), (0, 0, -1))  # rotation 180 deg about Y
 _IDENT = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 _MAIN_FLIP_X = 203.847   # left hand: X = 203.847 - local X (from rev4 FCStd fit)
+# The right-hand case frame is the left one mirrored: X_right = MIRROR_X - X_left maps the main board, the core board
+# and the thumb plate (the right 1x2 keys sit where the left 2x3 outer column is) onto each other. The right case reuses
+# the left's outline, floor, posts, feet and battery door mirrored; only the thumb keys, the ball hole, the PCB reliefs
+# and the wall openings are computed for the right boards.
+MIRROR_X = _MAIN_FLIP_X
 
 # core_board_e73 (right hand): headers J2/J3 (KiCad 158.115, 74.295 / 93.345) must meet main_board
 # sockets J1/J2 (153.05, 59.319 / 78.369). Mirror about x = 155.5825, shift 14.976 in Y,
@@ -287,7 +331,7 @@ PLACEMENTS = {
         # geometry (X mirrored, PCB unflipped, F.Cu toward the plate) shifted -60.452 along board X.
         "thumb_1x2": (
             ((0.813798, -0.5, -0.296198), (0.469846, 0.866025, -0.17101), (0.34202, 0.0, 0.939693)),
-            (-140.3069, -168.5549, -84.3265 + THUMB_LIFT_Z),
+            (-140.3069 + THUMB_SHIFT_IN * _FALL[0], -168.5549 - THUMB_SHIFT_IN * _FALL[1], -84.3265 + THUMB_LIFT_Z),
         ),
     },
     "left": {
@@ -299,7 +343,7 @@ PLACEMENTS = {
         # Board is flipped (B.Cu toward the plate), so local +Z points down: tilt 160 deg, yaw 150 deg.
         "thumb_2x3": (
             ((-0.813798, 0.5, -0.296198), (0.469846, 0.866025, 0.17101), (0.34202, 0.0, -0.939693)),
-            (295.4318 - THUMB_LEFT_SHIFT_IN * _FALL[0], -140.4253 - THUMB_LEFT_SHIFT_IN * _FALL[1], -62.1471 + THUMB_LIFT_Z),
+            (295.4318 - THUMB_SHIFT_IN * _FALL[0], -140.4253 - THUMB_SHIFT_IN * _FALL[1], -62.1471 + THUMB_LIFT_Z),
         ),
         # core_board_e73 below (-Z) the flipped main_board, same 5.5 mm between facing faces; the core
         # board is symmetric, so it keeps the right-hand pose (flip about Y, USB edge at the back) and
@@ -315,7 +359,7 @@ PLACEMENTS = {
 # FreeCAD file put the ball hole ~29 mm further towards the main board; that is not used.
 # Hole diameter: rev4's hole bounding box is 35.3 x 36.5 (an ellipse from the tilt) -> ~36.5 for the
 # 34 mm ball. Ball centre depth below the plate follows BALL_CENTER_DEPTH.
-BALL_HOLE_CENTER_RIGHT = (77.232, -141.945, -3.8)
+BALL_HOLE_CENTER_RIGHT = (round(77.232 + THUMB_SHIFT_IN * _FALL[0], 3), round(-141.945 - THUMB_SHIFT_IN * _FALL[1], 3), -3.8)
 BALL_HOLE_D = 36.5
 # Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
 BALL_TOP = KEYCAP_TOP

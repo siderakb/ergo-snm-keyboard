@@ -1,10 +1,11 @@
-"""Battery door (left): a plate carrying the 2xAA holder (glued on), flush in a pocket of the bottom plate's outer face.
+"""Battery door: a plate carrying the 2xAA holder (glued on), flush in a pocket of the bottom plate's outer face.
 
 It hangs from three mushroom studs in keyholes of the bottom plate (two on the -X edge, one on the +X edge; the slots
 run along Y). Pushed BATTERY_SLIDE towards +Y the heads reach the big holes and the door drops out with the holder; the
 holder wires stay connected. Locked (towards -Y), a bump on a sprung tongue at the door's -Y end sits in a dimple in the
 pocket ceiling. The +X keyhole floats along X, so only the -X pair locates the door. Door and pocket are notched around
-the corner screw post. Rectangles are (x0, y0, x1, y1) in the case frame, the door in its locked position.
+the corner screw post. Rectangles are (x0, y0, x1, y1) in the case frame, the door in its locked position. The right
+door is the left one mirrored (two studs on the core board side there too).
 """
 
 import functools
@@ -13,6 +14,7 @@ import numpy as np
 from build123d import Align, Axis, Box, Cone, Cylinder, Pos, Rot, chamfer
 
 import params
+from geometry import mirror_x
 from placeholders import battery_holder
 from topcase import floor_profile
 
@@ -21,7 +23,12 @@ MIN = (Align.CENTER, Align.CENTER, Align.MIN)
 
 @functools.lru_cache(maxsize=None)
 def layout(hand):
-    """Plan rectangles of the holder, the opening in the plate, the door and the pocket, and the locked stud centres."""
+    """Plan rectangles of the holder, the opening in the plate, the door and the pocket, and the locked stud centres
+    (the third one floats along X)."""
+    if hand == "right":
+        left = layout("left")
+        flip = lambda r: (mirror_x(r[2]), r[1], mirror_x(r[0]), r[3])
+        return {k: flip(v) for k, v in left.items() if k != "studs"} | {"studs": tuple((mirror_x(x), y) for x, y in left["studs"])}
     bb = battery_holder(hand).bounding_box()
     s, c = params.BATTERY_SLIDE, params.BATTERY_OPEN_CLEAR
     holder = (bb.min.X, bb.min.Y, bb.max.X, bb.max.Y)
@@ -150,7 +157,7 @@ def plate_cuts(hand):
     cuts = [pocket, edge, _box(lay["opening"], z["bottom"] - 5.0, z["rim"] + 5.0)]
     rh, ch = params.KEY_HOLE_D / 2, params.KEY_HOLE_CHAMFER
     for i, (x, y) in enumerate(lay["studs"]):
-        float_x = params.KEY_X_FLOAT if x > lay["opening"][2] else 0.0
+        float_x = params.KEY_X_FLOAT if i == 2 else 0.0
         cuts += _keyhole(x, y, z["bottom"] - 1.0, z["rim"] + 1.0, float_x)
         for dx in ((-float_x / 2, float_x / 2) if float_x else (0.0,)):      # lead-in at the big hole's lower edge
             cuts.append(Pos(x + dx, y + params.BATTERY_SLIDE, z["ceiling"] - 0.01) * Cone(rh + ch, rh, ch + 0.01, align=MIN))

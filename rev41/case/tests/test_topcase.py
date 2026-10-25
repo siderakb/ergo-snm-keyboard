@@ -154,12 +154,13 @@ def test_walls_end_bottom_recess_below_the_plate_outer_face():
     assert probe(bottom + 0.3) and not probe(bottom - 0.3)
 
 
-def test_tactile_dots_mark_the_middle_usb_and_the_switch_on_the_wall_outside():
-    cuts = topcase._opening_cuts("left")
-    bumps = topcase.tactile_bumps("left")
-    assert len(bumps) == len(params.TACTILE_BUMPS_LEFT) == 2
-    wall = topcase.walls("left")
-    for (label, where), dome in zip(params.TACTILE_BUMPS_LEFT, bumps):
+@pytest.mark.parametrize("hand", ["left", "right"])
+def test_tactile_dots_mark_the_middle_usb_and_the_switch_on_the_wall_outside(hand):
+    cuts = topcase._opening_cuts(hand)
+    bumps = topcase.tactile_bumps(hand)
+    assert len(bumps) == len(params.TACTILE_BUMPS[hand]) == 2
+    wall = topcase.walls(hand)
+    for (label, where), dome in zip(params.TACTILE_BUMPS[hand], bumps):
         b, o = dome.bounding_box(), cuts[label].bounding_box()
         assert b.size.Y == pytest.approx(params.TACTILE_BUMP_H + 0.1, abs=0.02) and b.size.X == pytest.approx(params.TACTILE_BUMP_D, abs=0.4)
         cx, cz = (b.min.X + b.max.X) / 2, (b.min.Z + b.max.Z) / 2

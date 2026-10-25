@@ -40,9 +40,13 @@ def main():
         shapes.update(top_case_draft(args.hand))
     if args.bottom:
         shapes["bottom_case"] = bottom_case(args.hand)
-        if (args.hand or params.HAND) == "left":
-            shapes["battery_door"] = battery_door("left")
-            shapes["battery_holder"] = battery_holder("left")
+        shapes["battery_door"] = battery_door(args.hand)
+        shapes["battery_holder"] = battery_holder(args.hand or params.HAND)
+        if (args.hand or params.HAND) == "right":
+            import trackball
+
+            shapes |= {"ball_cup": trackball.cup(), "trackball": trackball.ball()} | trackball.sensor_parts()
+            shapes |= {f"steel_{i}": s for i, s in enumerate(trackball.steel_balls())}
     path = OUT / f"{args.out or args.view}.png"
     viz.render(shapes, path, args.view, section)
     print(path)

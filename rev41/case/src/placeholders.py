@@ -72,13 +72,17 @@ def core_board_placeholders(hand):
 
 def battery_holder(hand):
     """2x AA holder (BATTERY_HOLDER, read as length x height x width) in the case frame, locked position: long side along
-    Y, -X side BATTERY_CORE_CLEAR past the core board, top at BATTERY_TOP_Z_LEFT, +Y end from battery_y_top. Left hand only."""
-    assert hand == "left"
+    Y, -X side BATTERY_CORE_CLEAR past the core board, top at BATTERY_TOP_Z, +Y end from battery_y_top. The right one is
+    the left one mirrored."""
+    if hand == "right":
+        from geometry import mirror_shape
+
+        return mirror_shape(battery_holder("left"))
     import outline
 
     L, H, W = params.BATTERY_HOLDER
     x0 = max(x for x, _ in outline._board_plan_points("core_board_e73", hand)) + params.BATTERY_CORE_CLEAR
-    top = params.BATTERY_TOP_Z_LEFT
+    top = params.BATTERY_TOP_Z
     y1 = battery_y_top(hand, x0, x0 + W)
     return _box(x0, x0 + W, y1 - L, y1, top - H, top)
 
