@@ -50,10 +50,19 @@ def _box(a0, a1, b0, b1, w0, w1):
     return Pos((a0 + a1) / 2, (b0 + b1) / 2, w0) * Box(a1 - a0, b1 - b0, w1 - w0, align=MIN)
 
 
+def _seats(polar, azimuths):
+    p, r = np.radians(polar), R + params.BEARING_BALL_D / 2
+    return [np.array((r * np.sin(p) * np.cos(a), r * np.sin(p) * np.sin(a), -r * np.cos(p))) for a in np.radians(azimuths)]
+
+
 def bearings():
     """Ball-frame centres of the three steel balls (touching the ball)."""
-    p, r = np.radians(params.BEARING_POLAR), R + params.BEARING_BALL_D / 2
-    return [np.array((r * np.sin(p) * np.cos(a), r * np.sin(p) * np.sin(a), -r * np.cos(p))) for a in np.radians((0, 120, 240))]
+    return _seats(params.BEARING_POLAR, (0, 120, 240))
+
+
+def alt_bearings():
+    """The second set of seats (BEARING_POLAR_ALT, in the gaps of the first)."""
+    return _seats(params.BEARING_POLAR_ALT, (60, 180, 300))
 
 
 def pin_field():
@@ -87,7 +96,7 @@ def cup_local():
     r_in, r_out = R + params.BALL_CUP_GAP, R + params.BALL_CUP_GAP + params.BALL_CUP_WALL
     bu, bv = params.CUP_BLOCK
     body = Sphere(r_out) + _box(-bu / 2, bu / 2, -bv / 2, bv / 2, W_SEAT, params.CUP_BLOCK_TOP)
-    for p in bearings():
+    for p in bearings() + alt_bearings():
         body = body + Pos(*p) * Sphere(params.BEARING_BOSS_D / 2)
     down, up, _ = params.BALL_POD_HALF                    # nothing above the rim; uphill the shell is cut flat inside the pod
     body = body & _box(-down + params.BALL_POD_CLEAR, up - params.BALL_POD_CLEAR, -50, 50, W_POD_IN - 1.0, -params.BALL_CUP_RIM)
@@ -96,7 +105,7 @@ def cup_local():
     c = params.LENS_WINDOW_CLEAR
     body = body - _box(-lu / 2 - c, lu / 2 + c, -lv / 2 - c, lv / 2 + c, W_SEAT - 1.0, 0.0)   # the sensor sees the ball
     body = body - _box(*pin_field(), W_SEAT - 1.0, W_SEAT + 2.0)                                # U1 pins on B.Cu
-    for p in bearings():                       # blind seat: the steel ball sits on its bottom, touching the ball
+    for p in bearings() + alt_bearings():      # blind seat: the steel ball sits on its bottom, touching the ball
         k = p / np.linalg.norm(p)
         body = body - Location(Plane(origin=tuple(p - k * 2.0), z_dir=tuple(k))) * Cylinder(params.BEARING_HOLE_D / 2, 2.0 + params.BEARING_BALL_D / 2, align=MIN)
     for a, b in board_holes():

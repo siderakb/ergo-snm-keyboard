@@ -263,6 +263,9 @@ BALL_CUP_GAP = 0.8                 # ball -> cup inner surface = steel ball prot
 BALL_CUP_WALL = 1.5
 BALL_CUP_RIM = 6.0                 # >= 5.2 for 0.5 to the walls
 BEARING_POLAR = 45.0               # steel balls this far from the bottom pole (azimuths 0 / 120 / 240 from +u); <= ~49 for the uphill boss
+# A second set of seats at BEARING_POLAR_ALT, turned 60 deg (azimuths 60 / 180 / 300), to try the steeper angle on the same
+# cup: fit the steel balls in one set or the other (user).
+BEARING_POLAR_ALT = 49.0
 BEARING_HOLE_D = 2.5               # TODO: press fit + glue, set from the test print
 BEARING_BOSS_D = 5.5
 # PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat. The board is the

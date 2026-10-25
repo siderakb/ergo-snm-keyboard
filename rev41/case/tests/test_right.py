@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pytest
+from build123d import Pos, Sphere
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
@@ -75,6 +76,21 @@ def test_ball_rests_on_three_steel_balls_and_clears_the_cup(right_case):
         assert np.linalg.norm(p) == pytest.approx(params.BALL_D / 2 + params.BEARING_BALL_D / 2)       # touching the ball
         assert np.degrees(np.arccos(-p[2] / np.linalg.norm(p))) == pytest.approx(params.BEARING_POLAR)
     assert right_case["cup"].distance_to(trackball.ball()) == pytest.approx(params.BALL_CUP_GAP, abs=0.05)
+
+
+def test_second_seat_set_is_in_the_gaps_at_the_steeper_angle(right_case):
+    alt = trackball.alt_bearings()
+    assert len(alt) == 3
+    for p in alt:
+        assert np.linalg.norm(p) == pytest.approx(params.BALL_D / 2 + params.BEARING_BALL_D / 2)
+        assert np.degrees(np.arccos(-p[2] / np.linalg.norm(p))) == pytest.approx(params.BEARING_POLAR_ALT)
+        az = np.degrees(np.arctan2(p[1], p[0])) % 360
+        assert min(abs(((az - a) + 180) % 360 - 180) for a in (0, 120, 240)) == pytest.approx(60.0)    # midway between
+        ball = trackball.loc() * Pos(*p) * Sphere(params.BEARING_BALL_D / 2)
+        assert analysis.interference_volume(right_case["cup"], ball) < 1e-6                         # the seat is open
+        k = p / np.linalg.norm(p)
+        behind = trackball.to_case(*(p + 2.0 * k))                     # past the seat bottom, outside the shell: the boss
+        assert right_case["cup"].is_inside(tuple(behind))
 
 
 def test_cup_rim_clears_the_arm_walls(right_case):

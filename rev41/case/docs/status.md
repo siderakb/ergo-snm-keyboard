@@ -217,8 +217,9 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   lower the cup rim instead.
 - Ball frame: ball centre, u uphill along the thumb plate, v across, n plate normal; sensor axis along n.
 - Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 6.0 below the ball centre (0.64 to the arm walls); flat cut
-  0.5 short of the pod on the uphill side; three Ø2.5 steel balls at 45 deg from the pole (user; test print 35-45) (azimuth 0/120/240 from +u) in blind
-  seats Ø2.5 with Ø5.5 bosses; seat block 32 x 25 (top 14.5 below the ball centre) for the board; lens window 19 x 11 + 0.5
+  0.5 short of the pod on the uphill side; three Ø2.5 steel balls at 45 deg from the pole (user) (azimuth 0/120/240 from +u) in
+  blind seats Ø2.5 with Ø5.5 bosses, plus a second set of three seats at 49 deg, azimuths 60/180/300 (midway), to try the steeper
+  angle on the same cup (fit one set or the other; the 49 deg bosses reach 16.52 from the axis); seat block 32 x 25 (top 14.5 below the ball centre) for the board; lens window 19 x 11 + 0.5
   (TODO lens outline) and a recess over U1's through-hole pins on B.Cu (pads + 1.0).
 - PMW3610 board: long side along u, FPC end uphill, B.Cu (lens) up. Sandwich (user): four M2.5 x 10 socket head screws (head
   Ø4.5 x 2.5, user has them) come up through the pod floor (counterbore Ø5.0 x 1.7, head 0.8 proud = BOTTOM_RECESS, so no lower
