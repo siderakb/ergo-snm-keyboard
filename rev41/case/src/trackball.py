@@ -2,8 +2,8 @@
 
 Everything is built in the ball frame (`frame`): origin at the ball centre, x = u (uphill along the thumb plate, towards the
 crease), y = v = n x u, z = n (thumb plate normal). Depths `w` below are along n from the ball centre.
-The cup is a separate part: a spherical shell below BALL_CUP_RIM with three steel-ball seats, a seat block for the sensor
-board (four screws, shims for the working distance) and two feet screwed onto the pod floor from below.
+The cup is a separate part: a spherical shell below BALL_CUP_RIM with three steel-ball seats and a seat block for the sensor
+board. Four screws from below clamp pod floor (standoffs), board and shims to the cup.
 """
 
 import functools
@@ -56,20 +56,29 @@ def bearings():
     return [np.array((r * np.sin(p) * np.cos(a), r * np.sin(p) * np.sin(a), -r * np.cos(p))) for a in np.radians((0, 120, 240))]
 
 
+def pin_field():
+    """(u0, u1, v0, v1) of U1's through-hole pins with their clearance (board local X -> v, -KiCad y -> u)."""
+    cx, cy = params.PMW3610_BOARD_CENTRE
+    x0, y0, x1, y1 = params.PMW3610_PIN_FIELD
+    c = params.PMW3610_PIN_CLEAR
+    return cy - y1 - c, cy - y0 + c, x0 - cx - c, x1 - cx + c
+
+
 def board_holes():
     hx, hy = params.PMW3610_HOLES                                   # short (x) x long (y) side of the board
     return [(sa * hy / 2, sb * hx / 2) for sa in (-1, 1) for sb in (-1, 1)]      # long side along u
 
 
-def feet():
-    return [(0.0, s * params.CUP_FOOT_V) for s in (-1, 1)]
+W_HEAD = W_POD_OUT + params.SENSOR_SCREW_HEAD_H - params.SENSOR_SCREW_PROUD           # screw head underside
+W_TIP = W_HEAD + params.SENSOR_SCREW_L                                                # screw tip (nominal shim)
+NUT_DEPTH = params.NUT_M25_H + 0.5
 
 
-def _screw_post(a, b, w_end):
-    """Nut pocket open at the lower face w_end and the blind screw hole above it (screw comes up from below)."""
-    d = params.NUT_M25_H + 0.5
-    nut = Pos(a, b, w_end - 1.0) * Cylinder((params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2, d + 1.0, align=MIN)
-    return [nut, Pos(a, b, w_end + d - 0.01) * Cylinder(params.SCREW_M25_CLEAR_D / 2, params.POST_HOLE_LEN, align=MIN)]
+def _screw_post(a, b):
+    """Nut pocket open at the seat and the blind hole above it, 0.5 past the screw tip."""
+    nut = Pos(a, b, W_SEAT - 1.0) * Cylinder((params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2, NUT_DEPTH + 1.0, align=MIN)
+    w0 = W_SEAT + NUT_DEPTH - 0.01
+    return [nut, Pos(a, b, w0) * Cylinder(params.SCREW_M25_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)]
 
 
 @functools.lru_cache(maxsize=None)
@@ -78,8 +87,6 @@ def cup_local():
     r_in, r_out = R + params.BALL_CUP_GAP, R + params.BALL_CUP_GAP + params.BALL_CUP_WALL
     bu, bv = params.CUP_BLOCK
     body = Sphere(r_out) + _box(-bu / 2, bu / 2, -bv / 2, bv / 2, W_SEAT, params.CUP_BLOCK_TOP)
-    for a, b in feet():
-        body = body + Pos(a, b, W_POD_IN) * Cylinder(params.CUP_FOOT_D / 2, -params.BALL_CUP_RIM - W_POD_IN, align=MIN)
     for p in bearings():
         body = body + Pos(*p) * Sphere(params.BEARING_BOSS_D / 2)
     down, up, _ = params.BALL_POD_HALF                    # nothing above the rim; uphill the shell is cut flat inside the pod
@@ -88,14 +95,12 @@ def cup_local():
     lu, lv = params.PMW3610_LENS_BOX
     c = params.LENS_WINDOW_CLEAR
     body = body - _box(-lu / 2 - c, lu / 2 + c, -lv / 2 - c, lv / 2 + c, W_SEAT - 1.0, 0.0)   # the sensor sees the ball
+    body = body - _box(*pin_field(), W_SEAT - 1.0, W_SEAT + 2.0)                                # U1 pins on B.Cu
     for p in bearings():                       # blind seat: the steel ball sits on its bottom, touching the ball
         k = p / np.linalg.norm(p)
         body = body - Location(Plane(origin=tuple(p - k * 2.0), z_dir=tuple(k))) * Cylinder(params.BEARING_HOLE_D / 2, 2.0 + params.BEARING_BALL_D / 2, align=MIN)
     for a, b in board_holes():
-        for cut in _screw_post(a, b, W_SEAT):
-            body = body - cut
-    for a, b in feet():
-        for cut in _screw_post(a, b, W_POD_IN):
+        for cut in _screw_post(a, b):
             body = body - cut
     return body
 
@@ -165,10 +170,16 @@ def foot_xy():
     return tuple(to_case(0.0, 0.0, W_POD_OUT)[:2])
 
 
+def standoffs():
+    """Standoffs on the pod floor under the four board holes, up to the board's sensor face."""
+    return [loc() * Pos(a, b, W_POD_IN - 0.1) * Cylinder(params.SENSOR_STANDOFF_D / 2, W_SENSOR - W_POD_IN + 0.1, align=MIN)
+            for a, b in board_holes()]
+
+
 def mount_cuts():
-    """Screw holes and head counterbores through the pod floor under the two cup feet."""
+    """Through holes for the four board screws and the head counterbores in the pod's outer face."""
     out = []
-    for a, b in feet():
-        out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.SCREW_M25_CLEAR_D / 2, params.BOTTOM_WALL + 6.0, align=MIN))
-        out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.SCREW_HEAD_CBORE_D / 2, 5.0 + params.SCREW_HEAD_SINK, align=MIN))
+    for a, b in board_holes():
+        out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.SCREW_M25_CLEAR_D / 2, W_SENSOR - W_POD_OUT + 6.0, align=MIN))
+        out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.SENSOR_SCREW_CBORE_D / 2, W_HEAD - W_POD_OUT + 5.0, align=MIN))
     return out

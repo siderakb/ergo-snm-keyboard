@@ -99,3 +99,28 @@ def test_thumb_foot_stands_under_the_pod():
     x, y = trackball.foot_xy()
     assert any(np.hypot(t[0] - x, t[1] - y) < 1e-6 for t, _, _ in axes)
     assert topcase.floor_z("right", x, y) == pytest.approx(trackball.pod_floor_z(x, y), abs=1e-6)
+
+
+def test_board_sandwich_screws_engage_the_nut_and_stay_blind():
+    shim_max = 2 * params.SENSOR_SHIM_NOM
+    tip_short = trackball.W_TIP - (shim_max - params.SENSOR_SHIM_NOM)             # thickest shim pack pushes the cup up
+    assert tip_short >= trackball.W_SEAT + params.NUT_M25_H                          # the whole nut is engaged
+    assert trackball.W_TIP + 0.5 <= params.CUP_BLOCK_TOP                             # blind hole stays inside the block
+    proud = trackball.W_POD_OUT - (trackball.W_HEAD - params.SENSOR_SCREW_HEAD_H)
+    assert proud <= params.BOTTOM_RECESS + 1e-9                                       # head no lower than the walls' edge
+    assert trackball.W_HEAD < trackball.W_POD_IN                                     # counterbore stays in the floor
+    assert trackball.W_SENSOR - trackball.W_HEAD >= 1.5                              # material under the head
+
+
+def test_cup_seat_clears_the_sensor_pins_on_bcu():
+    u0, u1, v0, v1 = trackball.pin_field()
+    c = params.PMW3610_PIN_CLEAR - 0.1
+    pins = trackball.loc() * trackball._box(u0 + c, u1 - c, v0 + c, v1 - c, trackball.W_BOARD, trackball.W_BOARD + 1.5)
+    assert analysis.interference_volume(trackball.cup(), pins) < 1e-6
+
+
+def test_standoffs_clear_the_sensor_parts():
+    parts = trackball.sensor_parts()
+    for s in trackball.standoffs():
+        for k in ("pmw3610_ic", "pmw3610_fpc"):
+            assert s.distance_to(parts[k]) >= 0.5, k

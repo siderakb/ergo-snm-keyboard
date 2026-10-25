@@ -175,9 +175,11 @@ def bottom_case(hand=None):
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
     for c in topcase.screw_counterbores(hand):
         body = body - c
-    if hand == "right":                                  # the ball cup's two feet are screwed on from below
+    if hand == "right":                                  # board standoffs; the board screws come up through the pod floor
         import trackball
 
+        for s in trackball.standoffs():
+            body = body + s
         for c in trackball.mount_cuts():
             body = body - c
     for part in feet(hand):                              # on a ramp the column's flat top would stick out of the inner face

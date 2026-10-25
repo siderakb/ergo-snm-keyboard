@@ -246,6 +246,10 @@ PMW3610_HOLES = (17.5, 25.5)   # M3 x4
 PMW3610_BOARD_CENTRE = (150.0, 100.0)    # KiCad; the optical centre (U1 Cmts.User mark) is the board centre
 PMW3610_IC_BOX = (16.2, 10.1, 1.65)      # package (pmw3610.png) along the board's long side, body below the sensor face
 PMW3610_IC_REF_Y = 102.988               # U1 footprint origin (package centre), KiCad y: 2.988 off the optical centre
+# U1 is through-hole: its pin ends and solder stick out of B.Cu, the face against the cup's seat. Pad centres (x0, y0, x1, y1),
+# KiCad, from the footprint (pads 1-16), and the clearance around them (pad + solder fillet).
+PMW3610_PIN_FIELD = (144.65, 96.82, 155.35, 110.17)
+PMW3610_PIN_CLEAR = 1.0
 PMW3610_LENS_BOX = (19.0, 11.0)          # TODO: lens outline (no drawing of the lens part yet); 3.4 high (PMW3610_LENS_PROTRUSION)
 PMW3610_FPC_REF_Y = 87.35                # J2 AFC01-S08FCA-00 (F.Cu, the face away from the ball), KiCad y
 PMW3610_FPC_BOX = (9.0, 4.5, 2.0)        # along the board edge x depth x height (2.0: user); width/depth TODO from the AFC01 drawing
@@ -261,16 +265,18 @@ BALL_CUP_RIM = 6.0                 # >= 5.2 for 0.5 to the walls
 BEARING_POLAR = 45.0               # steel balls this far from the bottom pole (azimuths 0 / 120 / 240 from +u); <= ~49 for the uphill boss
 BEARING_HOLE_D = 2.5               # TODO: press fit + glue, set from the test print
 BEARING_BOSS_D = 5.5
-# PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat, screwed with four
-# M2.5 x 6 from below (heads 1.3 < FPC 2.0) into nuts in the cup, shims between seat and board set the working distance:
+# PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat. The board is the
+# middle of a sandwich: four M2.5 x 10 socket head screws come up through the pod floor, a standoff on it, the board and the
+# shims into nuts in the cup (user: the cup shares the board's screws). Shims between seat and board set the working distance:
 # the seat is SENSOR_SHIM_NOM nearer the ball than nominal, so shims can make up +-0.2 either way.
 SENSOR_SHIM_NOM = 0.2
 LENS_WINDOW_CLEAR = 0.5
 CUP_BLOCK = (32.0, 25.0)           # seat block under the cup (u x v), carries the four board screws
-CUP_BLOCK_TOP = -16.0              # block top below the ball centre (merges with the shell)
-# The module stands on the floor of a pod in the bottom plate on two feet across the arm, screwed from below (M2.5 x 6).
-CUP_FOOT_D = 6.0
-CUP_FOOT_V = 15.25                 # feet at u = 0, v = +-this
+CUP_BLOCK_TOP = -14.5              # block top below the ball centre (merges with the shell; keeps the screw holes blind)
+SENSOR_SCREW_L, SENSOR_SCREW_HEAD_D, SENSOR_SCREW_HEAD_H = 10.0, 4.5, 2.5     # M2.5 x 10 socket head (user has them)
+SENSOR_SCREW_CBORE_D = SENSOR_SCREW_HEAD_D + 0.5
+SENSOR_SCREW_PROUD = 0.8           # head stands this far out of the pod's outer face (= BOTTOM_RECESS: no lower than the walls)
+SENSOR_STANDOFF_D = 5.0            # on the pod floor under each board hole: carries the whole head, 1.1 wall around the hole
 BALL_POD_CLEAR = 0.5               # lowest part (FPC connector) -> pod floor
 # Inner extent of the pod from the ball axis: downhill (-u), uphill (+u), across (+-v; the arm walls bound it). Uphill it ends
 # 2.1 past the FPC connector (room for the cable to bend up) and clears the post next to the crease (BOSS_SHIFT_RIGHT).

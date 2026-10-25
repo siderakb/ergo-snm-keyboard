@@ -218,13 +218,16 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - Ball frame: ball centre, u uphill along the thumb plate, v across, n plate normal; sensor axis along n.
 - Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 6.0 below the ball centre (0.64 to the arm walls); flat cut
   0.5 short of the pod on the uphill side; three Ø2.5 steel balls at 45 deg from the pole (user; test print 35-45) (azimuth 0/120/240 from +u) in blind
-  seats Ø2.5 with Ø5.5 bosses; seat block 32 x 25 for the board; lens window 19 x 11 + 0.5 (TODO lens outline); two Ø6 feet at
-  u = 0, v = +-15.25 down to the pod floor.
-- PMW3610 board: long side along u, FPC end uphill, B.Cu (lens) up; four M2.5 x 6 from below (heads 1.3 under the board) into
-  nuts in the seat block; the seat sits 0.2 nearer the ball than nominal, shims set the 2.4 working distance (+-0.2).
+  seats Ø2.5 with Ø5.5 bosses; seat block 32 x 25 (top 14.5 below the ball centre) for the board; lens window 19 x 11 + 0.5
+  (TODO lens outline) and a recess over U1's through-hole pins on B.Cu (pads + 1.0).
+- PMW3610 board: long side along u, FPC end uphill, B.Cu (lens) up. Sandwich (user): four M2.5 x 10 socket head screws (head
+  Ø4.5 x 2.5, user has them) come up through the pod floor (counterbore Ø5.0 x 1.7, head 0.8 proud = BOTTOM_RECESS, so no lower
+  than the walls' edge), a Ø5.0 x 2.5 standoff on the floor, the board and the shims into nuts in the seat block: 2.8 under the
+  head, 5.4 into the cup (whole nut + blind hole). The seat sits 0.2 nearer the ball than nominal, shims set the 2.4 working
+  distance (+-0.2). M2.5 x 12 would go through the block.
 - Pod in the bottom plate: floor parallel to the thumb plate, 0.5 under the FPC connector (outer face 28.9 below the ball centre
   = 38.6 below the plate top); inner extent u -19.5 .. +17.0 (2.1 past the FPC connector for the cable bend), v bounded by the
-  arm walls, which come down around it. Cup feet screwed on from below (M2.5 x 6, counterbores in the pod floor).
+  arm walls, which come down around it. Taking the bottom plate off brings the cup and the board with it.
 - The thumb foot (FEET_LEFT[THUMB_FOOT]) stands under the middle of the pod on the right. The post next to the crease moves
   2.5 uphill (`BOSS_SHIFT_RIGHT`, at the 0.4 PCB clearance) so it stays out of the pod.
 - Height: the pod is now the lowest part; the desk plane is 14.9 lower than in R1, so every foot column is ~15 longer (raise the
