@@ -245,6 +245,12 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   17.6 cavity round the pod neck (the plate edge is 18.8 out, so it cannot widen); the cup rim (7.0 below the centre, 6.0 at
   BALL_RAISE 0) stays where the neck's 45 deg cone widens: 0.4 to the plate, 0.2 under the 49 deg boss tops, ball -> plate 0.66.
   With BALL_RAISE 10 the rim had to go to 9.0.
+- Collar round the ball hole (user, `topcase.ball_collar`): a 2.0 wall hangs from the skin underside along the plate normal down to the
+  bottom plate's inner face (like the posts), so the ball sits in a closed shaft; inner radius = the hole (18.25), outer 20.25, so it
+  merges with the arm walls on the two sides. The thumb_1x2 board's edge is only 0.16 outside the hole edge (18.41 from the axis in
+  the plate plane), so on that side the wall is cut back to the board outline + 0.3 and what is left thinner than 1.0 is dropped:
+  an open slot about 36 deg (11.5 mm) wide, with the wall growing back 1.0 -> 2.0 over the next 8 deg each side. Nothing of the
+  collar touches the boards, ball or cup.
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
   outline from drawings; FPC route from the pod to the core board; the pod is a separate grey cup below the orange walls.

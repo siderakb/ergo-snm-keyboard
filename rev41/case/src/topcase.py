@@ -464,6 +464,48 @@ def ball_hole(hand):
     return [_along(np.array(params.BALL_HOLE_CENTER_RIGHT) + 5.0 * n, n, 0.0, params.PLATE_T + 10.0, params.BALL_HOLE_D / 2)]
 
 
+def _thumb_board_uv(hand):
+    """The thumb board's plan outline in the ball frame (u, v) of trackball.frame(), as a shapely polygon (convex hull)."""
+    import trackball
+
+    c, u, v, _ = trackball.frame()
+    board = outline.thumb_board(hand)
+    x0, x1 = params.THUMB_BOARDS[board]["x_range"]
+    pts = [(x, y) for loop in pcb_ref.outline_loops(pcb_ref.load_board(params.BOARD_SOURCE[board])) for x, y in loop if x0 - 0.01 <= x <= x1 + 0.01]
+    uv = [((p := np.array(local_to_case(board, x, -y, 0.0, hand=hand)) - c) @ u, p @ v) for x, y in pts]
+    return MultiPoint(uv).convex_hull
+
+
+def ball_collar_profile(hand):
+    """2D (u, v) shape of the collar wall round the ball hole: the ring cut back to the thumb board outline + clearance, with
+    anything thinner than BALL_HOLE_WALL_MIN dropped."""
+    r = params.BALL_HOLE_D / 2
+    ring = Point(0, 0).buffer(r + params.BALL_HOLE_WALL, 128).difference(Point(0, 0).buffer(r, 128))
+    cut = ring.difference(_thumb_board_uv(hand).buffer(params.BALL_HOLE_PCB_CLEAR, 16))
+    m = params.BALL_HOLE_WALL_MIN / 2
+    return cut.buffer(-m, 16).buffer(m, 16).intersection(ring)
+
+
+def ball_collar(hand):
+    """Right hand: the wall round the ball hole, from the skin underside down to the bottom plate's inner face (as the posts)."""
+    if hand != "right":
+        return None
+    import trackball
+
+    c, u, _, n = trackball.frame()
+    top = np.array(params.BALL_HOLE_CENTER_RIGHT)
+    r = params.BALL_HOLE_D / 2
+    tube = _along(top, n, -1.0, 80.0, r + params.BALL_HOLE_WALL) - _along(top, n, -2.0, 90.0, r)
+    ring = Point(0, 0).buffer(r + params.BALL_HOLE_WALL + 1.0, 128).difference(Point(0, 0).buffer(r - 0.5, 128))
+    drop = ring.difference(ball_collar_profile(hand).buffer(1e-3))          # what the board outline / min wall took away
+    plane = Location(Plane(origin=tuple(top), x_dir=tuple(u), z_dir=tuple(n)))
+    for g in getattr(drop, "geoms", [drop]):
+        if g.area > 1e-3:
+            tube = tube - plane * Pos(0, 0, -60) * Solid.extrude(_face(g), (0, 0, 120))
+    zone = _under(hand, params.PLATE_T) - below_floor(hand, params.BOTTOM_WALL, pod=False)
+    return tube & zone & outline.plan_prism(hand, outline.case_outline_polygon(hand))
+
+
 def top_skin_keyed(hand):
     skin = outline.top_skin(hand)
     for c in key_cutouts(hand) + relief_cutouts(hand) + led_slots(hand) + ball_hole(hand):
@@ -478,6 +520,8 @@ def top_case(hand=None):
     p = posts(hand)
     if p is not None:
         body = body + p      # walls and posts are already cut by the pockets; the skin stays whole above them
+    if ball_collar(hand) is not None:
+        body = body + ball_collar(hand)
     return body
 
 
@@ -488,4 +532,6 @@ def top_case_draft(hand=None):
     p = posts(hand)
     if p is not None:
         out["top_posts"] = p
+    if ball_collar(hand) is not None:
+        out["top_collar"] = ball_collar(hand)
     return out

@@ -162,3 +162,21 @@ def test_standoffs_clear_the_sensor_parts():
     for s in trackball.standoffs():
         for k in ("pmw3610_ic", "pmw3610_fpc"):
             assert s.distance_to(parts[k]) >= 0.5, k
+
+
+def test_ball_hole_collar_wall_runs_from_the_skin_to_the_plate_and_keeps_off_the_thumb_board():
+    collar = topcase.ball_collar("right")
+    assert collar is not None and len(collar.solids()) <= 2
+    c, u, v, n = trackball.frame()
+    top = np.array(params.BALL_HOLE_CENTER_RIGHT)
+    r = params.BALL_HOLE_D / 2
+    p = lambda ang, rr, depth: tuple(top + rr * (np.cos(ang) * u + np.sin(ang) * v) - depth * n)
+    for depth in (params.PLATE_T + 0.5, params.PLATE_T + 4.0):                       # under the skin, in the shaft
+        assert collar.is_inside(p(0.0, r + params.BALL_HOLE_WALL / 2, depth)), depth       # full wall on the open side
+        assert not collar.is_inside(p(0.0, r - 0.3, depth))                                 # the bore is the hole
+    assert not collar.is_inside(p(np.pi, r + 0.5, params.PLATE_T + 2.0))             # open slot where the board edge is
+    boards = {b.label: b for b in load_boards("right")}
+    assert collar.distance_to(boards["thumb_1x2"]) >= params.BALL_HOLE_PCB_CLEAR - 0.02
+    assert trackball.ball().distance_to(collar) >= params.BALL_HOLE_D / 2 - params.BALL_D / 2 - 0.05
+    prof = topcase.ball_collar_profile("right")                                       # no sliver thinner than the minimum
+    assert prof.buffer(-params.BALL_HOLE_WALL_MIN / 2 + 0.02).buffer(params.BALL_HOLE_WALL_MIN / 2 - 0.02).area == pytest.approx(prof.area, rel=0.02)

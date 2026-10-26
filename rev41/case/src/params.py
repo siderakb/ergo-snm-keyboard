@@ -382,6 +382,12 @@ PLACEMENTS = {
 # 34 mm ball. Ball centre depth below the plate follows BALL_CENTER_DEPTH.
 BALL_HOLE_CENTER_RIGHT = (round(77.232 + THUMB_SHIFT_IN * _FALL[0], 3), round(-141.945 - THUMB_SHIFT_IN * _FALL[1], 3), -3.8)
 BALL_HOLE_D = 36.5
+# Collar round the ball hole (user): a wall hangs from the skin along the plate normal down to the bottom plate, so the ball sits
+# in a closed shaft. On the thumb PCB side the board edge is only 0.16 outside the hole edge, so the wall is cut back to the
+# board outline + BALL_HOLE_PCB_CLEAR; whatever is left thinner than BALL_HOLE_WALL_MIN is dropped (a short open slot).
+BALL_HOLE_WALL = 2.0
+BALL_HOLE_WALL_MIN = 1.0
+BALL_HOLE_PCB_CLEAR = 0.3
 # Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
 BALL_RAISE = 5.0                # user: the whole trackball (ball, cup, sensor, pod) moves this far up along the plate normal
 BALL_TOP = KEYCAP_TOP + BALL_RAISE
