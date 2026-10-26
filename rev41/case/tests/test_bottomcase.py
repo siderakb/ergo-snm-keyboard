@@ -120,6 +120,23 @@ def test_feet_end_on_the_tented_desk_plane(bottom):
     assert min(n @ np.array((v.X, v.Y, v.Z)) for v in walls.vertices()) >= d + params.FOOT_END_T + params.FOOT_MIN_CLEAR - 0.5
 
 
+def test_foot_flares_stay_whole_inside_the_plate_and_the_door_edges():
+    from shapely.geometry import Point
+
+    need = params.FOOT_D / 2 + params.FOOT_FLARE_R + 1.0                  # flare radius + 1.0: not cut by an edge
+    plate = bottomcase.bottom_outline("left")
+    x0, y0, x1, y1 = batterydoor.layout("left")["door"]
+    notch = batterydoor._post_keep("left")
+    for i, (x, y) in enumerate(params.FEET_LEFT):
+        if i == params.THUMB_FOOT:
+            continue                                                       # the thumb foot is far from every edge
+        if batterydoor.on_door("left", x, y):
+            assert min(x - x0, x1 - x, y - y0, y1 - y) >= need - 0.1, (x, y)
+            assert np.hypot(x - notch[0], y - notch[1]) - notch[2] >= need - 0.1, (x, y)   # nor from the post notch
+        else:
+            assert plate.exterior.distance(Point(x, y)) >= need - 0.1, (x, y)
+
+
 def test_foot_columns_flare_at_the_root(bottom, door):
     r = params.FOOT_D / 2
     for on_door, solid in ((False, bottom), (True, door)):

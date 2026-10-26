@@ -179,6 +179,9 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   Y down to -108.4.
 - The +Y strip post (73.8, -34.2) is replaced by a fixed corner post (109.5, -38.6) (`BOSS_FIXED_LEFT`, ~95% of the boss).
 - Foot (105, -45) moved to (100, -45) so it stands wholly on the door; the door carries it (desk load goes into the laps).
+- Feet moved inward (user, 2026-10-26), so the root flares (radius 6.5) are not cut by the plate edge / the door edge: the -X pair
+  from x 2.0 to 4.5 (edge 5.7 -> 8.2), the door foot from (100, -45) to (98, -48.5) (+Y door edge 4.4 -> 7.9, +X 7.4 -> 9.4, post notch
+  7.0 -> 10.4). The right hand mirrors them (+X pair, door foot on the core board's -X side). `FEET_LEFT` is shared by both hands.
 - Battery wire (J8 to the holder): not modelled, it lies loose inside the shell (user). J8 is about 54-80 mm from the holder's
   +Y end in a straight line; leave about 150 mm so the door can be pushed 4 mm and the holder dropped out of the plate.
 - Ribs (`bottomcase.ribs`, `foot_flares`): (1) every foot column root gets a conical flare (+2.5 radial over 3.75, clipped to the

@@ -172,7 +172,9 @@ EDGE_RIB_H = 4.0
 STRIP_RIB_H = 5.0
 STRIP_RIB_GAP = 1.0        # from the opening's +Y edge
 STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire through
-FEET_LEFT = ((2.0, -124.0), (2.0, -55.0), (100.0, -45.0),                       # near the user's circles; (100, -45) on the battery door
+# Feet are at least FOOT_D / 2 + FOOT_FLARE_R + 1.0 = 7.5 from the plate edge and the door's edges, so the root flare is whole
+# (user: move the three inward; 2.0 -> 4.5 for the -X pair, the door one 8 from the +Y edge, 2 inward).
+FEET_LEFT = ((4.5, -124.0), (4.5, -55.0), (98.0, -48.5),                        # near the user's circles; (98, -48.5) on the battery door
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 THUMB_FOOT = 3             # index in FEET_LEFT; the right hand puts this foot under the middle of the trackball pod instead
 # Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
