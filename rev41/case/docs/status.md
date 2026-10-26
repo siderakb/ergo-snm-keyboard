@@ -216,7 +216,7 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   FPC (J2 AFC01-S08FCA-00, 2.0 high, no pin header), cable 150 mm (not modelled, like the battery wire); keep the outline and
   lower the cup rim instead.
 - Ball frame: ball centre, u uphill along the thumb plate, v across, n plate normal; sensor axis along n.
-- Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 6.0 below the ball centre (1.8 to the
+- Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 7.0 below the ball centre (about 2.4 to the
   arm walls), trimmed to radius 18.46 (0.5 inside the pod wall); three Ø2.5 steel balls at 45 deg from the pole (user) (azimuth 0/120/240 from +u) in
   blind seats Ø2.5 with Ø5.5 bosses, plus a second set of three seats at 49 deg, azimuths 60/180/300 (midway), to try the steeper
   angle on the same cup (fit one set or the other; the 49 deg bosses reach 16.52 from the axis); seat block 32 x 25 (top 14.5 below the ball centre) for the board; lens window 19 x 11 + 0.5
@@ -236,8 +236,12 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   18.46. FPC connector -> pod wall about 4. Taking the bottom plate off brings the cup and the board with it.
 - The thumb foot (FEET_LEFT[THUMB_FOOT]) stands under the middle of the pod on the right. The post next to the crease moves
   2.5 uphill (`BOSS_SHIFT_RIGHT`, at the 0.4 PCB clearance) so it stays out of the pod.
-- Height: the pod (its rounded edge and the screw heads, `trackball.lowest_points`) is now the lowest part; the desk plane is
-  12.4 lower than in R1 (the lowest points are the screw heads, 0.9 below the rounded edge), so every
-  foot column is ~12 longer (raise the ball or change the tent angle to win some back).
+- Raised 5 (user, `BALL_RAISE`; first 10, then 5 back): the whole module (ball, cup, sensor, pod) moves 5 up along the plate normal:
+  the ball centre is 4.7 below the plate top and the ball top 5 above the keycap tops. The pod hangs 14.5 under the walls and the
+  desk plane is 5 higher than at BALL_RAISE 0 (-57.4, was -62.3): every foot column is ~5 shorter. The arm's flat plate has a
+  17.6 cavity round the pod neck (the plate edge is 18.8 out, so it cannot widen); the cup rim (7.0 below the centre, 6.0 at
+  BALL_RAISE 0) stays where the neck's 45 deg cone widens: 0.4 to the plate, 0.2 under the 49 deg boss tops, ball -> plate 0.66.
+  With BALL_RAISE 10 the rim had to go to 9.0.
+- Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
   outline from drawings; FPC route from the pod to the core board; the pod is a separate grey cup below the orange walls.

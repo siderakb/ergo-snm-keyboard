@@ -262,7 +262,8 @@ PMW3610_FPC_BOX = (9.0, 4.5, 2.0)        # along the board edge x depth x height
 # axis) by 0.5 (user: lower rim, keep the outline). Above the rim the top case hole (1.25 per side) guides the ball.
 BALL_CUP_GAP = 0.8                 # ball -> cup inner surface = steel ball protrusion
 BALL_CUP_WALL = 1.5
-BALL_CUP_RIM = 6.0                 # >= 5.2 for 0.5 to the walls
+BALL_CUP_RIM = 7.0                 # >= 5.2 for 0.5 to the walls; also under the pod neck: the plate's cavity (17.6, the plate edge
+                                   # is 18.8 out) is narrower than the cup higher up, so the rim stays where the neck cone widens
 BEARING_POLAR = 45.0               # steel balls this far from the bottom pole (azimuths 0 / 120 / 240 from +u); <= ~49 for the uphill boss
 # A second set of seats at BEARING_POLAR_ALT, turned 60 deg (azimuths 60 / 180 / 300), to try the steeper angle on the same
 # cup: fit the steel balls in one set or the other (user).
@@ -380,8 +381,9 @@ PLACEMENTS = {
 BALL_HOLE_CENTER_RIGHT = (round(77.232 + THUMB_SHIFT_IN * _FALL[0], 3), round(-141.945 - THUMB_SHIFT_IN * _FALL[1], 3), -3.8)
 BALL_HOLE_D = 36.5
 # Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
-BALL_TOP = KEYCAP_TOP
-BALL_CENTER_DEPTH = round(BALL_D / 2 - BALL_TOP, 3)   # 9.7 below the plate top, along the plate normal
+BALL_RAISE = 5.0                # user: the whole trackball (ball, cup, sensor, pod) moves this far up along the plate normal
+BALL_TOP = KEYCAP_TOP + BALL_RAISE
+BALL_CENTER_DEPTH = round(BALL_D / 2 - BALL_TOP, 3)   # -0.3 (above the plate top) along the plate normal; 9.7 below with BALL_RAISE = 0
 
 # thumb_cluster.kicad_pcb is a panel of two boards joined by mouse bites; KiCad x range of each.
 THUMB_BOARDS = {

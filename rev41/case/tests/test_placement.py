@@ -65,14 +65,14 @@ def test_right_thumb_1x2_is_mirror_image_of_left_first_column():
         assert abs(xr - (params.MIRROR_X - xl)) < 0.01 and abs(yr - yl) < 0.01 and abs(zr - zl) < 0.01   # both slide in
 
 
-def test_ball_top_is_level_with_keycap_top():
+def test_ball_top_is_BALL_RAISE_above_keycap_top():
     import numpy as np
     from geometry import ball_center
 
     n = placement("thumb_1x2", "right")[0][:, 2]
     top = np.array(ball_center()) + params.BALL_D / 2 * n          # ball point farthest along the normal
     plate_top = np.array(params.BALL_HOLE_CENTER_RIGHT)
-    assert abs((top - plate_top) @ n - params.KEYCAP_TOP) < 1e-3
+    assert abs((top - plate_top) @ n - (params.KEYCAP_TOP + params.BALL_RAISE)) < 1e-3
 
 
 def test_sensor_lens_plane_is_working_distance_below_ball():
