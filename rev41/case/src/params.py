@@ -385,6 +385,7 @@ BALL_HOLE_D = 36.5
 # Collar round the ball hole (user): a wall hangs from the skin along the plate normal down to the bottom plate, so the ball sits
 # in a closed shaft. On the thumb PCB side the board edge is only 0.16 outside the hole edge, so the wall is cut back to the
 # board outline + BALL_HOLE_PCB_CLEAR; whatever is left thinner than BALL_HOLE_WALL_MIN is dropped (a short open slot).
+BALL_HOLE_CHAMFER = 0.8          # 45 degree chamfer on the hole's top edge (user), 0.8 = the JLC minimum emboss
 BALL_HOLE_WALL = 2.0
 BALL_HOLE_WALL_MIN = 1.0
 BALL_HOLE_PCB_CLEAR = 0.3

@@ -180,3 +180,15 @@ def test_ball_hole_collar_wall_runs_from_the_skin_to_the_plate_and_keeps_off_the
     assert trackball.ball().distance_to(collar) >= params.BALL_HOLE_D / 2 - params.BALL_D / 2 - 0.05
     prof = topcase.ball_collar_profile("right")                                       # no sliver thinner than the minimum
     assert prof.buffer(-params.BALL_HOLE_WALL_MIN / 2 + 0.02).buffer(params.BALL_HOLE_WALL_MIN / 2 - 0.02).area == pytest.approx(prof.area, rel=0.02)
+
+
+def test_ball_hole_top_edge_is_chamfered():
+    skin = topcase.top_skin_keyed("right")
+    c, u, v, n = trackball.frame()
+    top = np.array(params.BALL_HOLE_CENTER_RIGHT)
+    r, ch = params.BALL_HOLE_D / 2, params.BALL_HOLE_CHAMFER
+    at = lambda rr, depth: tuple(top + rr * v - depth * n)                           # on the +v side, clear of the collar slot
+    assert not skin.is_inside(at(r + ch * 0.5, ch * 0.25))        # just under the top, inside the chamfer cone
+    assert skin.is_inside(at(r + ch * 0.5, ch * 0.75))            # deeper at the same radius: solid
+    assert skin.is_inside(at(r + ch + 0.3, 0.2))                  # beyond the chamfer: the top face is whole
+    assert not skin.is_inside(at(r - 0.3, params.PLATE_T / 2))    # the hole itself

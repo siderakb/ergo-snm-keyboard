@@ -13,7 +13,7 @@ import functools
 import numpy as np
 from shapely.geometry import LineString, MultiPoint, Point, Polygon
 from shapely.ops import unary_union
-from build123d import Align, Axis, Box, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Sphere, Wire, fillet
+from build123d import Align, Axis, Box, Cone, Cylinder, Rot, Face, Location, Plane, Pos, Solid, Sphere, Wire, fillet
 
 import params
 import outline
@@ -457,11 +457,15 @@ def led_slots(hand):
 
 
 def ball_hole(hand):
-    """Right hand: the trackball opening through the thumb plate, BALL_HOLE_D wide along the plate normal."""
+    """Right hand: the trackball opening through the thumb plate, BALL_HOLE_D wide along the plate normal, with a BALL_HOLE_CHAMFER
+    45 degree chamfer round its top edge."""
     if hand != "right":
         return []
     _, n = outline.plate_plane(outline.thumb_board(hand), hand)
-    return [_along(np.array(params.BALL_HOLE_CENTER_RIGHT) + 5.0 * n, n, 0.0, params.PLATE_T + 10.0, params.BALL_HOLE_D / 2)]
+    top = np.array(params.BALL_HOLE_CENTER_RIGHT)
+    r, c = params.BALL_HOLE_D / 2, params.BALL_HOLE_CHAMFER
+    cone = Location(Plane(origin=tuple(top - c * n), z_dir=tuple(n))) * Cone(r, r + c + 0.1, c + 0.1, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    return [_along(top + 5.0 * n, n, 0.0, params.PLATE_T + 10.0, r), cone]
 
 
 def _thumb_board_uv(hand):

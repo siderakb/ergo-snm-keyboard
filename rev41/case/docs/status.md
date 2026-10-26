@@ -251,6 +251,7 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   the plate plane), so on that side the wall is cut back to the board outline + 0.3 and what is left thinner than 1.0 is dropped:
   an open slot about 36 deg (11.5 mm) wide, with the wall growing back 1.0 -> 2.0 over the next 8 deg each side. Nothing of the
   collar touches the boards, ball or cup.
+- The ball hole's top edge has a 0.8 x 45 deg chamfer (user, `BALL_HOLE_CHAMFER`; cut in the skin only, the collar below is unchanged).
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
   outline from drawings; FPC route from the pod to the core board; the pod is a separate grey cup below the orange walls.
