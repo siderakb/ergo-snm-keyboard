@@ -192,15 +192,15 @@ def _cone_down(r_top, w_top, w_bottom):
 @functools.lru_cache(maxsize=None)
 def pod_outer():
     """Outer body of the pod (to be cut by `pod_cavity` and kept below the plate's inner face): the round cup, inside the plate
-    outline up to the floor, outside it (over the arm walls) starting at the plate edge just under the walls and widening at
-    45 degrees."""
+    outline up to the floor, outside it (over the arm walls) straight up to just under the walls (user: the pod's outer face
+    continues the walls' outer face)."""
     import bottomcase
     import topcase
 
     w_ref, r_edge = _pod_top()
     r, f = _pod_size(0.0)
     cyl = loc() * _pod_cylinder(r, f, W_POD_OUT)
-    flared = cyl & (loc() * _cone_down(r_edge, w_ref, W_POD_OUT - 1.0))
+    flared = cyl & (loc() * _box(-50, 50, -50, 50, W_POD_OUT - 1.0, w_ref))
     inside = cyl & outline.plan_prism("right", bottomcase.bottom_outline("right"))
     under_walls = topcase.below_floor("right", -params.BOTTOM_RECESS - params.BALL_POD_EDGE_CLEAR, pod=False)
     return inside + (flared & under_walls)

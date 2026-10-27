@@ -239,8 +239,8 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   inner radius 18.96 (the sensor board's R3 corners, 18.46 from the axis, + 0.5: the board shifts up to 0.35 on its screws),
   outer 20.96, flush with the arm walls (20.98); floor parallel to
   the thumb plate, 0.5 under the FPC connector (outer face 28.9 below the ball centre = 38.6 below the plate top); bottom edge
-  rounded R2.5 inside / R4.5 outside. Over the arm walls it starts at the plate edge 0.2 under the walls' bottom edge and widens
-  at 45 degrees; the opening up into the arm keeps 0.6 round the ball (wall ~1.2 there, on the arm's two sides only). Outline,
+  rounded R2.5 inside / R4.5 outside. Over the arm walls its outer face goes straight up to 0.2 under the walls' bottom edge
+  (user: continues the walls' outer face, no shoulder); the opening up into the arm keeps 0.6 round the ball (wall ~1.2 there, on the arm's two sides only). Outline,
   walls and the plate around the pod are the mirrored left ones (`below_floor(..., pod=False)`). The cup is trimmed to radius
   18.46. FPC connector -> pod wall about 4. Taking the bottom plate off brings the cup and the board with it.
 - The thumb foot (FEET_LEFT[THUMB_FOOT]) stands under the middle of the pod on the right. The post next to the crease moves
