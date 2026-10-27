@@ -273,6 +273,9 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   the flat core-level strip under the core board's +Y end (x 152-182, inner face z -13.0, 6.0 free above it), centred at (167, -50),
   reading normally looking down into the open bottom case (X to the right); about 20 x 14 mm. TODO: JLC minimum stroke width of
   embossed text is unchecked (bold 4.5 should give about 0.8-0.9).
+- Both halves stand equally high (user): `desk_plane("left")` is the right hand's desk plane mirrored (X <-> MIRROR_X - X), so the left
+  feet (and the thumb foot) are as much longer as the right's trackball pod needs (left desk plane -23.0, was -14.5): the -X pair and
+  the battery door foot are 19.3 / 19.3 / 21.0 on both hands. The left label is at the mirrored spot (36.8, -50), also on the inner face.
 - Button access hole (`bottomcase.button_holes`, `BUTTON_HOLE_D` 2.5): vertical through the plate over the fitted tact button's centre, both hands.
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens

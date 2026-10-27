@@ -32,9 +32,13 @@ def bottom_outline(hand):
 def desk_plane(hand):
     """(unit normal, d) of the desk in the case frame, n . p = d: tilted by TENT_ANGLE about Y with the inner side up
     (+X on the left hand, -X on the right), as
-    high as the lowest point of the case allows (the walls' bottom edge along the outline, plus pads and clearance)."""
+    high as the lowest point of the case allows (the walls' bottom edge along the outline, plus pads and clearance). The right
+    hand's lowest point is the trackball pod; the left hand takes the right hand's desk plane mirrored (user: both halves the same
+    height, so the left feet are as much longer than they would need to be as the pod makes the right ones)."""
     t = np.radians(params.TENT_ANGLE)
     n = np.array((np.sin(t) * (1.0 if hand == "left" else -1.0), 0.0, np.cos(t)))
+    if hand == "left":                                   # mirror X -> MIRROR_X - X: n . p = d  <->  n' . p' = d + sin(t) * MIRROR_X
+        return n, float(desk_plane("right")[1] + np.sin(t) * params.MIRROR_X)
     ring = outline.case_outline_polygon(hand).exterior
     pts = [ring.interpolate(s) for s in np.arange(0.0, ring.length, 1.0)]
     low = min(n @ np.array((p.x, p.y, floor_z(hand, p.x, p.y, -params.BOTTOM_RECESS, pod=False))) for p in pts)
@@ -113,14 +117,17 @@ def button_holes(hand):
     return holes
 
 
+def label_centre(hand):
+    x, y = params.LABEL_CENTRE
+    return (x, y) if hand == "right" else (params.MIRROR_X - x, y)
+
+
 def label_text(hand):
-    """Right hand: the raised label (params.LABEL_*) on the plate's inner face, standing LABEL_HEIGHT above it; reads correctly looking
-    down on the face (X to the right); None for the left hand."""
-    if hand != "right":
-        return None
+    """The raised label (params.LABEL_*) on the plate's inner face, standing LABEL_HEIGHT above it; reads correctly looking down on
+    the face (X to the right), both hands (the left one at the mirrored spot)."""
     from build123d import FontStyle, Text, extrude
 
-    x, y = params.LABEL_CENTRE
+    x, y = label_centre(hand)
     plane = Plane(origin=(x, y, floor_z(hand, x, y, params.BOTTOM_WALL) - 0.1), x_dir=(1, 0, 0), z_dir=(0, 0, 1))   # normal up, X right, Y up
     text = Text(chr(10).join(params.LABEL_LINES), params.LABEL_SIZE, font_style=FontStyle.BOLD)
     return Location(plane) * extrude(text, amount=params.LABEL_HEIGHT + 0.1)
