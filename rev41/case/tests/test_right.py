@@ -251,3 +251,24 @@ def test_button_access_hole_goes_through_the_bottom_plate_over_the_tact_button(h
         assert bottom.is_inside((x + params.BUTTON_HOLE_D / 2 + 0.2, y, z))                     # and no wider
     board = next(b for b in load_boards(hand) if b.label == "main_board")
     assert bottom.distance_to(board) > 0.0
+
+
+def test_label_is_raised_0_8_from_the_inner_face_and_clears_the_core_board():
+    label = bottomcase.label_text("right")
+    bottom = bottomcase.bottom_case("right")
+    assert bottomcase.label_text("left") is None
+    z = topcase.floor_z("right", *params.LABEL_CENTRE, params.BOTTOM_WALL)
+    bb = label.bounding_box()
+    assert bb.min.Z == pytest.approx(z - 0.1, abs=0.02) and bb.max.Z == pytest.approx(z + params.LABEL_HEIGHT, abs=0.02)
+    x0, x1 = 152.0, 182.0                                                        # the flat core-level strip
+    assert x0 + 1.0 < bb.min.X and bb.max.X < x1 - 1.0
+    assert len(bottom.solids()) == 1
+    parts = [b for b in load_boards("right") if b.label == "core_board_e73"] + list(core_board_placeholders("right").values())
+    assert all(label.distance_to(p) >= 0.5 for p in parts)                      # the board and its parts stay clear of the letters
+    assert topcase.floor_z("right", *params.LABEL_CENTRE) == pytest.approx(z - params.BOTTOM_WALL)      # the outer face stays flat
+    big = [s for s in label.solids() if s.volume > 1.0][0].center()
+    assert bottom.is_inside((big.X, big.Y, z + params.LABEL_HEIGHT / 2))         # a letter is part of the plate body
+    assert not bottom.is_inside((big.X + 40.0, big.Y, z + params.LABEL_HEIGHT / 2))
+    # reads normally looking down (X to the right): the line "SideraKB" is the top one (largest Y), its 'S' at the smallest X
+    first = [s for s in label.solids() if s.bounding_box().min.Y > bb.max.Y - 5.5]
+    assert min(s.bounding_box().min.X for s in first) == pytest.approx(min(s.bounding_box().min.X for s in label.solids() if s.volume > 0.5), abs=1.5)

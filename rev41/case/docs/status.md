@@ -268,6 +268,12 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   0.5; user): under the sensor board along v = 0 there are 1.85 under the IC and 1.5 under the FPC connector (was 0.85 / 0.5), 3.6
   beside them but only 1.2 wide between the IC and the standoffs, and 6.5 wide round the cup block (v 12.5 - 19). Cable lengths (planar + up/down in the
   pod): sensor -> J5 about 125 mm, thumb J2 -> J5 about 190-230 mm (the user buys the cables).
+- Label (user, `bottomcase.label_text`, `LABEL_*`): raised text "SideraKB" / "ErgoSNM" / "Rev4.0", three lines, bold, font size 4.5, 0.8 high
+  (the JLC minimum emboss), on the INNER face of the right bottom plate (first on the outer face, then moved inside by the user), on
+  the flat core-level strip under the core board's +Y end (x 152-182, inner face z -13.0, 6.0 free above it), centred at (167, -50),
+  reading normally looking down into the open bottom case (X to the right); about 20 x 14 mm. TODO: JLC minimum stroke width of
+  embossed text is unchecked (bold 4.5 should give about 0.8-0.9).
+- Button access hole (`bottomcase.button_holes`, `BUTTON_HOLE_D` 2.5): vertical through the plate over the fitted tact button's centre, both hands.
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
   outline from drawings; FPC route from the pod to the core board; the pod is a separate grey cup below the orange walls.

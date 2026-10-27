@@ -177,6 +177,12 @@ STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire throug
 # Reset / boot button (the fitted TL3342 on the main board's lower face): a through hole in the bottom plate over its centre, so a
 # thin tool reaches it without taking the case apart (user).
 BUTTON_HOLE_D = 2.5
+# Raised label on the right bottom plate's INNER face (user): three lines, readable looking down into the open bottom case, centred
+# on the flat core-level strip under the core board's +Y end (6.0 free above the inner face there). Height 0.8 = the JLC minimum emboss.
+LABEL_LINES = ("SideraKB", "ErgoSNM", "Rev4.0")
+LABEL_SIZE = 4.5            # font size (mm); TODO: JLC minimum stroke width for embossed text is unchecked
+LABEL_HEIGHT = 0.8
+LABEL_CENTRE = (167.0, -50.0)
 FEET_LEFT = ((4.5, -124.0), (4.5, -55.0), (98.0, -48.5),                        # near the user's circles; (98, -48.5) on the battery door
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 THUMB_FOOT = 3             # index in FEET_LEFT; the right hand puts this foot under the middle of the trackball pod instead

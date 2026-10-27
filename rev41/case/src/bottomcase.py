@@ -113,6 +113,19 @@ def button_holes(hand):
     return holes
 
 
+def label_text(hand):
+    """Right hand: the raised label (params.LABEL_*) on the plate's inner face, standing LABEL_HEIGHT above it; reads correctly looking
+    down on the face (X to the right); None for the left hand."""
+    if hand != "right":
+        return None
+    from build123d import FontStyle, Text, extrude
+
+    x, y = params.LABEL_CENTRE
+    plane = Plane(origin=(x, y, floor_z(hand, x, y, params.BOTTOM_WALL) - 0.1), x_dir=(1, 0, 0), z_dir=(0, 0, 1))   # normal up, X right, Y up
+    text = Text(chr(10).join(params.LABEL_LINES), params.LABEL_SIZE, font_style=FontStyle.BOLD)
+    return Location(plane) * extrude(text, amount=params.LABEL_HEIGHT + 0.1)
+
+
 def support_holes(hand):
     """{ref: (x, y)} of the main-board mounting holes used for support pillars, in the case frame."""
     holes = {r: (x, y) for r, x, y in pcb_ref.mounting_holes(pcb_ref.load_board(params.BOARD_SOURCE["main_board"]))}
@@ -207,6 +220,9 @@ def bottom_case(hand=None):
         body = body - c
     for c in button_holes(hand):
         body = body - c
+    label = label_text(hand)
+    if label is not None:
+        body = body + label
     if hand == "right":                                  # board standoffs; the board screws come up through the pod floor
         import trackball
 
