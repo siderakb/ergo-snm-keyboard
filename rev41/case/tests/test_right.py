@@ -235,3 +235,19 @@ def test_thumb_cable_has_room_under_the_sensor_board():
     assert ic_bottom - floor >= 1.8 - 1e-6                                     # under the IC
     assert trackball.W_LOW - floor >= 1.5 - 1e-6                               # under the FPC connector
     assert trackball.W_SENSOR - floor == pytest.approx(3.5)                    # standoff height
+
+
+@pytest.mark.parametrize("hand", ["left", "right"])
+def test_button_access_hole_goes_through_the_bottom_plate_over_the_tact_button(hand):
+    bottom = bottomcase.bottom_case(hand)
+    holes = bottomcase.button_holes(hand)
+    assert len(holes) == 1
+    bb = holes[0].bounding_box()
+    x, y = (bb.min.X + bb.max.X) / 2, (bb.min.Y + bb.max.Y) / 2
+    top, inner = topcase.floor_z(hand, x, y), topcase.floor_z(hand, x, y, params.BOTTOM_WALL)
+    for z in (top + 0.3, (top + inner) / 2, inner - 0.3):
+        assert not bottom.is_inside((x, y, z))                                                  # open through the plate
+        assert not bottom.is_inside((x + params.BUTTON_HOLE_D / 2 - 0.1, y, z))
+        assert bottom.is_inside((x + params.BUTTON_HOLE_D / 2 + 0.2, y, z))                     # and no wider
+    board = next(b for b in load_boards(hand) if b.label == "main_board")
+    assert bottom.distance_to(board) > 0.0

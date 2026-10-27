@@ -98,6 +98,21 @@ def feet(hand, on_door=False):
     return out
 
 
+def button_holes(hand):
+    """Vertical holes through the bottom plate over the fitted tact button's centre (main board lower face), both hands."""
+    from assembly import load_boards
+    from geometry import location
+
+    board = next(b for b in load_boards(hand) if b.label == "main_board")
+    holes = []
+    for c in board.children:
+        if c.label.startswith("SW_SPST_TL3342"):
+            bb = (location("main_board", hand) * c).bounding_box()
+            x, y = (bb.min.X + bb.max.X) / 2, (bb.min.Y + bb.max.Y) / 2
+            holes.append(Pos(x, y, -60.0) * Cylinder(params.BUTTON_HOLE_D / 2, 120.0, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    return holes
+
+
 def support_holes(hand):
     """{ref: (x, y)} of the main-board mounting holes used for support pillars, in the case frame."""
     holes = {r: (x, y) for r, x, y in pcb_ref.mounting_holes(pcb_ref.load_board(params.BOARD_SOURCE["main_board"]))}
@@ -189,6 +204,8 @@ def bottom_case(hand=None):
         top, n, t = post_axis(hand, x, y)
         body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
     for c in topcase.screw_counterbores(hand):
+        body = body - c
+    for c in button_holes(hand):
         body = body - c
     if hand == "right":                                  # board standoffs; the board screws come up through the pod floor
         import trackball

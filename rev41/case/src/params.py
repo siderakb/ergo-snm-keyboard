@@ -174,6 +174,9 @@ STRIP_RIB_GAP = 1.0        # from the opening's +Y edge
 STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire through
 # Feet are at least FOOT_D / 2 + FOOT_FLARE_R + 1.0 = 7.5 from the plate edge and the door's edges, so the root flare is whole
 # (user: move the three inward; 2.0 -> 4.5 for the -X pair, the door one 8 from the +Y edge, 2 inward).
+# Reset / boot button (the fitted TL3342 on the main board's lower face): a through hole in the bottom plate over its centre, so a
+# thin tool reaches it without taking the case apart (user).
+BUTTON_HOLE_D = 2.5
 FEET_LEFT = ((4.5, -124.0), (4.5, -55.0), (98.0, -48.5),                        # near the user's circles; (98, -48.5) on the battery door
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 THUMB_FOOT = 3             # index in FEET_LEFT; the right hand puts this foot under the middle of the trackball pod instead
