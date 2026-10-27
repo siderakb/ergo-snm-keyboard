@@ -206,14 +206,20 @@ PIN_TIP_CHAMFER = 0.3
 BATTERY_CORE_CLEAR = 0.5
 BATTERY_SLIDE = 4.0
 BATTERY_OPEN_CLEAR = 0.5       # holder -> opening edge
-BATTERY_DOOR_T = 2.0
+# The holder is glued into a shallow nest in the door's top face (user: simple alignment): the door is BATTERY_FLOOR_T thick under the
+# holder and BATTERY_NEST_DEPTH higher round it (the nest edge is 0.3 off the holder's footprint for the glue), so the holder
+# stays where it was and so does the floor; the plate's rim goes up by the same depth to keep the ceiling over the door 1.7 thick.
+BATTERY_FLOOR_T = 2.0
+BATTERY_NEST_DEPTH = 0.5
+BATTERY_NEST_CLEAR = 0.3
+BATTERY_DOOR_T = BATTERY_FLOOR_T + BATTERY_NEST_DEPTH
 BATTERY_DOOR_LAP = 2.5         # door under the plate on the -Y edge
 BATTERY_DOOR_LAP_KEY = 7.5     # on the X edges, where the keyholes are (1.5 of plate between big hole and opening)
 BATTERY_DOOR_LAP_TOP = 1.0     # at the +Y end
 BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
 BATTERY_POCKET_CLEAR = 0.3     # pocket around the door
 BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with KEY_HEAD_GAP: 0.6 vertical play)
-BATTERY_RIM_H = 2.0            # plate thickened on the inside around the opening (1.7 above the pocket)
+BATTERY_RIM_H = 2.0 + BATTERY_NEST_DEPTH   # plate thickened on the inside around the opening (1.7 above the pocket)
 BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
 KEY_STUD_D, KEY_HEAD_D, KEY_HEAD_T = 2.5, 5.0, 1.5       # mushroom studs on the door
 KEY_HOLE_D, KEY_SLOT_W = 6.0, 3.1                        # keyholes in the plate
@@ -253,9 +259,9 @@ PMW3610_IC_REF_Y = 102.988               # U1 footprint origin (package centre),
 # KiCad, from the footprint (pads 1-16), and the clearance around them (pad + solder fillet).
 PMW3610_PIN_FIELD = (144.65, 96.82, 155.35, 110.17)
 PMW3610_PIN_CLEAR = 1.0
-PMW3610_LENS_BOX = (19.0, 11.0)          # TODO: lens outline (no drawing of the lens part yet); 3.4 high (PMW3610_LENS_PROTRUSION)
+PMW3610_LENS_BOX = (12.9, 8.1)           # lens outline (user), long side along the board's long side; 3.4 high (PMW3610_LENS_PROTRUSION)
 PMW3610_FPC_REF_Y = 87.35                # J2 AFC01-S08FCA-00 (F.Cu, the face away from the ball), KiCad y
-PMW3610_FPC_BOX = (9.0, 4.5, 2.0)        # along the board edge x depth x height (2.0: user); width/depth TODO from the AFC01 drawing
+PMW3610_FPC_BOX = (10.0, 4.5, 2.0)       # AFC01-S08FCA-00 along the board edge x depth x height (user)
 
 # --- Ball cup (right hand, separate part; R2) ---
 # Frame: ball centre, u = uphill along the thumb plate (towards the crease), v = n x u (level), n = plate normal.
@@ -284,13 +290,25 @@ SENSOR_SCREW_L, SENSOR_SCREW_HEAD_D, SENSOR_SCREW_HEAD_H = 10.0, 4.5, 2.5     # 
 SENSOR_SCREW_CBORE_D = SENSOR_SCREW_HEAD_D + 0.5
 SENSOR_SCREW_PROUD = 0.8           # head stands this far out of the pod's outer face (= BOTTOM_RECESS: no lower than the walls)
 SENSOR_STANDOFF_D = 5.0            # on the pod floor under each board hole: carries the whole head, 1.1 wall around the hole
-BALL_POD_CLEAR = 0.5               # lowest part (FPC connector) -> pod floor
+BALL_POD_CLEAR = 0.5               # cup -> pod wall (radial)
+BALL_POD_FLOOR_CLEAR = 1.5         # lowest part (FPC connector) -> pod floor: standoffs 3.5 high; 0.5 -> 1.5 so the thumb cable (user)
+                                   # fits under the sensor board (1.85 under the IC, 1.5 under the connector)
 # The pod is a round cup of the bottom plate on the ball axis, hanging below the arm; the top case walls stay as on the left
 # (user). Inner radius = the sensor board's rounded corner (hole centre 15.46 + R3 = 18.46 from the axis) + 0.5 (the board
 # shifts up to 0.35 on its screws, + SLA / PCB tolerance), so its outer face is flush with the arm walls (20.96 vs 20.98).
 # Just under the walls' bottom edge (BALL_POD_EDGE_CLEAR) it starts at the plate's edge and widens at 45 degrees. Its opening
 # up into the arm keeps BALL_POD_TOP_CLEAR around the ball. The bottom edge is rounded, BALL_POD_FILLET on the inside (the
 # board corners keep 0.5 to it), + BOTTOM_WALL outside.
+# Cable windows (user, option A: the sensor FPC and the thumb_1x2 FPC both go through the pod): one on each side of the pod along
+# the thumb arm (-u downhill towards the thumb board, +u uphill towards the main area), BALL_POD_FPC_W wide, from the neck's
+# wall up through the arm's plate (they open the plate ring and the pod wall between radius R0 and R1 from the axis, leaving the
+# pod wall >= 1.6 beside them) and down into the pod's wide part. The collar gets an arch on the +u side so the cable can leave
+# the ball shaft; on the -u side the collar's slot at the thumb board is the way out.
+BALL_POD_FPC_W = 8.0
+BALL_POD_FPC_R0, BALL_POD_FPC_R1 = 16.8, 19.3
+BALL_POD_FPC_BOTTOM = -9.5         # below the ball centre (the pod's cone is wider than R1 from about -7.4)
+BALL_POD_FPC_ABOVE = 0.5           # window top above the plate's inner face
+BALL_POD_FPC_ARCH_H = 2.0          # collar arch height above the plate's inner face
 BALL_POD_BOARD_CLEAR = 0.5
 BALL_POD_R_IN = round(math.hypot(PMW3610_HOLES[0] / 2, PMW3610_HOLES[1] / 2) + PMW3610_BOARD_CORNER_R + BALL_POD_BOARD_CLEAR, 3)
 BALL_POD_FILLET = 2.5

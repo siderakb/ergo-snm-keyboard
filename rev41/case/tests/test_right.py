@@ -124,7 +124,7 @@ def test_sensor_stack_and_pod_depths():
     lens_top = trackball.W_BOARD + params.PMW3610_LENS_PROTRUSION
     assert -R - lens_top == pytest.approx(params.PMW3610_WORKING_DISTANCE)          # nominal, with the nominal shim
     assert trackball.W_SEAT - trackball.W_BOARD == pytest.approx(params.SENSOR_SHIM_NOM)
-    assert trackball.W_LOW - trackball.W_POD_IN == pytest.approx(params.BALL_POD_CLEAR)
+    assert trackball.W_LOW - trackball.W_POD_IN == pytest.approx(params.BALL_POD_FLOOR_CLEAR)
     parts = trackball.sensor_parts()
     _, _, _, n = trackball.frame()
     c = np.array(geometry.ball_center())
@@ -171,7 +171,7 @@ def test_ball_hole_collar_wall_runs_from_the_skin_to_the_plate_and_keeps_off_the
     top = np.array(params.BALL_HOLE_CENTER_RIGHT)
     r = params.BALL_HOLE_D / 2
     p = lambda ang, rr, depth: tuple(top + rr * (np.cos(ang) * u + np.sin(ang) * v) - depth * n)
-    for depth in (params.PLATE_T + 0.5, params.PLATE_T + 4.0):                       # under the skin, in the shaft
+    for depth in (params.PLATE_T + 0.5, params.PLATE_T + 1.5):                       # under the skin, above the cable arch
         assert collar.is_inside(p(0.0, r + params.BALL_HOLE_WALL / 2, depth)), depth       # full wall on the open side
         assert not collar.is_inside(p(0.0, r - 0.3, depth))                                 # the bore is the hole
     assert not collar.is_inside(p(np.pi, r + 0.5, params.PLATE_T + 2.0))             # open slot where the board edge is
@@ -192,3 +192,46 @@ def test_ball_hole_top_edge_is_chamfered():
     assert skin.is_inside(at(r + ch * 0.5, ch * 0.75))            # deeper at the same radius: solid
     assert skin.is_inside(at(r + ch + 0.3, 0.2))                  # beyond the chamfer: the top face is whole
     assert not skin.is_inside(at(r - 0.3, params.PLATE_T / 2))    # the hole itself
+
+
+def test_cable_windows_open_the_plate_ring_and_pod_wall_on_both_sides_and_leave_the_wall(right_case):
+    bottom, wi = right_case["bottom"], trackball.plate_inner_w()
+    at = lambda u, v, w: tuple(trackball.to_case(u, v, w))
+    hw = params.BALL_POD_FPC_W / 2
+    for s in (-1, 1):
+        for w in (wi - 0.5, -5.0, -8.0):                                              # open from the plate down to the wide part
+            for r in (17.0, 18.0, 19.0):
+                assert not bottom.is_inside(at(s * r, 0.0, w)), (s, r, w)
+        assert not bottom.is_inside(at(s * 18.0, hw - 0.3, -5.0))                      # the full width is open ...
+        assert bottom.is_inside(at(s * 18.0, hw + 0.4, -5.0))                          # ... and no wider
+        assert bottom.is_inside(at(s * (params.BALL_POD_FPC_R1 + 0.7), 0.0, -5.0))   # wall left outside the window (>= 1.6 thick)
+        assert not bottom.is_inside(at(s * 18.0, 0.0, wi - 1.0))                      # (the window cuts the whole plate there)
+
+
+def test_collar_arch_on_the_uphill_side_only(right_case):
+    wi = trackball.plate_inner_w()
+    collar = topcase.ball_collar("right")
+    r = params.BALL_HOLE_D / 2 + params.BALL_HOLE_WALL / 2
+    at = lambda u, v, w: tuple(trackball.to_case(u, v, w))
+    assert not collar.is_inside(at(r, 0.0, wi + 1.0))                       # arch (+u)
+    assert collar.is_inside(at(r, 0.0, wi + params.BALL_POD_FPC_ARCH_H + 0.5))   # wall above the arch
+    assert collar.is_inside(at(r, params.BALL_POD_FPC_W / 2 + 0.5, wi + 1.0))    # wall beside it
+    assert not collar.is_inside(at(-r, 0.0, wi + 1.0))                      # -u: the slot at the thumb board
+    assert collar.distance_to(trackball.ball()) >= 1.2
+
+
+def test_cable_lane_through_the_pod_under_the_sensor_board_is_open():
+    parts = list(trackball.sensor_parts().values()) + trackball.standoffs()
+    floor = trackball.W_POD_IN
+    for u in np.linspace(-14.0, 14.0, 15):                                   # a flat cable (0.3) lying on the floor at v = 0
+        p = tuple(trackball.to_case(u, 0.0, floor + 0.2))
+        assert not any(s.is_inside(p) for s in parts), u
+        assert not trackball.cup().is_inside(p), u
+
+
+def test_thumb_cable_has_room_under_the_sensor_board():
+    floor = trackball.W_POD_IN
+    ic_bottom = trackball.W_SENSOR - params.PMW3610_IC_BOX[2]
+    assert ic_bottom - floor >= 1.8 - 1e-6                                     # under the IC
+    assert trackball.W_LOW - floor >= 1.5 - 1e-6                               # under the FPC connector
+    assert trackball.W_SENSOR - floor == pytest.approx(3.5)                    # standoff height

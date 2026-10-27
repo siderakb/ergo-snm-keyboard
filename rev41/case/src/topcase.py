@@ -114,7 +114,7 @@ def floor_profile(hand):
 
     bat = battery_holder(hand).bounding_box()
     pocket = batterydoor.layout(hand)["pocket"]
-    z_deep = bat.min.Z - params.BATTERY_DOOR_T            # the holder sits on the door, flush with the floor
+    z_deep = bat.min.Z - params.BATTERY_FLOOR_T           # the holder sits in the door's nest, flush with the floor
     z_shallow = -(params.HOTSWAP_SOCKET_PROTRUSION + clear + wall)
     core = [b for b in load_boards(hand) if b.label == "core_board_e73"][0].bounding_box()
     z_core = min([core.min.Z] + [s.bounding_box().min.Z for s in core_board_placeholders(hand).values()]) - clear - wall
@@ -506,6 +506,7 @@ def ball_collar(hand):
     for g in getattr(drop, "geoms", [drop]):
         if g.area > 1e-3:
             tube = tube - plane * Pos(0, 0, -60) * Solid.extrude(_face(g), (0, 0, 120))
+    tube = tube - trackball.fpc_arch()                                       # cable arch on the +u side
     zone = _under(hand, params.PLATE_T) - below_floor(hand, params.BOTTOM_WALL, pod=False)
     return tube & zone & outline.plan_prism(hand, outline.case_outline_polygon(hand))
 

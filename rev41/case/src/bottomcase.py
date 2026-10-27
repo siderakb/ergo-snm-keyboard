@@ -58,7 +58,7 @@ def _foot_axes(hand, on_door):
             continue
         # start inside the plate, low enough that the tilted top disc stays under its inner face
         sink = params.FOOT_D / 2 * np.sin(np.radians(params.TENT_ANGLE)) + 0.1
-        z = batterydoor.levels(hand)["top"] if on_door else floor_z(hand, x, y, params.BOTTOM_WALL)
+        z = batterydoor.levels(hand)["nest"] if on_door else floor_z(hand, x, y, params.BOTTOM_WALL)     # (a foot may stand under the nest)
         out.append((np.array((x, y, z - sink)), n, d))
     return out
 
@@ -145,6 +145,8 @@ def ribs(hand):
     z0 = z["bottom"] + params.BOTTOM_WALL - 0.1
     slab = Pos(0, 0, z0 + (params.EDGE_RIB_H + 0.1) / 2) * Box(1000, 1000, params.EDGE_RIB_H + 0.1)
     edge = topcase._prism(band) & slab
+    pocket = batterydoor._box(lay["pocket"], z["bottom"] - 5.0, z["ceiling"], grow=params.BATTERY_POCKET_CLEAR)
+    edge = edge - pocket                                                             # the pocket (and the sliding door) stays free
     px0, _, px1, _ = lay["pocket"]
     px0 = max(px0, x_start)                                                          # nor under the USB-C
     y0 = lay["opening"][3] + params.STRIP_RIB_GAP
@@ -169,7 +171,9 @@ def bottom_case(hand=None):
         import trackball
 
         shell = trackball.pod_shell()
-        body = body - trackball.pod_cavity() + shell
+        for w in trackball.fpc_windows():                # cable windows through the plate ring and the pod wall
+            shell = shell - w
+        body = body - trackball.pod_cavity() - trackball.fpc_windows()[0] - trackball.fpc_windows()[1] + shell
         zone = envelope - trackball.pod_cavity() + shell
     rim = batterydoor.plate_rim(hand)
     for x, y in topcase.post_positions(hand):                       # the top case posts stand on the plate
@@ -208,11 +212,12 @@ def battery_door(hand=None):
     body = batterydoor.door(hand)
     z = batterydoor.levels(hand)
     slab = batterydoor._box(batterydoor.layout(hand)["door"], z["bottom"] - 20.0, z["top"])        # flares stay on the door
+    slab = slab - batterydoor.nest(hand)                                                           # the holder sits in the nest
     if batterydoor.post_notch(hand):
         slab = slab - batterydoor.post_notch(hand)
     for flare in foot_flares(hand, on_door=True):
         body = body + (flare & slab)
-    above = batterydoor._box((-500.0, -500.0, 500.0, 500.0), z["bottom"] - 200.0, z["top"])         # nothing above the door's top
+    above = batterydoor._box((-500.0, -500.0, 500.0, 500.0), z["bottom"] - 200.0, z["nest"])        # nothing above the nest floor
     for part in feet(hand, on_door=True):
         body = body + (part & above)
     return body

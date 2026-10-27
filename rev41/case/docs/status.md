@@ -178,6 +178,12 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   the floor now covers the pocket + 1 mm: X from 58.2 (under the core board's right part, the core-level step is X 21-54),
   Y down to -108.4.
 - The +Y strip post (73.8, -34.2) is replaced by a fixed corner post (109.5, -38.6) (`BOSS_FIXED_LEFT`, ~95% of the boss).
+- Holder nest (user, 2026-10-27, `batterydoor.nest`): the door's top face has a 0.5 deep nest for the glued holder, its footprint + 0.3 (glue gap),
+  so the holder is located in X and Y. The holder stays where it was (floor unchanged): the door is `BATTERY_FLOOR_T` 2.0 thick under
+  it and `BATTERY_DOOR_T` 2.5 round it, the plate's rim went up to `BATTERY_RIM_H` 2.5 so the ceiling over the door is still 1.7
+  thick, and the pocket ceiling, stud heads and keyholes rose 0.5 with the door top. The tongue (6 x 12) is recessed with the nest from
+  y0 + 2.7 on (its stiffness is as before), the bump (0.8 above the door top) sits outside the nest. Foot columns and flares stay under
+  the nest floor; the edge rib no longer enters the pocket (it ended 0.1 inside the sliding door's footprint). Both hands.
 - Foot (105, -45) moved to (100, -45) so it stands wholly on the door; the door carries it (desk load goes into the laps).
 - Feet moved inward (user, 2026-10-26), so the root flares (radius 6.5) are not cut by the plate edge / the door edge: the -X pair
   from x 2.0 to 4.5 (edge 5.7 -> 8.2), the door foot from (100, -45) to (98, -48.5) (+Y door edge 4.4 -> 7.9, +X 7.4 -> 9.4, post notch
@@ -226,8 +232,8 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   (TODO lens outline) and a recess over U1's through-hole pins on B.Cu (pads + 1.0).
 - PMW3610 board: long side along u, FPC end uphill, B.Cu (lens) up. Sandwich (user): four M2.5 x 10 socket head screws (head
   Ø4.5 x 2.5, user has them) come up through the pod floor (counterbore Ø5.0 x 1.7, head 0.8 proud = BOTTOM_RECESS, so no lower
-  than the walls' edge), a Ø5.0 x 2.5 standoff on the floor, the board and the shims into nuts in the seat block: 2.8 under the
-  head, 5.4 into the cup (whole nut + blind hole). The seat sits 0.2 nearer the ball than nominal, shims set the 2.4 working
+  than the walls' edge), a Ø5.0 x 3.5 standoff on the floor, the board and the shims into nuts in the seat block: 3.8 under the
+  head, 4.4 into the cup (whole nut + blind hole). The seat sits 0.2 nearer the ball than nominal, shims set the 2.4 working
   distance (+-0.2). M2.5 x 12 would go through the block.
 - Pod (round, bottom plate only; user: the top case walls stay as on the left): a cup on the ball axis hanging below the arm,
   inner radius 18.96 (the sensor board's R3 corners, 18.46 from the axis, + 0.5: the board shifts up to 0.35 on its screws),
@@ -252,6 +258,16 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   an open slot about 36 deg (11.5 mm) wide, with the wall growing back 1.0 -> 2.0 over the next 8 deg each side. Nothing of the
   collar touches the boards, ball or cup.
 - The ball hole's top edge has a 0.8 x 45 deg chamfer (user, `BALL_HOLE_CHAMFER`; cut in the skin only, the collar below is unchanged).
+- Cables (user: both FPCs go through the pod, option A; lens 12.9 x 8.1 and FPC connector 10 x 4.5 are now the real sizes). The core
+  board's FPC connectors J5 / J6 are at (158.8 / 171.5, -84.1), opening towards -Y, on its lower face; the free height map over the
+  right plate (11-15 mm in the deep area, 1.0 over the battery holder, 0.5 under the main board's sockets) gives a corridor along
+  y = -110 from the crease to the core board. The ball and the collar close the thumb arm, so there are two cable windows
+  (`trackball.fpc_windows`, 8 wide, radius 16.8 - 19.3 from the axis, one on each side along the arm) through the plate ring and the
+  pod wall (>= 1.6 of wall left beside them), and a 2.0 high arch in the collar's lower edge on the uphill side (`fpc_arch`); on the
+  downhill side the collar's slot at the thumb board is the way out. The standoffs are 3.5 high (`BALL_POD_FLOOR_CLEAR` 1.5, was
+  0.5; user): under the sensor board along v = 0 there are 1.85 under the IC and 1.5 under the FPC connector (was 0.85 / 0.5), 3.6
+  beside them but only 1.2 wide between the IC and the standoffs, and 6.5 wide round the cup block (v 12.5 - 19). Cable lengths (planar + up/down in the
+  pod): sensor -> J5 about 125 mm, thumb J2 -> J5 about 190-230 mm (the user buys the cables).
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
   outline from drawings; FPC route from the pod to the core board; the pod is a separate grey cup below the orange walls.

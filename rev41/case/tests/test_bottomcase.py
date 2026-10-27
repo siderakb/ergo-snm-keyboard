@@ -214,7 +214,7 @@ def test_battery_door_is_flush_and_touches_nothing_when_locked(bottom, top, door
     lay, z = batterydoor.layout("left"), batterydoor.levels("left")
     assert z["bottom"] == pytest.approx(topcase.floor_profile("left")["z_deep"])          # flush with the floor
     holder = battery_holder("left")
-    assert holder.bounding_box().min.Z == pytest.approx(z["top"])                          # the holder sits on the door
+    assert holder.bounding_box().min.Z == pytest.approx(z["nest"])                         # the holder sits on the nest floor
     for other in [bottom, top, holder] + load_boards("left") + list(core_board_placeholders("left").values()):
         assert vol(door & other) < 1e-3
     play = params.BATTERY_CEIL_GAP
@@ -224,6 +224,26 @@ def test_battery_door_is_flush_and_touches_nothing_when_locked(bottom, top, door
     assert vol(bottom & (Pos(0, -0.5, 0) * door)) > 1.0           # it cannot slide further towards -Y
     x, y, r = batterydoor._post_keep("left")                      # notched around the corner post's counterbore
     assert door.distance(Pos(x, y, 0) * Cylinder(r, 100)) > params.BATTERY_POCKET_CLEAR - 0.01
+
+
+def test_battery_door_has_a_nest_that_locates_the_holder(door):
+    from placeholders import battery_holder
+
+    h, z = batterydoor.layout("left")["holder"], batterydoor.levels("left")
+    c = params.BATTERY_NEST_CLEAR
+    assert z["top"] - z["nest"] == pytest.approx(params.BATTERY_NEST_DEPTH)
+    xm, ym = (h[0] + h[2]) / 2, (h[1] + h[3]) / 2
+    zm = z["nest"] + params.BATTERY_NEST_DEPTH / 2                            # mid height of the nest wall
+    assert door.is_inside((xm, ym, z["nest"] - 0.3)) and not door.is_inside((xm, ym, z["nest"] + 0.1))     # floor / open
+    for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):                         # open inside the 0.3 gap
+        x = (h[2] if dx > 0 else h[0]) + dx * (c - 0.1) if dx else xm
+        y = (h[3] if dy > 0 else h[1]) + dy * (c - 0.1) if dy else ym
+        assert not door.is_inside((x, y, zm)), (dx, dy)
+    assert door.is_inside((h[0] - c - 0.2, ym, zm)) and door.is_inside((h[2] + c + 0.2, ym, zm))   # wall on the two long sides
+    from build123d import Box
+
+    wall = door & (Pos((h[0] + h[2]) / 2, (h[1] + h[3]) / 2, z["nest"] + 5.0) * Box(500, 500, 10))            # the nest's wall only
+    assert wall.distance(battery_holder("left")) >= c - 0.01                    # the holder fits with the glue gap
 
 
 def test_battery_door_pushed_towards_plus_y_drops_out_with_the_holder(bottom, top, door):

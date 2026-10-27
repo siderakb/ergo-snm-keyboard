@@ -43,10 +43,11 @@ def layout(hand):
 
 
 def levels(hand):
-    """Z of the door underside (flush with the floor), the door top, the pocket ceiling and the rim top."""
+    """Z of the door underside (flush with the floor), the nest floor (the holder's bottom), the door top, the pocket ceiling and
+    the rim top."""
     z = floor_profile(hand)["z_deep"]
     top = z + params.BATTERY_DOOR_T
-    return {"bottom": z, "top": top, "ceiling": top + params.BATTERY_CEIL_GAP,
+    return {"bottom": z, "nest": z + params.BATTERY_FLOOR_T, "top": top, "ceiling": top + params.BATTERY_CEIL_GAP,
             "rim": z + params.BOTTOM_WALL + params.BATTERY_RIM_H}
 
 
@@ -86,6 +87,12 @@ def post_notch(hand):
             + _box((x - r, y - s, x + r, y), z0, z0 + h))
 
 
+def nest(hand):
+    """The shallow nest for the glued holder: its footprint plus BATTERY_NEST_CLEAR, from the nest floor up through the door's top."""
+    h, z = layout(hand)["holder"], levels(hand)
+    return _box(h, z["nest"], z["top"] + 1.0, grow=params.BATTERY_NEST_CLEAR)
+
+
 def _tongue(hand):
     """(x0, y0, x1, y1) of the sprung tongue at the door's -Y end and the y of its bump."""
     d = layout(hand)["door"]
@@ -101,6 +108,7 @@ def door(hand):
     notch = post_notch(hand)
     if notch:
         body = body - notch
+    body = body - nest(hand)
     head_z = z["rim"] + params.KEY_HEAD_GAP
     rs, rf = params.KEY_STUD_D / 2, params.KEY_ROOT_FILLET
     for x, y in lay["studs"]:

@@ -21,7 +21,7 @@ W_BOARD = -(R + params.PMW3610_LENS_FACE_TO_SURFACE)          # board face towar
 W_SENSOR = W_BOARD - params.PMW3610_BOARD_T                    # face with the IC and the FPC connector
 W_SEAT = W_BOARD + params.SENSOR_SHIM_NOM                      # cup seat (shims fill the rest)
 W_LOW = W_SENSOR - params.PMW3610_FPC_BOX[2]                   # lowest part of the module
-W_POD_IN = W_LOW - params.BALL_POD_CLEAR                       # pod floor, inner face
+W_POD_IN = W_LOW - params.BALL_POD_FLOOR_CLEAR                 # pod floor, inner face
 W_POD_OUT = W_POD_IN - params.BOTTOM_WALL
 
 
@@ -216,6 +216,28 @@ def pod_cavity():
     r, f = _pod_size(params.BOTTOM_WALL)
     neck = _cone_down(r_top, w_neck, W_POD_IN - 1.0) + Pos(0, 0, w_neck - 0.01) * Cylinder(r_top, 200.0, align=MIN)
     return loc() * (_pod_cylinder(r, f, W_POD_IN) & neck)
+
+
+def plate_inner_w():
+    """Ball-frame height of the arm plate's inner face (BOTTOM_WALL above the thumb floor)."""
+    import topcase
+
+    return params.BALL_CENTER_DEPTH - (topcase.floor_profile("right")["thumb_depth"] - params.BOTTOM_WALL)
+
+
+def fpc_windows():
+    """The two cable windows through the plate ring and the pod wall, in the case frame: (downhill, uphill)."""
+    w0, w1 = params.BALL_POD_FPC_BOTTOM, plate_inner_w() + params.BALL_POD_FPC_ABOVE
+    r0, r1, hw = params.BALL_POD_FPC_R0, params.BALL_POD_FPC_R1, params.BALL_POD_FPC_W / 2
+    return [loc() * _box(min(s * r0, s * r1), max(s * r0, s * r1), -hw, hw, w0, w1) for s in (-1, 1)]
+
+
+def fpc_arch():
+    """Notch in the collar's lower edge on the +u side: the cable leaves the ball shaft under it."""
+    r_in = params.BALL_HOLE_D / 2
+    z0 = plate_inner_w() - 0.2
+    return loc() * _box(r_in - 0.5, r_in + params.BALL_HOLE_WALL + 0.5, -params.BALL_POD_FPC_W / 2, params.BALL_POD_FPC_W / 2,
+                        z0, plate_inner_w() + params.BALL_POD_FPC_ARCH_H)
 
 
 def pod_shell():
