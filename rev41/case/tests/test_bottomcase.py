@@ -272,3 +272,14 @@ def test_thumb_ledge_sits_on_the_plate_under_the_thumb_pcb_edge(bottom):
     assert vol(ledge & thumb) < 1e-6
     assert vol(ledge & bottom) < 1e-3                       # touches the plate's inner face, no overlap
     assert bottom.distance(ledge) < 1e-3
+
+
+def test_battery_rim_is_bonded_to_the_plate_across_the_pocket_slit(bottom):
+    """The rim above the pocket slit must carry the door's studs: it needs a real section on every side, not a sliver."""
+    x0, y0, x1, y1 = batterydoor.layout("left")["pocket"]
+    z, g = batterydoor.levels("left"), params.BATTERY_POCKET_CLEAR
+    za, zb = z["ceiling"] + 0.01, z["rim"] - 0.01
+    sides = {"-X": (x0 - g, y0, x0, y1), "+X": (x1, y0, x1 + g, y1), "-Y": (x0, y0 - g, x1, y0), "+Y": (x0, y1, x1, y1 + g)}
+    for name, r in sides.items():
+        section = vol(bottom & batterydoor._box(r, za, zb)) / g           # material bridging the slit, mm2
+        assert section > 40.0, f"{name}: rim is joined to the plate by only {section:.1f} mm2"

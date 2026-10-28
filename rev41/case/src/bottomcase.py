@@ -210,7 +210,7 @@ def bottom_case(hand=None):
             shell = shell - w
         body = body - trackball.pod_cavity() - trackball.fpc_windows()[0] - trackball.fpc_windows()[1] + shell
         zone = envelope - trackball.pod_cavity() + shell
-    rim = batterydoor.plate_rim(hand)
+    rim = batterydoor.plate_rim(hand) & topcase._prism(bottom_outline(hand))      # the lap stays on the plate
     for x, y in topcase.post_positions(hand):                       # the top case posts stand on the plate
         rim = rim - Pos(x, y, -50) * Cylinder(params.BOSS_D / 2 + 0.3, 100)
     body = body + rim

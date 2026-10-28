@@ -233,6 +233,7 @@ BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
 BATTERY_POCKET_CLEAR = 0.4     # pocket around the door (both MJF)
 BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with KEY_HEAD_GAP: 0.6 vertical play)
 BATTERY_RIM_H = 2.0 + BATTERY_NEST_DEPTH   # plate thickened on the inside around the opening (1.7 above the pocket)
+BATTERY_RIM_LAP = 3.0          # the rim reaches this far past the pocket (and its 0.4 slit) onto the plate: it only holds the door's studs if it is bonded to the plate
 BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
 KEY_STUD_D, KEY_HEAD_D, KEY_HEAD_T = 2.5, 5.0, 1.5       # mushroom studs on the door
 KEY_HOLE_D, KEY_SLOT_W = 6.0, 3.1                        # keyholes in the plate

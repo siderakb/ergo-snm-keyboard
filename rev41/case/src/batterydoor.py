@@ -130,10 +130,11 @@ def door(hand):
 
 
 def plate_rim(hand):
-    """Plan region of the thickening: the pocket less the opening (posts are cut out in bottomcase)."""
+    """Plan region of the thickening: the pocket plus BATTERY_RIM_LAP all round (it bridges the pocket's slit and sits on the
+    plate), less the opening. Posts are cut out and the plate outline is clipped in bottomcase."""
     lay, z = layout(hand), levels(hand)
     inner = z["bottom"] + params.BOTTOM_WALL
-    return _box(lay["pocket"], inner - 0.1, z["rim"]) - _box(lay["opening"], inner - 1.0, z["rim"] + 1.0)
+    return _box(lay["pocket"], inner - 0.1, z["rim"], grow=params.BATTERY_RIM_LAP) - _box(lay["opening"], inner - 1.0, z["rim"] + 1.0)
 
 
 def _keyhole(x, y, z0, z1, float_x):
