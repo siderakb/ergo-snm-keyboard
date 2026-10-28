@@ -283,3 +283,12 @@ def test_battery_rim_is_bonded_to_the_plate_across_the_pocket_slit(bottom):
     for name, r in sides.items():
         section = vol(bottom & batterydoor._box(r, za, zb)) / g           # material bridging the slit, mm2
         assert section > 40.0, f"{name}: rim is joined to the plate by only {section:.1f} mm2"
+
+
+def test_battery_bump_dimple_leaves_a_wall_to_the_opening():
+    """The dimple in the rim's -Y strip must not run into the opening edge (it used to leave 0.05 mm)."""
+    lay = batterydoor.layout("left")
+    (_, _, _, _), by = batterydoor._tongue("left")
+    dimple_top = by + params.BATTERY_BUMP_W / 2 + 0.2
+    assert lay["opening"][1] - dimple_top >= 0.6
+    assert by - params.BATTERY_BUMP_W / 2 - 0.2 - lay["door"][1] >= 0.6
