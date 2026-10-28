@@ -276,6 +276,11 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - Both halves stand equally high (user): `desk_plane("left")` is the right hand's desk plane mirrored (X <-> MIRROR_X - X), so the left
   feet (and the thumb foot) are as much longer as the right's trackball pod needs (left desk plane -23.0, was -14.5): the -X pair and
   the battery door foot are 19.3 / 19.3 / 21.0 on both hands. The left label is at the mirrored spot (36.8, -50), also on the inner face.
+- Core board LEDs (LD2 / LD3, 0603, face towards the plate, z -8.2 .. -7.1; right x 150.5 / 167.0, y -37.7, left mirrored): a horizontal
+  Ø1.6 hole along Y through the top case's +Y wall at each LED's X and mid height (`topcase.led_wall_holes`, `LED_HOLE_D`), the same wall
+  as the USB-C and switch openings (user; first they were holes in the bottom plate with a shield tube, replaced). Both hands.
+  TODO: the LEDs emit towards the bottom plate (they sit on the face towards it), so only scattered light reaches a hole in the side
+  wall; if it is too dim, a light guide (a short prism / printed-in channel) or a bigger hole is needed. Colour / brightness unknown.
 - Button access hole (`bottomcase.button_holes`, `BUTTON_HOLE_D` 2.5): vertical through the plate over the fitted tact button's centre, both hands.
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens

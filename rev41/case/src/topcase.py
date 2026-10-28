@@ -245,8 +245,27 @@ def _opening_cuts(hand):
     return cuts
 
 
+def led_wall_holes(hand):
+    """Horizontal Ø LED_HOLE_D holes along Y through the +Y wall at each core board LED's X and mid height (LD2 / LD3)."""
+    from assembly import load_boards
+    from shapely.geometry import LineString
+
+    board = next(b for b in load_boards(hand) if b.label == "core_board_e73")
+    outer = outline.case_outline_polygon(hand)
+    holes = []
+    for c in board.children:
+        if not c.label.startswith("LED_"):
+            continue
+        bb = (location("core_board_e73", hand) * c).bounding_box()
+        x, y0, z = (bb.min.X + bb.max.X) / 2, (bb.min.Y + bb.max.Y) / 2, (bb.min.Z + bb.max.Z) / 2
+        ymax = outer.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3]
+        length = ymax + 1.0 - y0
+        holes.append(Pos(x, y0 + length / 2, z) * Rot(-90, 0, 0) * Cylinder(params.LED_HOLE_D / 2, length))
+    return holes
+
+
 def wall_openings(hand):
-    return list(_opening_cuts(hand).values())
+    return list(_opening_cuts(hand).values()) + led_wall_holes(hand)
 
 
 def tactile_bumps(hand):

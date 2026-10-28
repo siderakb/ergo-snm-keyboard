@@ -177,6 +177,9 @@ STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire throug
 # Reset / boot button (the fitted TL3342 on the main board's lower face): a through hole in the bottom plate over its centre, so a
 # thin tool reaches it without taking the case apart (user).
 BUTTON_HOLE_D = 2.5
+# The core board's two status LEDs (LD2 / LD3, 0603, on the face towards the bottom plate): a small hole through the top case's +Y
+# wall at each LED's X and height (same wall as the USB-C and switch openings, user), both hands.
+LED_HOLE_D = 1.6
 # Raised label on the right bottom plate's INNER face (user): three lines, readable looking down into the open bottom case, centred
 # on the flat core-level strip under the core board's +Y end (6.0 free above the inner face there). Height 0.8 = the JLC minimum emboss.
 LABEL_LINES = ("SideraKB", "ErgoSNM", "Rev4.0")

@@ -288,3 +288,24 @@ def test_both_halves_stand_at_the_same_height():
                                   for top, n, d in bottomcase._foot_axes(hand, on))
     left, right = [x for x in lengths("left") if 15.0 < x < 25.0], [x for x in lengths("right") if 15.0 < x < 25.0]
     assert len(left) == len(right) == 3 and left == pytest.approx(right, abs=0.01)
+
+
+@pytest.mark.parametrize("hand", ["left", "right"])
+def test_led_holes_go_through_the_plus_y_wall_at_the_core_board_leds(hand):
+    holes = topcase.led_wall_holes(hand)
+    assert len(holes) == 2
+    walls = topcase.walls(hand)
+    cuts = topcase._opening_cuts(hand)
+    outer = outline.case_outline_polygon(hand)
+    for h in holes:
+        bb = h.bounding_box()
+        x, z = (bb.min.X + bb.max.X) / 2, (bb.min.Z + bb.max.Z) / 2
+        from shapely.geometry import LineString
+
+        ymax = outer.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3]
+        for y in (ymax - 1.5, ymax - 0.3):                                                       # through the wall's full thickness
+            assert not walls.is_inside((x, y, z)), (x, y)
+        r = params.LED_HOLE_D / 2
+        assert walls.is_inside((x, ymax - 1.0, z + r + 0.3)) and walls.is_inside((x, ymax - 1.0, z - r - 0.3))   # wall round the hole
+        assert all(analysis.interference_volume(h, c) < 1e-6 for c in cuts.values())                # clear of the USB and switch openings
+        assert min(h.distance_to(c) for c in cuts.values()) >= 0.3

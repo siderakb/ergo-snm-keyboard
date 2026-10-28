@@ -135,7 +135,7 @@ def test_wall_openings_for_usb_and_switch_sit_in_the_top_case_wall_with_wall_lef
     from placeholders import core_board_placeholders
 
     cuts = topcase.wall_openings("left")
-    assert len(cuts) == 3                      # J4, J9 and SW2
+    assert len(cuts) == 5                      # J4, J9, SW2 and the two LED holes
     for label, shape in core_board_placeholders("left").items():
         if label.startswith(("usb_", "switch_")):
             assert sum(analysis.interference_volume(c, shape) for c in cuts) > 0, label
