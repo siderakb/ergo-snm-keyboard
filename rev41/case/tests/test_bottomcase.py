@@ -59,7 +59,7 @@ def test_screw_holes_and_counterbores_line_up_with_the_posts(bottom):
         assert not bottom.is_inside(tuple(on_axis(params.BOTTOM_WALL / 2)))                      # through hole
         c = bottomcase.bottom_outline("left").centroid
         u = np.array((c.x - x, c.y - y, 0.0)); u -= n * (u @ n); u /= np.linalg.norm(u)      # towards the plate inside
-        assert bottom.is_inside(tuple(on_axis(0.5) + u * (params.SCREW_M25_CLEAR_D / 2 + 0.5)))   # plate around the hole
+        assert bottom.is_inside(tuple(on_axis(0.5) + u * (params.BOTTOM_SCREW_CLEAR_D / 2 + 0.5)))   # plate around the hole
         sink = on_axis(params.BOTTOM_WALL - params.SCREW_HEAD_SINK / 2) + u * (params.SCREW_HEAD_CBORE_D / 2 - 0.2)
         assert not bottom.is_inside(tuple(sink))                                                  # head counterbore
 

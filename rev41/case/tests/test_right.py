@@ -104,7 +104,7 @@ def test_second_seat_set_is_in_the_gaps_at_the_steeper_angle(right_case):
 
 def test_cup_rim_clears_the_arm_walls_and_the_plate(right_case):
     assert right_case["cup"].distance_to(right_case["top"]) >= 0.5 - 0.05
-    assert right_case["cup"].distance_to(right_case["bottom"]) >= 0.4 - 0.01              # the neck through the arm's plate
+    assert right_case["cup"].distance_to(right_case["bottom"]) >= 0.3 - 0.01              # the neck through the arm's plate (0.33 with PLATE_SIDE_CLEAR 0.3)
     assert trackball.ball().distance_to(right_case["bottom"]) >= params.BALL_POD_TOP_CLEAR - 0.02
 
 

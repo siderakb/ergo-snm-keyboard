@@ -285,3 +285,9 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
 - Height: the lowest points are the pod's rounded edge and the sensor screw heads (`trackball.lowest_points`).
 - TODO: test print of the cup (steel-ball seat fit, working distance / shims, rolling); FPC connector width/depth and the lens
   outline from drawings; FPC route from the pod to the core board; the pod is a separate grey cup below the orange walls.
+
+## Bottom case + battery door in PA12S-HP (MJF), 2026-10-28
+- Page values (jlc3dp.com/help/article/pa12s-hp-nylon): black or grey, +-0.3 (<100 mm) / +-0.4 %, wall > 1.0, 370 x 276 x 360; min hole / emboss / clearance not given there (the older guideline's MJF values are used).
+- Changed: `PLATE_SIDE_CLEAR` 0.2 -> 0.3 (0.4 would leave the ball cup 0.26 from the arm plate), `BATTERY_POCKET_CLEAR` 0.3 -> 0.4, new `BOTTOM_SCREW_CLEAR_D` 3.0 (bottom plate and pod; the top case keeps 2.8), `PMW3610_WD_TOL` 0.3 (more shims), rib comment.
+- Not changed: `BALL_POD_CLEAR` 0.5 (the pod's outer face is flush with the arm walls through it), ribs 1.5, label size 4.5.
+- TODO: warpage of the 168 x 141 plate with the solid Ø8 feet (consider hollowing them); embossed text legibility on the grainy surface (maybe size 5.5); parts are not registered in `parts/` with material "mjf", so check.py applies no per-material rules to them; fit coupon in PA12S-HP.

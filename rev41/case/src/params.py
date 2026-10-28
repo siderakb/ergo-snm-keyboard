@@ -37,7 +37,7 @@ BOTTOM_CLEAR = 0.5
 # The bottom case is a plate inside the top case walls (the seam only shows from below); its outer face sits BOTTOM_RECESS
 # up from the bottom edge of the walls, and PLATE_SIDE_CLEAR from their inner face in plan.
 BOTTOM_RECESS = 0.8
-PLATE_SIDE_CLEAR = 0.2      # TODO: set from a fit coupon (SLA)
+PLATE_SIDE_CLEAR = 0.3      # bottom plate (MJF PA12S-HP) to the top case inner face; 0.4 would leave the ball cup only 0.26 from the arm plate; TODO: fit coupon
 
 # --- Slide switch (SK12D07) on core_board_e73 ---
 SLIDE_SW_HANDLE = 7.0  # handle length (user-provided; confirm it is measured from the body top)
@@ -82,6 +82,7 @@ SCREW_M25_LENGTHS = (6.0, 4.0)
 SCREW_M25_HEAD_D = 5.5
 SCREW_M25_HEAD_H = 1.3
 SCREW_M25_CLEAR_D = 2.8        # TODO: through-hole for M2.5 in SLA (JLC holes shrink up to 0.3), set from coupon
+BOTTOM_SCREW_CLEAR_D = 3.0     # same in the MJF PA12S-HP parts (bottom plate, pod): holes shrink up to 0.3 there too
 # Nuts: knurled brass insert M2.5 x 2 x 3.5 (thread dia x height x outer dia), glued into the resin
 # (refs/drawings/螺母參考.png is the vendor table; this size is the user's, not a row of it).
 NUT_M25_THREAD = 2.5
@@ -165,7 +166,7 @@ FOOT_PAD_RECESS_CLEAR = 0.4   # recess diameter = pad + this (rim 0.8 on the Ø8
 FOOT_END_T = FOOT_PAD_T - FOOT_PAD_RECESS   # column end above the desk
 FOOT_MIN_CLEAR = 1.0
 FOOT_FLARE_R, FOOT_FLARE_L = 2.5, 3.75   # conical flare at the column root (radial x along the axis), clipped to the plate outline
-# Ribs on the plate (SLA, so as thick as the walls, >= 1.5): a standing edge rim along the plate edge on the deep level
+# Ribs on the plate (MJF: JLC suggests 1.0-1.2 ribs on long walls, 1.5 is on the safe side): a standing edge rim along the plate edge on the deep level
 # (+Y and +X sides), and a bar across the strip between the battery opening and the pocket's +Y end (with a gap for the wire).
 RIB_T = 1.5
 EDGE_RIB_H = 4.0
@@ -229,7 +230,7 @@ BATTERY_DOOR_LAP = 2.5         # door under the plate on the -Y edge
 BATTERY_DOOR_LAP_KEY = 7.5     # on the X edges, where the keyholes are (1.5 of plate between big hole and opening)
 BATTERY_DOOR_LAP_TOP = 1.0     # at the +Y end
 BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
-BATTERY_POCKET_CLEAR = 0.3     # pocket around the door
+BATTERY_POCKET_CLEAR = 0.4     # pocket around the door (both MJF)
 BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with KEY_HEAD_GAP: 0.6 vertical play)
 BATTERY_RIM_H = 2.0 + BATTERY_NEST_DEPTH   # plate thickened on the inside around the opening (1.7 above the pocket)
 BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
@@ -249,7 +250,7 @@ BATTERY_BUMP_H, BATTERY_BUMP_W = 0.8, 2.0
 BALL_D = 34.0
 BEARING_BALL_D = 2.5
 PMW3610_WORKING_DISTANCE = 2.4   # lens reference plane (lowest plane of the lens) to ball surface, PMW3610 spec
-PMW3610_WD_TOL = 0.2             # +-; equal to the JLC SLA tolerance, so the sensor mount needs adjustment (shims)
+PMW3610_WD_TOL = 0.3             # +-; equal to the JLC MJF tolerance (pod and standoffs are PA12S-HP), so the sensor mount needs adjustment (shims)
 # PMW3610 reference section (refs/drawings/pmw3610-lens.png), distances to the tracking (ball) surface.
 # The sensor body sits on one PCB face ("sensor face"); the lens passes through a window in the board
 # and sticks out of the other face. On the breakout (user-confirmed, same as the drawing) the IC is on

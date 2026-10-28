@@ -87,7 +87,7 @@ def _screw_post(a, b):
     """Nut pocket open at the seat and the blind hole above it, 0.5 past the screw tip."""
     nut = Pos(a, b, W_SEAT - 1.0) * Cylinder((params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2, NUT_DEPTH + 1.0, align=MIN)
     w0 = W_SEAT + NUT_DEPTH - 0.01
-    return [nut, Pos(a, b, w0) * Cylinder(params.SCREW_M25_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)]
+    return [nut, Pos(a, b, w0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)]
 
 
 @functools.lru_cache(maxsize=None)
@@ -293,6 +293,6 @@ def mount_cuts():
     """Through holes for the four board screws and the head counterbores in the pod's outer face."""
     out = []
     for a, b in board_holes():
-        out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.SCREW_M25_CLEAR_D / 2, W_SENSOR - W_POD_OUT + 6.0, align=MIN))
+        out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, W_SENSOR - W_POD_OUT + 6.0, align=MIN))
         out.append(loc() * Pos(a, b, W_POD_OUT - 5.0) * Cylinder(params.SENSOR_SCREW_CBORE_D / 2, W_HEAD - W_POD_OUT + 5.0, align=MIN))
     return out

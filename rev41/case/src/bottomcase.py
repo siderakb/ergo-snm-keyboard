@@ -222,7 +222,7 @@ def bottom_case(hand=None):
         body = body + (flare & zone)
     for x, y in topcase.post_positions(hand):
         top, n, t = post_axis(hand, x, y)
-        body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.SCREW_M25_CLEAR_D / 2)
+        body = body - _along(top, n, t - 1.0, params.BOTTOM_WALL + 2.0, params.BOTTOM_SCREW_CLEAR_D / 2)
     for c in topcase.screw_counterbores(hand):
         body = body - c
     for c in button_holes(hand):
