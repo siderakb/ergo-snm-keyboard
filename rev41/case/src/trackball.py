@@ -90,12 +90,27 @@ def _screw_post(a, b):
     return [nut, Pos(a, b, w0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)]
 
 
+def _seat_frame(r_out):
+    """Bosses on the board holes, a collar round the lens window and diagonal ribs between them, W_SEAT up into the shell."""
+    def top(rho):                                             # 1.0 into the shell above radius rho, never below CUP_BLOCK_TOP
+        return max(params.CUP_BLOCK_TOP, -np.sqrt(r_out ** 2 - rho ** 2) + 1.0)
+    lu, lv = params.PMW3610_LENS_BOX
+    c = params.LENS_WINDOW_CLEAR + params.CUP_COLLAR_WALL
+    frame = _box(-lu / 2 - c, lu / 2 + c, -lv / 2 - c, lv / 2 + c, W_SEAT, top(np.hypot(lu / 2 + c, lv / 2 + c)))
+    for a, b in board_holes():
+        rho = np.hypot(a, b)
+        h = top(rho - params.CUP_BOSS_D / 2) - W_SEAT
+        frame = frame + Pos(a, b, W_SEAT) * Cylinder(params.CUP_BOSS_D / 2, h, align=MIN)
+        rib = Box(rho, params.CUP_RIB_W, h, align=(Align.MAX, Align.CENTER, Align.MIN))
+        frame = frame + Location((a, b, W_SEAT), (0, 0, np.degrees(np.arctan2(b, a)))) * rib
+    return frame
+
+
 @functools.lru_cache(maxsize=None)
 def cup_local():
     """The cup in the ball frame."""
     r_in, r_out = R + params.BALL_CUP_GAP, R + params.BALL_CUP_GAP + params.BALL_CUP_WALL
-    bu, bv = params.CUP_BLOCK
-    body = Sphere(r_out) + _box(-bu / 2, bu / 2, -bv / 2, bv / 2, W_SEAT, params.CUP_BLOCK_TOP)
+    body = Sphere(r_out) + _seat_frame(r_out)
     for p in bearings() + alt_bearings():
         body = body + Pos(*p) * Sphere(params.BEARING_BOSS_D / 2)
     r_keep = params.BALL_POD_R_IN - params.BALL_POD_CLEAR    # nothing above the rim, nothing outside the pod's wall

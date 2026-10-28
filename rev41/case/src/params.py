@@ -297,8 +297,11 @@ BEARING_BOSS_D = 5.5
 # the seat is SENSOR_SHIM_NOM nearer the ball than nominal, so shims can make up +-0.2 either way.
 SENSOR_SHIM_NOM = 0.2
 LENS_WINDOW_CLEAR = 0.5
-CUP_BLOCK = (32.0, 25.0)           # seat block under the cup (u x v), carries the four board screws
-CUP_BLOCK_TOP = -14.5              # block top below the ball centre (merges with the shell; keeps the screw holes blind)
+# seat under the cup: four screw bosses, a collar round the lens window and ribs from the bosses to the collar (no solid block)
+CUP_BOSS_D = 6.5                   # around the nut pocket (3.8): 1.35 wall
+CUP_COLLAR_WALL = 1.5
+CUP_RIB_W = 1.5
+CUP_BLOCK_TOP = -14.5              # lowest top of the seat structure below the ball centre (keeps the screw holes blind)
 SENSOR_SCREW_L, SENSOR_SCREW_HEAD_D, SENSOR_SCREW_HEAD_H = 10.0, 4.5, 2.5     # M2.5 x 10 socket head (user has them)
 SENSOR_SCREW_CBORE_D = SENSOR_SCREW_HEAD_D + 0.5
 SENSOR_SCREW_PROUD = 0.8           # head stands this far out of the pod's outer face (= BOTTOM_RECESS: no lower than the walls)
