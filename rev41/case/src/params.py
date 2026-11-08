@@ -173,8 +173,10 @@ EDGE_RIB_H = 4.0
 STRIP_RIB_H = 5.0
 STRIP_RIB_GAP = 1.0        # from the opening's +Y edge
 STRIP_RIB_NOTCH_W = 12.0   # centred on the holder, lets the battery wire through
-# Feet are at least FOOT_D / 2 + FOOT_FLARE_R + 1.0 = 7.5 from the plate edge and the door's edges, so the root flare is whole
-# (user: move the three inward; 2.0 -> 4.5 for the -X pair, the door one 8 from the +Y edge, 2 inward).
+# Feet are at least FOOT_D / 2 + FOOT_FLARE_R + 1.0 = 7.5 from the plate edge, so the root flare is whole
+# (user: move the three inward; 2.0 -> 4.5 for the -X pair). FOOT_BESIDE_DOOR is the exception: it moved off the battery door
+# (user) into the 10 mm strip between the pocket and the +X plate edge, so its column keeps FOOT_SIDE_CLEAR to both and its
+# flare is cut by the pocket and the plate edge.
 # Reset / boot button (the fitted TL3342 on the main board's lower face): a through hole in the bottom plate over its centre, so a
 # thin tool reaches it without taking the case apart (user).
 BUTTON_HOLE_D = 2.5
@@ -187,8 +189,10 @@ LABEL_LINES = ("SideraKB", "ErgoSNM", "Rev4.0")
 LABEL_SIZE = 4.5            # font size (mm); TODO: JLC minimum stroke width for embossed text is unchecked
 LABEL_HEIGHT = 0.8
 LABEL_CENTRE = (167.0, -50.0)
-FEET_LEFT = ((4.5, -124.0), (4.5, -55.0), (98.0, -48.5),                        # near the user's circles; (98, -48.5) on the battery door
+FEET_LEFT = ((4.5, -124.0), (4.5, -55.0), (108.0, -48.0),                       # near the user's circles; (108, -48) beside the battery door (+X)
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
+FOOT_BESIDE_DOOR = 2
+FOOT_SIDE_CLEAR = 0.8
 THUMB_FOOT = 3             # index in FEET_LEFT; the right hand puts this foot under the middle of the trackball pod instead
 # Support pillars from the bottom plate through main-board mounting holes to the skin underside: a body up to
 # PILLAR_TOP_Z (below the hot-swap sockets) and a pin through the Ø2.2 hole touching the skin.
@@ -208,14 +212,16 @@ PIN_SHOULDER = 1.0
 PIN_SHOULDER_UP = 0.3
 PIN_TIP_CHAMFER = 0.3
 # Battery door (left): the 2xAA holder is glued onto a door (MJF PA12) that sits flush in a pocket of the bottom plate's
-# outer face and hangs from three keyholes (two on the -X edge, one on the +X edge). Push it BATTERY_SLIDE towards +Y and
+# outer face and hangs on slide tabs (three on each X edge) that ride in grooves in the pocket's side walls, over a ledge
+# with a notch at each tab's unlocked position (a keyhole turned sideways). Push it BATTERY_SLIDE towards +Y and
 # it drops out with the holder (the holder wires stay connected, left long enough); push back towards -Y to lock, a bump
 # on a sprung tongue at the door's -Y end clicks into a dimple. The plate around the opening is thickened inside.
 # The holder's -X side is BATTERY_CORE_CLEAR past the core board; its +Y end leaves room for the slide, the opening
 # clearance, the door's +Y lap, the pocket's travel and BATTERY_EDGE_MARGIN to the plate edge.
 # Clearances follow the JLC guideline for moving parts (SLA 0.5, MJF 0.6 total; tolerance +-0.2 SLA / +-0.3 MJF, holes
 # +-0.3 and usually small): 0.6 total play between the sliding faces; walls of positioning/snap features >= 1.5; the door
-# (about 46 x 67, MJF) 2.0 thick. Still to be checked on a test print (keyhole + stud at 0.3 / 0.4 / 0.5 per side).
+# (about 38 x 68, MJF) 2.0 thick. Still to be checked on a test print (tab + groove at 0.3 / 0.4 / 0.5 per side).
+# No foot stands on the door (user): a foot there pushed the door along the slide whenever the keyboard was moved on the desk.
 BATTERY_CORE_CLEAR = 0.5
 BATTERY_SLIDE = 4.0
 BATTERY_OPEN_CLEAR = 0.5       # holder -> opening edge
@@ -227,19 +233,22 @@ BATTERY_NEST_DEPTH = 0.5
 BATTERY_NEST_CLEAR = 0.3
 BATTERY_DOOR_T = BATTERY_FLOOR_T + BATTERY_NEST_DEPTH
 BATTERY_DOOR_LAP = 4.0         # door under the plate on the -Y edge (the bump dimple sits in this strip: 0.8 of wall each side)
-BATTERY_DOOR_LAP_KEY = 7.5     # on the X edges, where the keyholes are (1.5 of plate between big hole and opening)
+BATTERY_DOOR_LAP_SIDE = 2.5    # on the X edges (the tabs reach BATTERY_TAB_W further, into the side grooves)
 BATTERY_DOOR_LAP_TOP = 1.0     # at the +Y end
 BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
 BATTERY_POCKET_CLEAR = 0.4     # pocket around the door (both MJF)
-BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with KEY_HEAD_GAP: 0.6 vertical play)
+BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with BATTERY_TAB_GAP: 0.6 vertical play)
 BATTERY_RIM_H = 2.0 + BATTERY_NEST_DEPTH   # plate thickened on the inside around the opening (1.7 above the pocket)
-BATTERY_RIM_LAP = 3.0          # the rim reaches this far past the pocket (and its 0.4 slit) onto the plate: it only holds the door's studs if it is bonded to the plate
+BATTERY_RIM_LAP = 3.0          # the rim reaches this far past the pocket and the side grooves onto the plate: the grooves' ceilings are in the rim
 BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
-KEY_STUD_D, KEY_HEAD_D, KEY_HEAD_T = 2.5, 5.0, 1.5       # mushroom studs on the door
-KEY_HOLE_D, KEY_SLOT_W = 6.0, 3.1                        # keyholes in the plate
-KEY_HEAD_GAP = 0.3                                       # head above the rim
-KEY_X_FLOAT = 0.6              # the +X keyhole is this much wider along X: only the -X pair locates the door in X
-KEY_HEAD_CHAMFER, KEY_HOLE_CHAMFER, KEY_ROOT_FILLET = 0.5, 0.4, 0.3     # lead-ins and the stud root
+# Slide tabs on the door's X edges: BATTERY_TAB_L along Y, reaching BATTERY_TAB_W past the edge, BATTERY_TAB_T thick, from
+# BATTERY_TAB_T - BATTERY_TAB_RISE below the door top to BATTERY_TAB_RISE above it. Each rides in a groove BATTERY_TAB_GAP
+# above and below it and BATTERY_TAB_TIP_CLEAR past its tip; the ledge under the groove (1.4) holds the door up, and has a
+# notch (tab + BATTERY_TAB_GAP each end) where the tab sits when the door is pushed BATTERY_SLIDE towards +Y.
+# Tab -Y ends from the door's -Y edge (locked), per X side of the left door: on the +X side they stay off the foot beside it.
+BATTERY_TAB_L, BATTERY_TAB_W, BATTERY_TAB_T, BATTERY_TAB_RISE = 3.0, 2.4, 1.0, 0.2
+BATTERY_TAB_GAP, BATTERY_TAB_TIP_CLEAR = 0.3, 0.4
+BATTERY_TABS_LEFT = {"-X": (6.0, 35.0, 60.0), "+X": (6.0, 29.0, 47.0)}
 BATTERY_DOOR_CHAMFER, BATTERY_POCKET_CHAMFER = 0.4, 0.3                  # door top edge, pocket edge in the floor
 # Locking bump: the door has 0.6 vertical play, so the bump engages BATTERY_BUMP_H - 0.6 with the door hanging and
 # BATTERY_BUMP_H with it pressed up (keyboard upside down, or on its feet); a 6 x 12 x 2.0 PA12 tongue bends that far

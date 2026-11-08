@@ -108,7 +108,7 @@ def test_feet_end_on_the_tented_desk_plane(bottom):
     n, d = bottomcase.desk_plane("left")
     assert np.degrees(np.arccos(n[2])) == pytest.approx(params.TENT_ANGLE) and n[0] > 0     # +X (thumb side) up
     plate_feet, door_feet = bottomcase.feet("left"), bottomcase.feet("left", on_door=True)
-    assert len(plate_feet) + len(door_feet) == len(params.FEET_LEFT) and door_feet
+    assert len(plate_feet) == len(params.FEET_LEFT) and not door_feet                  # no foot on the battery door
     for foot in plate_feet + door_feet:
         low = min(n @ np.array((v.X, v.Y, v.Z)) for v in foot.vertices())
         assert low == pytest.approx(d + params.FOOT_END_T, abs=1e-3)                     # column end (rim of the pad recess)
@@ -120,34 +120,39 @@ def test_feet_end_on_the_tented_desk_plane(bottom):
     assert min(n @ np.array((v.X, v.Y, v.Z)) for v in walls.vertices()) >= d + params.FOOT_END_T + params.FOOT_MIN_CLEAR - 0.5
 
 
-def test_foot_flares_stay_whole_inside_the_plate_and_the_door_edges():
-    from shapely.geometry import Point
+def test_foot_flares_stay_whole_inside_the_plate_and_the_foot_beside_the_door_clears_the_pocket():
+    from shapely.geometry import Point, box
 
     need = params.FOOT_D / 2 + params.FOOT_FLARE_R + 1.0                  # flare radius + 1.0: not cut by an edge
     plate = bottomcase.bottom_outline("left")
-    x0, y0, x1, y1 = batterydoor.layout("left")["door"]
-    notch = batterydoor._post_keep("left")
+    x0, y0, x1, y1 = batterydoor.layout("left")["pocket"]
+    g = params.BATTERY_POCKET_CLEAR + params.BATTERY_POCKET_CHAMFER
+    pocket = box(x0 - g, y0 - g, x1 + g, y1 + g)
+    notches = [n for _, n in batterydoor.grooves("left")]
     for i, (x, y) in enumerate(params.FEET_LEFT):
+        assert not batterydoor.on_door("left", x, y), (x, y)
         if i == params.THUMB_FOOT:
             continue                                                       # the thumb foot is far from every edge
-        if batterydoor.on_door("left", x, y):
-            assert min(x - x0, x1 - x, y - y0, y1 - y) >= need - 0.1, (x, y)
-            assert np.hypot(x - notch[0], y - notch[1]) - notch[2] >= need - 0.1, (x, y)   # nor from the post notch
+        if i == params.FOOT_BESIDE_DOOR:                                   # the column clears the pocket, its notches and the edge
+            r = params.FOOT_D / 2 + params.FOOT_SIDE_CLEAR
+            assert plate.exterior.distance(Point(x, y)) >= r - 0.05, (x, y)
+            assert pocket.distance(Point(x, y)) >= r - 0.05, (x, y)
+            for n in notches:
+                b = n.bounding_box()
+                assert box(b.min.X, b.min.Y, b.max.X, b.max.Y).distance(Point(x, y)) >= r - 0.05, (x, y)
         else:
             assert plate.exterior.distance(Point(x, y)) >= need - 0.1, (x, y)
 
 
-def test_foot_columns_flare_at_the_root(bottom, door):
+def test_foot_columns_flare_at_the_root(bottom):
     r = params.FOOT_D / 2
-    for on_door, solid in ((False, bottom), (True, door)):
+    for on_door, solid in ((False, bottom),):
         for top, n, _ in bottomcase._foot_axes("left", on_door):
             x, y = top[0], top[1]
-            z = batterydoor.levels("left")["bottom"] if on_door else topcase.floor_z("left", x, y)
-            u = np.array((1.0, 0.0, 0.0)); u -= n * (u @ n); u /= np.linalg.norm(u)       # across the axis
+            z = topcase.floor_z("left", x, y)
+            u = np.array((0.0, 1.0, 0.0)); u -= n * (u @ n); u /= np.linalg.norm(u)       # across the axis, along Y
             for sign in (1, -1):
                 p = top + n * ((z - 0.5 - top[2]) / n[2]) + sign * u * (r + 0.8)            # 0.5 below the floor, beside the column
-                if sign == -1 and abs(x) < r + 3:
-                    continue                                                                   # the -X edge clips the flare
                 assert solid.is_inside(tuple(p)), (x, y, sign)
             p = top + n * ((z - params.FOOT_FLARE_L - 2.0 - top[2]) / n[2]) + u * (r + 0.8)   # below the flare: bare column
             assert not solid.is_inside(tuple(p)), (x, y)
@@ -155,11 +160,15 @@ def test_foot_columns_flare_at_the_root(bottom, door):
 
 def test_feet_and_pillars_do_not_poke_through_the_plate_faces(bottom):
     angles = np.linspace(0, 2 * np.pi, 24, endpoint=False)
+    ribs = bottomcase.ribs("left") + [batterydoor.plate_rim("left")]
     for top, n, _ in bottomcase._foot_axes("left", False):          # columns end at the plate's inner face, also on a ramp
         x, y = top[0], top[1]
         for a in angles:
             px, py = x + 0.9 * params.FOOT_D / 2 * np.cos(a), y + 0.9 * params.FOOT_D / 2 * np.sin(a)
-            assert not bottom.is_inside((px, py, topcase.floor_z("left", px, py, params.BOTTOM_WALL) + 0.3)), (x, y, a)
+            p = (px, py, topcase.floor_z("left", px, py, params.BOTTOM_WALL) + 0.3)
+            if any(r.is_inside(p) for r in ribs):
+                continue                                              # the +X edge rib and the battery rim, beside the foot next to the door
+            assert not bottom.is_inside(p), (x, y, a)
     for x, y in bottomcase.support_holes("left").values():          # pillars stop at the outer face, also on a ramp
         for a in angles:
             px, py = x + 0.95 * params.PILLAR_D / 2 * np.cos(a), y + 0.95 * params.PILLAR_D / 2 * np.sin(a)
@@ -219,11 +228,34 @@ def test_battery_door_is_flush_and_touches_nothing_when_locked(bottom, top, door
         assert vol(door & other) < 1e-3
     play = params.BATTERY_CEIL_GAP
     assert vol(bottom & (Pos(0, 0, play - 0.01) * door)) < 1e-3   # pressed up: the bump still fits its dimple
-    assert vol(bottom & (Pos(0, 0, -params.KEY_HEAD_GAP + 0.01) * door)) < 1e-3
-    assert vol(bottom & (Pos(0, 0, -params.KEY_HEAD_GAP - 0.2) * door)) > 1.0     # the stud heads hold it up
+    assert vol(bottom & (Pos(0, 0, -params.BATTERY_TAB_GAP + 0.01) * door)) < 1e-3
+    assert vol(bottom & (Pos(0, 0, -params.BATTERY_TAB_GAP - 0.2) * door)) > 1.0     # the tabs sit on the ledges
     assert vol(bottom & (Pos(0, -0.5, 0) * door)) > 1.0           # it cannot slide further towards -Y
-    x, y, r = batterydoor._post_keep("left")                      # notched around the corner post's counterbore
-    assert door.distance(Pos(x, y, 0) * Cylinder(r, 100)) > params.BATTERY_POCKET_CLEAR - 0.01
+    for dx in (-0.5, 0.5):                                        # the pocket walls locate it along X ...
+        assert vol(bottom & (Pos(dx, 0, 0) * door)) > 0.1
+    for dx in (-params.BATTERY_POCKET_CLEAR + 0.05, params.BATTERY_POCKET_CLEAR - 0.05):
+        assert vol(bottom & (Pos(dx, 0, 0) * door)) < 1e-3        # ... with BATTERY_POCKET_CLEAR each side
+    keep = batterydoor._post_keep("left")                         # notched around a corner post's counterbore, if one is near
+    if keep:
+        x, y, r = keep
+        assert door.distance(Pos(x, y, 0) * Cylinder(r, 100)) > params.BATTERY_POCKET_CLEAR - 0.01
+
+
+def test_battery_door_tabs_each_side_ride_on_a_ledge_with_a_notch_at_the_unlocked_position(bottom, door):
+    lay, s = batterydoor.layout("left"), params.BATTERY_SLIDE
+    z0, z1 = batterydoor.tab_z("left")
+    d = lay["door"]
+    sides = [1 if t[0] + t[2] > d[0] + d[2] else -1 for t in lay["tabs"]]
+    assert sides.count(1) == 3 and sides.count(-1) == 3
+    for t, side in zip(lay["tabs"], sides):
+        xm = t[2] - 0.5 if side > 0 else t[0] + 0.5                      # near the tab tip
+        ym = (t[1] + t[3]) / 2
+        assert door.is_inside((xm, ym, (z0 + z1) / 2))                    # the tab
+        assert bottom.is_inside((xm, ym, z0 - params.BATTERY_TAB_GAP - 0.5))   # the ledge under it (locked)
+        assert bottom.is_inside((xm, ym, z1 + params.BATTERY_TAB_GAP + 0.5))   # the groove's roof over it
+        assert not bottom.is_inside((xm, ym + s, z0 - params.BATTERY_TAB_GAP - 0.5))   # the notch (unlocked)
+    assert min(t[2] - t[0] for t in lay["tabs"]) == pytest.approx(params.BATTERY_TAB_W + 0.5)
+    assert d[2] - d[0] < lay["opening"][2] - lay["opening"][0] + 2 * params.BATTERY_DOOR_LAP_SIDE + 0.01
 
 
 def test_battery_door_has_a_nest_that_locates_the_holder(door):
@@ -275,7 +307,7 @@ def test_thumb_ledge_sits_on_the_plate_under_the_thumb_pcb_edge(bottom):
 
 
 def test_battery_rim_is_bonded_to_the_plate_across_the_pocket_slit(bottom):
-    """The rim above the pocket slit must carry the door's studs: it needs a real section on every side, not a sliver."""
+    """The rim above the pocket slit roofs the tab grooves: it needs a real section on every side, not a sliver."""
     x0, y0, x1, y1 = batterydoor.layout("left")["pocket"]
     z, g = batterydoor.levels("left"), params.BATTERY_POCKET_CLEAR
     za, zb = z["ceiling"] + 0.01, z["rim"] - 0.01

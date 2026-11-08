@@ -166,6 +166,14 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   hand-shifted away from the edge (`BOSS_SHIFT_LEFT`): (57.6, -134.2) and (92.3, -138.9).
 
 ## Battery door (left, 2026-10-24)
+- **2026-11-08 (user): slide tabs instead of studs, and no foot on the door.** The door hangs on three tabs per X edge
+  (3 along Y x 2.4 past the edge x 1.0, 0.2 above the door top; `BATTERY_TABS_LEFT`) riding in grooves cut sideways into
+  the pocket's side walls (0.3 above/below, 0.4 past the tip), over a 1.4 ledge with a notch at each tab's unlocked
+  position (`batterydoor.grooves`). X lap 7.5 -> 2.5, door 48.2 -> 38.2 wide; the rim now reaches past the grooves. The
+  foot that stood on the door is at (108, -48) on the plate beside it (`FOOT_BESIDE_DOOR`), vertical (the others follow
+  the desk normal; tilted 10 deg its end leaned 3.9 over the door's way out), end face parallel to the desk; its flare is
+  cut by the pocket and the plate edge. The holder moved 0.3 towards +Y (narrower door under the slanted +Y edge). The
+  stud/keyhole text below is superseded. TODO: test print of tab + groove fit; anti-rattle preload (option E) not done yet.
 - `batterydoor.py`: the 2xAA holder is glued onto a 2.0 mm door (MJF PA12) flush in a pocket of the plate's outer face.
   Three mushroom studs (Ø2.5, head Ø5 x 1.5 with a 0.5 lead-in chamfer, root fillet 0.3; two on the -X edge, one on the
   +X edge) hang it from keyholes (Ø6.0 with a 0.4 entry chamfer + 3.1 slot along Y; the +X one 0.6 wider along X so only

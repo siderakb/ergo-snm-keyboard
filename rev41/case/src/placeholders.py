@@ -95,6 +95,6 @@ def battery_y_top(hand, x0, x1):
     import outline
 
     plate = outline.case_outline_polygon(hand).buffer(-(params.BOTTOM_WALL + params.PLATE_SIDE_CLEAR))
-    reach = params.BATTERY_OPEN_CLEAR + params.BATTERY_DOOR_LAP_KEY
+    reach = params.BATTERY_OPEN_CLEAR + params.BATTERY_DOOR_LAP_SIDE
     edge = min(plate.intersection(LineString([(x, -1000), (x, 1000)])).bounds[3] for x in np.linspace(x0 - reach, x1 + reach, 30))
     return edge - (2 * params.BATTERY_SLIDE + params.BATTERY_OPEN_CLEAR + params.BATTERY_DOOR_LAP_TOP + params.BATTERY_EDGE_MARGIN)

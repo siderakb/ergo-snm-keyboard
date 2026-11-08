@@ -294,9 +294,9 @@ def test_both_halves_stand_at_the_same_height():
         left = float(nl @ np.array((x, -80.0, 3.8))) - dl
         right = float(nr @ np.array((params.MIRROR_X - x, -80.0, 3.8))) - dr
         assert left == pytest.approx(right, abs=1e-6)
-    # the three matching feet (-X pair and the battery door one) are exactly as long on both hands
-    lengths = lambda hand: sorted(round(float(n @ top - (d + params.FOOT_END_T)), 2) for on in (False, True)
-                                  for top, n, d in bottomcase._foot_axes(hand, on))
+    # the three matching feet (-X pair and the one beside the battery door) stand as high on both hands
+    lengths = lambda hand: sorted(round(float(bottomcase.desk_plane(hand)[0] @ top - (d + params.FOOT_END_T)), 2)
+                                  for on in (False, True) for top, _, d in bottomcase._foot_axes(hand, on))
     left, right = [x for x in lengths("left") if 15.0 < x < 25.0], [x for x in lengths("right") if 15.0 < x < 25.0]
     assert len(left) == len(right) == 3 and left == pytest.approx(right, abs=0.01)
 

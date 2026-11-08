@@ -50,7 +50,8 @@ def desk_plane(hand):
 
 
 def _foot_axes(hand, on_door):
-    """[(top point, desk normal, desk d)] of the feet columns: the axis runs from `top` down along -n."""
+    """[(top point, axis, desk d)] of the feet columns: the axis runs from `top` down along -axis. The axis is the desk normal,
+    except for FOOT_BESIDE_DOOR: vertical, so its lower end does not lean over the battery door's way out."""
     n, d = desk_plane(hand)
     out = []
     for i, (x, y) in enumerate(params.FEET_LEFT):
@@ -63,7 +64,8 @@ def _foot_axes(hand, on_door):
         # start inside the plate, low enough that the tilted top disc stays under its inner face
         sink = params.FOOT_D / 2 * np.sin(np.radians(params.TENT_ANGLE)) + 0.1
         z = batterydoor.levels(hand)["nest"] if on_door else floor_z(hand, x, y, params.BOTTOM_WALL)     # (a foot may stand under the nest)
-        out.append((np.array((x, y, z - sink)), n, d))
+        axis = np.array((0.0, 0.0, 1.0)) if i == params.FOOT_BESIDE_DOOR else n
+        out.append((np.array((x, y, z - sink)), axis, d))
     return out
 
 
@@ -92,12 +94,15 @@ def feet(hand, on_door=False):
     """Feet columns: from the plate's inner face (or the battery door's top) down along the desk normal to FOOT_END_T
     above the desk, with a FOOT_PAD_D rubber pad recess in the end. on_door picks the feet standing on the battery door."""
     out = []
-    for top, n, d in _foot_axes(hand, on_door):
-        length = n @ top - (d + params.FOOT_END_T)
-        plane = Plane(origin=tuple(top), z_dir=tuple(-n))
-        column = Location(plane) * Cylinder(params.FOOT_D / 2, length, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    n = desk_plane(hand)[0]
+    low = (Align.CENTER, Align.CENTER, Align.MIN)
+    for top, a, d in _foot_axes(hand, on_door):
+        length = (n @ top - (d + params.FOOT_END_T)) / (n @ a)       # along the axis to the column end's centre
+        end = Plane(origin=tuple(top - a * length), z_dir=tuple(-n))  # the end face is parallel to the desk
+        column = Location(Plane(origin=tuple(top), z_dir=tuple(-a))) * Cylinder(params.FOOT_D / 2, length + 2.0, align=low)
+        column = column - Location(end) * Box(200.0, 200.0, 50.0, align=low)
         r, depth = (params.FOOT_PAD_D + params.FOOT_PAD_RECESS_CLEAR) / 2, params.FOOT_PAD_RECESS
-        recess = Location(plane) * Pos(0, 0, length - depth) * Cylinder(r, depth + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        recess = Location(end) * Pos(0, 0, -depth) * Cylinder(r, depth + 1.0, align=low)
         out.append(column - recess)
     return out
 
@@ -241,6 +246,8 @@ def bottom_case(hand=None):
         body = body + (part & zone)
     for part in pillars(hand):                           # ... and a pillar's flat base out of the outer face
         body = body + (part - outer_below)
+    for c in batterydoor.plate_cuts(hand):               # again: the foot beside the door has its flare cut by the pocket
+        body = body - c
     solids = sorted(body.solids(), key=lambda s: s.volume)
     assert all(s.volume < 0.1 for s in solids[:-1]), "bottom case falls apart"
     return solids[-1]                                    # drops boolean slivers (counterbore against a ramp)
