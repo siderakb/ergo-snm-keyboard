@@ -3,7 +3,7 @@
 The walls run from the top surface all the way down, BOTTOM_RECESS past the outer face of the bottom plate, which sits
 inside them (the seam only shows from below). The plate faces follow the folded main/thumb surface: the lower of a
 plane parallel to each top plane. Screw posts sit in the free corners between the PCB outlines and the wall and run
-down to the plate's inner face; each has a nut pocket open at its lower end and a blind screw hole above it.
+down to the plate's inner face; each has a hex pocket for a brass standoff open at its lower end.
 The right case takes the left one's floor and posts mirrored (params.MIRROR_X); the trackball pod hangs below it (bottom plate
 only, the walls stay as on the left).
 """
@@ -18,7 +18,7 @@ from build123d import Align, Axis, Box, Cone, Cylinder, Rot, Face, Location, Pla
 import params
 import outline
 import pcb_ref
-from geometry import ball_center, local_to_case, location, mirror_shape, mirror_x, outline_in_case
+from geometry import standoff_pocket, ball_center, local_to_case, location, mirror_shape, mirror_x, outline_in_case
 
 _BIG = outline._BIG
 
@@ -306,8 +306,12 @@ def walls(hand):
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
     shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS, pod=False)
     shell = shell + thumb_ledge(hand)
-    for c in pockets(hand) + wall_openings(hand) + screw_counterbores(hand):
+    cuts, ribs = pockets(hand)
+    for c in cuts + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c
+    for r in ribs:                                   # crush ribs where a pocket overlaps the wall
+        shell = shell + (r & outline.plan_prism(hand, outline.case_outline_polygon(hand).difference(
+            outline.case_outline_polygon(hand).buffer(-params.BOTTOM_WALL))))
     for dome in tactile_bumps(hand):
         shell = shell + dome
     return shell
@@ -350,18 +354,28 @@ def _along(top, n, start, length, r):
     return Location(plane) * Cylinder(r, length, align=(Align.CENTER, Align.CENTER, Align.MIN))
 
 
+def standoff_frame(hand, x, y):
+    """(top, n, t, u): the post axis and the in-plane unit vector u (perpendicular to n) that one pocket flat faces: towards
+    the nearest PCB edge or case outline, where the post is thinnest. The pocket's corners are at 30 + k * 60 deg from u."""
+    top, n, t = post_axis(hand, x, y)
+    p = Point(x, y)
+    near = [pcb_union(hand).exterior if hasattr(pcb_union(hand), "exterior") else pcb_union(hand).boundary,
+            outline.case_outline_polygon(hand).exterior]
+    q = min((g.interpolate(g.project(p)) for g in near), key=p.distance)
+    d = np.array((q.x - x, q.y - y, 0.0))
+    u = d - n * np.dot(d, n)
+    return top, n, t, u / np.linalg.norm(u)
+
+
 def pockets(hand):
-    """Nut pocket open at each post's lower end and the blind screw hole above it (also cut out of the wall where a
-    pocket overlaps it)."""
-    cuts = []
-    r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
-    nut_depth = params.NUT_M25_H + 0.5
+    """Standoff pocket at each post's lower end, as (cuts, ribs) lists (also cut out of the wall where a pocket overlaps
+    it). The screw (3.3 into the post) ends inside the 4.0 standoff, so there is no screw hole above."""
+    cuts, ribs = [], []
     for x, y in post_positions(hand):
-        top, n, t = post_axis(hand, x, y)
-        cuts.append(_along(top, n, t - nut_depth, nut_depth + 1.0, r_nut))
-        hole = min(params.POST_HOLE_LEN, t - params.PLATE_T - 0.5)         # blind: stays 0.5 under the skin
-        cuts.append(_along(top, n, t - hole, hole, params.SCREW_M25_CLEAR_D / 2))
-    return cuts
+        c, r = standoff_pocket(*standoff_frame(hand, x, y))
+        cuts.append(c)
+        ribs += r
+    return cuts, ribs
 
 
 def posts(hand):
@@ -376,8 +390,11 @@ def posts(hand):
     keep_out = pcb_union(hand).buffer(params.BOSS_PCB_CLEAR)     # trims bosses that do not fit whole
     zone = _under(hand, params.PLATE_T) - below_floor(hand, params.BOTTOM_WALL)
     body = body & zone & outline.plan_prism(hand, outline.case_outline_polygon(hand)) - _prism(keep_out)
-    for c in pockets(hand):
+    cuts, ribs = pockets(hand)
+    for c in cuts:
         body = body - c
+    for r in ribs:
+        body = body + r
     return body
 
 
@@ -538,7 +555,7 @@ def top_skin_keyed(hand):
 
 
 def top_case(hand=None):
-    """Skin + walls + posts as one fused solid, with the nut pockets and screw holes cut."""
+    """Skin + walls + posts as one fused solid, with the standoff pockets cut."""
     hand = hand or params.HAND
     body = top_skin_keyed(hand) + walls(hand)
     p = posts(hand)

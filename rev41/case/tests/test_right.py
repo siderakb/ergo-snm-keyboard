@@ -149,10 +149,10 @@ def test_thumb_foot_stands_under_the_pod():
     assert topcase.floor_z("right", x, y) == pytest.approx(trackball.pod_floor_z(x, y), abs=1e-6)
 
 
-def test_board_sandwich_screws_engage_the_nut_and_stay_blind():
+def test_board_sandwich_screws_engage_the_standoff_and_stay_blind():
     shim_max = 2 * params.SENSOR_SHIM_NOM
     tip_short = trackball.W_TIP - (shim_max - params.SENSOR_SHIM_NOM)             # thickest shim pack pushes the cup up
-    assert tip_short >= trackball.W_SEAT + params.NUT_M25_H                          # the whole nut is engaged
+    assert tip_short >= trackball.W_SEAT + params.STANDOFF_H - 1.0                   # at least 3 mm of thread engaged
     assert trackball.W_TIP + 0.5 <= params.CUP_BLOCK_TOP                             # blind hole stays inside the block
     proud = trackball.W_POD_OUT - (trackball.W_HEAD - params.SENSOR_SCREW_HEAD_H)
     assert proud <= params.BOTTOM_RECESS + 1e-9                                       # head no lower than the walls' edge

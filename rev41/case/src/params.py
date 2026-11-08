@@ -99,12 +99,17 @@ SCREW_M25_HEAD_D = 5.5
 SCREW_M25_HEAD_H = 1.3
 SCREW_M25_CLEAR_D = 2.8        # TODO: through-hole for M2.5 in SLA (JLC holes shrink up to 0.3), set from coupon
 BOTTOM_SCREW_CLEAR_D = 3.0     # same in the MJF PA12S-HP parts (bottom plate, pod): holes shrink up to 0.3 there too
-# Nuts: knurled brass insert M2.5 x 2 x 3.5 (thread dia x height x outer dia), glued into the resin
-# (refs/drawings/螺母參考.png is the vendor table; this size is the user's, not a row of it).
-NUT_M25_THREAD = 2.5
-NUT_M25_H = 2.0
-NUT_M25_OD = 3.5
-NUT_POCKET_CLEAR = 0.3         # TODO: diametral clearance for glue, set from coupon_nut_trap
+# Screw posts (case and trackball cup): hex brass standoffs (user's part: M2.5, 4 across flats, 4 high, smooth outside), pressed into a
+# hex pocket open at the post's lower end. The hex stops it turning; the bottom plate bears on its lower end, so the
+# screw's pull goes into the plate and not into glue; three crush ribs keep it in before assembly (no glue needed;
+# without ribs, one glue dot in a corner relief). The trackball cup's sensor screws use the same standoffs.
+STANDOFF_AF = 4.0
+STANDOFF_H = 4.0
+STANDOFF_POCKET_CLEAR = 0.2    # TODO: across-flats clearance of the hex pocket in SLA, set from a coupon
+STANDOFF_CORNER_RELIEF_D = 0.6 # round reliefs at the six pocket corners: SLA rounds inside corners, the brass corners are sharp
+STANDOFF_RIB_D = 0.8           # crush ribs: half-round, along the axis, on three alternate flats
+STANDOFF_RIB_INTERF = 0.12     # TODO: rib overlap with the standoff's flat (radial), set from a coupon
+STANDOFF_RIB_LEAD = 0.5        # ribs stop this far inside the pocket mouth (lead-in)
 # The PMW3610 breakout has M3 holes (3.2 mm); M2.5 screws pass through them.
 
 # --- Battery (2x AA, series) ---
@@ -136,17 +141,16 @@ TACTILE_BUMP_GAP = 2.5
 TACTILE_BUMPS = {"left": (("usb_J9", "below"), ("switch_SW2", "+x")), "right": (("usb_J9", "below"), ("switch_SW1", "-x"))}
 SLIDE_SW_TRAVEL = 3.0      # handle travel between the two positions (TODO confirm from the SK12D07 drawing)
 # Screw posts in the free corners between the PCB outlines and the case wall: Ø7.8 so the wall around the
-# 3.8 mm nut pocket is 2.0 mm (JLC SLA wall for parts of 100-200 mm); the posts run down to the bottom plate, the nut
-# sits in the post's lower end (glued in), the M2.5 x 6 screw comes up through the plate.
+# old 3.8 mm nut pocket was 2.0 mm (JLC SLA wall for parts of 100-200 mm); the posts run down to the bottom plate, the hex
+# standoff (STANDOFF_*) sits in the post's lower end, the M2.5 x 6 screw comes up through the plate.
 # Screw: head 1.3 in a SCREW_HEAD_SINK counterbore (0.7 proud, inside the 0.8 recess), 1.4 of plate, so the 4.7 shank
-# reaches 3.3 into the post (nut pocket 2.5); POST_HOLE_LEN is the blind hole above the post end.
+# reaches 3.3 into the post, inside the 4.0 standoff: no screw hole above the standoff pocket.
 # The tilted thumb board (1.6 mm thick, hot-swap sockets 1.8 mm below it) reaches sideways past its plan
 # corners by about (1.6 + 1.8) * sin(20 deg); the case plan outline grows by this around the thumb area.
 THUMB_TILT_MARGIN = 0.7
 BOSS_D = 7.8
 SCREW_HEAD_SINK = 0.6
 SCREW_HEAD_CBORE_D = SCREW_M25_HEAD_D + 0.5
-POST_HOLE_LEN = 5.0
 BOSS_PCB_CLEAR = 0.4
 BOSS_COUNT = 3
 # The right hand uses the left-hand posts, feet and floor mirrored (see MIRROR_X), so these are only given for the left.
@@ -335,12 +339,12 @@ BEARING_HOLE_D = 2.5               # TODO: press fit + glue, set from the test p
 BEARING_BOSS_D = 5.5
 # PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat. The board is the
 # middle of a sandwich: four M2.5 x 10 socket head screws come up through the pod floor, a standoff on it, the board and the
-# shims into nuts in the cup (user: the cup shares the board's screws). Shims between seat and board set the working distance:
+# shims into standoffs in the cup (user: the cup shares the board's screws). Shims between seat and board set the working distance:
 # the seat is SENSOR_SHIM_NOM nearer the ball than nominal, so shims can make up +-0.2 either way.
 SENSOR_SHIM_NOM = 0.2
 LENS_WINDOW_CLEAR = 0.5
 # seat under the cup: four screw bosses, a collar round the lens window and ribs from the bosses to the collar (no solid block)
-CUP_BOSS_D = 6.5                   # around the nut pocket (3.8): 1.35 wall
+CUP_BOSS_D = 7.5                   # around the standoff pocket (4.2 across flats, 4.85 across corners): 1.3 wall at the corners
 CUP_COLLAR_WALL = 1.5
 CUP_RIB_W = 1.5
 CUP_BLOCK_TOP = -14.5              # lowest top of the seat structure below the ball centre (keeps the screw holes blind)

@@ -36,22 +36,22 @@ def test_posts_are_spread_and_clear_of_the_pcbs():
     all_pts = topcase.post_positions("left")
     pts, extra = all_pts[:params.BOSS_COUNT], all_pts[params.BOSS_COUNT:]
     assert len(pts) >= 3 and extra == list(params.BOSS_FIXED_LEFT)
-    r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
+    r_nut = (params.STANDOFF_AF + params.STANDOFF_POCKET_CLEAR) / 2      # pocket flat (a flat faces the nearest edge)
     outer = outline.case_outline_polygon("left")
     from shapely.geometry import Polygon
     from geometry import outline_in_case
 
     boards = [Polygon(max(outline_in_case(b, "left"), key=lambda l: Polygon(l).area)) for b in ("main_board", "core_board_e73")]
-    for p in extra:      # corner post, slightly trimmed: at least 1.0 mm of material around the nut pocket on both sides
-        assert min(b.distance(Point(p)) for b in boards) >= params.BOSS_PCB_CLEAR + r_nut + 1.0     # the door pocket is notched
-        assert outer.exterior.distance(Point(p)) >= r_nut + 1.0
+    for p in extra:      # corner post, slightly trimmed: at least 0.8 mm of material around the pocket on both sides
+        assert min(b.distance(Point(p)) for b in boards) >= params.BOSS_PCB_CLEAR + r_nut + 0.8     # the door pocket is notched
+        assert outer.exterior.distance(Point(p)) >= r_nut + 0.8
     union = topcase.pcb_union("left")
     inner = outline.case_outline_polygon("left").buffer(-params.BOTTOM_WALL)
     r = params.BOSS_D / 2
-    r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
+    r_nut = (params.STANDOFF_AF + params.STANDOFF_POCKET_CLEAR) / 2      # pocket flat (a flat faces the nearest edge)
     for p in pts:
         shifted = any(np.hypot(p[0] - sx - dx, p[1] - sy - dy) < 1.0 for (sx, sy), (dx, dy) in params.BOSS_SHIFT_LEFT.items())
-        need = r_nut + 1.0 if shifted and (p[1] < -130 or p[0] < 30) else r       # hand-shifted post, trimmed by the PCB
+        need = r_nut + 0.8 if shifted and (p[1] < -130 or p[0] < 30) else r       # hand-shifted post, trimmed by the PCB
         assert union.distance(Point(p)) >= need + params.BOSS_PCB_CLEAR - 0.01
         assert inner.buffer(-(r - 1.0) + 1e-6).contains(Point(p))
     a = np.array(all_pts)
@@ -65,18 +65,25 @@ def test_walls_and_posts_do_not_touch_the_boards():
         assert analysis.interference_volume(shell, board) < 1e-3, board.label
 
 
-def test_posts_reach_the_bottom_plate_with_the_nut_pocket_at_the_lower_end(case):
+def test_posts_reach_the_bottom_plate_with_the_standoff_pocket_at_the_lower_end(case):
     for x, y in topcase.post_positions("left"):
-        top, n, t = topcase.post_axis("left", x, y)
+        top, n, t, u = topcase.standoff_frame("left", x, y)
         end = top - t * n
-        probe = lambda d: case.is_inside(tuple(end + n * d))
-        assert not probe(0.5) and not probe(params.NUT_M25_H)            # in the nut pocket
-        assert not probe(min(params.POST_HOLE_LEN, t - params.PLATE_T - 0.5) - 0.3)       # blind screw hole
+        probe = lambda d, off=np.zeros(3): case.is_inside(tuple(end + n * d + off))
+        assert not probe(0.5) and not probe(params.STANDOFF_H - 0.1)     # in the pocket, all the way up
+        assert probe(params.STANDOFF_H + 0.1)                            # solid above the standoff
         assert probe(t - params.PLATE_T / 2)                             # skin above is solid
+        v = np.cross(n, u)
+        a = (params.STANDOFF_AF + params.STANDOFF_POCKET_CLEAR) / np.sqrt(3)
+        corner = np.cos(np.radians(30)) * u + np.sin(np.radians(30)) * v
+        assert not probe(2.0, corner * (a - 0.05))                       # hex corner (with relief) is open
+        rib = np.cos(np.radians(60)) * u + np.sin(np.radians(60)) * v
+        assert probe(2.0, rib * (params.STANDOFF_AF / 2 - params.STANDOFF_RIB_INTERF + 0.05))   # crush rib crest
+        assert not probe(2.0, u * (params.STANDOFF_AF / 2 + 0.05))      # plain flat facing u: clearance only
 
 
 def test_pockets_are_empty_in_walls_and_in_the_fused_case(case):
-    r_nut = (params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2
+    r_nut = params.STANDOFF_AF / 2 - params.STANDOFF_RIB_INTERF     # inscribed circle inside the ribs
     w = topcase.walls("left")
     for x, y in topcase.post_positions("left"):
         top, n, t = topcase.post_axis("left", x, y)

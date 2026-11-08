@@ -4,6 +4,7 @@ See params.PLACEMENTS. STEP-local = (KiCad x, -KiCad y, z with 0 at the B.Cu fac
 """
 
 import numpy as np
+from build123d import Align, Cylinder, Location, Plane, RegularPolygon, extrude
 
 import params
 
@@ -86,3 +87,29 @@ def location(board, hand=None):
 
     R, t = placement(board, hand)
     return Location(Plane(origin=tuple(t), x_dir=tuple(R[:, 0]), z_dir=tuple(R[:, 2])))
+
+
+def standoff_pocket(top, n, t, u):
+    """Hex pocket for the brass standoff, open at the post's lower end (t below `top`) and STANDOFF_H deep, with round
+    corner reliefs and three crush ribs, as (cut, ribs): subtract the cut, then add the ribs back."""
+    af = params.STANDOFF_AF + params.STANDOFF_POCKET_CLEAR
+    R = af / np.sqrt(3)                                     # corner radius of the pocket hex
+    depth = params.STANDOFF_H
+    v = np.cross(n, u)                                      # n x u: in-plane, 90 deg from u (right-handed with -n axis)
+    ang = lambda a: np.cos(np.radians(a)) * u + np.sin(np.radians(a)) * v
+    end = top - t * n
+    base = end - 1.0 * n                                    # the cut starts 1.0 below the post end (clean mouth)
+    plane = Plane(origin=tuple(base), x_dir=tuple(ang(30)), z_dir=tuple(n))     # hex corners on x: corner at 30 deg from u
+    cut = Location(plane) * extrude(RegularPolygon(R, 6), depth + 1.0)
+    for k in range(6):
+        c = base + R * ang(30 + 60 * k)
+        cut = cut + Location(Plane(origin=tuple(c), z_dir=tuple(n))) * Cylinder(
+            params.STANDOFF_CORNER_RELIEF_D / 2, depth + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    ribs = []
+    r_rib = params.STANDOFF_RIB_D / 2
+    reach = params.STANDOFF_AF / 2 - params.STANDOFF_RIB_INTERF          # rib crest, from the axis
+    for a in (60, 180, 300):                                               # alternate flats, not the one facing u
+        c = end + n * params.STANDOFF_RIB_LEAD + (reach + r_rib) * ang(a)
+        ribs.append(Location(Plane(origin=tuple(c), z_dir=tuple(n))) * Cylinder(
+            r_rib, depth - params.STANDOFF_RIB_LEAD, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    return cut, ribs

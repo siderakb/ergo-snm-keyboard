@@ -1,7 +1,7 @@
 """Bottom case: a plate inside the top case walls, with feet columns and support pillars.
 
 Its outer face follows `topcase.below_floor`, BOTTOM_RECESS up from the bottom edge of the walls, so the seam only shows
-from below. The M2.5 screws go up through it into the nuts at the lower ends of the top case posts (heads in shallow
+from below. The M2.5 screws go up through it into the hex standoffs at the lower ends of the top case posts (heads in shallow
 counterbores). Feet columns stand perpendicular to the tented desk plane (`desk_plane`); support pillars rise through the
 main board's mounting holes to the skin underside. The plate carries the battery door (batterydoor.py). The right hand
 uses the left feet and ribs mirrored (params.MIRROR_X), except the thumb foot, which stands under the trackball pod.

@@ -80,14 +80,16 @@ def board_holes():
 
 W_HEAD = W_POD_OUT + params.SENSOR_SCREW_HEAD_H - params.SENSOR_SCREW_PROUD           # screw head underside
 W_TIP = W_HEAD + params.SENSOR_SCREW_L                                                # screw tip (nominal shim)
-NUT_DEPTH = params.NUT_M25_H + 0.5
 
 
 def _screw_post(a, b):
-    """Nut pocket open at the seat and the blind hole above it, 0.5 past the screw tip."""
-    nut = Pos(a, b, W_SEAT - 1.0) * Cylinder((params.NUT_M25_OD + params.NUT_POCKET_CLEAR) / 2, NUT_DEPTH + 1.0, align=MIN)
-    w0 = W_SEAT + NUT_DEPTH - 0.01
-    return [nut, Pos(a, b, w0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)]
+    """(cuts, ribs): hex standoff pocket open at the seat (the board and shims bear on the standoff's lower end, so the
+    screw's pull does not load the glue) with one flat facing out from the lens, and the blind hole above it, 0.5 past
+    the screw tip."""
+    u = np.array((a, b, 0.0)) / np.hypot(a, b)
+    cut, ribs = geometry.standoff_pocket(np.array((a, b, W_SEAT)), np.array((0.0, 0.0, 1.0)), 0.0, u)
+    w0 = W_SEAT + params.STANDOFF_H - 0.01
+    return [cut, Pos(a, b, w0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)], ribs
 
 
 def _seat_frame(r_out):
@@ -124,8 +126,11 @@ def cup_local():
         k = p / np.linalg.norm(p)
         body = body - Location(Plane(origin=tuple(p - k * 2.0), z_dir=tuple(k))) * Cylinder(params.BEARING_HOLE_D / 2, 2.0 + params.BEARING_BALL_D / 2, align=MIN)
     for a, b in board_holes():
-        for cut in _screw_post(a, b):
+        cuts, ribs = _screw_post(a, b)
+        for cut in cuts:
             body = body - cut
+        for rib in ribs:
+            body = body + rib
     return body
 
 
