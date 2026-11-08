@@ -224,17 +224,21 @@ def test_battery_door_is_flush_and_touches_nothing_when_locked(bottom, top, door
     assert z["bottom"] == pytest.approx(topcase.floor_profile("left")["z_deep"])          # flush with the floor
     holder = battery_holder("left")
     assert holder.bounding_box().min.Z == pytest.approx(z["nest"])                         # the holder sits on the nest floor
-    for other in [bottom, top, holder] + load_boards("left") + list(core_board_placeholders("left").values()):
+    for other in [top, holder] + load_boards("left") + list(core_board_placeholders("left").values()):
         assert vol(door & other) < 1e-3
+    rigid = door
+    for p in batterydoor.preloads("left"):
+        assert vol(bottom & p) > 0.01                             # the bump and the fingers press the plate (relaxed in the model)
+        rigid = rigid - p
+    assert vol(bottom & rigid) < 1e-3                             # nothing else touches
     play = params.BATTERY_CEIL_GAP
-    assert vol(bottom & (Pos(0, 0, play - 0.01) * door)) < 1e-3   # pressed up: the bump still fits its dimple
-    assert vol(bottom & (Pos(0, 0, -params.BATTERY_TAB_GAP + 0.01) * door)) < 1e-3
-    assert vol(bottom & (Pos(0, 0, -params.BATTERY_TAB_GAP - 0.2) * door)) > 1.0     # the tabs sit on the ledges
-    assert vol(bottom & (Pos(0, -0.5, 0) * door)) > 1.0           # it cannot slide further towards -Y
+    assert vol(bottom & (Pos(0, 0, play - 0.01) * rigid)) < 1e-3  # pressed up: free for the play
+    assert vol(bottom & (Pos(0, 0, -0.05) * rigid)) > 0.5         # seated: the tabs sit on the ledges (flush)
+    assert vol(bottom & (Pos(0, -0.5, 0) * rigid)) > 1.0          # it cannot slide further towards -Y
     for dx in (-0.5, 0.5):                                        # the pocket walls locate it along X ...
-        assert vol(bottom & (Pos(dx, 0, 0) * door)) > 0.1
+        assert vol(bottom & (Pos(dx, 0, 0) * rigid)) > 0.1
     for dx in (-params.BATTERY_POCKET_CLEAR + 0.05, params.BATTERY_POCKET_CLEAR - 0.05):
-        assert vol(bottom & (Pos(dx, 0, 0) * door)) < 1e-3        # ... with BATTERY_POCKET_CLEAR each side
+        assert vol(bottom & (Pos(dx, 0, 0) * rigid)) < 1e-3       # ... with BATTERY_POCKET_CLEAR each side
     keep = batterydoor._post_keep("left")                         # notched around a corner post's counterbore, if one is near
     if keep:
         x, y, r = keep
@@ -251,9 +255,9 @@ def test_battery_door_tabs_each_side_ride_on_a_ledge_with_a_notch_at_the_unlocke
         xm = t[2] - 0.5 if side > 0 else t[0] + 0.5                      # near the tab tip
         ym = (t[1] + t[3]) / 2
         assert door.is_inside((xm, ym, (z0 + z1) / 2))                    # the tab
-        assert bottom.is_inside((xm, ym, z0 - params.BATTERY_TAB_GAP - 0.5))   # the ledge under it (locked)
+        assert bottom.is_inside((xm, ym, z0 - 0.3))                       # the ledge right under it (locked, seated)
         assert bottom.is_inside((xm, ym, z1 + params.BATTERY_TAB_GAP + 0.5))   # the groove's roof over it
-        assert not bottom.is_inside((xm, ym + s, z0 - params.BATTERY_TAB_GAP - 0.5))   # the notch (unlocked)
+        assert not bottom.is_inside((xm, ym + s, z0 - 0.5))               # the notch (unlocked)
     assert min(t[2] - t[0] for t in lay["tabs"]) == pytest.approx(params.BATTERY_TAB_W + 0.5)
     assert d[2] - d[0] < lay["opening"][2] - lay["opening"][0] + 2 * params.BATTERY_DOOR_LAP_SIDE + 0.01
 
@@ -282,9 +286,11 @@ def test_battery_door_pushed_towards_plus_y_drops_out_with_the_holder(bottom, to
     from placeholders import battery_holder
 
     s = params.BATTERY_SLIDE
-    cartridge = [door, battery_holder("left")]
+    rigid = door
+    for p in batterydoor.preloads("left"):
+        rigid = rigid - p
     for dz in (0.0, -0.5, -1.5, -3.0, -6.0, -12.0, -20.0):
-        for part in cartridge:
+        for part in [door if dz < -1.0 else rigid, battery_holder("left")]:   # the springs drag on the ceiling until clear
             moved = Pos(0, s, dz) * part
             assert vol(bottom & moved) < 1e-3 and vol(top & moved) < 1e-3, dz
 
@@ -295,6 +301,27 @@ def test_battery_door_locks_with_a_bump_in_a_dimple(door):
     cx = (tx0 + tx1) / 2
     assert door.is_inside((cx, by, z["top"] + params.BATTERY_BUMP_H / 2))                  # bump on the tongue
     assert not door.is_inside((tx0 - params.BATTERY_TONGUE_SLOT / 2, by, (z["top"] + z["bottom"]) / 2))   # slot beside it
+
+
+def test_battery_door_is_preloaded_down_by_the_bump_and_two_springs(bottom, door):
+    lay, z = batterydoor.layout("left"), batterydoor.levels("left")
+    d = lay["door"]
+    assert len(lay["springs"]) == 2
+    assert {1 if r[0] + r[2] > d[0] + d[2] else -1 for r in lay["springs"]} == {1, -1}       # one on each X edge
+    s = params.BATTERY_SLIDE
+    for r in lay["springs"]:
+        xm, tip = (r[0] + r[2]) / 2, r[1] + 0.3
+        assert door.is_inside((xm, tip, z["ceiling"] + params.BATTERY_SPRING_PRELOAD - 0.3))   # the tip reaches into the ceiling
+        assert not door.is_inside((xm, tip, z["top"] - 0.5))                                    # the relief under it
+        assert r[0] > d[0] + params.BATTERY_DOOR_CHAMFER - 0.01 and r[2] < d[2] - params.BATTERY_DOOR_CHAMFER + 0.01
+        assert r[2] < lay["opening"][0] or r[0] > lay["opening"][2]                              # under the plate, not the opening
+        for groove, _ in batterydoor.grooves("left"):                    # never under a tab groove over the slide
+            b = groove.bounding_box()
+            if b.min.X < r[2] and r[0] < b.max.X:
+                assert r[1] + s < b.min.Y or r[3] > b.max.Y and r[1] > b.max.Y, (r, b)
+    # the bump stands above the dimple's roof: the tongue stays bent and pushes the door down
+    (_, _, _, _), by = batterydoor._tongue("left")
+    assert params.BATTERY_BUMP_H - params.BATTERY_CEIL_GAP > params.BATTERY_DIMPLE_D + 0.2
 
 
 def test_thumb_ledge_sits_on_the_plate_under_the_thumb_pcb_edge(bottom):
@@ -321,6 +348,6 @@ def test_battery_bump_dimple_leaves_a_wall_to_the_opening():
     """The dimple in the rim's -Y strip must not run into the opening edge (it used to leave 0.05 mm)."""
     lay = batterydoor.layout("left")
     (_, _, _, _), by = batterydoor._tongue("left")
-    dimple_top = by + params.BATTERY_BUMP_W / 2 + 0.2
-    assert lay["opening"][1] - dimple_top >= 0.6
-    assert by - params.BATTERY_BUMP_W / 2 - 0.2 - lay["door"][1] >= 0.6
+    hw = batterydoor.dimple_half_width()
+    assert lay["opening"][1] - (by + hw) >= 0.6
+    assert by - hw - lay["door"][1] >= 0.6

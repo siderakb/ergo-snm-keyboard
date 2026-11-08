@@ -237,24 +237,35 @@ BATTERY_DOOR_LAP_SIDE = 2.5    # on the X edges (the tabs reach BATTERY_TAB_W fu
 BATTERY_DOOR_LAP_TOP = 1.0     # at the +Y end
 BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
 BATTERY_POCKET_CLEAR = 0.4     # pocket around the door (both MJF)
-BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door (with BATTERY_TAB_GAP: 0.6 vertical play)
+BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door: the door sits on its tabs (preloaded down), 0.3 vertical play
 BATTERY_RIM_H = 2.0 + BATTERY_NEST_DEPTH   # plate thickened on the inside around the opening (1.7 above the pocket)
 BATTERY_RIM_LAP = 3.0          # the rim reaches this far past the pocket and the side grooves onto the plate: the grooves' ceilings are in the rim
 BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
 # Slide tabs on the door's X edges: BATTERY_TAB_L along Y, reaching BATTERY_TAB_W past the edge, BATTERY_TAB_T thick, from
-# BATTERY_TAB_T - BATTERY_TAB_RISE below the door top to BATTERY_TAB_RISE above it. Each rides in a groove BATTERY_TAB_GAP
-# above and below it and BATTERY_TAB_TIP_CLEAR past its tip; the ledge under the groove (1.4) holds the door up, and has a
-# notch (tab + BATTERY_TAB_GAP each end) where the tab sits when the door is pushed BATTERY_SLIDE towards +Y.
+# BATTERY_TAB_T - BATTERY_TAB_RISE below the door top to BATTERY_TAB_RISE above it. Each rides in a groove that starts at
+# its underside (the door is modelled seated on the ledges, where the preload holds it, so it is flush there) and runs
+# BATTERY_TAB_GAP above it and BATTERY_TAB_TIP_CLEAR past its tip; the ledge under the groove (1.7) holds the door up, and
+# has a notch (tab + BATTERY_TAB_GAP each end) where the tab sits when the door is pushed BATTERY_SLIDE towards +Y.
 # Tab -Y ends from the door's -Y edge (locked), per X side of the left door: on the +X side they stay off the foot beside it.
 BATTERY_TAB_L, BATTERY_TAB_W, BATTERY_TAB_T, BATTERY_TAB_RISE = 3.0, 2.4, 1.0, 0.2
 BATTERY_TAB_GAP, BATTERY_TAB_TIP_CLEAR = 0.3, 0.4
 BATTERY_TABS_LEFT = {"-X": (6.0, 35.0, 60.0), "+X": (6.0, 29.0, 47.0)}
 BATTERY_DOOR_CHAMFER, BATTERY_POCKET_CHAMFER = 0.4, 0.3                  # door top edge, pocket edge in the floor
-# Locking bump: the door has 0.6 vertical play, so the bump engages BATTERY_BUMP_H - 0.6 with the door hanging and
-# BATTERY_BUMP_H with it pressed up (keyboard upside down, or on its feet); a 6 x 12 x 2.0 PA12 tongue bends that far
-# with roughly 6-10 N (to be tuned on the test print).
-BATTERY_TONGUE_W, BATTERY_TONGUE_L, BATTERY_TONGUE_SLOT = 6.0, 12.0, 1.0
-BATTERY_BUMP_H, BATTERY_BUMP_W = 0.8, 2.0
+# Anti-rattle preload, pushing the door DOWN onto its tabs' ledges (with gravity: the door + holder + 2 AA weigh ~0.6 N,
+# so the springs only have to beat that when the keyboard is upside down or shaken).
+# A: the locking bump (half cylinder BATTERY_BUMP_W wide, BATTERY_BUMP_H high) stands BATTERY_BUMP_H - BATTERY_CEIL_GAP above
+# the ceiling with the door seated, but its dimple is only BATTERY_DIMPLE_D deep: the 6 x 16 x 2.0 tongue stays bent by the
+# difference (0.35, about 1.7 N for PA12, k ~ 5 N/mm) and pushes the door's -Y end down. Unlocking bends it 0.7 (~3.5 N).
+# B: two sprung fingers on the door's top in the X laps near the +Y end (one each side, clear of the tab grooves over the whole
+# slide): BATTERY_SPRING_W x BATTERY_SPRING_L x BATTERY_SPRING_T, root at the +Y end, rising so the free tip stands
+# BATTERY_SPRING_PRELOAD into the ceiling (~1.2 N each, +-0.3 tolerance -> 0.75-1.65 N), over a relief so they can bend.
+# All to be tuned on the test print.
+BATTERY_TONGUE_W, BATTERY_TONGUE_L, BATTERY_TONGUE_SLOT = 6.0, 16.0, 1.0
+BATTERY_BUMP_H, BATTERY_BUMP_W = 1.0, 2.0
+BATTERY_DIMPLE_D = 0.35
+BATTERY_SPRING_W, BATTERY_SPRING_L, BATTERY_SPRING_T, BATTERY_SPRING_PRELOAD = 1.4, 8.0, 1.0, 0.8
+BATTERY_SPRING_RELIEF = 1.4        # depth of the relief under a finger (door 2.5 thick there)
+BATTERY_SPRINGS_LEFT = {"-X": -22.0, "+X": -12.5}   # finger -Y (tip) end from the door's +Y edge, per X side of the left door
 
 # --- Trackball ---
 BALL_D = 34.0

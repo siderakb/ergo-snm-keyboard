@@ -173,7 +173,13 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   foot that stood on the door is at (108, -48) on the plate beside it (`FOOT_BESIDE_DOOR`), vertical (the others follow
   the desk normal; tilted 10 deg its end leaned 3.9 over the door's way out), end face parallel to the desk; its flare is
   cut by the pocket and the plate edge. The holder moved 0.3 towards +Y (narrower door under the slanted +Y edge). The
-  stud/keyhole text below is superseded. TODO: test print of tab + groove fit; anti-rattle preload (option E) not done yet.
+  stud/keyhole text below is superseded. TODO: test print of tab + groove fit.
+- **2026-11-08 anti-rattle preload (user: A + B), pushing the door down onto the ledges (with gravity, ~0.6 N load).** The door is
+  now modelled seated on the ledges (groove starts at the tab underside, flush there; 0.3 play up). A: bump 1.0 high in a dimple
+  only 0.35 deep (`dimple_half_width`), tongue 12 -> 16 long, so it stays bent 0.35 (~1.7 N) and pushes the -Y end down;
+  unlocking bends it 0.7 (~3.5 N). B: one sprung finger per X lap near the +Y end (1.4 x 8 x 1.0, root at +Y, tip 0.8 into the
+  ceiling, relief 1.4 deep under it; `BATTERY_SPRINGS_LEFT`), never under a tab groove over the slide. `batterydoor.preloads`
+  lists the parts modelled relaxed that press the plate. Forces are estimates; tune on the test print.
 - `batterydoor.py`: the 2xAA holder is glued onto a 2.0 mm door (MJF PA12) flush in a pocket of the plate's outer face.
   Three mushroom studs (Ø2.5, head Ø5 x 1.5 with a 0.5 lead-in chamfer, root fillet 0.3; two on the -X edge, one on the
   +X edge) hang it from keyholes (Ø6.0 with a 0.4 entry chamfer + 3.1 slot along Y; the +X one 0.6 wider along X so only

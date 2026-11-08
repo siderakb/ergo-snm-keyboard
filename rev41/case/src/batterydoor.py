@@ -10,7 +10,7 @@ position. The right door is the left one mirrored.
 
 import functools
 
-from build123d import Align, Axis, Box, Cylinder, Pos, Rot, chamfer
+from build123d import Align, Axis, Box, Cylinder, Plane, Polygon, Pos, Rot, chamfer, extrude
 
 import params
 from geometry import mirror_x
@@ -22,12 +22,13 @@ MIN = (Align.CENTER, Align.CENTER, Align.MIN)
 
 @functools.lru_cache(maxsize=None)
 def layout(hand):
-    """Plan rectangles of the holder, the opening in the plate, the door, the pocket and the locked slide tabs (each from
-    0.5 inside the door edge to its tip)."""
+    """Plan rectangles of the holder, the opening in the plate, the door, the pocket, the locked slide tabs (each from
+    0.5 inside the door edge to its tip) and the sprung fingers (tip at y0, root at y1)."""
     if hand == "right":
         left = layout("left")
         flip = lambda r: (mirror_x(r[2]), r[1], mirror_x(r[0]), r[3])
-        return {k: flip(v) for k, v in left.items() if k != "tabs"} | {"tabs": tuple(flip(t) for t in left["tabs"])}
+        return {k: flip(v) for k, v in left.items() if k not in ("tabs", "springs")} \
+            | {k: tuple(flip(t) for t in left[k]) for k in ("tabs", "springs")}
     bb = battery_holder(hand).bounding_box()
     s, c = params.BATTERY_SLIDE, params.BATTERY_OPEN_CLEAR
     holder = (bb.min.X, bb.min.Y, bb.max.X, bb.max.Y)
@@ -38,7 +39,11 @@ def layout(hand):
     w, n = params.BATTERY_TAB_W, params.BATTERY_TAB_L
     tabs = tuple((door[0] - w, door[1] + dy, door[0] + 0.5, door[1] + dy + n) for dy in params.BATTERY_TABS_LEFT["-X"]) \
         + tuple((door[2] - 0.5, door[1] + dy, door[2] + w, door[1] + dy + n) for dy in params.BATTERY_TABS_LEFT["+X"])
-    return {"holder": holder, "opening": opening, "door": door, "pocket": pocket, "tabs": tabs}
+    sw, sl, c = params.BATTERY_SPRING_W, params.BATTERY_SPRING_L, params.BATTERY_DOOR_CHAMFER
+    xc = {"-X": door[0] + (c + k) / 2, "+X": door[2] - (c + k) / 2}         # middle of the lap strip beside the chamfer
+    springs = tuple((xc[side] - sw / 2, door[3] + dy, xc[side] + sw / 2, door[3] + dy + sl)
+                    for side, dy in params.BATTERY_SPRINGS_LEFT.items())
+    return {"holder": holder, "opening": opening, "door": door, "pocket": pocket, "tabs": tabs, "springs": springs}
 
 
 def levels(hand):
@@ -74,10 +79,38 @@ def grooves(hand):
             x0, x1 = d[2] - 0.6, t[2] + tip
         else:
             x0, x1 = t[0] - tip, d[0] + 0.6
-        groove = _box((x0, t[1] - g, x1, t[3] + s + g), z0 - g, z1 + g)
-        notch = _box((x0, t[1] + s - g, x1, t[3] + s + g), levels(hand)["bottom"] - 5.0, z0 - g + 0.01)
+        groove = _box((x0, t[1] - g, x1, t[3] + s + g), z0, z1 + g)
+        notch = _box((x0, t[1] + s - g, x1, t[3] + s + g), levels(hand)["bottom"] - 5.0, z0 + 0.01)
         out.append((groove, notch))
     return out
+
+
+def dimple_half_width():
+    """Half the dimple's length along Y: the bump's chord at the dimple depth (where it presses the dimple's roof) + 0.2."""
+    r = params.BATTERY_BUMP_W / 2
+    d = params.BATTERY_DIMPLE_D
+    return (r * r - (r - d) ** 2) ** 0.5 + 0.2
+
+
+def _bump(hand):
+    (tx0, _, tx1, _), by = _tongue(hand)
+    top = levels(hand)["top"]
+    bump = Pos((tx0 + tx1) / 2, by, top) * Rot(0, 90, 0) * Cylinder(params.BATTERY_BUMP_W / 2, tx1 - tx0 - 1.0)
+    return bump & _box((tx0, by - 1.0, tx1, by + 1.0), top - 0.1, top + params.BATTERY_BUMP_H)
+
+
+def _spring(hand, r):
+    """A sprung finger over plan rect r (tip at r[1], root at r[3]): flat in the door at the root, rising to the tip."""
+    top, t = levels(hand)["top"], params.BATTERY_SPRING_T
+    h = params.BATTERY_CEIL_GAP + params.BATTERY_SPRING_PRELOAD               # tip top above the door top
+    yr, yt = r[3], r[1]
+    pts = [(yr + 1.0, top - t), (yr + 1.0, top), (yr, top), (yt, top + h), (yt, top + h - t), (yr, top - t)]
+    return extrude(Plane.YZ.offset(r[0]) * Polygon(*pts, align=None), amount=r[2] - r[0])
+
+
+def preloads(hand):
+    """The parts of the door that press the plate on purpose (modelled relaxed): the locking bump and the sprung fingers."""
+    return [_bump(hand)] + [_spring(hand, r) for r in layout(hand)["springs"]]
 
 
 def on_door(hand, x, y):
@@ -145,8 +178,10 @@ def door(hand):
     w = params.BATTERY_TONGUE_SLOT
     for x in (tx0 - w, tx1):                                     # two slots from the -Y edge free the tongue
         body = body - _box((x, ty0 - 1.0, x + w, ty1), z["bottom"] - 1.0, z["top"] + 1.0)
-    bump = Pos((tx0 + tx1) / 2, by, z["top"]) * Rot(0, 90, 0) * Cylinder(params.BATTERY_BUMP_W / 2, tx1 - tx0 - 1.0)
-    body = body + (bump & _box((tx0, by - 1.0, tx1, by + 1.0), z["top"] - 0.1, z["top"] + params.BATTERY_BUMP_H))
+    body = body + _bump(hand)
+    for r in lay["springs"]:                                     # relief under each finger, open at the tip and the sides
+        body = body - _box((r[0] - 0.4, r[1] - 0.4, r[2] + 0.4, r[3]), z["top"] - params.BATTERY_SPRING_RELIEF, z["top"] + 2.0)
+        body = body + _spring(hand, r)
     hx = (lay["holder"][0] + lay["holder"][2]) / 2
     for i in range(4):                                           # thumb grip grooves in the underside, behind the tongue
         y = ty1 + 2.0 + i * 2.0
@@ -181,6 +216,6 @@ def plate_cuts(hand):
     for groove, notch in grooves(hand):
         cuts += [groove, notch]
     (tx0, _, tx1, _), by = _tongue(hand)
-    cuts.append(_box((tx0 - 0.5, by - params.BATTERY_BUMP_W / 2 - 0.2, tx1 + 0.5, by + params.BATTERY_BUMP_W / 2 + 0.2),
-                     z["ceiling"] - 0.2, z["ceiling"] + params.BATTERY_BUMP_H + 0.1))      # room for the door pressed up
+    hw = dimple_half_width()
+    cuts.append(_box((tx0 - 0.5, by - hw, tx1 + 0.5, by + hw), z["ceiling"] - 0.2, z["ceiling"] + params.BATTERY_DIMPLE_D))   # shallow: the bump presses
     return cuts
