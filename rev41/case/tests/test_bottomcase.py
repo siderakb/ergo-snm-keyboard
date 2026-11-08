@@ -128,18 +128,14 @@ def test_foot_flares_stay_whole_inside_the_plate_and_the_foot_beside_the_door_cl
     x0, y0, x1, y1 = batterydoor.layout("left")["pocket"]
     g = params.BATTERY_POCKET_CLEAR + params.BATTERY_POCKET_CHAMFER
     pocket = box(x0 - g, y0 - g, x1 + g, y1 + g)
-    notches = [n for _, n in batterydoor.grooves("left")]
     for i, (x, y) in enumerate(params.FEET_LEFT):
         assert not batterydoor.on_door("left", x, y), (x, y)
         if i == params.THUMB_FOOT:
             continue                                                       # the thumb foot is far from every edge
-        if i == params.FOOT_BESIDE_DOOR:                                   # the column clears the pocket, its notches and the edge
+        if i == params.FOOT_BESIDE_DOOR:                                   # the column clears the pocket and the edge
             r = params.FOOT_D / 2 + params.FOOT_SIDE_CLEAR
             assert plate.exterior.distance(Point(x, y)) >= r - 0.05, (x, y)
             assert pocket.distance(Point(x, y)) >= r - 0.05, (x, y)
-            for n in notches:
-                b = n.bounding_box()
-                assert box(b.min.X, b.min.Y, b.max.X, b.max.Y).distance(Point(x, y)) >= r - 0.05, (x, y)
         else:
             assert plate.exterior.distance(Point(x, y)) >= need - 0.1, (x, y)
 
@@ -233,34 +229,51 @@ def test_battery_door_is_flush_and_touches_nothing_when_locked(bottom, top, door
     assert vol(bottom & rigid) < 1e-3                             # nothing else touches
     play = params.BATTERY_CEIL_GAP
     assert vol(bottom & (Pos(0, 0, play - 0.01) * rigid)) < 1e-3  # pressed up: free for the play
-    assert vol(bottom & (Pos(0, 0, -0.05) * rigid)) > 0.5         # seated: the tabs sit on the ledges (flush)
+    assert vol(bottom & (Pos(0, 0, -0.05) * rigid)) > 0.3         # hanging: the fingers rest on the rim (flush)
     assert vol(bottom & (Pos(0, -0.5, 0) * rigid)) > 1.0          # it cannot slide further towards -Y
-    for dx in (-0.5, 0.5):                                        # the pocket walls locate it along X ...
+    for dx in (-0.5, 0.5):                                        # the hook posts in their slots locate it along X ...
         assert vol(bottom & (Pos(dx, 0, 0) * rigid)) > 0.1
-    for dx in (-params.BATTERY_POCKET_CLEAR + 0.05, params.BATTERY_POCKET_CLEAR - 0.05):
-        assert vol(bottom & (Pos(dx, 0, 0) * rigid)) < 1e-3       # ... with BATTERY_POCKET_CLEAR each side
+    c = min(params.BATTERY_POCKET_CLEAR, params.BATTERY_HOOK_SLOT_CLEAR)
+    for dx in (-c + 0.05, c - 0.05):
+        assert vol(bottom & (Pos(dx, 0, 0) * rigid)) < 1e-3       # ... with the slot clearance each side
     keep = batterydoor._post_keep("left")                         # notched around a corner post's counterbore, if one is near
     if keep:
         x, y, r = keep
         assert door.distance(Pos(x, y, 0) * Cylinder(r, 100)) > params.BATTERY_POCKET_CLEAR - 0.01
 
 
-def test_battery_door_tabs_each_side_ride_on_a_ledge_with_a_notch_at_the_unlocked_position(bottom, door):
-    lay, s = batterydoor.layout("left"), params.BATTERY_SLIDE
-    z0, z1 = batterydoor.tab_z("left")
+def test_battery_door_hooks_each_side_rest_on_the_rim_and_drop_through_their_slots(bottom, door):
+    lay, z, s = batterydoor.layout("left"), batterydoor.levels("left"), params.BATTERY_SLIDE
     d = lay["door"]
-    sides = [1 if t[0] + t[2] > d[0] + d[2] else -1 for t in lay["tabs"]]
+    sides = [1 if p[0] + p[2] > d[0] + d[2] else -1 for p in lay["hooks"]]
     assert sides.count(1) == 3 and sides.count(-1) == 3
-    for t, side in zip(lay["tabs"], sides):
-        xm = t[2] - 0.5 if side > 0 else t[0] + 0.5                      # near the tab tip
-        ym = (t[1] + t[3]) / 2
-        assert door.is_inside((xm, ym, (z0 + z1) / 2))                    # the tab
-        assert bottom.is_inside((xm, ym, z0 - 0.3))                       # the ledge right under it (locked, seated)
-        assert bottom.is_inside((xm, ym, z1 + params.BATTERY_TAB_GAP + 0.5))   # the groove's roof over it
-        assert not bottom.is_inside((xm, ym + s, z0 - 0.5))               # the notch (unlocked)
-    assert min(t[2] - t[0] for t in lay["tabs"]) == pytest.approx(params.BATTERY_TAB_W + 0.5)
+    L, t = params.BATTERY_HOOK_L, params.BATTERY_HOOK_T
+    for p in lay["hooks"]:
+        xm = (p[0] + p[2]) / 2
+        assert d[0] < p[0] and p[2] < d[2]                                    # the post stands on the door's lap strip
+        h, o = lay["holder"], lay["opening"]
+        assert p[2] <= h[0] - 0.25 or p[0] >= h[2] + 0.25                  # clear of the holder (both move with the door)
+        assert p[2] - p[0] == pytest.approx(params.BATTERY_HOOK_POST[0])
+        if p[2] < (o[0] + o[2]) / 2:
+            wall = (p[0] - params.BATTERY_HOOK_SLOT_CLEAR) - (d[0] - params.BATTERY_POCKET_CLEAR)
+        else:
+            wall = (d[2] + params.BATTERY_POCKET_CLEAR) - (p[2] + params.BATTERY_HOOK_SLOT_CLEAR)
+        assert wall >= 1.0 - 1e-6                                              # plate left between the slot and the pocket wall
+        assert door.is_inside((xm, p[1] - L + 0.3, z["rim"] + t / 2))          # the finger, over the rim
+        assert bottom.is_inside((xm, p[1] - L + 0.3, z["rim"] - 0.5))         # the rim under it (locked)
+        assert not bottom.is_inside((xm, p[1] - L + 0.3 + s, z["rim"] - 0.5)) # unlocked: the slot under it
+        assert not bottom.is_inside((xm, (p[1] + p[3]) / 2, z["ceiling"] + 0.5))   # the post's slot
     assert d[2] - d[0] < lay["opening"][2] - lay["opening"][0] + 2 * params.BATTERY_DOOR_LAP_SIDE + 0.01
 
+
+def test_battery_rim_does_not_stick_out_below_the_plate(bottom):
+    """The rim lies on the deep level's inner face; beside the pocket the floor ramps up, so it must be clipped there."""
+    x0, y0, x1, y1 = batterydoor.layout("left")["pocket"]
+    g = params.BATTERY_POCKET_CLEAR + params.BATTERY_POCKET_CHAMFER
+    ym = (y0 + y1) / 2
+    for x in (x0 - g - 1.0, x0 - g - 2.0, x0 - g - 2.9, x1 + g + 1.0, x1 + g + 2.0):
+        for y in (ym - 20.0, ym, ym + 15.0):
+            assert not bottom.is_inside((x, y, topcase.floor_z("left", x, y) - 0.3)), (x, y)
 
 def test_battery_door_has_a_nest_that_locates_the_holder(door):
     from placeholders import battery_holder
@@ -315,8 +328,8 @@ def test_battery_door_is_preloaded_down_by_the_bump_and_two_springs(bottom, door
         assert not door.is_inside((xm, tip, z["top"] - 0.5))                                    # the relief under it
         assert r[0] > d[0] + params.BATTERY_DOOR_CHAMFER - 0.01 and r[2] < d[2] - params.BATTERY_DOOR_CHAMFER + 0.01
         assert r[2] < lay["opening"][0] or r[0] > lay["opening"][2]                              # under the plate, not the opening
-        for groove, _ in batterydoor.grooves("left"):                    # never under a tab groove over the slide
-            b = groove.bounding_box()
+        for slot in batterydoor.slots("left"):                           # never under a hook slot over the slide
+            b = slot.bounding_box()
             if b.min.X < r[2] and r[0] < b.max.X:
                 assert r[1] + s < b.min.Y or r[3] > b.max.Y and r[1] > b.max.Y, (r, b)
     # the bump stands above the dimple's roof: the tongue stays bent and pushes the door down
@@ -334,7 +347,7 @@ def test_thumb_ledge_sits_on_the_plate_under_the_thumb_pcb_edge(bottom):
 
 
 def test_battery_rim_is_bonded_to_the_plate_across_the_pocket_slit(bottom):
-    """The rim above the pocket slit roofs the tab grooves: it needs a real section on every side, not a sliver."""
+    """The rim above the pocket slit carries the hooks: it needs a real section on every side, not a sliver."""
     x0, y0, x1, y1 = batterydoor.layout("left")["pocket"]
     z, g = batterydoor.levels("left"), params.BATTERY_POCKET_CLEAR
     za, zb = z["ceiling"] + 0.01, z["rim"] - 0.01

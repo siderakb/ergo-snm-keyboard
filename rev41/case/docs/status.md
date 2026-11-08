@@ -174,6 +174,13 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   the desk normal; tilted 10 deg its end leaned 3.9 over the door's way out), end face parallel to the desk; its flare is
   cut by the pocket and the plate edge. The holder moved 0.3 towards +Y (narrower door under the slanted +Y edge). The
   stud/keyhole text below is superseded. TODO: test print of tab + groove fit.
+- **2026-11-08 hooks instead of side tabs (user).** The side tabs/grooves/ledges are replaced by an upward L hook per tab
+  position (`batterydoor.hooks` / `slots`, `BATTERY_HOOK_*`): post 1.8 x 3 (user, was 1.2), 0.2 into the opening (0.3 to the holder, 1.0 of plate beside the slot), through a
+  slot open to the opening, finger 2.5 towards -Y x 3.0 thick (user, was 1.0) resting on the rim's top (door modelled hanging there, flush);
+  slots are under the door. The rim is back to a 3 mm lap and clipped above the plate's outer face (with the wider lap it
+  stuck out below the core-level ramp on the -X side, `test_battery_rim_does_not_stick_out_below_the_plate`). X is located by
+  the posts in their slots (0.3 a side). The tab text in the bullet above is superseded. Hooks (6 / 35 / 60 from the door's -Y
+  edge) and the two springs (22 in from its +Y edge) are the same on both X sides (user; the asymmetry was left from the tabs).
 - **2026-11-08 anti-rattle preload (user: A + B), pushing the door down onto the ledges (with gravity, ~0.6 N load).** The door is
   now modelled seated on the ledges (groove starts at the tab underside, flush there; 0.3 play up). A: bump 1.0 high in a dimple
   only 0.35 deep (`dimple_half_width`), tongue 12 -> 16 long, so it stays bent 0.35 (~1.7 N) and pushes the -Y end down;

@@ -212,15 +212,15 @@ PIN_SHOULDER = 1.0
 PIN_SHOULDER_UP = 0.3
 PIN_TIP_CHAMFER = 0.3
 # Battery door (left): the 2xAA holder is glued onto a door (MJF PA12) that sits flush in a pocket of the bottom plate's
-# outer face and hangs on slide tabs (three on each X edge) that ride in grooves in the pocket's side walls, over a ledge
-# with a notch at each tab's unlocked position (a keyhole turned sideways). Push it BATTERY_SLIDE towards +Y and
+# outer face and hangs on hooks (three on each X edge): a post up from the door through a slot in the plate, with a finger
+# towards -Y that rests on the rim's top (a flat keyhole). Push it BATTERY_SLIDE towards +Y and
 # it drops out with the holder (the holder wires stay connected, left long enough); push back towards -Y to lock, a bump
 # on a sprung tongue at the door's -Y end clicks into a dimple. The plate around the opening is thickened inside.
 # The holder's -X side is BATTERY_CORE_CLEAR past the core board; its +Y end leaves room for the slide, the opening
 # clearance, the door's +Y lap, the pocket's travel and BATTERY_EDGE_MARGIN to the plate edge.
 # Clearances follow the JLC guideline for moving parts (SLA 0.5, MJF 0.6 total; tolerance +-0.2 SLA / +-0.3 MJF, holes
 # +-0.3 and usually small): 0.6 total play between the sliding faces; walls of positioning/snap features >= 1.5; the door
-# (about 38 x 68, MJF) 2.0 thick. Still to be checked on a test print (tab + groove at 0.3 / 0.4 / 0.5 per side).
+# (about 38 x 68, MJF) 2.0 thick. Still to be checked on a test print (hook + slot at 0.3 / 0.4 / 0.5 per side).
 # No foot stands on the door (user): a foot there pushed the door along the slide whenever the keyboard was moved on the desk.
 BATTERY_CORE_CLEAR = 0.5
 BATTERY_SLIDE = 4.0
@@ -233,31 +233,35 @@ BATTERY_NEST_DEPTH = 0.5
 BATTERY_NEST_CLEAR = 0.3
 BATTERY_DOOR_T = BATTERY_FLOOR_T + BATTERY_NEST_DEPTH
 BATTERY_DOOR_LAP = 4.0         # door under the plate on the -Y edge (the bump dimple sits in this strip: 0.8 of wall each side)
-BATTERY_DOOR_LAP_SIDE = 2.5    # on the X edges (the tabs reach BATTERY_TAB_W further, into the side grooves)
+BATTERY_DOOR_LAP_SIDE = 2.5    # on the X edges (the hook posts stand in this strip, in slots open to the opening)
 BATTERY_DOOR_LAP_TOP = 1.0     # at the +Y end
 BATTERY_EDGE_MARGIN = 1.0      # pocket -> plate edge at +Y
 BATTERY_POCKET_CLEAR = 0.4     # pocket around the door (both MJF)
-BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door: the door sits on its tabs (preloaded down), 0.3 vertical play
+BATTERY_CEIL_GAP = 0.3         # pocket ceiling above the door: the door hangs on its hooks (preloaded down), 0.3 vertical play
 BATTERY_RIM_H = 2.0 + BATTERY_NEST_DEPTH   # plate thickened on the inside around the opening (1.7 above the pocket)
-BATTERY_RIM_LAP = 3.0          # the rim reaches this far past the pocket and the side grooves onto the plate: the grooves' ceilings are in the rim
+BATTERY_RIM_LAP = 3.0          # the rim reaches this far past the pocket onto the plate (kept above the plate's outer face): the hooks rest on it
 BATTERY_POST_KEEP = 1.5        # plate kept around the corner post's counterbore (pocket and door notched there)
-# Slide tabs on the door's X edges: BATTERY_TAB_L along Y, reaching BATTERY_TAB_W past the edge, BATTERY_TAB_T thick, from
-# BATTERY_TAB_T - BATTERY_TAB_RISE below the door top to BATTERY_TAB_RISE above it. Each rides in a groove that starts at
-# its underside (the door is modelled seated on the ledges, where the preload holds it, so it is flush there) and runs
-# BATTERY_TAB_GAP above it and BATTERY_TAB_TIP_CLEAR past its tip; the ledge under the groove (1.7) holds the door up, and
-# has a notch (tab + BATTERY_TAB_GAP each end) where the tab sits when the door is pushed BATTERY_SLIDE towards +Y.
-# Tab -Y ends from the door's -Y edge (locked), per X side of the left door: on the +X side they stay off the foot beside it.
-BATTERY_TAB_L, BATTERY_TAB_W, BATTERY_TAB_T, BATTERY_TAB_RISE = 3.0, 2.4, 1.0, 0.2
-BATTERY_TAB_GAP, BATTERY_TAB_TIP_CLEAR = 0.3, 0.4
-BATTERY_TABS_LEFT = {"-X": (6.0, 35.0, 60.0), "+X": (6.0, 29.0, 47.0)}
+# Hooks on the door's X edges (user: the slide tabs turned 90 degrees, so no side grooves and no ledge on the ramp): a post
+# BATTERY_HOOK_POST (X x Y) up from the door top, its inner face BATTERY_HOOK_OFFSET from the opening edge, through a
+# slot in the plate (open to the opening, post + clearance wide), ending in a finger BATTERY_HOOK_L towards -Y, BATTERY_HOOK_T
+# thick, resting on the rim's top: the door is modelled hanging on the fingers (where the preload holds it), so it is flush
+# there. The slot runs over the post's locked and unlocked positions; unlocked the finger is over the slot too, so the door
+# drops out. Locked, the finger lies BATTERY_HOOK_L - BATTERY_HOOK_SLOT_CLEAR on the rim. Slots are covered by the door.
+# Post -Y ends from the door's -Y edge (locked), the same on both X sides (the slots stay inside the plate, clear of the foot).
+BATTERY_HOOK_POST = (1.8, 3.0)     # X: user, 1.2 -> 1.8 (2.0 would leave the plate beside the slot under 1.0)
+BATTERY_HOOK_OFFSET = -0.2        # post's inner face from the opening edge (- = into the opening): 0.3 to the holder (it moves
+                                  # with the door), 1.0 of plate left between the slot and the pocket wall
+BATTERY_HOOK_L, BATTERY_HOOK_T = 2.5, 3.0      # T: user, 1.0 -> 3.0
+BATTERY_HOOK_SLOT_CLEAR = 0.3      # each side round the post and the finger in the slot
+BATTERY_HOOKS_LEFT = {"-X": (6.0, 35.0, 60.0), "+X": (6.0, 35.0, 60.0)}
 BATTERY_DOOR_CHAMFER, BATTERY_POCKET_CHAMFER = 0.4, 0.3                  # door top edge, pocket edge in the floor
 # Anti-rattle preload, pushing the door DOWN onto its tabs' ledges (with gravity: the door + holder + 2 AA weigh ~0.6 N,
 # so the springs only have to beat that when the keyboard is upside down or shaken).
 # A: the locking bump (half cylinder BATTERY_BUMP_W wide, BATTERY_BUMP_H high) stands BATTERY_BUMP_H - BATTERY_CEIL_GAP above
 # the ceiling with the door seated, but its dimple is only BATTERY_DIMPLE_D deep: the 6 x 16 x 2.0 tongue stays bent by the
 # difference (0.35, about 1.7 N for PA12, k ~ 5 N/mm) and pushes the door's -Y end down. Unlocking bends it 0.7 (~3.5 N).
-# B: two sprung fingers on the door's top in the X laps near the +Y end (one each side, clear of the tab grooves over the whole
-# slide): BATTERY_SPRING_W x BATTERY_SPRING_L x BATTERY_SPRING_T, root at the +Y end, rising so the free tip stands
+# B: two sprung fingers on the door's top in the X laps near the +Y end (one each side, off the plate's slots over the whole
+# slide, and clear of the hook slots): BATTERY_SPRING_W x BATTERY_SPRING_L x BATTERY_SPRING_T, root at the +Y end, rising so the free tip stands
 # BATTERY_SPRING_PRELOAD into the ceiling (~1.2 N each, +-0.3 tolerance -> 0.75-1.65 N), over a relief so they can bend.
 # All to be tuned on the test print.
 BATTERY_TONGUE_W, BATTERY_TONGUE_L, BATTERY_TONGUE_SLOT = 6.0, 16.0, 1.0
@@ -265,7 +269,7 @@ BATTERY_BUMP_H, BATTERY_BUMP_W = 1.0, 2.0
 BATTERY_DIMPLE_D = 0.35
 BATTERY_SPRING_W, BATTERY_SPRING_L, BATTERY_SPRING_T, BATTERY_SPRING_PRELOAD = 1.4, 8.0, 1.0, 0.8
 BATTERY_SPRING_RELIEF = 1.4        # depth of the relief under a finger (door 2.5 thick there)
-BATTERY_SPRINGS_LEFT = {"-X": -22.0, "+X": -12.5}   # finger -Y (tip) end from the door's +Y edge, per X side of the left door
+BATTERY_SPRINGS_LEFT = {"-X": -22.0, "+X": -22.0}   # finger -Y (tip) end from the door's +Y edge; symmetric, so the preload is even
 
 # --- Trackball ---
 BALL_D = 34.0

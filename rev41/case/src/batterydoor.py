@@ -1,8 +1,8 @@
 """Battery door: a plate carrying the 2xAA holder (glued on), flush in a pocket of the bottom plate's outer face.
 
-It hangs on slide tabs, three on each X edge, that ride in grooves cut sideways into the pocket's side walls, over a
-ledge of the plate (a keyhole turned sideways). Pushed BATTERY_SLIDE towards +Y the tabs reach notches in the ledges and
-the door drops out with the holder; the holder wires stay connected. Locked (towards -Y), a bump on a sprung tongue at
+It hangs on hooks, three on each X edge: a post up from the door through a slot in the plate (open to the opening) with a
+finger towards -Y resting on the rim's top (a flat keyhole). Pushed BATTERY_SLIDE towards +Y the fingers are over the
+slots and the door drops out with the holder; the holder wires stay connected. Locked (towards -Y), a bump on a sprung tongue at
 the door's -Y end sits in a dimple in the pocket ceiling. No foot stands on the door. Door and pocket are notched around
 a corner screw post if one comes near. Rectangles are (x0, y0, x1, y1) in the case frame, the door in its locked
 position. The right door is the left one mirrored.
@@ -22,13 +22,13 @@ MIN = (Align.CENTER, Align.CENTER, Align.MIN)
 
 @functools.lru_cache(maxsize=None)
 def layout(hand):
-    """Plan rectangles of the holder, the opening in the plate, the door, the pocket, the locked slide tabs (each from
-    0.5 inside the door edge to its tip) and the sprung fingers (tip at y0, root at y1)."""
+    """Plan rectangles of the holder, the opening in the plate, the door, the pocket, the locked hook posts (the finger runs
+    BATTERY_HOOK_L on from each post's -Y end) and the sprung fingers (tip at y0, root at y1)."""
     if hand == "right":
         left = layout("left")
         flip = lambda r: (mirror_x(r[2]), r[1], mirror_x(r[0]), r[3])
-        return {k: flip(v) for k, v in left.items() if k not in ("tabs", "springs")} \
-            | {k: tuple(flip(t) for t in left[k]) for k in ("tabs", "springs")}
+        return {k: flip(v) for k, v in left.items() if k not in ("hooks", "springs")} \
+            | {k: tuple(flip(t) for t in left[k]) for k in ("hooks", "springs")}
     bb = battery_holder(hand).bounding_box()
     s, c = params.BATTERY_SLIDE, params.BATTERY_OPEN_CLEAR
     holder = (bb.min.X, bb.min.Y, bb.max.X, bb.max.Y)
@@ -36,14 +36,14 @@ def layout(hand):
     k = params.BATTERY_DOOR_LAP_SIDE
     door = (opening[0] - k, opening[1] - params.BATTERY_DOOR_LAP, opening[2] + k, opening[3] + params.BATTERY_DOOR_LAP_TOP)
     pocket = (door[0], door[1], door[2], door[3] + s)
-    w, n = params.BATTERY_TAB_W, params.BATTERY_TAB_L
-    tabs = tuple((door[0] - w, door[1] + dy, door[0] + 0.5, door[1] + dy + n) for dy in params.BATTERY_TABS_LEFT["-X"]) \
-        + tuple((door[2] - 0.5, door[1] + dy, door[2] + w, door[1] + dy + n) for dy in params.BATTERY_TABS_LEFT["+X"])
+    (pw, pl), o = params.BATTERY_HOOK_POST, params.BATTERY_HOOK_OFFSET
+    hooks = tuple((opening[0] - o - pw, door[1] + dy, opening[0] - o, door[1] + dy + pl) for dy in params.BATTERY_HOOKS_LEFT["-X"]) \
+        + tuple((opening[2] + o, door[1] + dy, opening[2] + o + pw, door[1] + dy + pl) for dy in params.BATTERY_HOOKS_LEFT["+X"])
     sw, sl, c = params.BATTERY_SPRING_W, params.BATTERY_SPRING_L, params.BATTERY_DOOR_CHAMFER
     xc = {"-X": door[0] + (c + k) / 2, "+X": door[2] - (c + k) / 2}         # middle of the lap strip beside the chamfer
     springs = tuple((xc[side] - sw / 2, door[3] + dy, xc[side] + sw / 2, door[3] + dy + sl)
                     for side, dy in params.BATTERY_SPRINGS_LEFT.items())
-    return {"holder": holder, "opening": opening, "door": door, "pocket": pocket, "tabs": tabs, "springs": springs}
+    return {"holder": holder, "opening": opening, "door": door, "pocket": pocket, "hooks": hooks, "springs": springs}
 
 
 def levels(hand):
@@ -55,33 +55,35 @@ def levels(hand):
             "rim": z + params.BOTTOM_WALL + params.BATTERY_RIM_H}
 
 
-def tab_z(hand):
-    """(z0, z1) of the slide tabs (door locked, hanging free)."""
-    top = levels(hand)["top"]
-    return top + params.BATTERY_TAB_RISE - params.BATTERY_TAB_T, top + params.BATTERY_TAB_RISE
-
-
-def _tab_side(hand, tab):
-    """+1 for a tab on the door's +X edge, -1 on its -X edge."""
+def _hook_side(hand, post):
+    """+1 for a hook on the door's +X edge, -1 on its -X edge."""
     d = layout(hand)["door"]
-    return 1 if tab[0] + tab[2] > d[0] + d[2] else -1
+    return 1 if post[0] + post[2] > d[0] + d[2] else -1
 
 
-def grooves(hand):
-    """[(groove, notch)] per tab: the groove in the pocket's side wall the tab slides in (from 0.6 inside the door edge, over
-    the locked and the unlocked positions) and the notch through the ledge below it at the unlocked position."""
-    d, s = layout(hand)["door"], params.BATTERY_SLIDE
-    g, tip = params.BATTERY_TAB_GAP, params.BATTERY_TAB_TIP_CLEAR
-    z0, z1 = tab_z(hand)
+def hooks(hand):
+    """The hook solids (post and finger) of the locked door, hanging on the rim's top."""
+    z, t, L = levels(hand), params.BATTERY_HOOK_T, params.BATTERY_HOOK_L
     out = []
-    for t in layout(hand)["tabs"]:
-        if _tab_side(hand, t) > 0:
-            x0, x1 = d[2] - 0.6, t[2] + tip
+    for x0, y0, x1, y1 in layout(hand)["hooks"]:
+        post = _box((x0, y0, x1, y1), z["top"] - 0.1, z["rim"] + t)
+        finger = _box((x0, y0 - L, x1, y0 + 0.5), z["rim"], z["rim"] + t)
+        out.append(post + finger)
+    return out
+
+
+def slots(hand):
+    """The slots through the plate for the hooks: from the opening edge outwards, over the locked post and the unlocked post
+    and finger (BATTERY_HOOK_SLOT_CLEAR all round)."""
+    lay, z, s, g = layout(hand), levels(hand), params.BATTERY_SLIDE, params.BATTERY_HOOK_SLOT_CLEAR
+    out = []
+    for p in lay["hooks"]:
+        if _hook_side(hand, p) > 0:
+            x0, x1 = min(lay["opening"][2], p[0]) - g, p[2] + g
         else:
-            x0, x1 = t[0] - tip, d[0] + 0.6
-        groove = _box((x0, t[1] - g, x1, t[3] + s + g), z0, z1 + g)
-        notch = _box((x0, t[1] + s - g, x1, t[3] + s + g), levels(hand)["bottom"] - 5.0, z0 + 0.01)
-        out.append((groove, notch))
+            x0, x1 = p[0] - g, max(lay["opening"][0], p[2]) + g
+        y0 = min(p[1], p[1] + s - params.BATTERY_HOOK_L) - g
+        out.append(_box((x0, y0, x1, p[3] + s + g), z["ceiling"] - 0.5, z["rim"] + 5.0))
     return out
 
 
@@ -163,7 +165,7 @@ def _tongue(hand):
 
 
 def door(hand):
-    """The door with its slide tabs and the locking tongue; the holder is glued on."""
+    """The door with its hooks and the locking tongue; the holder is glued on."""
     lay, z = layout(hand), levels(hand)
     body = _box(lay["door"], z["bottom"], z["top"])
     body = chamfer(body.edges().group_by(Axis.Z)[-1], params.BATTERY_DOOR_CHAMFER)
@@ -171,9 +173,8 @@ def door(hand):
     if notch:
         body = body - notch
     body = body - nest(hand)
-    z0, z1 = tab_z(hand)
-    for t in lay["tabs"]:
-        body = body + _box(t, z0, z1)
+    for h in hooks(hand):
+        body = body + h
     (tx0, ty0, tx1, ty1), by = _tongue(hand)
     w = params.BATTERY_TONGUE_SLOT
     for x in (tx0 - w, tx1):                                     # two slots from the -Y edge free the tongue
@@ -190,18 +191,16 @@ def door(hand):
 
 
 def plate_rim(hand):
-    """Plan region of the thickening: the pocket plus BATTERY_RIM_LAP all round, and past the side grooves on the X edges (it
-    bridges the pocket's slit, roofs the grooves and sits on the plate), less the opening. Posts are cut out and the plate
-    outline is clipped in bottomcase."""
+    """Plan region of the thickening: the pocket plus BATTERY_RIM_LAP all round (it bridges the pocket's slit, carries the
+    hooks and sits on the plate), less the opening. Posts are cut out, and the plate outline and the plate's outer face
+    (the floor ramps up beside the pocket) are clipped in bottomcase."""
     lay, z = layout(hand), levels(hand)
     inner = z["bottom"] + params.BOTTOM_WALL
-    x0, y0, x1, y1 = lay["pocket"]
-    lap, gx = params.BATTERY_RIM_LAP, params.BATTERY_TAB_W + params.BATTERY_TAB_TIP_CLEAR
-    return _box((x0 - gx - lap, y0 - lap, x1 + gx + lap, y1 + lap), inner - 0.1, z["rim"]) - _box(lay["opening"], inner - 1.0, z["rim"] + 1.0)
+    return _box(lay["pocket"], inner - 0.1, z["rim"], grow=params.BATTERY_RIM_LAP) - _box(lay["opening"], inner - 1.0, z["rim"] + 1.0)
 
 
 def plate_cuts(hand):
-    """Pocket (edge chamfered, notched around a corner post), opening, the tabs' side grooves and ledge notches, and the dimple."""
+    """Pocket (edge chamfered, notched around a corner post), opening, the hook slots and the dimple."""
     lay, z = layout(hand), levels(hand)
     g, c = params.BATTERY_POCKET_CLEAR, params.BATTERY_POCKET_CHAMFER
     pocket = _box(lay["pocket"], z["bottom"] - 5.0, z["ceiling"], grow=g)
@@ -213,8 +212,7 @@ def plate_cuts(hand):
         post = Pos(x, y, z["bottom"] - 10.0) * Cylinder(r, 20.0, align=MIN)
         pocket, edge = pocket - post, edge - post
     cuts = [pocket, edge, _box(lay["opening"], z["bottom"] - 5.0, z["rim"] + 5.0)]
-    for groove, notch in grooves(hand):
-        cuts += [groove, notch]
+    cuts += slots(hand)
     (tx0, _, tx1, _), by = _tongue(hand)
     hw = dimple_half_width()
     cuts.append(_box((tx0 - 0.5, by - hw, tx1 + 0.5, by + hw), z["ceiling"] - 0.2, z["ceiling"] + params.BATTERY_DIMPLE_D))   # shallow: the bump presses
