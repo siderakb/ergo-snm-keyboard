@@ -34,7 +34,7 @@ def test_walls_are_the_left_walls_height_the_pod_hangs_below():
     shell = trackball.pod_shell()
     assert shell.bounding_box().min.Z < right.min.Z - 5.0                            # still hangs below (9.8 with BALL_RAISE 10)
     assert shell.distance_to(topcase.walls("right")) >= params.BALL_POD_EDGE_CLEAR - 0.01
-    assert trackball.ball().distance_to(shell) >= params.BALL_POD_TOP_CLEAR - 0.02
+    assert trackball.ball().distance_to(shell) >= params.BALL_POD_R_IN - params.BALL_D / 2 - 0.02
 
 
 def test_posts_and_battery_door_are_mirrored():
@@ -87,7 +87,7 @@ def test_ball_rests_on_three_steel_balls_and_clears_the_cup(right_case):
     assert right_case["cup"].distance_to(trackball.ball()) == pytest.approx(params.BALL_CUP_GAP, abs=0.05)
 
 
-def test_second_seat_set_is_in_the_gaps_at_the_steeper_angle(right_case):
+def test_second_seat_set_is_in_the_gaps_of_the_first(right_case):
     alt = trackball.alt_bearings()
     assert len(alt) == 3
     for p in alt:
@@ -102,10 +102,20 @@ def test_second_seat_set_is_in_the_gaps_at_the_steeper_angle(right_case):
         assert right_case["cup"].is_inside(tuple(behind))
 
 
+def test_cup_and_board_go_into_the_pod_from_above():
+    """The pod is a straight tube: nothing of the cup or the board is farther from the axis than its inner radius."""
+    def max_rho(shape):
+        c, u, v, n = trackball.frame()
+        pts = np.array([tuple(p) for p in shape.vertices()] + [tuple(e @ 0.5) for e in shape.edges()]) - c
+        return np.hypot(pts @ u, pts @ v).max()
+    assert max_rho(trackball.cup()) <= params.BALL_POD_R_IN - params.BALL_POD_CLEAR + 0.01
+    assert max_rho(trackball.sensor_parts()["pmw3610_board"]) < params.BALL_POD_R_IN
+
+
 def test_cup_rim_clears_the_arm_walls_and_the_plate(right_case):
     assert right_case["cup"].distance_to(right_case["top"]) >= 0.5 - 0.05
-    assert right_case["cup"].distance_to(right_case["bottom"]) >= 0.3 - 0.01              # the neck through the arm's plate (0.33 with PLATE_SIDE_CLEAR 0.3)
-    assert trackball.ball().distance_to(right_case["bottom"]) >= params.BALL_POD_TOP_CLEAR - 0.02
+    assert right_case["cup"].distance_to(right_case["bottom"]) >= params.BALL_POD_CLEAR - 0.01   # the straight pod tube
+    assert trackball.ball().distance_to(right_case["bottom"]) >= params.BALL_POD_R_IN - params.BALL_D / 2 - 0.02
 
 
 def test_board_corners_clear_the_round_pod_wall(right_case):
@@ -194,7 +204,7 @@ def test_ball_hole_top_edge_is_chamfered():
     assert not skin.is_inside(at(r - 0.3, params.PLATE_T / 2))    # the hole itself
 
 
-def test_cable_windows_open_the_plate_ring_and_pod_wall_on_both_sides_and_leave_the_wall(right_case):
+def test_cable_windows_open_the_pod_wall_on_both_sides_and_leave_the_wall(right_case):
     bottom, wi = right_case["bottom"], trackball.plate_inner_w()
     at = lambda u, v, w: tuple(trackball.to_case(u, v, w))
     hw = params.BALL_POD_FPC_W / 2
@@ -202,8 +212,9 @@ def test_cable_windows_open_the_plate_ring_and_pod_wall_on_both_sides_and_leave_
         for w in (wi - 0.5, -5.0, -8.0):                                              # open from the plate down to the wide part
             for r in (17.0, 18.0, 19.0):
                 assert not bottom.is_inside(at(s * r, 0.0, w)), (s, r, w)
-        assert not bottom.is_inside(at(s * 18.0, hw - 0.3, -5.0))                      # the full width is open ...
-        assert bottom.is_inside(at(s * 18.0, hw + 0.4, -5.0))                          # ... and no wider
+        r = (params.BALL_POD_R_IN + params.BALL_POD_FPC_R1) / 2                       # in the tube wall (inside the tube is open anyway)
+        assert not bottom.is_inside(at(s * r, hw - 0.3, -5.0))                         # the full width is open ...
+        assert bottom.is_inside(at(s * r, hw + 0.4, -5.0))                             # ... and no wider
         assert bottom.is_inside(at(s * (params.BALL_POD_FPC_R1 + 0.7), 0.0, -5.0))   # wall left outside the window (>= 1.6 thick)
         assert not bottom.is_inside(at(s * 18.0, 0.0, wi - 1.0))                      # (the window cuts the whole plate there)
 

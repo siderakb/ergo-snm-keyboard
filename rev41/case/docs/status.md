@@ -225,10 +225,9 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   FPC (J2 AFC01-S08FCA-00, 2.0 high, no pin header), cable 150 mm (not modelled, like the battery wire); keep the outline and
   lower the cup rim instead.
 - Ball frame: ball centre, u uphill along the thumb plate, v across, n plate normal; sensor axis along n.
-- Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 7.0 below the ball centre (about 2.4 to the
-  arm walls), trimmed to radius 18.46 (0.5 inside the pod wall); three Ø2.5 steel balls at 45 deg from the pole (user) (azimuth 0/120/240 from +u) in
-  blind seats Ø2.5 with Ø5.5 bosses, plus a second set of three seats at 49 deg, azimuths 60/180/300 (midway), to try the steeper
-  angle on the same cup (fit one set or the other; the 49 deg bosses reach 16.52 from the axis); seat block 32 x 25 (top 14.5 below the ball centre) for the board; lens window 19 x 11 + 0.5
+- Cup (separate part, gold): shell Ø34 + 2 x 0.8 gap, 1.5 wall, rim 6.0 below the ball centre, trimmed to radius 18.46 (0.5 inside the pod wall); three Ø2.5 steel balls at 60 deg from the pole (user, 2026-11-07; was 45: the ball slipped out between two balls) (azimuth 0/120/240 from +u) in
+  blind seats Ø2.5 with Ø5.5 bosses, plus a second set of three seats at 55 deg, azimuths 60/180/300 (midway), to compare
+  on the same cup (fit one set or the other); seat block 32 x 25 (top 14.5 below the ball centre) for the board; lens window 19 x 11 + 0.5
   (TODO lens outline) and a recess over U1's through-hole pins on B.Cu (pads + 1.0).
 - PMW3610 board: long side along u, FPC end uphill, B.Cu (lens) up. Sandwich (user): four M2.5 x 10 socket head screws (head
   Ø4.5 x 2.5, user has them) come up through the pod floor (counterbore Ø5.0 x 1.7, head 0.8 proud = BOTTOM_RECESS, so no lower
@@ -240,17 +239,14 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   outer 20.96, flush with the arm walls (20.98); floor parallel to
   the thumb plate, 0.5 under the FPC connector (outer face 28.9 below the ball centre = 38.6 below the plate top); bottom edge
   rounded R2.5 inside / R4.5 outside. Over the arm walls its outer face goes straight up to 0.2 under the walls' bottom edge
-  (user: continues the walls' outer face, no shoulder); the opening up into the arm keeps 0.6 round the ball (wall ~1.2 there, on the arm's two sides only). Outline,
+  (user: continues the walls' outer face, no shoulder); inside it is a straight tube (2026-11-07, user): radius 18.96 all the way up through the arm's plate, no neck, so the cup and the sensor board go in from above (the old 17.6 neck was smaller than both the cup and the board's corners). Outline,
   walls and the plate around the pod are the mirrored left ones (`below_floor(..., pod=False)`). The cup is trimmed to radius
   18.46. FPC connector -> pod wall about 4. Taking the bottom plate off brings the cup and the board with it.
 - The thumb foot (FEET_LEFT[THUMB_FOOT]) stands under the middle of the pod on the right. The post next to the crease moves
   2.5 uphill (`BOSS_SHIFT_RIGHT`, at the 0.4 PCB clearance) so it stays out of the pod.
 - Raised 5 (user, `BALL_RAISE`; first 10, then 5 back): the whole module (ball, cup, sensor, pod) moves 5 up along the plate normal:
   the ball centre is 4.7 below the plate top and the ball top 5 above the keycap tops. The pod hangs 14.5 under the walls and the
-  desk plane is 5 higher than at BALL_RAISE 0 (-57.4, was -62.3): every foot column is ~5 shorter. The arm's flat plate has a
-  17.6 cavity round the pod neck (the plate edge is 18.8 out, so it cannot widen); the cup rim (7.0 below the centre, 6.0 at
-  BALL_RAISE 0) stays where the neck's 45 deg cone widens: 0.4 to the plate, 0.2 under the 49 deg boss tops, ball -> plate 0.66.
-  With BALL_RAISE 10 the rim had to go to 9.0.
+  desk plane is 5 higher than at BALL_RAISE 0 (-57.4, was -62.3): every foot column is ~5 shorter. (Superseded 2026-11-07: the 17.6 neck in the arm's plate is gone, the pod is a straight tube.)
 - Collar round the ball hole (user, `topcase.ball_collar`): a 2.0 wall hangs from the skin underside along the plate normal down to the
   bottom plate's inner face (like the posts), so the ball sits in a closed shaft; inner radius = the hole (18.25), outer 20.25, so it
   merges with the arm walls on the two sides. The thumb_1x2 board's edge is only 0.16 outside the hole edge (18.41 from the axis in
@@ -262,7 +258,7 @@ TODO: `SLIDE_SW_TRAVEL` and the handle position from the SK12D07 drawing; USB pl
   board's FPC connectors J5 / J6 are at (158.8 / 171.5, -84.1), opening towards -Y, on its lower face; the free height map over the
   right plate (11-15 mm in the deep area, 1.0 over the battery holder, 0.5 under the main board's sockets) gives a corridor along
   y = -110 from the crease to the core board. The ball and the collar close the thumb arm, so there are two cable windows
-  (`trackball.fpc_windows`, 8 wide, radius 16.8 - 19.3 from the axis, one on each side along the arm) through the plate ring and the
+  (`trackball.fpc_windows`, 8 wide, radius 16.8 - 19.3 from the axis, one on each side along the arm) through the
   pod wall (>= 1.6 of wall left beside them), and a 2.0 high arch in the collar's lower edge on the uphill side (`fpc_arch`); on the
   downhill side the collar's slot at the thumb board is the way out. The standoffs are 3.5 high (`BALL_POD_FLOOR_CLEAR` 1.5, was
   0.5; user): under the sensor board along v = 0 there are 1.85 under the IC and 1.5 under the FPC connector (was 0.85 / 0.5), 3.6

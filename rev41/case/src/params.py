@@ -284,12 +284,13 @@ PMW3610_FPC_BOX = (10.0, 4.5, 2.0)       # AFC01-S08FCA-00 along the board edge 
 # axis) by 0.5 (user: lower rim, keep the outline). Above the rim the top case hole (1.25 per side) guides the ball.
 BALL_CUP_GAP = 0.8                 # ball -> cup inner surface = steel ball protrusion
 BALL_CUP_WALL = 1.5
-BALL_CUP_RIM = 7.0                 # >= 5.2 for 0.5 to the walls; also under the pod neck: the plate's cavity (17.6, the plate edge
-                                   # is 18.8 out) is narrower than the cup higher up, so the rim stays where the neck cone widens
-BEARING_POLAR = 45.0               # steel balls this far from the bottom pole (azimuths 0 / 120 / 240 from +u); <= ~49 for the uphill boss
-# A second set of seats at BEARING_POLAR_ALT, turned 60 deg (azimuths 60 / 180 / 300), to try the steeper angle on the same
-# cup: fit the steel balls in one set or the other (user).
-BEARING_POLAR_ALT = 49.0
+BALL_CUP_RIM = 6.0                 # >= 5.2 for 0.5 to the walls; the pod is a straight tube (R_IN), so the cup only has to stay
+                                   # inside BALL_POD_R_IN - BALL_POD_CLEAR; 6.0 keeps the top of the 60 deg seat bosses
+BEARING_POLAR = 60.0               # steel balls this far from the bottom pole (azimuths 0 / 120 / 240 from +u); 45 let the ball slip out
+                                   # between two balls (effective angle atan(0.5 tan 45) = 26.6 deg; 60 -> 40.9)
+# A second set of seats at BEARING_POLAR_ALT, turned 60 deg (azimuths 60 / 180 / 300), to try the other angle on the same
+# cup: fit the steel balls in one set or the other (user: 60 + 55).
+BEARING_POLAR_ALT = 55.0
 BEARING_HOLE_D = 2.5               # TODO: press fit + glue, set from the test print
 BEARING_BOSS_D = 5.5
 # PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat. The board is the
@@ -313,11 +314,12 @@ BALL_POD_FLOOR_CLEAR = 1.5         # lowest part (FPC connector) -> pod floor: s
 # The pod is a round cup of the bottom plate on the ball axis, hanging below the arm; the top case walls stay as on the left
 # (user). Inner radius = the sensor board's rounded corner (hole centre 15.46 + R3 = 18.46 from the axis) + 0.5 (the board
 # shifts up to 0.35 on its screws, + SLA / PCB tolerance), so its outer face is flush with the arm walls (20.96 vs 20.98).
-# Just under the walls' bottom edge (BALL_POD_EDGE_CLEAR) it starts at the plate's edge and widens at 45 degrees. Its opening
-# up into the arm keeps BALL_POD_TOP_CLEAR around the ball. The bottom edge is rounded, BALL_POD_FILLET on the inside (the
+# Just under the walls' bottom edge (BALL_POD_EDGE_CLEAR) it starts at the plate's edge and widens at 45 degrees outside. Inside
+# it is a straight tube, BALL_POD_R_IN all the way up through the arm's plate (no neck), so the cup (R <= BALL_POD_R_IN -
+# BALL_POD_CLEAR) and the sensor board go in from above. The bottom edge is rounded, BALL_POD_FILLET on the inside (the
 # board corners keep 0.5 to it), + BOTTOM_WALL outside.
 # Cable windows (user, option A: the sensor FPC and the thumb_1x2 FPC both go through the pod): one on each side of the pod along
-# the thumb arm (-u downhill towards the thumb board, +u uphill towards the main area), BALL_POD_FPC_W wide, from the neck's
+# the thumb arm (-u downhill towards the thumb board, +u uphill towards the main area), BALL_POD_FPC_W wide, from the tube's
 # wall up through the arm's plate (they open the plate ring and the pod wall between radius R0 and R1 from the axis, leaving the
 # pod wall >= 1.6 beside them) and down into the pod's wide part. The collar gets an arch on the +u side so the cable can leave
 # the ball shaft; on the -u side the collar's slot at the thumb board is the way out.
@@ -330,7 +332,6 @@ BALL_POD_BOARD_CLEAR = 0.5
 BALL_POD_R_IN = round(math.hypot(PMW3610_HOLES[0] / 2, PMW3610_HOLES[1] / 2) + PMW3610_BOARD_CORNER_R + BALL_POD_BOARD_CLEAR, 3)
 BALL_POD_FILLET = 2.5
 BALL_POD_EDGE_CLEAR = 0.2
-BALL_POD_TOP_CLEAR = 0.6
 
 # --- Tenting ---
 TENT_DEG = 0.0         # TODO

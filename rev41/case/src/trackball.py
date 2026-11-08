@@ -198,12 +198,6 @@ def _pod_top():
     return w_ref, bottomcase.bottom_outline("right").exterior.distance(Point(c[0], c[1]))
 
 
-def _cone_down(r_top, w_top, w_bottom):
-    """45 degree cone, r_top at w_top, widening down to w_bottom."""
-    h = w_top - w_bottom
-    return Pos(0, 0, w_bottom) * Cone(r_top + h, r_top, h, align=MIN)
-
-
 @functools.lru_cache(maxsize=None)
 def pod_outer():
     """Outer body of the pod (to be cut by `pod_cavity` and kept below the plate's inner face): the round cup, inside the plate
@@ -223,14 +217,10 @@ def pod_outer():
 
 @functools.lru_cache(maxsize=None)
 def pod_cavity():
-    """Inside of the pod and its opening up into the arm: BALL_POD_R_IN with the rounded bottom edge, narrowing at 45 degrees
-    (BOTTOM_WALL from the outer flare) to the ball + BALL_POD_TOP_CLEAR."""
-    w_ref, r_edge = _pod_top()
-    r_top = R + params.BALL_POD_TOP_CLEAR
-    w_neck = w_ref - (params.BOTTOM_WALL * np.sqrt(2) - (r_edge - r_top))
+    """Inside of the pod: a straight tube BALL_POD_R_IN with the rounded bottom edge, open all the way up through the arm's
+    plate (no neck), so the cup and the sensor board go in from above."""
     r, f = _pod_size(params.BOTTOM_WALL)
-    neck = _cone_down(r_top, w_neck, W_POD_IN - 1.0) + Pos(0, 0, w_neck - 0.01) * Cylinder(r_top, 200.0, align=MIN)
-    return loc() * (_pod_cylinder(r, f, W_POD_IN) & neck)
+    return loc() * _pod_cylinder(r, f, W_POD_IN)
 
 
 def plate_inner_w():
