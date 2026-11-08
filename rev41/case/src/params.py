@@ -307,19 +307,22 @@ PMW3610_DIE_TO_SURFACE = 7.83
 PMW3610_BOARD_T = 1.60                  # drawing's PCB thickness (breakout board assumed the same)
 PMW3610_LENS_FACE_TO_SURFACE = round(PMW3610_SENSOR_FACE_TO_SURFACE - PMW3610_BOARD_T, 3)   # 5.8: board face toward the ball
 PMW3610_LENS_PROTRUSION = round(PMW3610_LENS_FACE_TO_SURFACE - PMW3610_WORKING_DISTANCE, 3)  # 3.4 beyond that face
-PMW3610_BOARD = (23.5, 31.5)
-PMW3610_HOLES = (17.5, 25.5)   # M3 x4
-PMW3610_BOARD_CORNER_R = 3.0    # Edge.Cuts: the corners are arcs about the hole centres
-PMW3610_BOARD_CENTRE = (150.0, 100.0)    # KiCad; the optical centre (U1 Cmts.User mark) is the board centre
+# New board (pmw3610-pcb/pmw3610_pcb_offset): 22.5 x 26.25, the optical centre (U1 mark) on the centre line 5.75 from the top
+# edge (KiCad y 90.99), so the board can be tilted with that edge down; two M3 holes at the other (bottom) edge.
+PMW3610_BOARD_EDGES = (139.7, 90.99, 162.2, 117.24)    # KiCad x0, y0 (top edge), x1, y1
+PMW3610_BOARD_CORNER_R = 3.0    # Edge.Cuts: four corner arcs
+PMW3610_OPTICAL_CENTRE = (150.95, 96.74)                # KiCad (dimension: 17.5 above the hole line, 8.25 from each hole)
+PMW3610_HOLES_KICAD = ((142.7, 114.24), (159.2, 114.24))
 PMW3610_IC_BOX = (16.2, 10.1, 1.65)      # package (pmw3610.png) along the board's long side, body below the sensor face
-PMW3610_IC_REF_Y = 102.988               # U1 footprint origin (package centre), KiCad y: 2.988 off the optical centre
-# U1 is through-hole: its pin ends and solder stick out of B.Cu, the face against the cup's seat. Pad centres (x0, y0, x1, y1),
+PMW3610_IC_REF_Y = 99.728                # U1 footprint origin (package centre), KiCad y: 2.988 off the optical centre, towards J2
+# U1 is through-hole: its pin ends and solder stick out of B.Cu, the face against the cup's collar. Pad centres (x0, y0, x1, y1),
 # KiCad, from the footprint (pads 1-16), and the clearance around them (pad + solder fillet).
-PMW3610_PIN_FIELD = (144.65, 96.82, 155.35, 110.17)
+PMW3610_PIN_FIELD = (145.6, 93.56, 156.3, 106.91)
 PMW3610_PIN_CLEAR = 1.0
 PMW3610_LENS_BOX = (12.9, 8.1)           # lens outline (user), long side along the board's long side; 3.4 high (PMW3610_LENS_PROTRUSION)
-PMW3610_FPC_REF_Y = 87.35                # J2 AFC01-S08FCA-00 (F.Cu, the face away from the ball), KiCad y
+PMW3610_FPC_REF_Y = 113.714               # J2 AFC01-S08FCA-00 (F.Cu, the face away from the ball), KiCad y
 PMW3610_FPC_BOX = (10.0, 4.5, 2.0)       # AFC01-S08FCA-00 along the board edge x depth x height (user)
+PMW3610_CAP_H = 1.25                     # tallest passive on F.Cu (C1/C6 0805); the 0603s are 0.8
 
 # --- Ball cup (right hand, separate part; R2) ---
 # Frame: ball centre, u = uphill along the thumb plate (towards the crease), v = n x u (level), n = plate normal.
@@ -337,31 +340,49 @@ BEARING_POLAR = 60.0               # steel balls this far from the bottom pole (
 BEARING_POLAR_ALT = 55.0
 BEARING_HOLE_D = 2.5               # TODO: press fit + glue, set from the test print
 BEARING_BOSS_D = 5.5
-# PMW3610 board under the cup: long side along u, FPC end uphill; B.Cu (lens) up against the cup's seat. The board is the
-# middle of a sandwich: four M2.5 x 10 socket head screws come up through the pod floor, a standoff on it, the board and the
-# shims into standoffs in the cup (user: the cup shares the board's screws). Shims between seat and board set the working distance:
-# the seat is SENSOR_SHIM_NOM nearer the ball than nominal, so shims can make up +-0.2 either way.
+# PMW3610 board under the cup, tilted (docs/trackball_height.md): the board's long side runs along u, its top edge (5.75 from the
+# optical centre) down and towards -u, the hole edge up towards +u (crease / main area); the sensor frame is the ball frame turned
+# SENSOR_TILT_DEG about v, the lens axis still through the ball centre. 30 deg: no part in the way, the half sits ~6.7 lower
+# (45 deg would hit the main board). Firmware: the axis across the tilt reads cos(30) of the motion (scale 1.155) plus sin(30)
+# of the ball's spin. The holes are 26.5 from the ball axis, out of the cup's reach (user: option A): the board is screwed to
+# the pod and the cup in one go (user): an arm of the cup reaches out along +a to two posts over the holes; two M2.5 come down
+# from the posts' tops through the board into hex nuts in pockets in the pod's standoffs, under F.Cu (user: nuts in the bottom
+# case, screws from the cup, so nothing is cut through the outside near the main floor). Cup, shims, board and nuts are one
+# clamped stack; the board's low end rests on two pads; the cup's two side feet and posts bear on B.Cu through the shims.
+SENSOR_TILT_DEG = 30.0
 SENSOR_SHIM_NOM = 0.2
 LENS_WINDOW_CLEAR = 0.5
-# seat under the cup: four screw bosses, a collar round the lens window and ribs from the bosses to the collar (no solid block)
-CUP_BOSS_D = 7.5                   # around the standoff pocket (4.2 across flats, 4.85 across corners): 1.3 wall at the corners
-CUP_COLLAR_WALL = 1.5
-CUP_RIB_W = 1.5
-CUP_BLOCK_TOP = -14.5              # lowest top of the seat structure below the ball centre (keeps the screw holes blind)
+CUP_COLLAR_WALL = 1.5              # frame round the lens window under the cup (stiffens the window edge)
+CUP_COLLAR_LIFT = 2.0              # its underside above the seat: off the board (and above U1's pins); only the side feet bear on B.Cu
 SENSOR_SCREW_L, SENSOR_SCREW_HEAD_D, SENSOR_SCREW_HEAD_H = 10.0, 4.5, 2.5     # M2.5 x 10 socket head (user has them)
-SENSOR_SCREW_CBORE_D = SENSOR_SCREW_HEAD_D + 0.5
-SENSOR_SCREW_PROUD = 0.8           # head stands this far out of the pod's outer face (= BOTTOM_RECESS: no lower than the walls)
-SENSOR_STANDOFF_D = 5.0            # on the pod floor under each board hole: carries the whole head, 1.1 wall around the hole
-BALL_POD_CLEAR = 0.5               # cup -> pod wall (radial)
-BALL_POD_FLOOR_CLEAR = 1.5         # lowest part (FPC connector) -> pod floor: standoffs 3.5 high; 0.5 -> 1.5 so the thumb cable (user)
-                                   # fits under the sensor board (1.85 under the IC, 1.5 under the connector)
+CUP_BOSS_D = 7.5                   # posts on the cup's arm round the standoff pocket (4.85 across corners): 1.3 wall
+CUP_ARM_A0 = 4.0                   # the arm starts here along a (inside the cup's shell) and runs out to the posts
+CUP_ARM_GAP = 1.0                  # arm underside above the seat (over U1's pins and the solder jumpers on B.Cu)
+CUP_POST_H = 4.5                   # post height above the seat: the screw head sits on its top (M2.5 x 10: tip 0.35..0.75 off
+                                   # the blind hole's bottom, through the whole nut, for shims 0..0.4)
+SENSOR_NUT_AF, SENSOR_NUT_H = 5.0, 2.0     # M2.5 hex nut, in a pocket at the top of each pod standoff (one flat towards the FPC)
+SENSOR_NUT_CLEAR = 0.2             # TODO: across-flats clearance of the nut pocket, set from a coupon
+CUP_ARM_SWEEP = 4.0                # the slot runs this much further along a past the posts: the cup goes in along n (tube),
+                                   # so the posts move out along a (sin 30 of the travel) until they are above the floor
+SENSOR_PAD = (2.0, 1.5)            # (along the board, across) pads under the board's low end, in the free corners beside C5 / C1
+SENSOR_PAD_POS = ((141.25, 93.14), (160.65, 93.14))     # KiCad pad centres (inside the R3 corner arcs, 0.7 off C1)
+# The cup bears on B.Cu with two side feet beside U1's pin field (the collar round the lens would only reach the board's
+# edge): (a range, |b| range) in the sensor frame (a towards the hole edge, b across), inside the cup's radius.
+CUP_SIDE_FEET = ((-5.0, 5.0), (6.6, 8.6))
+SENSOR_STANDOFF_D = 7.0            # on the pod floor under each board hole, round the nut pocket (5.77 across corners)
+SENSOR_STANDOFF_FPC_CLEAR = 0.5    # the standoffs are cut flat this far from J2 (the pocket's flat there is nearly open)
+SENSOR_SCREW_FLOOR = 0.5           # blind screw hole: material left under it in the pod floor
+BALL_POD_CLEAR = 0.5               # cup -> pod wall (radial), and the tube floor under the cup
+BALL_POD_FLOOR_CLEAR = 1.5         # sensor parts -> pod floor: the thumb cable (user) passes under the cup and the sensor board
 # The pod is a round cup of the bottom plate on the ball axis, hanging below the arm; the top case walls stay as on the left
 # (user). Inner radius = the sensor board's rounded corner (hole centre 15.46 + R3 = 18.46 from the axis) + 0.5 (the board
 # shifts up to 0.35 on its screws, + SLA / PCB tolerance), so its outer face is flush with the arm walls (20.96 vs 20.98).
 # Just under the walls' bottom edge (BALL_POD_EDGE_CLEAR) it starts at the plate's edge and widens at 45 degrees outside. Inside
 # it is a straight tube, BALL_POD_R_IN all the way up through the arm's plate (no neck), so the cup (R <= BALL_POD_R_IN -
 # BALL_POD_CLEAR) and the sensor board go in from above. The bottom edge is rounded, BALL_POD_FILLET on the inside (the
-# board corners keep 0.5 to it), + BOTTOM_WALL outside.
+# board corners keep 0.5 to it), + BOTTOM_WALL outside. Tilted board (SENSOR_TILT_DEG): the tube's floor is just under the
+# cup (the cable still passes), and a slot hangs below it on the +u side: boxes round the board, U1, J2 and the collar in the
+# sensor frame, BOTTOM_WALL thick, open upwards into the case.
 # Cable windows (user, option A: the sensor FPC and the thumb_1x2 FPC both go through the pod): one on each side of the pod along
 # the thumb arm (-u downhill towards the thumb board, +u uphill towards the main area), BALL_POD_FPC_W wide, from the tube's
 # wall up through the arm's plate (they open the plate ring and the pod wall between radius R0 and R1 from the axis, leaving the
@@ -373,7 +394,7 @@ BALL_POD_FPC_BOTTOM = -9.5         # below the ball centre (the pod's cone is wi
 BALL_POD_FPC_ABOVE = 0.5           # window top above the plate's inner face
 BALL_POD_FPC_ARCH_H = 2.0          # collar arch height above the plate's inner face
 BALL_POD_BOARD_CLEAR = 0.5
-BALL_POD_R_IN = round(math.hypot(PMW3610_HOLES[0] / 2, PMW3610_HOLES[1] / 2) + PMW3610_BOARD_CORNER_R + BALL_POD_BOARD_CLEAR, 3)
+BALL_POD_R_IN = 18.96              # was the old board's corners + 0.5; kept for the cup (its outer face stays flush with the arm walls)
 BALL_POD_FILLET = 2.5
 BALL_POD_EDGE_CLEAR = 0.2
 

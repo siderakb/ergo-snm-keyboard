@@ -21,6 +21,11 @@
 - 上蓋 8 根、球杯 4 根螺絲柱改用六角孔（`geometry.standoff_pocket`）。check 通過；pytest 111/112，唯一的失敗是右手凸字測試（`test_label_is_raised...[right]`），修改前就會失敗。
 - 待打樣：`STANDOFF_POCKET_CLEAR`、`STANDOFF_RIB_INTERF` 要用 coupon 校正；靠 PCB 那側壁厚只有 0.86–1.06。
 
+## 斜置 PMW3610（2026-11-08）
+- 新板 `pmw3610_pcb_offset`，斜 30°（往 +u），STEP 來源已改（`tools/export_step.py`）。整體降低約 5.3 mm；與板子、placeholder 沒有干涉。詳見 `docs/trackball_height.md`。
+- 球杯伸臂到板孔，跟板子共用兩顆螺絲固定。
+- 待處理：韌體要做軸向補償（1.155）；J2 排線從高端出去的路線要確認；深槽方塊的邊角是直角，還沒倒圓角。
+
 ## 尚未涵蓋的檢查
 - 最小孔徑、最小凸字等需要特徵辨識的 JLC 規則（目前靠設計時遵守 `params.py`）。
 - 零件間最小間隙（目前只檢查體積重疊，不檢查是否留有 0.2/0.5 mm 的組裝間隙）。
