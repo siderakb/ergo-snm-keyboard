@@ -246,6 +246,10 @@ def bottom_case(hand=None):
         body = body + (part & zone)
     for part in pillars(hand):                           # ... and a pillar's flat base out of the outer face
         body = body + (part - outer_below)
+    import coresupport
+
+    for boss in coresupport.bottom_bosses(hand):         # under the core board's X ends
+        body = body + (boss - outer_below)
     for c in batterydoor.plate_cuts(hand):               # again: the foot beside the door has its flare cut by the pocket
         body = body - c
     solids = sorted(body.solids(), key=lambda s: s.volume)

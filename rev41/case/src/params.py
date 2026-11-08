@@ -39,6 +39,22 @@ BOTTOM_CLEAR = 0.5
 BOTTOM_RECESS = 0.8
 PLATE_SIDE_CLEAR = 0.3      # bottom plate (MJF PA12S-HP) to the top case inner face; 0.4 would leave the ball cup only 0.26 from the arm plate; TODO: fit coupon
 
+# Core board supports (src/coresupport.py; user, 2026-11-08): the core board hangs on its two 2x10 headers only, so a push at
+# either X end tips it about Y. Bosses on the bottom plate (under the F.Cu face) and from the top case skin (onto the B.Cu face,
+# only where the main board leaves it free: the +Y strip) hold both X ends, CORE_SUPPORT_GAP clear of the board. Zones are
+# (kx0, ky0, kx1, ky1) in core board KiCad coordinates, symmetric about the board centre (kx 152.4) so both hands get the
+# same zones; each is cut back from part courtyards, through-hole pads, the board edge, the main board (top) and the battery
+# door pocket (bottom) by CORE_SUPPORT_CLEAR.
+CORE_SUPPORT_GAP = 0.2
+CORE_SUPPORT_CLEAR = 0.5
+CORE_SUPPORT_MIN_W = 2.0       # thinner parts of a boss region are dropped
+CORE_SUPPORT_MIN_AREA = 8.0
+CORE_SUPPORT_TOP_ZONES = ((130.0, 48.0, 145.0, 62.0), (159.8, 48.0, 175.0, 62.0))
+CORE_SUPPORT_BOTTOM_ZONES = (
+    (130.0, 56.0, 145.0, 61.5), (159.8, 56.0, 175.0, 61.5),       # +Y end, beside the USB-C / switch footprints
+    (130.0, 84.0, 145.0, 103.0), (159.8, 84.0, 175.0, 103.0),     # -Y end, around the battery header and the FPC sockets
+)
+
 # --- Slide switch (SK12D07) on core_board_e73 ---
 SLIDE_SW_HANDLE = 7.0  # handle length (user-provided; confirm it is measured from the body top)
 # Placeholder bodies for alignment (src/placeholders.py), sizes read from refs/drawings:
@@ -188,7 +204,7 @@ LED_HOLE_D = 1.6
 LABEL_LINES = ("SideraKB", "ErgoSNM", "Rev4.0")
 LABEL_SIZE = 4.5            # font size (mm); TODO: JLC minimum stroke width for embossed text is unchecked
 LABEL_HEIGHT = 0.8
-LABEL_CENTRE = (167.0, -50.0)
+LABEL_CENTRE = (167.0, -57.5)        # between the core board supports (coresupport.py) at Y -46.5 and -69.0
 FEET_LEFT = ((4.5, -124.0), (4.5, -55.0), (108.0, -48.0),                       # near the user's circles; (108, -48) beside the battery door (+X)
              (123.36, -140.07))                                                 # thumb board hole H5 (user's arrow)
 FOOT_BESIDE_DOOR = 2

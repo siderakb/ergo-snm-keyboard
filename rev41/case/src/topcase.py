@@ -546,6 +546,10 @@ def top_case(hand=None):
         body = body + p      # walls and posts are already cut by the pockets; the skin stays whole above them
     if ball_collar(hand) is not None:
         body = body + ball_collar(hand)
+    import coresupport
+
+    for boss in coresupport.top_bosses(hand):
+        body = body + boss
     return body
 
 
@@ -558,4 +562,9 @@ def top_case_draft(hand=None):
         out["top_posts"] = p
     if ball_collar(hand) is not None:
         out["top_collar"] = ball_collar(hand)
+    import coresupport
+
+    bosses = coresupport.top_bosses(hand)
+    if bosses:
+        out["top_core_supports"] = sum(bosses[1:], bosses[0])
     return out
