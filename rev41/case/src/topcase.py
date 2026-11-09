@@ -238,7 +238,12 @@ def _opening_cuts(hand):
             continue
         b = piece.bounding_box()
         along = c + (params.SLIDE_SW_TRAVEL / 2 if label.startswith("switch_") else 0.0)
-        cut = Pos((b.min.X + b.max.X) / 2, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2) * Box(b.size.X + 2 * along, y1 - y0, b.size.Z + 2 * c)
+        cx = (b.min.X + b.max.X) / 2
+        sx = b.size.X + 2 * along
+        if label.startswith("switch_"):      # centred on the switch body so the slot is symmetric, reaching the handle's far side + travel
+            cx = (bx.min.X + bx.max.X) / 2
+            sx = 2 * (max(abs(b.min.X - cx), abs(b.max.X - cx)) + along)
+        cut = Pos(cx, (y0 + y1) / 2, (b.min.Z + b.max.Z) / 2) * Box(sx, y1 - y0, b.size.Z + 2 * c)
         if label.startswith("usb_"):         # follows the receptacle shell's rounded corners, grown by the clearance
             cut = fillet(cut.edges().filter_by(Axis.Y), min(params.USB_C_FILLET + c, min(b.size.X, b.size.Z + 2 * c) / 2 - 0.01))
         cuts[label] = cut
