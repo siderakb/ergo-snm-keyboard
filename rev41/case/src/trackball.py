@@ -3,7 +3,7 @@
 Everything is built in the ball frame (`frame`): origin at the ball centre, x = u (uphill along the thumb plate, towards the
 crease), y = v = n x u, z = n (thumb plate normal). Depths `w` below are along n from the ball centre.
 The cup is a separate part: a spherical shell below BALL_CUP_RIM with three steel-ball seats and a seat block for the sensor
-board. Four screws from below clamp pod floor (standoffs), board and shims to the cup (hex standoffs dropped into the cup from above).
+board. Four screws from below clamp pod floor (standoffs), board and shims to the cup (hex standoffs slid into slots in the cup's bosses).
 """
 
 import functools
@@ -88,20 +88,20 @@ def _top(rho, r_out):
 
 
 def _screw_post(a, b):
-    """Cut for the hex standoff (nut): a hex pocket from CUP_NUT_FLOOR above the seat up through the boss top (the nut drops in from
-    above, one flat facing out from the lens) and the screw's clearance hole through the floor below it. The board and
-    shims bear on the floor's underside; the screw pulls the nut down onto the floor."""
+    """Cuts for the hex standoff: a pocket CUP_NUT_FLOOR above the seat (hex corners towards outside the cup) swept straight
+    out through the boss as a slot of the same width (= across flats), so the standoff slides in from the outside before the cup
+    goes into the pod (the pod wall then holds it in). The floor below carries the screw's pull, with the clearance hole."""
     af = params.STANDOFF_AF + params.STANDOFF_POCKET_CLEAR
     r = af / np.sqrt(3)
+    h = params.STANDOFF_H + 0.2
     w_nut = W_SEAT + params.CUP_NUT_FLOOR
-    w_top = -params.BALL_CUP_RIM + 1.0      # through the shell and out of the cup's rim plane: the nut drops in from the ball cavity
-    rot = np.degrees(np.arctan2(b, a)) + 30.0                  # hex corners at 30 deg from the outward direction
-    at = lambda x, y, z: Location((x, y, z), (0, 0, rot))
-    pocket = at(a, b, w_nut) * extrude(RegularPolygon(r, 6), w_top - w_nut)
+    ang = np.arctan2(b, a)
+    at = Location((a, b, w_nut), (0, 0, np.degrees(ang)))        # local x = outward
+    pocket = at * extrude(RegularPolygon(r, 6), h)               # corners on local x
+    pocket = pocket + at * Box(params.CUP_BOSS_D + r, af, h, align=(Align.MIN, Align.CENTER, Align.MIN))
     for k in range(6):
-        c = np.radians(rot + 60 * k)
-        pocket = pocket + Pos(a + r * np.cos(c), b + r * np.sin(c), w_nut) * Cylinder(
-            params.STANDOFF_CORNER_RELIEF_D / 2, w_top - w_nut, align=MIN)
+        c = ang + np.radians(60 * k)
+        pocket = pocket + Pos(a + r * np.cos(c), b + r * np.sin(c), w_nut) * Cylinder(params.STANDOFF_CORNER_RELIEF_D / 2, h, align=MIN)
     hole = Pos(a, b, W_SEAT - 1.0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, params.CUP_NUT_FLOOR + 1.01, align=MIN)
     return [pocket, hole]
 
@@ -141,7 +141,7 @@ def cup_local():
     for a, b in board_holes():
         for cut in _screw_post(a, b):
             body = body - cut
-    return max(body.solids(), key=lambda s: s.volume)      # the nut pockets leave slivers (0.3 mm3 each) of the shell at the rim
+    return body
 
 
 def cup():
