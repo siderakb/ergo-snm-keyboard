@@ -22,7 +22,7 @@ BOARDS = ("main_board", "thumb_cluster", "core_board_e73")
 
 # Boards that live outside this repository. Override the directory with the env var.
 EXTERNAL = {
-    "pmw3610_board": (os.environ.get("PMW3610_PCB_DIR") or CASE_DIR.parents[2] / "pmw3610-pcb" / "pmw3610_pcb_offset",
+    "pmw3610_board": (os.environ.get("PMW3610_PCB_DIR") or CASE_DIR.parents[2] / "pmw3610-pcb",
                       "pmw3610_pcb.kicad_pcb"),
 }
 

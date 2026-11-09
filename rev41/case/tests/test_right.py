@@ -102,18 +102,14 @@ def test_second_seat_set_is_in_the_gaps_of_the_first(right_case):
         assert right_case["cup"].is_inside(tuple(behind))
 
 
-def test_sensor_board_is_tilted_about_v_with_the_lens_axis_through_the_ball_centre():
-    c, u, v, n = trackball.frame()
-    _, a, vv, w = trackball.sensor_frame()
-    assert np.allclose(vv, v)
-    assert np.degrees(np.arccos(w @ n)) == pytest.approx(params.SENSOR_TILT_DEG)
-    assert a @ n > 0 and a @ u > 0                                   # the hole edge goes up, towards +u
-    lens = trackball._part_boxes()["lens"]
-    assert (lens[0] + lens[1]) / 2 == pytest.approx(0.0) and (lens[2] + lens[3]) / 2 == pytest.approx(0.0)
-    holes = trackball.board_holes()
-    assert len(holes) == 2 and all(h[0] == pytest.approx(17.5) for h in holes)
-    assert all(np.hypot((to - c) @ u, (to - c) @ v) > params.BALL_POD_R_IN
-               for to in (trackball.to_sensor(a0, b0, trackball.W_BOARD) for a0, b0 in holes))   # out of the cup's reach
+def test_cup_and_board_go_into_the_pod_from_above():
+    """The pod is a straight tube: nothing of the cup or the board is farther from the axis than its inner radius."""
+    def max_rho(shape):
+        c, u, v, n = trackball.frame()
+        pts = np.array([tuple(p) for p in shape.vertices()] + [tuple(e @ 0.5) for e in shape.edges()]) - c
+        return np.hypot(pts @ u, pts @ v).max()
+    assert max_rho(trackball.cup()) <= params.BALL_POD_R_IN - params.BALL_POD_CLEAR + 0.01
+    assert max_rho(trackball.sensor_parts()["pmw3610_board"]) < params.BALL_POD_R_IN
 
 
 def test_cup_rim_clears_the_arm_walls_and_the_plate(right_case):
@@ -122,18 +118,15 @@ def test_cup_rim_clears_the_arm_walls_and_the_plate(right_case):
     assert trackball.ball().distance_to(right_case["bottom"]) >= params.BALL_POD_R_IN - params.BALL_D / 2 - 0.02
 
 
-def test_board_corners_clear_the_pod(right_case):
+def test_board_corners_clear_the_round_pod_wall(right_case):
     from build123d import Vertex
 
-    x0, y0, x1, y1 = params.PMW3610_BOARD_EDGES
-    r = params.PMW3610_BOARD_CORNER_R
-    for w in (trackball.W_BOARD, (trackball.W_BOARD + trackball.W_SENSOR) / 2):      # (F.Cu sits on the pads at the low end)
-        for kx, sx in ((x0 + r, -1), (x1 - r, 1)):
-            for ky, sy in ((y0 + r, -1), (y1 - r, 1)):
-                a, b = trackball.board_ab(kx + sx * r * 0.7071, ky + sy * r * 0.7071)
-                corner = Vertex(*trackball.to_sensor(a, b, w))
-                for part in ("top", "bottom"):
-                    assert right_case[part].distance_to(corner) >= params.BALL_POD_BOARD_CLEAR - 0.01, (part, kx, ky, w)
+    for w in (trackball.W_BOARD, trackball.W_SENSOR):
+        for a, b in trackball.board_holes():                 # the rounded corners' farthest points from the axis
+            k = params.PMW3610_BOARD_CORNER_R / np.hypot(a, b)
+            corner = Vertex(*trackball.to_case(a * (1 + k), b * (1 + k), w))
+            for part in ("top", "bottom"):
+                assert right_case[part].distance_to(corner) >= params.BALL_POD_BOARD_CLEAR - 0.01, (part, a, b, w)
 
 
 def test_sensor_stack_and_pod_depths():
@@ -141,15 +134,12 @@ def test_sensor_stack_and_pod_depths():
     lens_top = trackball.W_BOARD + params.PMW3610_LENS_PROTRUSION
     assert -R - lens_top == pytest.approx(params.PMW3610_WORKING_DISTANCE)          # nominal, with the nominal shim
     assert trackball.W_SEAT - trackball.W_BOARD == pytest.approx(params.SENSOR_SHIM_NOM)
-    parts = {k: s for k, s in trackball.sensor_parts().items() if not k.startswith("sensor_nut")}    # (nuts: in the standoffs)
-    cavity = trackball.pod_cavity()
-    for k, s in parts.items():                                                      # every sensor part inside the slot
-        assert (s - cavity).volume < 0.01, k
-    p = trackball._part_boxes()
-    for k in ("ic", "fpc"):                                                         # cable room under U1 and J2
-        a = (p[k][0] + p[k][1]) / 2
-        floor = min(w0 for a0, a1, b0, b1, w0, _ in trackball._slot_boxes(0.0) if a0 <= a <= a1 and b0 <= 0.0 <= b1)
-        assert p[k][4] - floor >= params.BALL_POD_FLOOR_CLEAR - 1e-6, k
+    assert trackball.W_LOW - trackball.W_POD_IN == pytest.approx(params.BALL_POD_FLOOR_CLEAR)
+    parts = trackball.sensor_parts()
+    _, _, _, n = trackball.frame()
+    c = np.array(geometry.ball_center())
+    low = min(float((np.array((v.X, v.Y, v.Z)) - c) @ n) for s in parts.values() for v in s.vertices())
+    assert low >= trackball.W_POD_IN                                                # nothing below the pod floor
 
 
 def test_thumb_foot_stands_under_the_pod():
@@ -159,71 +149,21 @@ def test_thumb_foot_stands_under_the_pod():
     assert topcase.floor_z("right", x, y) == pytest.approx(trackball.pod_floor_z(x, y), abs=1e-6)
 
 
-def test_board_screws_go_through_the_nuts_and_stay_blind():
+def test_board_sandwich_screws_engage_the_standoff_and_stay_blind():
     shim_max = 2 * params.SENSOR_SHIM_NOM
-    tip_high = trackball.W_TIP + (shim_max - params.SENSOR_SHIM_NOM)              # thickest shim pack lifts the cup
-    assert tip_high <= trackball.W_NUT - 0.3                                         # the whole nut is engaged
-    tip_low = trackball.W_TIP - params.SENSOR_SHIM_NOM                              # no shim: the cup sits lowest
-    assert tip_low >= trackball.W_POD_OUT + params.SENSOR_SCREW_FLOOR + 0.2           # blind hole: the tip keeps off its bottom
-    assert trackball.W_POST_TOP - trackball.W_SEAT >= 3.0                            # post under the head
-    assert trackball.W_NUT >= trackball.W_POD_IN                                     # the pocket stays in the standoff
-
-
-def test_nut_pockets_hold_the_nuts_and_keep_off_the_fpc():
-    bottom = bottomcase.bottom_case("right")
-    parts = trackball.sensor_parts()
-    for i, (a, b) in enumerate(trackball.board_holes()):
-        nut = parts[f"sensor_nut_{i}"]
-        assert analysis.interference_volume(nut, bottom) < 1e-3
-        assert bottom.is_inside(tuple(trackball.to_sensor(a, b + np.sign(b) * 3.1, trackball.W_NUT + 1.0)))   # wall outside the nut
-        assert bottom.is_inside(tuple(trackball.to_sensor(a, b, trackball.W_POD_OUT + 0.2)))                 # closed outside
-    for s in trackball.standoffs():
-        assert s.distance_to(parts["pmw3610_fpc"]) >= params.SENSOR_STANDOFF_FPC_CLEAR - 0.01
-
-
-def test_cup_arm_reaches_the_board_holes():
-    cup = trackball.cup()
-    for a, b in trackball.board_holes():
-        r = params.CUP_BOSS_D / 2 - 0.3                                                # post wall beside the pocket
-        assert cup.is_inside(tuple(trackball.to_sensor(a + r, b, trackball.W_SEAT + 2.0))), (a, b)
-        assert not cup.is_inside(tuple(trackball.to_sensor(a, b, trackball.W_SEAT + 2.0)))      # the screw hole
-
-
-def test_cup_with_its_arm_goes_in_from_above():
-    """Lowered along n into the pod, the cup (with the arm) never touches the bottom case."""
-    from build123d import Pos as P
-
-    bottom = bottomcase.bottom_case("right")
-    _, _, _, n = trackball.frame()
-    cup = trackball.cup()
-    for d in (1.0, 3.0, 6.0, 10.0, 15.0, 25.0, 40.0):
-        assert analysis.interference_volume(P(*(n * d)) * cup, bottom) < 0.01, d
-
-
-def test_cup_bears_on_the_board_and_the_pads_carry_its_low_end():
-    from build123d import Vertex
-
-    cup = trackball.cup()
-    (fa0, fa1), (fb0, fb1) = params.CUP_SIDE_FEET
-    for s in (-1, 1):                                       # the side feet reach down to the seat (shims) over the board
-        p = trackball.to_sensor((fa0 + fa1) / 2, s * (fb0 + fb1) / 2, trackball.W_SEAT + 0.1)
-        assert cup.is_inside(tuple(p)), s
-    x0, y0, x1, y1 = params.PMW3610_BOARD_EDGES
-    a0, _ = trackball.board_ab(x0, y0)
-    pa = params.SENSOR_PAD[0] / 2
-    for a, b in trackball.pads():
-        assert a - pa > a0 and abs(b) + params.SENSOR_PAD[1] / 2 < 11.25          # under the board
-        pad = [s for s in trackball.standoffs() if s.is_inside(tuple(trackball.to_sensor(a, b, trackball.W_SENSOR - 0.05)))]
-        assert pad, (a, b)
-    board = trackball.sensor_parts()["pmw3610_board"]
-    for s in trackball.standoffs():
-        assert analysis.interference_volume(s, board) < 0.05
+    tip_short = trackball.W_TIP - (shim_max - params.SENSOR_SHIM_NOM)             # thickest shim pack pushes the cup up
+    assert tip_short >= trackball.W_SEAT + params.STANDOFF_H - 1.0                   # at least 3 mm of thread engaged
+    assert trackball.W_TIP + 0.5 <= params.CUP_BLOCK_TOP                             # blind hole stays inside the block
+    proud = trackball.W_POD_OUT - (trackball.W_HEAD - params.SENSOR_SCREW_HEAD_H)
+    assert proud <= params.BOTTOM_RECESS + 1e-9                                       # head no lower than the walls' edge
+    assert trackball.W_HEAD < trackball.W_POD_IN                                     # counterbore stays in the floor
+    assert trackball.W_SENSOR - trackball.W_HEAD >= 1.5                              # material under the head
 
 
 def test_cup_seat_clears_the_sensor_pins_on_bcu():
     u0, u1, v0, v1 = trackball.pin_field()
     c = params.PMW3610_PIN_CLEAR - 0.1
-    pins = trackball.sloc() * trackball._box(u0 + c, u1 - c, v0 + c, v1 - c, trackball.W_BOARD, trackball.W_BOARD + 1.5)
+    pins = trackball.loc() * trackball._box(u0 + c, u1 - c, v0 + c, v1 - c, trackball.W_BOARD, trackball.W_BOARD + 1.5)
     assert analysis.interference_volume(trackball.cup(), pins) < 1e-6
 
 
@@ -231,7 +171,7 @@ def test_standoffs_clear_the_sensor_parts():
     parts = trackball.sensor_parts()
     for s in trackball.standoffs():
         for k in ("pmw3610_ic", "pmw3610_fpc"):
-            assert s.distance_to(parts[k]) >= 0.5 - 1e-6, k
+            assert s.distance_to(parts[k]) >= 0.5, k
 
 
 def test_ball_hole_collar_wall_runs_from_the_skin_to_the_plate_and_keeps_off_the_thumb_board():
@@ -272,8 +212,6 @@ def test_cable_windows_open_the_pod_wall_on_both_sides_and_leave_the_wall(right_
         for w in (wi - 0.5, -5.0, -8.0):                                              # open from the plate down to the wide part
             for r in (17.0, 18.0, 19.0):
                 assert not bottom.is_inside(at(s * r, 0.0, w)), (s, r, w)
-        if s > 0:                                                                     # +u: the wall opens into the sensor slot
-            continue
         r = (params.BALL_POD_R_IN + params.BALL_POD_FPC_R1) / 2                       # in the tube wall (inside the tube is open anyway)
         assert not bottom.is_inside(at(s * r, hw - 0.3, -5.0))                         # the full width is open ...
         assert bottom.is_inside(at(s * r, hw + 0.4, -5.0))                             # ... and no wider
@@ -293,15 +231,21 @@ def test_collar_arch_on_the_uphill_side_only(right_case):
     assert collar.distance_to(trackball.ball()) >= 1.2
 
 
-def test_cable_lane_under_the_cup_and_the_sensor_board_is_open():
+def test_cable_lane_through_the_pod_under_the_sensor_board_is_open():
     parts = list(trackball.sensor_parts().values()) + trackball.standoffs()
-    cup, bottom = trackball.cup(), bottomcase.bottom_case("right")
-    for u in np.linspace(-14.0, 0.0, 8):                                     # under the cup, on the tube floor
-        p = tuple(trackball.to_case(u, 0.0, trackball.W_TUBE_IN + 0.2))
-        assert not cup.is_inside(p) and not bottom.is_inside(p), u
-    for a in np.linspace(-5.0, 20.0, 11):                                    # under the board, on the slot floor
-        p = tuple(trackball.to_sensor(a, 0.0, trackball.W_POD_IN + 0.2))
-        assert not any(s.is_inside(p) for s in parts) and not bottom.is_inside(p), a
+    floor = trackball.W_POD_IN
+    for u in np.linspace(-14.0, 14.0, 15):                                   # a flat cable (0.3) lying on the floor at v = 0
+        p = tuple(trackball.to_case(u, 0.0, floor + 0.2))
+        assert not any(s.is_inside(p) for s in parts), u
+        assert not trackball.cup().is_inside(p), u
+
+
+def test_thumb_cable_has_room_under_the_sensor_board():
+    floor = trackball.W_POD_IN
+    ic_bottom = trackball.W_SENSOR - params.PMW3610_IC_BOX[2]
+    assert ic_bottom - floor >= 1.8 - 1e-6                                     # under the IC
+    assert trackball.W_LOW - floor >= 1.5 - 1e-6                               # under the FPC connector
+    assert trackball.W_SENSOR - floor == pytest.approx(3.5)                    # standoff height
 
 
 @pytest.mark.parametrize("hand", ["left", "right"])
@@ -353,7 +297,7 @@ def test_both_halves_stand_at_the_same_height():
     # the three matching feet (-X pair and the one beside the battery door) stand as high on both hands
     lengths = lambda hand: sorted(round(float(bottomcase.desk_plane(hand)[0] @ top - (d + params.FOOT_END_T)), 2)
                                   for on in (False, True) for top, _, d in bottomcase._foot_axes(hand, on))
-    left, right = [x for x in lengths("left") if 12.0 < x < 20.0], [x for x in lengths("right") if 12.0 < x < 20.0]
+    left, right = [x for x in lengths("left") if 15.0 < x < 25.0], [x for x in lengths("right") if 15.0 < x < 25.0]
     assert len(left) == len(right) == 3 and left == pytest.approx(right, abs=0.01)
 
 
