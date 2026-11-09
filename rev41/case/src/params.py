@@ -344,7 +344,11 @@ BEARING_BOSS_D = 5.5
 SENSOR_SHIM_NOM = 0.2
 LENS_WINDOW_CLEAR = 0.5
 # seat under the cup: four screw bosses, a collar round the lens window and ribs from the bosses to the collar (no solid block)
-CUP_BOSS_D = 7.5                   # around the standoff pocket (4.2 across flats, 4.85 across corners): 1.3 wall at the corners
+CUP_BOSS_D = 7.5                   # around the nut pocket (4.2 across flats, 4.85 across corners): 1.3 wall at the corners
+# The cup's nuts are the same hex standoffs as the top case (STANDOFF_*), dropped in from the ball cavity onto a floor of
+# CUP_NUT_FLOOR; the screw comes up through the floor and the board bears on the floor's underside, so the pull on the nut goes
+# into the floor, no glue.
+CUP_NUT_FLOOR = 1.0                # screw tip (3.3 above the seat) reaches 2.3 into the 4.0 standoff
 CUP_COLLAR_WALL = 1.5
 CUP_RIB_W = 1.5
 CUP_BLOCK_TOP = -14.5              # lowest top of the seat structure below the ball centre (keeps the screw holes blind)

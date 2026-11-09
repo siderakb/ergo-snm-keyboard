@@ -3,13 +3,13 @@
 Everything is built in the ball frame (`frame`): origin at the ball centre, x = u (uphill along the thumb plate, towards the
 crease), y = v = n x u, z = n (thumb plate normal). Depths `w` below are along n from the ball centre.
 The cup is a separate part: a spherical shell below BALL_CUP_RIM with three steel-ball seats and a seat block for the sensor
-board. Four screws from below clamp pod floor (standoffs), board and shims to the cup.
+board. Four screws from below clamp pod floor (standoffs), board and shims to the cup (hex standoffs dropped into the cup from above).
 """
 
 import functools
 
 import numpy as np
-from build123d import Align, Axis, Box, Compound, Cone, Cylinder, Location, Plane, Pos, Sphere, fillet, import_step
+from build123d import Align, Axis, Box, Compound, Cone, Cylinder, Location, Plane, Pos, RegularPolygon, Sphere, extrude, fillet, import_step
 
 import geometry
 import outline
@@ -82,20 +82,33 @@ W_HEAD = W_POD_OUT + params.SENSOR_SCREW_HEAD_H - params.SENSOR_SCREW_PROUD     
 W_TIP = W_HEAD + params.SENSOR_SCREW_L                                                # screw tip (nominal shim)
 
 
+def _top(rho, r_out):
+    """Top of the seat structure at radius rho: 1.0 into the shell above it, never below CUP_BLOCK_TOP."""
+    return max(params.CUP_BLOCK_TOP, -np.sqrt(r_out ** 2 - rho ** 2) + 1.0)
+
+
 def _screw_post(a, b):
-    """(cuts, ribs): hex standoff pocket open at the seat (the board and shims bear on the standoff's lower end, so the
-    screw's pull does not load the glue) with one flat facing out from the lens, and the blind hole above it, 0.5 past
-    the screw tip."""
-    u = np.array((a, b, 0.0)) / np.hypot(a, b)
-    cut, ribs = geometry.standoff_pocket(np.array((a, b, W_SEAT)), np.array((0.0, 0.0, 1.0)), 0.0, u)
-    w0 = W_SEAT + params.STANDOFF_H - 0.01
-    return [cut, Pos(a, b, w0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, W_TIP + 0.5 - w0, align=MIN)], ribs
+    """Cut for the hex standoff (nut): a hex pocket from CUP_NUT_FLOOR above the seat up through the boss top (the nut drops in from
+    above, one flat facing out from the lens) and the screw's clearance hole through the floor below it. The board and
+    shims bear on the floor's underside; the screw pulls the nut down onto the floor."""
+    af = params.STANDOFF_AF + params.STANDOFF_POCKET_CLEAR
+    r = af / np.sqrt(3)
+    w_nut = W_SEAT + params.CUP_NUT_FLOOR
+    w_top = -params.BALL_CUP_RIM + 1.0      # through the shell and out of the cup's rim plane: the nut drops in from the ball cavity
+    rot = np.degrees(np.arctan2(b, a)) + 30.0                  # hex corners at 30 deg from the outward direction
+    at = lambda x, y, z: Location((x, y, z), (0, 0, rot))
+    pocket = at(a, b, w_nut) * extrude(RegularPolygon(r, 6), w_top - w_nut)
+    for k in range(6):
+        c = np.radians(rot + 60 * k)
+        pocket = pocket + Pos(a + r * np.cos(c), b + r * np.sin(c), w_nut) * Cylinder(
+            params.STANDOFF_CORNER_RELIEF_D / 2, w_top - w_nut, align=MIN)
+    hole = Pos(a, b, W_SEAT - 1.0) * Cylinder(params.BOTTOM_SCREW_CLEAR_D / 2, params.CUP_NUT_FLOOR + 1.01, align=MIN)
+    return [pocket, hole]
 
 
 def _seat_frame(r_out):
     """Bosses on the board holes, a collar round the lens window and diagonal ribs between them, W_SEAT up into the shell."""
-    def top(rho):                                             # 1.0 into the shell above radius rho, never below CUP_BLOCK_TOP
-        return max(params.CUP_BLOCK_TOP, -np.sqrt(r_out ** 2 - rho ** 2) + 1.0)
+    top = lambda rho: _top(rho, r_out)
     lu, lv = params.PMW3610_LENS_BOX
     c = params.LENS_WINDOW_CLEAR + params.CUP_COLLAR_WALL
     frame = _box(-lu / 2 - c, lu / 2 + c, -lv / 2 - c, lv / 2 + c, W_SEAT, top(np.hypot(lu / 2 + c, lv / 2 + c)))
@@ -126,12 +139,9 @@ def cup_local():
         k = p / np.linalg.norm(p)
         body = body - Location(Plane(origin=tuple(p - k * 2.0), z_dir=tuple(k))) * Cylinder(params.BEARING_HOLE_D / 2, 2.0 + params.BEARING_BALL_D / 2, align=MIN)
     for a, b in board_holes():
-        cuts, ribs = _screw_post(a, b)
-        for cut in cuts:
+        for cut in _screw_post(a, b):
             body = body - cut
-        for rib in ribs:
-            body = body + rib
-    return body
+    return max(body.solids(), key=lambda s: s.volume)      # the nut pockets leave slivers (0.3 mm3 each) of the shell at the rim
 
 
 def cup():

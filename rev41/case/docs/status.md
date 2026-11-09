@@ -19,6 +19,7 @@
 
 ## 螺絲柱改六角銅柱（2026-11-08）
 - 上蓋 8 根、球杯 4 根螺絲柱改用六角孔（`geometry.standoff_pocket`）。check 通過；pytest 111/112，唯一的失敗是右手凸字測試（`test_label_is_raised...[right]`），修改前就會失敗。
+- 球杯 4 根螺絲柱改成從球腔側放入 M2.5 螺母（`trackball._screw_post`，見 decisions）。打樣校正 `STANDOFF_POCKET_CLEAR`（球杯槽無擠壓肋）。
 - 待打樣：`STANDOFF_POCKET_CLEAR`、`STANDOFF_RIB_INTERF` 要用 coupon 校正；靠 PCB 那側壁厚只有 0.86–1.06。
 
 ## 尚未涵蓋的檢查
