@@ -280,7 +280,7 @@ def test_label_is_raised_0_8_from_the_inner_face_and_clears_the_core_board(hand)
     assert topcase.floor_z(hand, cx, cy) == pytest.approx(z - params.BOTTOM_WALL)      # the outer face stays flat
     big = [s for s in label.solids() if s.volume > 1.0][0].center()
     assert bottom.is_inside((big.X, big.Y, z + params.LABEL_HEIGHT / 2))         # a letter is part of the plate body
-    assert not bottom.is_inside((big.X + 40.0, big.Y, z + params.LABEL_HEIGHT / 2))
+    assert not bottom.is_inside((big.X, big.Y, z + params.LABEL_HEIGHT + 0.2))       # and no taller than LABEL_HEIGHT
     # reads normally looking down (X to the right): the line "SideraKB" is the top one (largest Y), its 'S' at the smallest X
     first = [s for s in label.solids() if s.bounding_box().min.Y > bb.max.Y - 5.5]
     assert min(s.bounding_box().min.X for s in first) == pytest.approx(min(s.bounding_box().min.X for s in label.solids() if s.volume > 0.5), abs=1.5)
