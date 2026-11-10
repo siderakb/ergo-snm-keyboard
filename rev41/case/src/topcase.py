@@ -304,13 +304,24 @@ def tactile_bumps(hand):
     return out
 
 
+def wall_corner_fill(hand):
+    """Fills the breach where the main side's wall meets the leaning thumb wall: the plan prism is split at the crease
+    bisector, the tilted piece leans away from the vertical one and leaves a notch at the wall's lower end. Here the
+    wall is also extruded vertically over the corner (to the bottom plate's face), so it runs on towards -Y."""
+    outer = outline.case_outline_polygon(hand)
+    ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
+    x0, x1 = (86.0, 92.0) if hand == "right" else (params.MIRROR_X - 92.0, params.MIRROR_X - 86.0)   # right-hand frame, mirrored for left
+    region = ring & Polygon([(x0, -125.0), (x1, -125.0), (x1, -95.0), (x0, -95.0)])
+    return _prism(region) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS, pod=False)
+
+
 def walls(hand):
     """Outer walls from the top surface down to BOTTOM_RECESS below the bottom plate's outer face: the bottom plate sits
     inside them, so the seam only shows from below."""
     outer = outline.case_outline_polygon(hand)
     ring = outer.difference(outer.buffer(-params.BOTTOM_WALL))
     shell = outline.plan_prism(hand, ring) & _under(hand, 0.0) - below_floor(hand, -params.BOTTOM_RECESS, pod=False)
-    shell = shell + thumb_ledge(hand)
+    shell = shell + thumb_ledge(hand) + wall_corner_fill(hand)
     cuts, ribs = pockets(hand)
     for c in cuts + wall_openings(hand) + screw_counterbores(hand):
         shell = shell - c
