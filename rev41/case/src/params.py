@@ -472,6 +472,7 @@ BALL_HOLE_D = 36.5
 BALL_HOLE_CHAMFER = 0.8          # 45 degree chamfer on the hole's top edge (user), 0.8 = the JLC minimum emboss
 BALL_HOLE_WALL = 2.0
 BALL_HOLE_WALL_MIN = 1.0
+BALL_HOLE_WALL_TRIM = 1.8        # collar wall thinner than this (the tapering crescent the board outline leaves) is cut off radially
 BALL_HOLE_PCB_CLEAR = 0.3
 # Ball top is level with the keycap tops; the centre is then BALL_D/2 - KEYCAP_TOP below the plate top.
 BALL_RAISE = 5.0                # user: the whole trackball (ball, cup, sensor, pod) moves this far up along the plate normal

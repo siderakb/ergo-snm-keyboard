@@ -539,7 +539,19 @@ def ball_collar_profile(hand):
     ring = Point(0, 0).buffer(r + params.BALL_HOLE_WALL, 128).difference(Point(0, 0).buffer(r, 128))
     cut = ring.difference(_thumb_board_uv(hand).buffer(params.BALL_HOLE_PCB_CLEAR, 16))
     m = params.BALL_HOLE_WALL_MIN / 2
-    return cut.buffer(-m, 16).buffer(m, 16).intersection(ring)
+    prof = cut.buffer(-m, 16).buffer(m, 16).intersection(ring)
+    # The board outline is a straight line across the ring, so the wall ends in a thin tapering crescent. Keep only the angles
+    # where the wall is at least BALL_HOLE_WALL_TRIM thick: the ends become radial cuts.
+    step = np.radians(0.5)
+    keep = []
+    for a in np.arange(0.0, 2 * np.pi, step):
+        d = np.array([np.cos(a), np.sin(a)])
+        ray = LineString([tuple(d * (r - 0.1)), tuple(d * (r + params.BALL_HOLE_WALL + 0.1))])
+        if prof.intersection(ray).length >= params.BALL_HOLE_WALL_TRIM:
+            R = r + params.BALL_HOLE_WALL + 1.0
+            keep.append(Polygon([(0, 0), tuple(R * np.array([np.cos(a - step / 2), np.sin(a - step / 2)])),
+                                 tuple(R * np.array([np.cos(a + step / 2), np.sin(a + step / 2)]))]).buffer(1e-4))
+    return prof.intersection(unary_union(keep)) if keep else prof
 
 
 def ball_collar(hand):
@@ -560,7 +572,9 @@ def ball_collar(hand):
             tube = tube - plane * Pos(0, 0, -60) * Solid.extrude(_face(g), (0, 0, 120))
     tube = tube - trackball.fpc_arch()                                       # cable arch on the +u side
     zone = _under(hand, params.PLATE_T) - below_floor(hand, params.BOTTOM_WALL, pod=False)
-    return tube & zone & outline.plan_prism(hand, outline.case_outline_polygon(hand))
+    # flat bottom at the thumb plate's inner face: where the main floor dips below it the wall would grow a crescent-shaped foot
+    flat = trackball.loc() * Pos(0, 0, trackball.plate_inner_w()) * Box(200, 200, 200, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    return tube & zone & flat & outline.plan_prism(hand, outline.case_outline_polygon(hand))
 
 
 def top_skin_keyed(hand):
